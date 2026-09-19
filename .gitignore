@@ -1,0 +1,28 @@
+# Files Git must never track. Git does not read .agentignore; keep the two lists in sync
+# for generated files (that file also hides lockfiles, media, and bulk data from agents).
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Node
+node_modules/
+
+# Mutation guard leftovers (see scripts/mutation_guard.py --recover)
+*.mgbak
+
+# Per-user and machine-local state
+.claude/settings.local.json
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log

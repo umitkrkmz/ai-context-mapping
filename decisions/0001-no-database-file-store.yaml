@@ -1,0 +1,50 @@
+# Architecture Decision Record 0001
+# Machine-readable: scripts/verify_invariants.py lints this file and enforces
+# `forbidden_imports` across the whole codebase. Keep it to flat keys, scalars, and lists.
+
+id: ADR-0001
+title: Persist state in plain files; do not introduce a database
+status: accepted
+date: 2026-09-20
+decision: >
+  All persistent state lives in plain, human-readable files inside the repository
+  (Markdown, JSON, YAML, or line-oriented text). The project uses no database engine,
+  no ORM, and no external state service.
+reason: >
+  A file store is diffable, reviewable in pull requests, greppable by both people and AI
+  agents, and portable across machines. It needs no installation, no migrations, and no
+  credentials, which keeps the zero-dependency promise of AGENTS.md Rule 4. A database
+  would hide state from version control and from the AI context, and would add a runtime
+  dependency that every contributor must install and every agent must reason about.
+forbidden_actions:
+  - Adding a database engine such as SQLite, PostgreSQL, MySQL, MongoDB, or Redis
+  - Adding an ORM or query-builder library such as SQLAlchemy, Peewee, or Django ORM
+  - Replacing a file-backed store with an embedded or remote database
+  - Introducing binary or opaque state files that cannot be reviewed in a diff
+  - Adding a background service that must run for the project to work
+  - Writing state to files outside the repository without explicit user consent
+forbidden_imports:
+  - sqlite3
+  - sqlalchemy
+  - psycopg2
+  - psycopg
+  - pymysql
+  - mysql
+  - pymongo
+  - redis
+  - peewee
+  - tortoise
+  - dbm
+  - shelve
+allowed_alternatives:
+  - Store records as JSON or YAML files, one file per entity, written atomically
+  - Store append-only history as newline-delimited text
+  - Store human-facing state as Markdown tables, as maps/project-map.md does
+consequences: >
+  Lookups are linear scans or index files rebuilt from the tree, so this design suits
+  small and medium data sets. If a real requirement exceeds file-store limits, write a new
+  ADR that supersedes this one and obtain explicit user approval before any code changes.
+enforcement:
+  - scripts/verify_invariants.py rejects imports listed in forbidden_imports
+  - AGENTS.md Rule 3 requires user consent before actions in forbidden_actions
+supersedes: null

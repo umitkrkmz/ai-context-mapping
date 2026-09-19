@@ -1,0 +1,41 @@
+---
+description: Context and guardrail rules - use the project map, respect negative invariants, and never take destructive actions without consent.
+globs:
+alwaysApply: true
+---
+
+# Context Guardrails
+
+The full contract is in `AGENTS.md`. These rules are always active.
+
+## Project map first
+
+- Read `@maps/project-map.md` before any exploratory search. It lists every file with its
+  category, purpose, and invariants.
+- Do not attach whole folders or run repository-wide searches when the map already names
+  the file you need.
+- Never read paths matched by `.agentignore`.
+- When you add, move, or delete a file, update `maps/project-map.md` in the same change.
+
+## Architectural invariants
+
+- Check a file's `Invariants` column in the map before editing it. If it lists an ID such
+  as `NI-006`, read that entry in `@invariants/negative-invariants.md` first.
+- Do not remove or "simplify" code carrying an `INVARIANT(...)` marker, even when it looks
+  redundant. Historical edge-case guards stay untouched.
+- Never perform an action listed in `forbidden_actions` inside `decisions/*.yaml`. Stop and
+  ask the user instead.
+
+## Non-negotiable rules
+
+1. A bug is fixed only when an automated regression test proves it. Verify the test with
+   `python scripts/mutation_guard.py --test <test> --target <file>:<function>`.
+2. Ask for explicit user consent before `git push --force`, deleting user data, wiping
+   files, or any other irreversible operation.
+3. Use the standard library. Add no third-party dependency without user approval.
+4. Keep diffs minimal. Do not reformat or refactor code outside the request.
+
+## Before you finish
+
+Run `python -m pytest -q tests`, `python scripts/verify_invariants.py`, and
+`python scripts/check_dependency_budget.py`. Report any failure verbatim.

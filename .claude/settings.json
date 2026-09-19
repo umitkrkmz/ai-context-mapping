@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" || exit 0; if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; exec \"$PY\" .claude/hooks/guardrail_hook.py post-edit",
+            "timeout": 60,
+            "statusMessage": "Checking architectural invariants..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit*)",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" || exit 0; if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; \"$PY\" .claude/hooks/guardrail_hook.py is-git-commit || exit 0; \"$PY\" scripts/check_dependency_budget.py --no-color >&2 || exit 2; if \"$PY\" -c \"import pytest\" >/dev/null 2>&1; then \"$PY\" -m pytest -q tests/test_maps.py >&2 || exit 2; elif [ \"${AI_GUARDRAILS_STRICT:-0}\" = \"1\" ]; then echo \"pytest is not installed (AI_GUARDRAILS_STRICT=1)\" >&2; exit 2; else echo \"[ai-guardrails] warn: pytest is not installed; skipped the map coverage test\" >&2; fi",
+            "timeout": 300,
+            "statusMessage": "Commit gate: dependency budget and map coverage..."
+          }
+        ]
+      }
+    ]
+  }
+}

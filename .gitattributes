@@ -1,0 +1,6 @@
+# Normalize line endings so shell scripts and the CLAUDE.md mirror behave the same on every OS.
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+AGENTS.md text eol=lf
+CLAUDE.md text eol=lf

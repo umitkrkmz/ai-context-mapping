@@ -1,0 +1,165 @@
+# .agentignore — paths that AI agents must not read, index, or map.
+#
+# Syntax follows .gitignore: "#" comments, "*" and "**" globs, a trailing "/" matches
+# directories only, a leading "/" anchors to the repository root, and "!" re-includes.
+#
+# Purpose: keep the context window free of generated, binary, and bulk-data files.
+# scripts/init_mapping.py and tests/test_maps.py both honor this file, so anything
+# listed here does not need an entry in maps/project-map.md.
+
+# --- Version control and tool state ---------------------------------------------------
+.git/
+.hg/
+.svn/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Python ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+*.mgbak
+
+# --- JavaScript / TypeScript ----------------------------------------------------------
+node_modules/
+.next/
+.nuxt/
+.svelte-kit/
+.turbo/
+.parcel-cache/
+.cache/
+coverage/
+*.tsbuildinfo
+*.min.js
+*.min.css
+*.map
+
+# --- Build artifacts and packaging ----------------------------------------------------
+build/
+dist/
+out/
+target/
+bin/Debug/
+bin/Release/
+obj/
+*.egg
+*.whl
+*.tar.gz
+*.tgz
+
+# --- Lockfiles (huge, machine-generated, zero signal for agents) ----------------------
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+Cargo.lock
+composer.lock
+Gemfile.lock
+
+# --- Compiled binaries and archives ---------------------------------------------------
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.o
+*.obj
+*.class
+*.jar
+*.war
+*.wasm
+*.bin
+*.zip
+*.7z
+*.rar
+*.gz
+*.bz2
+*.xz
+
+# --- Media and documents that cannot be read as text ----------------------------------
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.ico
+*.bmp
+*.tiff
+*.psd
+*.mp3
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wav
+*.flac
+*.woff
+*.woff2
+*.ttf
+*.otf
+*.eot
+*.pdf
+
+# --- Databases, large mock datasets, and bulk data ------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.parquet
+*.feather
+*.pickle
+*.pkl
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.jsonl
+*.ndjson
+mock_data/
+mock-data/
+fixtures/large/
+fixtures/generated/
+testdata/large/
+data/raw/
+data/processed/
+datasets/
+downloads/
+
+# --- Logs and temporary files ---------------------------------------------------------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# --- Secrets (never expose these to an agent) -----------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# --- Claude Code local, per-user state ---------------------------------------------------
+.claude/settings.local.json
