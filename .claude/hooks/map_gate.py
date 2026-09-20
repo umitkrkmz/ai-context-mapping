@@ -27,8 +27,9 @@ read the map does not unlock a sub-agent that has not.
 
 Fail-open by design (invariant NI-010): if the project has no map, the payload is malformed, or anything
 unexpected happens, the call is allowed. Set ``AI_GUARDRAILS_PERMISSIVE=1`` to disable the gate for
-manual or CI runs. This is a guardrail against a reflex, not a security boundary: a determined agent can
-route around a shell heuristic.
+manual or CI runs, or ``AI_GUARDRAILS_ANY_MAP=1`` to let a nested project's own map count as well
+(monorepos, benchmark harnesses). This is a guardrail against a reflex, not a security boundary: a
+determined agent can route around a shell heuristic.
 
 Exit codes (see the Claude Code hooks reference): 0 allow, 2 block (stderr is fed back to Claude).
 
@@ -56,6 +57,7 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, TextIO, Tuple
 MAP_RELATIVE = "maps/project-map.md"
 PERMISSIVE_ENV = "AI_GUARDRAILS_PERMISSIVE"  # INVARIANT(NI-010): keep the bypass for manual and CI runs.
 STATE_DIR_ENV = "AI_GUARDRAILS_STATE_DIR"
+ANY_MAP_ENV = "AI_GUARDRAILS_ANY_MAP"  # opt in: a nested project's own maps/project-map.md counts too
 STATE_TTL_SECONDS = 7 * 24 * 3600
 BLOCK_MESSAGE = (
     "Rule 1 Enforced: Access denied. You must inspect 'maps/project-map.md' or query the MCP context "
@@ -240,8 +242,13 @@ def _norm(path: str) -> str:
     return os.path.normcase(os.path.normpath(path.replace("\\", "/"))).replace("\\", "/")
 
 
-def is_map_file(path: str, root: Path) -> bool:
-    """True when ``path`` (absolute or relative to the project root) is maps/project-map.md."""
+def is_map_file(path: str, root: Path, any_map: bool = False) -> bool:
+    """True when ``path`` (absolute or relative to the project root) is maps/project-map.md.
+
+    With ``any_map`` (env AI_GUARDRAILS_ANY_MAP=1) an existing ``maps/project-map.md`` belonging to a
+    nested project also counts. That suits monorepos and benchmark harnesses, where the project an agent
+    works in is not the project whose hooks are running. It is off by default.
+    """
     if not path:
         return False
     candidate = Path(path)
@@ -252,24 +259,26 @@ def is_map_file(path: str, root: Path) -> bool:
         expected = os.path.realpath(root / MAP_RELATIVE)
     except OSError:
         return False
-    return os.path.normcase(resolved) == os.path.normcase(expected)
+    if os.path.normcase(resolved) == os.path.normcase(expected):
+        return True
+    return any_map and resolved.replace("\\", "/").lower().endswith("/" + MAP_RELATIVE) and os.path.isfile(resolved)
 
 
-def references_map(program: str, args: Sequence[str], root: Path, piped: bool) -> bool:
+def references_map(program: str, args: Sequence[str], root: Path, piped: bool, any_map: bool = False) -> bool:
     """True when a command inspects the project map (reads it, or asks the MCP server for it)."""
     if program in READERS:
-        return any(is_map_file(a, root) for a in args if not a.startswith("-"))
+        return any(is_map_file(a, root, any_map) for a in args if not a.startswith("-"))
     if program in GREP_LIKE or program in RG_LIKE:
         operands, _recursive, pattern_given = parse_operands(args)
         paths = operands if pattern_given else operands[1:]
-        return bool(paths) and all(is_map_file(p, root) for p in paths)
+        return bool(paths) and all(is_map_file(p, root, any_map) for p in paths)
     if program.startswith("python") or program == "py":
         text = " ".join(args).replace("\\", "/")
         return "context_server.py" in text and any(f"--call {name}" in text or f"--call={name}" in text for name in MCP_MAP_TOOLS)
     return False
 
 
-def classify_shell(command: str, root: Path, shell: str = "Bash") -> str:
+def classify_shell(command: str, root: Path, shell: str = "Bash", any_map: bool = False) -> str:
     """Classify a shell command as ``"map"`` (inspects the map), ``"search"``, or ``"other"``.
 
     Segments are examined in order, so ``cat maps/project-map.md && grep -r x .`` is a map access.
@@ -278,7 +287,7 @@ def classify_shell(command: str, root: Path, shell: str = "Bash") -> str:
         program, args = program_and_args(tokenize(segment, shell))
         if not program:
             continue
-        if references_map(program, args, root, piped):
+        if references_map(program, args, root, piped, any_map):
             return "map"
         if is_search(program, args, piped, shell):
             return "search"
@@ -335,7 +344,7 @@ def project_root(payload: Mapping[str, Any], env: Mapping[str, str]) -> Path:
     return Path(str(chosen)).resolve()
 
 
-def tool_action(payload: Mapping[str, Any], root: Path) -> Tuple[str, str]:
+def tool_action(payload: Mapping[str, Any], root: Path, any_map: bool = False) -> Tuple[str, str]:
     """Decide what a tool call is: ``("map", via)``, ``("search", why)``, or ``("other", "")``."""
     name = str(payload.get("tool_name") or "")
     tool_input = payload.get("tool_input")
@@ -343,16 +352,16 @@ def tool_action(payload: Mapping[str, Any], root: Path) -> Tuple[str, str]:
     if name.startswith("mcp__") and name.rsplit("__", 1)[-1] in MCP_MAP_TOOLS:
         return "map", f"mcp:{name}"
     if name in READ_TOOLS:
-        return ("map", "Read") if is_map_file(str(tool_input.get("file_path") or ""), root) else ("other", "")
+        return ("map", "Read") if is_map_file(str(tool_input.get("file_path") or ""), root, any_map) else ("other", "")
     if name == "Grep":
-        return ("map", "Grep") if is_map_file(str(tool_input.get("path") or ""), root) else ("search", "Grep")
+        return ("map", "Grep") if is_map_file(str(tool_input.get("path") or ""), root, any_map) else ("search", "Grep")
     if name == "Glob":
         pattern = str(tool_input.get("pattern") or "")
         literal = not any(ch in pattern for ch in "*?[{")
-        return ("map", "Glob") if literal and is_map_file(pattern, root) else ("search", "Glob")
+        return ("map", "Glob") if literal and is_map_file(pattern, root, any_map) else ("search", "Glob")
     if name in SHELL_TOOLS:
         command = str(tool_input.get("command") or "")
-        kind = classify_shell(command, root, name)
+        kind = classify_shell(command, root, name, any_map)
         return (kind, f"{name}: {command[:60]}") if kind != "other" else ("other", "")
     return "other", ""
 
@@ -365,7 +374,7 @@ def gate(payload: Mapping[str, Any], env: Optional[Mapping[str, str]] = None) ->
     root = project_root(payload, env)
     if not (root / MAP_RELATIVE).is_file():
         return 0, ""  # INVARIANT(NI-010): no map means nothing to enforce; fail open.
-    action, detail = tool_action(payload, root)
+    action, detail = tool_action(payload, root, env.get(ANY_MAP_ENV) == "1")
     if action == "map":
         mark_unlocked(root, payload, env, detail)
         return 0, ""

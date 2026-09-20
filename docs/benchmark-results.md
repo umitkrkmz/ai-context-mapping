@@ -1,14 +1,15 @@
 # Benchmark Results: Does the Framework Pay for Itself?
 
-Two A/B experiments on the same bug, in the same project at two sizes: **4,400 tokens** (v1.0.1) and
-**55,600 tokens** (v1.0.2). In each, one agent works with the framework and one without.
+Three A/B experiments on the same bug: in a **4,400-token** project (v1.0.1), in a **55,600-token**
+project (v1.0.2), and in the same large project with **Rule 1 enforced by a gate** (v1.0.3 hook).
 
-**The short version: the results do not support the claim that a project map saves tokens.** The
-framework did not make agents fix the bug better or cheaper in either experiment. It did produce
-machine-checked evidence, at a small cost. Read section 1 before quoting any number, and section 8 for
-the limits of these experiments.
+**The short version.** When Rule 1 ("read the map first") was only an instruction, agents ignored it and
+the map saved no tokens (experiments 1 and 2). When it was enforced, every agent read the map first and the
+median cost fell by 27% with equal fix quality (experiment 3). That last result is **promising, not
+proven**: it rests on three trials per arm, one bug, and a harness with caveats. Read section 1 before
+quoting any number, and section 9 for the limits.
 
-Run dates: 2026-09-20 (both). Experiment 1 has one trial per arm; experiment 2 has three.
+Run dates: 2026-09-20 (all three). Experiment 1 has one trial per arm; experiments 2 and 3 have three.
 
 ## 1. Summary
 
@@ -20,6 +21,8 @@ Run dates: 2026-09-20 (both). Experiment 1 has one trial per arm; experiment 2 h
 | Did the baseline's cost grow with project size?                 | **No.** It was flat: 148.7k at 4.4k tokens, **150.9k median at 55.6k** (12.7x larger). |
 | Did the baseline agent scan the whole repository?               | **No.** All 8 agents listed the tree, then grepped (experiment 2) or opened files by name (experiment 1). None read more than 12 files. |
 | Did the framework agents follow Rule 1 (read the map first)?    | **No, 0 of 3.** All three grepped first; two read the map afterwards; one never opened it. |
+| **Does enforcing Rule 1 change the cost?** (experiment 3)       | **Preliminary yes.** Median weighted cost **-27%** (117.6k vs 160.2k); all 3 gated runs cheaper than all 3 ungated. Not statistically conclusive at n=3. |
+| Did the gate hurt fix quality?                                  | **No** on the measured outcome (8/8 acceptance, 4/4 mutants). But gated agents wrote unit tests only (0 of 3 added an end-to-end test vs 2 of 3) and none opened the frozen legacy module. |
 | What did the framework arm buy?                                 | Mutation-verified tests, invariant, dependency, and map checks. It did not buy a better fix. |
 | What did it cost?                                               | About 7,000-12,000 extra tokens of instruction and script reading per task, and one hung command. |
 
@@ -28,7 +31,8 @@ Run dates: 2026-09-20 (both). Experiment 1 has one trial per arm; experiment 2 h
 that reads the whole repository. No agent here did that. Agents navigate with `Glob` and `grep`, whose
 cost depends on how many files *match*, not on how large the repository is. The model is a worst case
 for an unguided agent, not a prediction, and this benchmark found no savings from the map at 55,600
-tokens.
+tokens. Experiment 3 shows that this holds for an *advisory* rule; with the rule enforced, the picture
+changes (section 5).
 
 ## 2. What we measured, and how
 
@@ -180,7 +184,110 @@ boundary test from a non-boundary test at 55,600 tokens.
   the cache over a run (mostly the system prompt, tool definitions, and the files read), and every turn
   re-reads the growing context. That is why 12.7x more project barely moved the total.
 
-## 5. Scale: 4,400 to 55,600 tokens
+## 5. Experiment 3: the same task with Rule 1 enforced (the v1.0.3 map gate)
+
+**Question.** In experiment 2, Rule 1 was followed 0 of 3 times. If the rule is enforced by a hook that
+blocks `Grep`, `Glob`, and exploratory shell commands until the map has been read
+(`.claude/hooks/map_gate.py`), do cost or quality change?
+
+**Design.** Same project, same prompt, same model, fresh sub-agent per trial, framework layer in both arms.
+Six new directories, three trials per arm, interleaved: Bn1, Bg1, Bg2, Bn2, Bn3, Bg3 (`Bn` = framework, gate
+off; `Bg` = framework, gate on). The primary metric (weighted cost) was fixed before the runs, and no
+hypothesis about direction was recorded.
+
+**How the gate was applied, and what that costs us.** The gate is a project hook of *this* repository,
+and it checks this repository's map. The benchmark directories are scratch copies with their own maps, so
+we enabled an opt-in mode added for this experiment, `AI_GUARDRAILS_ANY_MAP=1`, in which a nested project's
+own `maps/project-map.md` counts as the map. The gate arm was the shipped hook plus that flag; the
+ungated arm was the same session with the hook removed (the v1.0.2-era configuration). The hook
+configuration was swapped between runs and restored from git afterwards. A session rooted in the
+project itself, as a real adopter would use, is the more faithful setup, but the headless CLI was not
+available (not logged in), so that setup was not run.
+
+### 5.1 Per-trial results
+
+| Trial | Gate | Weighted cost | New tokens | Cache reads | Search output | Latency | Turns | Tool calls | Blocked | Map read before first search |
+| ----- | ---- | ------------: | ---------: | ----------: | ------------: | ------: | ----: | ---------: | ------: | ---------------------------- |
+| Bn1   | off  |       177,470 |     83,995 |     551,892 |      ~6,903 |  56.0 s |     9 |          9 |       0 | no (only grepped lines from it) |
+| Bn2   | off  |       132,854 |     45,574 |     584,455 |      ~6,844 | 176.6 s |     9 |         10 |       0 | no (only grepped lines from it) |
+| Bn3   | off  |       160,199 |     56,739 |     689,514 |      ~6,022 |  59.6 s |    10 |         18 |       0 | no (read it 6th, after a listing and three other files) |
+| Bg1   | on   |       117,632 |     38,568 |     535,455 |        ~655 |  47.5 s |     9 |         15 |       1 | **yes** |
+| Bg2   | on   |       129,379 |     50,820 |     491,180 |         ~39 |  53.8 s |     8 |         15 |       1 | **yes** |
+| Bg3   | on   |   **105,371** |     36,342 |     461,588 |         ~39 |  40.2 s |     8 |         14 |       1 | **yes** |
+
+"Search output" is the text returned to the model by `Glob`, `Grep`, and shell searches; a blocked call
+returns none. Bn2's 176.6 s includes a hung shell command (a heredoc), the same kind of event that hit B2
+in experiment 2; it costs time, not tokens.
+
+### 5.2 Aggregates
+
+| Metric                       | Gate off: median (range)      | Gate on: median (range)     | On / off (median) | On / off (mean) |
+| ---------------------------- | ----------------------------: | --------------------------: | ----------------: | --------------: |
+| **Weighted cost** (primary)  | 160,199 (132,854-177,470)     | 117,632 (105,371-129,379)   |         **0.73x** |           0.75x |
+| New tokens                   |  56,739 (45,574-83,995)       |  38,568 (36,342-50,820)     |             0.68x |           0.67x |
+| All-in tokens                | 635,887 (630,029-746,253)     | 542,000 (497,930-574,023)   |             0.85x |           0.80x |
+| Search output (tokens)       |   6,844 (6,022-6,903)         |      39 (39-655)            |             0.01x |           0.04x |
+| *Harness total*              |  81,036 (78,320-88,758)       |  71,550 (69,851-83,856)     |             0.88x |           0.91x |
+| Latency                      |  59.6 s (56.0-176.6)          |  47.5 s (40.2-53.8)         |             0.80x |           0.48x |
+| Turns                        |  9 (9-10)                     |  8 (8-9)                    |             0.89x |           0.89x |
+| Tool calls                   |  10 (9-18)                    |  15 (14-15)                 |             1.50x |           1.19x |
+
+All three gated runs cost less than all three ungated runs (129,379 < 132,854). With three trials per arm
+the smallest possible exact permutation p-value is 0.05 (one-sided), so this is **consistent, not
+conclusive**. New tokens overlap between arms (Bg2 at 50,820 exceeds Bn2 at 45,574). The gate arm makes
+*more* tool calls because the ungated agents bundled many operations into compound shell commands; it
+takes fewer turns.
+
+### 5.3 Against the earlier arms (weighted cost, medians)
+
+| Arm                                                   | Median cost | vs gate on |
+| ----------------------------------------------------- | ----------: | ---------: |
+| A: no framework (experiment 2)                        |     150,887 |      -22% |
+| B: framework, gate off (experiment 2)                 |     154,071 |      -24% |
+| Bn: framework, gate off (experiment 3, re-run)        |     160,199 |      -27% |
+| **Bg: framework, gate on (experiment 3)**             | **117,632** |          - |
+
+The re-run ungated arm sits within 4% of the experiment 2 framework arm (160.2k vs 154.1k), which
+suggests the conditions were comparable across runs.
+
+### 5.4 Quality
+
+| Measure                                             | Gate off (3) | Gate on (3) |
+| --------------------------------------------------- | -----------: | ----------: |
+| Identical one-character fix                         |          3/3 |         3/3 |
+| Hidden acceptance tests passed                      |      8/8 x3  |     8/8 x3  |
+| Mutation kill rate of the agent's suite             |      4/4 x3  |     4/4 x3  |
+| Ran the mutation guard themselves                   |          3/3 |         3/3 |
+| Added an end-to-end (`compute_quote`) regression test |        2/3 |     **0/3** |
+| Opened `legacy_shipping.py` (frozen, same bug)      |          2/3 |     **0/3** |
+| Touched `legacy_shipping.py`                        |          0/3 |         0/3 |
+| Files changed outside the fix and its tests         |            0 |           0 |
+
+### 5.5 What the transcripts show
+
+- **The gate fired exactly once per gated run**, on the first `Glob **/*`, and 3 of 3 agents recovered
+  immediately by reading the map (a 2nd call). Every successful search in a gated run came after the map
+  was read; in the ungated runs, 0 of 3 read the map before searching.
+- **The mechanism is visible.** Ungated agents pulled about 6,000-6,900 tokens of search output into
+  context (a whole-tree `Glob` of about 4,100 tokens plus broad `find` and `grep` dumps). Gated agents pulled 39-655. That output
+  stays in the context and is re-read on every later turn. The gated agents did read the map (about 3,700
+  tokens), and still finished cheaper.
+- **The saving partly comes from reading less.** Gated agents read fewer test files and never opened the
+  frozen legacy module. That explains both the lower cost and the two quality-adjacent differences in
+  section 5.4: they wrote unit tests only, and none reported the sibling off-by-one that two ungated
+  agents surfaced. Whether that is a good or bad trade depends on the task.
+- **Sub-agent scope worked as designed** in the real harness: each agent, including each fresh
+  sub-agent, was blocked until it had read a map itself.
+
+### 5.6 What this experiment does not tell us
+
+- **Whether the map or merely the blocking of broad searches produces the saving.** An ablation (block
+  searches but do not require the map) would separate them.
+- **Whether it holds beyond 55,600 tokens, for other bugs, or for symptoms that cannot be grepped.**
+- **How an adopter's setup behaves,** with a session rooted in the project rather than the nested-map mode
+  used here.
+
+## 6. Scale: 4,400 to 55,600 tokens
 
 | Quantity (weighted cost unless noted)      | Small (n=1 each) | Large (n=3 each, median) | Change |
 | ------------------------------------------ | ---------------: | -----------------------: | -----: |
@@ -194,7 +301,7 @@ boundary test from a non-boundary test at 55,600 tokens.
 A 12.7x larger project moved neither arm's cost. The gap between arms shrank by six points, which is
 inside the noise. **There is no sign that the map's value grows with project size over this range.**
 
-## 6. Interpretation
+## 7. Interpretation
 
 **Supported by the data**
 
@@ -216,6 +323,12 @@ inside the noise. **There is no sign that the map's value grows with project siz
   symptom.
 - *"The map's advantage grows with repository size."* Not observed between 4,400 and 55,600 tokens.
 
+**Experiment 3 qualifies the conclusions above.** They describe an *advisory* rule that agents ignored. With
+Rule 1 enforced, agents read the map first, avoided most search output, and cost a median 27% less, with
+the same fix and the same mutation score. That supports the framework's central design idea, that a rule
+needs a script behind it, and suggests the map's value is realized only when it is consulted before
+searching. It does not yet prove a saving (three trials, one bug), and it did not measure scale.
+
 **What the framework did show value for**
 
 - **Evidence, not outcomes.** B's tests were verified by an independent mutation run; A's equally strong
@@ -224,24 +337,21 @@ inside the noise. **There is no sign that the map's value grows with project siz
   plausible wrong fixes such as unifying tier operators or editing the frozen module. No agent tried,
   so we cannot say whether they would have.
 
-## 7. What would change the picture (untested)
+## 8. What would change the picture (untested)
 
 - **A symptom that cannot be grepped.** "Wrong total for some German orders" has no distinctive string.
   There the baseline must explore, and a map might route it. This benchmark's bug was chosen to be
   typical, and it is greppable.
 - **Repositories 10x to 100x larger**, where even matches are numerous and `Glob **/*` itself is
   expensive (here: ~1,700 tokens; at 5,000 files it would be tens of thousands).
-- **Enforcing Rule 1 rather than requesting it.** *Implemented in v1.0.3* as `.claude/hooks/map_gate.py`,
-  a `PreToolUse` gate that denies `Glob`, `Grep`, and exploratory shell searches until the map has been
-  read. It is unit-tested, and a live check showed a fresh sub-agent blocked on its first `Grep`,
-  reading the map as instructed, and succeeding on the retry (3 tool calls). **Its effect on token
-  cost, latency, and fix quality has not been benchmarked**; a gate could just as well add turns as
-  remove searching. Re-running experiment 2 with the gate enabled is the obvious next test.
+- **Enforcing Rule 1 rather than requesting it.** Implemented in v1.0.3 and measured in experiment 3.
+  What remains: repeat it with five or more trials per arm, on a larger project, with a second bug type,
+  and with an ablation that blocks broad searches *without* requiring the map, to see which part matters.
 - **Trimming the overhead:** an agent should run a script with `--help`, not read its source;
   `CLAUDE.md` and `AGENTS.md` should not both be read; the map should stay under ~3,000 tokens.
 - **More trials and more bug types.** Three trials per arm and one bug do not support statistics.
 
-## 8. Threats to validity
+## 9. Threats to validity
 
 - **Three trials per arm (one in experiment 1).** LLM runs vary; B2 shows how far one run can move a
   mean. Differences under about 20% are noise here.
@@ -256,10 +366,21 @@ inside the noise. **There is no sign that the map's value grows with project siz
   files that way; B2 read `CLAUDE.md`, `AGENTS.md`, and the README).
 - **Sequential runs at different moments.** API load may differ between trials, which affects latency.
 - **Agents used file reads, not the MCP protocol.** The server returns the same content.
+- **Experiment 3 was not run as an adopter would run it.** The gate protected a different directory tree
+  than the project whose hooks were running, which needed the `AI_GUARDRAILS_ANY_MAP=1` opt-in (added for
+  this experiment), and the hook configuration was swapped between runs of a single session. The
+  gate's logic is the shipped one; the surrounding conditions are not.
+- **Experiment 3 has three trials per arm.** The cost difference is consistent but cannot reach
+  conventional significance (minimum exact one-sided p = 0.05).
+- **`Read`-tool counts can mislead.** Two ungated agents read files with `cat` in shell commands, so a
+  count of `Read` calls showed zero. Experiment 3's comparisons therefore rely on token counts and
+  search-output volume, which are measured from tool results, not on file counts.
+- **The gate spends one call per run.** Each gated agent's first search was blocked; that call is included
+  in the results.
 - **The boundary operators were added before the runs** and applied identically to all arms (see the
   operator comparison in section 3).
 
-## 9. Reproduce
+## 10. Reproduce
 
 Everything is in the repository. The fixtures (`benchmarks/shipdesk/`, `benchmarks/shipdesk-large/`) are
 listed in `.agentignore` because they contain deliberate bugs; `benchmarks/conftest.py` keeps `pytest`
@@ -284,6 +405,16 @@ cp templates/python/tests/test_maps.py $WORK/B/tests/
 
 Give each agent the prompt from section 2 in a fresh session pointed at its own directory. Then:
 
+**For the gate experiment (experiment 3)**, run the sub-agents inside a Claude Code session whose
+project hooks include the gate, and enable the nested-map mode in the hook command of the *gate* runs:
+
+```text
+AI_GUARDRAILS_ANY_MAP=1 exec "$PY" .claude/hooks/map_gate.py      # in .claude/settings.json, PreToolUse
+```
+
+For the ungated runs, remove the map-gate entry from `.claude/settings.json` (and restore it afterwards).
+Both arms use the same directories: the large project plus the framework layer.
+
 ```bash
 # Correctness (8/8 expected)
 BENCH_PROJECT=$WORK/A python -m pytest benchmarks/acceptance_check.py -q
@@ -292,7 +423,7 @@ BENCH_PROJECT=$WORK/A python -m pytest benchmarks/acceptance_check.py -q
 (cd $WORK/A && python /path/to/repo/scripts/mutation_guard.py --test tests \
   --target shipdesk/shipping.py:qualifies_for_free_shipping --max-mutants 0 --min-score 0)
 
-# Tokens, tool calls, and files read, from the transcripts
+# Tokens, tool calls, search output, and gate blocks, from the transcripts
 python benchmarks/analyze_transcripts.py --dir <session>/subagents --sequence AGENT_ID [AGENT_ID ...]
 ```
 

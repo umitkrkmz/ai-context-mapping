@@ -168,20 +168,23 @@ From now on, adding a file without describing it in the map fails the build.
 ## Does it work? Honest results
 
 We ran A/B experiments: the same agent, model, and bug, with and without the framework, on a
-4,400-token and a 55,600-token project (8 agent runs, measured from transcripts).
+4,400-token and a 55,600-token project (14 agent runs, measured from transcripts).
 
 | Finding | Result |
 | ------- | ------ |
 | Correct fix, strong regression test | **8 of 8** runs, in both arms |
-| Token savings from the project map | **None measured.** Median cost +2% (large project), spread larger than the difference |
+| Token savings from the project map, **as an instruction** | **None measured.** Median cost +2% (large project), spread larger than the difference |
 | Did unguided agents scan the repository? | **No.** They grepped and read ~11 files, and their cost stayed flat as the project grew 12.7x |
-| Did agents follow "read the map first"? | **0 of 3.** Advisory rules are followed only partly |
+| Did agents follow "read the map first"? | **0 of 3** when it was an instruction; **3 of 3** when the gate enforced it |
+| Token cost with Rule 1 **enforced** by the map gate | **Median -27%** (117.6k vs 160.2k), same fix quality, 3 trials per arm: promising, **not proven** |
 | What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
 
-So the evidence supports the framework as **verification and guardrails**, not (yet) as a token saver.
-The Rule 1 map gate (v1.0.3) was built in response; its unit tests and a live check show it blocks and
-unblocks correctly, but **its effect on cost and behavior has not been re-benchmarked**.
-Larger repositories and tasks that cannot be grepped remain untested. Full data, method, and limits:
+So the evidence supports the framework as **verification and guardrails**, and suggests that the map saves
+tokens only when it is *consulted first*, which agents do not do on their own. With the Rule 1 gate,
+every agent read the map first and the median cost fell by 27%. That result rests on three trials per
+arm and one bug (the difference is consistent but not statistically conclusive), and gated agents also
+wrote fewer end-to-end tests. Larger repositories, other bugs, and tasks that cannot be grepped remain
+untested. Full data, method, and limits:
 [docs/benchmark-results.md](docs/benchmark-results.md).
 
 ## The tools

@@ -356,3 +356,63 @@ def test_the_gate_keeps_its_bypass_and_fail_open_markers() -> None:
 def test_guardrail_hook_detects_git_commits(command: str, expected: bool) -> None:
     assert guard_module.is_git_commit({"tool_name": "Bash", "tool_input": {"command": command}}) is expected
     assert guard_module.is_git_commit({"tool_name": "Read", "tool_input": {"command": command}}) is False
+
+
+# --------------------------------------------------------------------------------------
+# Opt-in: a nested project's own map counts (monorepos, benchmark harnesses)
+# --------------------------------------------------------------------------------------
+@pytest.fixture()
+def nested_map(tmp_path: Path) -> Path:
+    """A second project, with its own map, that lives outside the project whose hooks are running."""
+    other = tmp_path.parent / (tmp_path.name + "-other")
+    (other / "maps").mkdir(parents=True)
+    (other / "maps" / "project-map.md").write_text("# Other map\n", encoding="utf-8")
+    (other / "docs").mkdir()
+    (other / "docs" / "project-map.md").write_text("not a map\n", encoding="utf-8")
+    return other
+
+
+def test_a_foreign_map_does_not_unlock_by_default(project: Path, nested_map: Path) -> None:
+    assert run(project, payload("Read", file_path=str(nested_map / "maps" / "project-map.md"))) == (0, "")
+    assert run(project, payload("Grep", pattern="x"))[0] == 2
+
+
+def test_any_map_mode_accepts_a_nested_projects_map(project: Path, nested_map: Path) -> None:
+    extra = {"AI_GUARDRAILS_ANY_MAP": "1"}
+    assert run(project, payload("Grep", pattern="x"), **extra)[0] == 2
+    assert run(project, payload("Read", file_path=str(nested_map / "maps" / "project-map.md")), **extra) == (0, "")
+    assert run(project, payload("Grep", pattern="x"), **extra) == (0, "")
+    assert run(project, bash("grep -rn foo ."), **extra) == (0, "")
+
+
+def test_any_map_mode_via_shell_reader(project: Path, nested_map: Path) -> None:
+    extra = {"AI_GUARDRAILS_ANY_MAP": "1"}
+    assert run(project, bash(f"cat {(nested_map / 'maps' / 'project-map.md').as_posix()}"), **extra) == (0, "")
+    assert run(project, payload("Glob", pattern="**/*"), **extra) == (0, "")
+
+
+def test_any_map_mode_rejects_lookalikes(project: Path, nested_map: Path) -> None:
+    extra = {"AI_GUARDRAILS_ANY_MAP": "1"}
+    assert run(project, payload("Read", file_path=str(nested_map / "docs" / "project-map.md")), **extra) == (0, "")
+    assert run(project, payload("Read", file_path=str(nested_map / "maps" / "missing-map.md")), **extra) == (0, "")
+    assert run(project, payload("Read", file_path=str(nested_map / "maps" / "nope" / "project-map.md")), **extra) == (0, "")
+    assert run(project, payload("Grep", pattern="x"), **extra)[0] == 2
+
+
+def test_is_map_file_edge_cases(project: Path, nested_map: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    is_map_file = gate_module.is_map_file
+    # An empty path is a plain False (not merely falsy).
+    assert is_map_file("", project) is False
+    # A directory whose name merely ends in "maps" must not count as a maps/ directory.
+    lookalike = nested_map.parent / "notmaps"
+    lookalike.mkdir()
+    (lookalike / "project-map.md").write_text("not a map\n", encoding="utf-8")
+    assert is_map_file(str(lookalike / "project-map.md"), project, any_map=True) is False
+    assert is_map_file(str(nested_map / "maps" / "project-map.md"), project, any_map=True) is True
+    assert is_map_file(str(nested_map / "maps" / "project-map.md"), project, any_map=False) is False
+    # If the path cannot be resolved, the answer is False rather than an error.
+    def boom(_path):
+        raise OSError("unresolvable")
+
+    monkeypatch.setattr(gate_module.os.path, "realpath", boom)
+    assert is_map_file("maps/project-map.md", project) is False

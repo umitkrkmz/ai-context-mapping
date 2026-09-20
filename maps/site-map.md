@@ -80,5 +80,6 @@ Transport: JSON-RPC 2.0 over stdio, served by `mcp/context_server.py`.
 | `SKIP_AI_GUARDRAILS`    | installed pre-commit hook  | `1` skips the hook once                                    |
 | `AI_GUARDRAILS_STRICT`  | git pre-commit hook, Claude Code commit gate | `1` makes a missing pytest a failure     |
 | `AI_GUARDRAILS_PERMISSIVE` | `.claude/hooks/map_gate.py` | `1` disables the Rule 1 gate (manual or CI runs)            |
+| `AI_GUARDRAILS_ANY_MAP`    | `.claude/hooks/map_gate.py` | `1` lets a nested project's own map unlock searching (monorepos, benchmarks) |
 | `AI_GUARDRAILS_STATE_DIR`  | `.claude/hooks/map_gate.py` | Override the marker directory (default: system temp, per project) |
 | `MUTATION_GUARD`        | set by `mutation_guard.py` | `1` inside test runs launched by the guard                 |

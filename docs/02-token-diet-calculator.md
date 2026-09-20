@@ -9,14 +9,15 @@ a reference benchmark, a scaling model, and a script to measure your own reposit
 > characters**, which is typically within roughly 15-25% of a real tokenizer for source code
 > and prose. Use the script in section 7 with your own repository and your own model's price.
 
-> **Empirical check: read this first.** Two A/B experiments ([benchmark results](benchmark-results.md))
-> tested this model with real agents on a 4,400-token and a 55,600-token project. They found
-> **no token savings from the map.** The baseline agents did not scan the repository: they listed
-> files and grepped, reading 10-12 files (about 3% of the project), and their cost stayed flat while
-> the project grew 12.7x. The "naive whole-repository read" below is therefore a **worst-case model of
-> an unguided agent**, not a description of the agents tested, and its percentages are an upper
-> bound. Whether the map pays off in much larger repositories, or for symptoms that cannot be
-> grepped, is untested.
+> **Empirical check: read this first.** Our A/B experiments ([benchmark results](benchmark-results.md))
+> tested this model with real agents on a 4,400-token and a 55,600-token project. With the map merely
+> *requested*, they found **no token savings**: the baseline agents did not scan the repository (they
+> listed files and grepped, reading 10-12 files, about 3% of the project), their cost stayed flat while
+> the project grew 12.7x, and they ignored the instruction to read the map. With the map *enforced* by
+> a hook, the median cost fell by 27% on three trials per arm, a preliminary result. The "naive
+> whole-repository read" below is therefore a **worst-case model of an unguided agent**, not a
+> description of the agents tested, and its percentages are an upper bound. Whether the map pays off
+> in much larger repositories, or for symptoms that cannot be grepped, is untested.
 
 ## 1. Headline (worst-case model, not a measurement)
 

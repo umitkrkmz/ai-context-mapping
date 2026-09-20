@@ -48,11 +48,13 @@ The diet has three rules.
 A map that is too long defeats its purpose. If yours passes a few thousand tokens, group
 more aggressively rather than trimming descriptions.
 
-> **Measured caveat.** In [two A/B experiments](benchmark-results.md), unguided agents did not scan
-> repositories: they listed files and grepped, and their cost did not grow with project size up to
-> 55,600 tokens. The token diet is a hypothesis for much larger repositories and for tasks that
-> cannot be found by searching, not a demonstrated saving. What the framework did deliver was
-> verification evidence (mutation-checked tests, invariant checks) at a small, roughly constant cost.
+> **Measured caveat.** In [our A/B experiments](benchmark-results.md), unguided agents did not scan
+> repositories: they listed files and grepped, ignored the instruction to read the map first (0 of 3),
+> and the map saved no tokens. When the instruction was enforced by a hook, every agent read the map
+> first and the median cost fell by 27% at equal fix quality, on three trials per arm. So the token
+> diet appears to work only when the map is consulted before searching, and this is a preliminary
+> result, not a demonstrated saving; larger repositories and tasks that cannot be searched for are
+> untested.
 
 ## 3. Why a file-based store
 
