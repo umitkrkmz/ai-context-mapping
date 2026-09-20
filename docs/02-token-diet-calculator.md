@@ -9,6 +9,12 @@ a reference benchmark, a scaling model, and a script to measure your own reposit
 > characters**, which is typically within roughly 15-25% of a real tokenizer for source code
 > and prose. Use the script in section 7 with your own repository and your own model's price.
 
+> **Empirical check.** An A/B run on a small project ([benchmark results](benchmark-results.md))
+> found that the framework arm used *more* tokens than the baseline, because the project (about
+> 4,400 tokens) was as small as the framework's own instructions. That is consistent with the
+> model below, which predicts savings only when the repository is much larger than the map. The
+> scaling claim itself has not been tested empirically.
+
 ## 1. Headline
 
 | Approach                              | Tokens read to orient and locate the code | Relative |

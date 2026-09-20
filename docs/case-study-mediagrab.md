@@ -73,7 +73,7 @@ and is listed against its file in the project map.
 
 | Guardrail                | Application in MediaGrab                                                            |
 | ------------------------ | ----------------------------------------------------------------------------------- |
-| `AGENTS.md`              | Four rules loaded at the start of every session by Claude Code, Cursor, and Copilot. |
+| `AGENTS.md`              | Five rules loaded at the start of every session by Claude Code, Cursor, and Copilot. |
 | Project map + MCP server | The agent asks `get_file_purpose` instead of grepping; the map names the guard modules and their invariants. |
 | `.agentignore`           | Excluded downloaded media, logs, sample datasets, and build output from context.    |
 | Negative invariants      | One entry per platform quirk: long Windows paths, `Retry-After` handling, filename sanitizing. |

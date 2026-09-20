@@ -43,7 +43,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 INVARIANTS_DOC = "invariants/negative-invariants.md"
 DECISIONS_DIR = "decisions"
 FENCE_LINE = re.compile(r"^ {0,3}(`{3,}|~{3,})\s*([^\s`]*)\s*$")

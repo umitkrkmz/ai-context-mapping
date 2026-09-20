@@ -39,7 +39,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 CONFIG_FILE = ".dependency-budget.json"
 DEV_HINTS = ("dev", "test", "lint", "doc", "ci", "typing", "build")
 SKIP_DIRS = {".git", "node_modules", ".venv", "venv", "env", "__pycache__", "dist", "build", ".tox"}

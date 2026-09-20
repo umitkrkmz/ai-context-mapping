@@ -7,10 +7,24 @@ A small, dependency-free toolkit that gives Claude Code, Cursor, GitHub Copilot,
 agents a *map* of your project and a set of *checks* they cannot talk their way around.
 
 - **Zero dependencies.** Python 3.9+ standard library only. Nothing to `pip install`.
-- **Works with any agent.** `AGENTS.md`, `CLAUDE.md`, Copilot instructions, Cursor rules, and an MCP server.
+- **Agent-agnostic core, native integrations.** Agent-agnostic core (Markdown, AST checks, mutation guard) with native integrations for Claude Code, Cursor, and GitHub Copilot.
 - **Enforced, not just requested.** Every rule that matters is backed by a script, a test, a git hook, or CI.
 
 ---
+
+## Three pillars
+
+The framework does three things, and only three. Everything in the repository serves one of them.
+
+| Pillar                        | Question it answers                          | What implements it                                                        |
+| ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------- |
+| **1. Map the Context**        | *Where is it, and what is it for?*           | `maps/` (project map, site map), the MCP context server, `.agentignore`   |
+| **2. Encode the Constraints** | *What must not change, and what is forbidden?* | Negative invariants, machine-readable ADRs, the dependency budget       |
+| **3. Verify the Changes**     | *Did the change respect the constraints, and can the test fail?* | AST invariant checks, mutation testing, self-guarding tests |
+
+Agent manifestos (`AGENTS.md`, Copilot and Cursor rules, Claude Code commands and hooks) are
+delivery channels for these pillars, not a fourth one. A proposed feature that does not map the
+context, encode a constraint, or verify a change does not belong here.
 
 ## The problem
 
@@ -26,7 +40,7 @@ agents a *map* of your project and a set of *checks* they cannot talk their way 
    Agent starts a task
           |
           v
-   AGENTS.md ---- four rules ------------------------------+
+   AGENTS.md ---- five rules ------------------------------+
           |                                                |
           v                                                |
    maps/project-map.md   (read, do not grep)               |
@@ -63,14 +77,21 @@ flowchart LR
     L --> M
 ```
 
-## The four rules
+## The five rules
 
 Defined in [`AGENTS.md`](AGENTS.md) and mirrored to every agent format:
 
-1. **Map before search.** Read `maps/project-map.md` before any exploratory `grep` or `find`.
-2. **No fix without a regression test.** And the test must survive mutation verification.
-3. **Consent before destruction.** Ask before `git push --force`, deleting data, or wiping files.
-4. **Zero unauthorized dependencies.** Standard library first.
+| #   | Rule                                | What it requires                                                                 | Pillar         | Backed by                                        |
+| --- | ----------------------------------- | -------------------------------------------------------------------------------- | -------------- | ------------------------------------------------ |
+| 1   | **Map before search**               | Read `maps/project-map.md` before any exploratory `grep` or `find`               | Map            | `tests/test_maps.py`, MCP server                 |
+| 2   | **No fix without a regression test** | The test must survive mutation verification                                     | Verify         | `scripts/mutation_guard.py`                      |
+| 3   | **Consent before destruction**      | Ask before `git push --force`, deleting data, or wiping files                    | Constrain      | Review, pre-commit hook                          |
+| 4   | **Zero unauthorized dependencies**  | Standard library first                                                           | Constrain      | `scripts/check_dependency_budget.py`             |
+| 5   | **Do not invent project knowledge** | If an invariant, decision, or map entry does not define a constraint or contract, stop and ask | Map + Constrain | Map, invariants, and ADRs as the only sources of truth |
+
+Rule 5 is the only rule that no script can fully enforce, so it is worded as a duty to ask:
+an agent that cannot cite a map row, an invariant ID, a decision ID, or code it read for a
+constraint does not know that constraint yet.
 
 ## Quickstart (3 minutes)
 
@@ -211,6 +232,7 @@ decisions/                    machine-readable architecture decision records
 scripts/                      init_mapping, verify_invariants, check_dependency_budget,
                               mutation_guard, install_hooks
 mcp/                          stdio MCP server and setup guide
+benchmarks/                   fixture project, framework layer, and scoring check for the A/B benchmark
 personas/                     refactorer, tester, ux_architect system prompts
 templates/                    python, typescript, and generic starters
 tests/                        self-guarding map tests
@@ -223,6 +245,7 @@ docs/                         principles, token-diet calculator, MediaGrab case 
 | ----------------------------------------------------------------- | --------------------------------------------------- |
 | [Core principles](docs/01-core-principles.md)                     | Why the framework is built this way                 |
 | [Token diet calculator](docs/02-token-diet-calculator.md)         | How much context and money the map saves            |
+| [Benchmark results](docs/benchmark-results.md)                    | An A/B test with honest numbers, including where the framework loses |
 | [Case study: MediaGrab](docs/case-study-mediagrab.md)             | What this looks like in a real architecture         |
 | [Negative invariants](invariants/negative-invariants.md)          | How to protect code from well-meaning "cleanup"     |
 | [Decision records](decisions/README.md)                           | How to write machine-readable ADRs                  |

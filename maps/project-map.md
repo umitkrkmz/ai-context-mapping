@@ -46,19 +46,24 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `.gitignore` | ignore | Files Git must not track: caches, virtual environments, mutation leftovers, local settings. | - |
 | `.gitattributes` | config | Forces LF line endings for scripts and the AGENTS.md/CLAUDE.md pair on every OS. | - |
 | `.github/` | ci | GitHub-specific configuration. | - |
-| `.github/copilot-instructions.md` | manifesto | Copilot instructions: map first, invariants, the four rules. | - |
+| `.github/copilot-instructions.md` | manifesto | Copilot instructions: map first, invariants, the five rules. | - |
 | `.github/workflows/` | ci | GitHub Actions workflows. | - |
 | `.github/workflows/ai-guardrails.yml` | ci | CI: map freshness, invariants, dependency budget, tests, MCP handshake, CLAUDE.md mirror. | - |
-| `AGENTS.md` | manifesto | Primary operating manifesto for AI agents: the four rules, commands, definition of done. | NI-008 |
+| `AGENTS.md` | manifesto | Primary operating manifesto for AI agents: the five rules, commands, definition of done. | NI-008 |
 | `CLAUDE.md` | manifesto | Byte-identical mirror of AGENTS.md for Claude Code. | NI-008 |
 | `LICENSE` | legal | MIT license. | - |
 | `README.md` | docs | Landing page: diagrams, 3-minute quickstart, feature matrix, tools, contributing. | - |
+| `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: fixture project, framework layer, scoring check. | - |
+| `benchmarks/acceptance_check.py` | test | Hidden scoring check: exactly 50.00 must ship free. Not named test_*.py, so pytest skips it. | - |
+| `benchmarks/shipdesk-overlay/**` | test | Framework layer for benchmark Agent B: AGENTS.md, CLAUDE.md, a hand-written map, and two invariants. | - |
+| `benchmarks/shipdesk/**` | test | ShipDesk fixture: a checkout library with a planted off-by-one bug in shipping.py (31 files). | - |
 | `decisions/` | decision | Machine-readable architecture decision records. | ADR-0001 |
 | `decisions/0001-no-database-file-store.yaml` | decision | ADR-0001: state lives in plain files; forbids databases, ORMs, and services. | ADR-0001 |
 | `decisions/README.md` | decision | Schema, YAML subset, and usage rules for decision records. | - |
 | `docs/` | docs | Long-form documentation. | - |
 | `docs/01-core-principles.md` | docs | Rationale: token diet, file-based stores, and the guardrail layers. | - |
 | `docs/02-token-diet-calculator.md` | docs | Token and cost model: whole-repo scanning vs map-guided reads, with a measuring script. | - |
+| `docs/benchmark-results.md` | docs | Empirical A/B benchmark: baseline vs framework agent on one regression; honest results and limits. | - |
 | `docs/case-study-mediagrab.md` | docs | Case study of the MediaGrab architecture: zero DB, 100+ tests, map-guided AI work. | - |
 | `invariants/` | invariant | Negative invariants. | - |
 | `invariants/negative-invariants.md` | invariant | Defines negative invariants, templates, and the live machine-checked NI-* rules. | NI-001, NI-002, NI-003, NI-004, NI-005, NI-006, NI-007, NI-009 |
@@ -76,11 +81,11 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `scripts/check_dependency_budget.py` | script | Audits requirements, package.json, and pyproject against an allow-list and ceiling; exits 1. | NI-001, NI-004, NI-005 |
 | `scripts/init_mapping.py` | script | Scans the tree; generates or merges maps/project-map.md; --check freshness and --stats token report. | NI-001, NI-004, NI-005, NI-009 |
 | `scripts/install_hooks.sh` | script | Installs the git pre-commit hook that runs the guardrail checks. | - |
-| `scripts/mutation_guard.py` | script | Mutates a target function and verifies its test fails; always restores the file. | NI-001, NI-002, NI-004, NI-005, NI-006, NI-007 |
+| `scripts/mutation_guard.py` | script | Mutates a target function (incl. boundary shifts) and verifies its test fails; restores the file. | NI-001, NI-002, NI-004, NI-005, NI-006, NI-007 |
 | `scripts/verify_invariants.py` | script | AST checker for forbidden imports, isolated wrappers, forbidden calls, and required guards. | NI-001, NI-004, NI-005 |
 | `templates/` | template | Boilerplate to copy into other projects. | - |
 | `templates/generic/` | template | Language-agnostic starter. | - |
-| `templates/generic/AGENTS.md` | template | Language-agnostic AGENTS.md: the four rules and the guardrail commands. | - |
+| `templates/generic/AGENTS.md` | template | Language-agnostic AGENTS.md: the five rules and the guardrail commands. | - |
 | `templates/generic/maps/` | template | Map directory for the generic starter. | - |
 | `templates/generic/maps/project-map.md` | template | Minimal project map for the generic starter. | - |
 | `templates/python/` | template | Python and pytest starter. | - |

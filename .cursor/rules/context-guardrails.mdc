@@ -34,6 +34,8 @@ The full contract is in `AGENTS.md`. These rules are always active.
    files, or any other irreversible operation.
 3. Use the standard library. Add no third-party dependency without user approval.
 4. Keep diffs minimal. Do not reformat or refactor code outside the request.
+5. Do not invent project knowledge. If an invariant, decision, or map entry does not clearly define
+   a constraint or contract, stop and ask the user. Cite your source; say "I do not know" when you do not.
 
 ## Before you finish
 

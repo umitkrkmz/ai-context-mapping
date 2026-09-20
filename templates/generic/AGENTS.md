@@ -6,7 +6,7 @@ it too.
 
 Read this file completely before you change anything.
 
-## The Four Rules
+## The Five Rules
 
 ### Rule 1: Read the map before you search
 
@@ -35,6 +35,13 @@ Approval for one action does not extend to the next.
 Prefer the language standard library. Do not add a package, service, or system tool unless the
 user approved it in this conversation. `python scripts/check_dependency_budget.py` audits
 `requirements*.txt`, `package.json`, and `pyproject.toml`.
+
+### Rule 5: Do not invent project knowledge
+
+Never fill architectural gaps with plausible fiction. If an invariant, decision, or map entry
+does not clearly define a constraint or contract, **stop and ask the user** instead of assuming.
+Cite your source (a map row, an invariant or decision ID, or code you read) for every constraint
+you rely on, and say "I do not know" when you do not.
 
 ## Negative Invariants and Decisions
 

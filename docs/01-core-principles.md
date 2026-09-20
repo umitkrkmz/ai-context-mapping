@@ -89,7 +89,7 @@ framework stacks independent layers so that a mistake must slip through several 
   Layer 2   Negative invariants   what must not change, and why (prose + machine rules)
             + Decisions           what must not be introduced (forbidden_actions)
   Layer 1   Project map (MCP)     where things are; which invariants apply to each file
-  Layer 0   Agent manifesto       AGENTS.md / CLAUDE.md / Copilot / Cursor rules: the four rules
+  Layer 0   Agent manifesto       AGENTS.md / CLAUDE.md / Copilot / Cursor rules: the five rules
 ```
 
 | Layer | Fails when                                            | Enforced by                                  |

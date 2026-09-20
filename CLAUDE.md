@@ -6,7 +6,7 @@ This file is the primary contract between this repository and any AI coding agen
 
 Read this file completely before you change anything. It is short on purpose.
 
-## The Four Rules
+## The Five Rules
 
 ### Rule 1 — Read the map before you search
 
@@ -50,6 +50,18 @@ Approval for one destructive action does not extend to the next. If in doubt, as
 Prefer the language standard library. Do not add a third-party package, service, or
 system tool unless the user approved it in this conversation. Dependency additions are
 audited by `python scripts/check_dependency_budget.py` and by CI.
+
+### Rule 5 — Do not invent project knowledge
+
+Never fill architectural gaps with plausible fiction. If an invariant, decision, or map entry
+does not clearly define a constraint or contract, **stop and ask the user** instead of assuming.
+
+- Cite your source for every constraint you rely on: a map row, an invariant ID, a decision ID,
+  or a line of code you read. If you cannot cite one, you do not know it yet.
+- A missing or vague map entry, an undefined invariant reference, or a contradiction between a
+  document and the code is a question for the user, not a gap to fill with a guess.
+- Say "I do not know" when you do not know. Never invent file purposes, function contracts,
+  business rules, or the reason a guard exists.
 
 ## Negative Invariants and Decisions
 

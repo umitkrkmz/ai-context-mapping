@@ -29,7 +29,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 MAP_RELATIVE_PATH = "maps/project-map.md"
 IGNORE_FILE_NAME = ".agentignore"
 FILE_INDEX_TITLE = "File Index"
@@ -328,6 +328,24 @@ def ensure_map_entries(entries: List[Entry], root: Path, output: Path, matcher: 
     parts = relative.split("/")
     wanted = ["/".join(parts[:i]) + "/" for i in range(1, len(parts))] + [relative]
     return entries + [Entry(path, path.endswith("/")) for path in wanted if path not in known]
+
+
+def fold_existing_groups(entries: List[Entry], existing: Dict[str, "Row"]) -> List[Entry]:
+    """Keep hand-written ``dir/**`` group rows as single entries instead of re-expanding them."""
+    groups = [key for key in existing if key.endswith("/**")]
+    if not groups:
+        return entries
+    result: List[Entry] = []
+    emitted: Set[str] = set()
+    for entry in entries:
+        owner = next((g for g in groups if entry.path.startswith(g[:-2])), None)
+        if owner is None:
+            result.append(entry)
+        elif owner not in emitted:
+            emitted.add(owner)
+            total = sum(1 for e in entries if not e.is_dir and e.path.startswith(owner[:-2]))
+            result.append(Entry(owner, True, total))
+    return result
 
 
 def collapse_large_directories(
@@ -949,6 +967,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     existing = parse_file_index(existing_text)
     protected = existing.keys() if args.merge else ()
     entries = collapse_large_directories(all_entries, args.collapse_threshold, protected)
+    if args.merge:
+        entries = fold_existing_groups(entries, existing)
 
     if args.stats:
         if not output.is_file():

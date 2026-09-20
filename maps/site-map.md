@@ -10,7 +10,7 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 | AI agent           | `AGENTS.md` -> `maps/project-map.md` -> invariants for the files you will touch -> `decisions/`             |
 | New user           | `README.md` -> `docs/01-core-principles.md` -> `templates/<stack>/` -> `mcp/README.md`                      |
 | Contributor        | `README.md` (Contributing) -> `invariants/negative-invariants.md` -> `docs/01-core-principles.md` section 9 |
-| Skeptic            | `docs/02-token-diet-calculator.md` -> `docs/case-study-mediagrab.md`                                        |
+| Skeptic            | `docs/02-token-diet-calculator.md` -> `docs/benchmark-results.md` -> `docs/case-study-mediagrab.md`         |
 
 ## CLI routes
 

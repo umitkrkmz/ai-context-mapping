@@ -10,6 +10,6 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 
 | Path | Category | Purpose | Invariants |
 | ---- | -------- | ------- | ---------- |
-| `AGENTS.md` | manifesto | Operating manifesto for AI agents: the four rules and guardrail commands. | - |
+| `AGENTS.md` | manifesto | Operating manifesto for AI agents: the five rules and guardrail commands. | - |
 | `maps/` | map | Repository navigation maps. | - |
 | `maps/project-map.md` | map | Index of every path with category, purpose, and invariants. | - |

@@ -27,7 +27,7 @@ Useful options:
 | `--list` | Preview the mutants without running any tests or touching files |
 | `--min-score 0.8` | Require a higher share of mutants to be killed (default 0.5) |
 | `--max-mutants N` | Cap the number of mutants on large functions (default 30) |
-| `--operators compare,bool` | Restrict the mutation operators |
+| `--operators compare,boundary` | Restrict the mutation operators (`compare`, `boundary`, `arith`, `bool`, `not`, `if`, `return`, `const`) |
 | `--runner "python -m unittest {test}"` | Use a test runner other than pytest |
 | `--timeout SEC` | Change the per-run timeout (default 120; a timeout counts as killed) |
 | `--recover` | Restore the target from a leftover `.mgbak` backup after an interrupted run |
@@ -36,6 +36,8 @@ Interpreting the result (exit code 0 = pass, 1 = verification failed, 2 = usage 
 
 - `neutralize` survived: the test still passes when the function does nothing. It does not
   exercise the function, or it mocks the behavior away. Rewrite it to assert on real output.
+- A `boundary shift` mutant survived (`>=` became `>`): the test never checks the exact edge value.
+  Add cases at, one below, and one above the boundary.
 - Other mutants survived: strengthen the assertions for each `survivor` line, or explain in
   your report why that mutant is equivalent (changes no observable behavior).
 - Exit 2 with "baseline run failed": the test fails before any mutation. Fix the test or the

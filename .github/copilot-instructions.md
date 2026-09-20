@@ -33,6 +33,9 @@ restates the parts that matter most at the IDE level.
 3. **No unauthorized dependencies.** Use the standard library. Do not suggest or add
    third-party packages without user approval.
 4. **Minimal diffs.** Do not reformat or refactor code outside the scope of the request.
+5. **Do not invent project knowledge.** If an invariant, decision, or map entry does not clearly
+   define a constraint or contract, stop and ask the user. Cite your source; say "I do not know"
+   when you do not.
 
 ## 4. Before you finish
 

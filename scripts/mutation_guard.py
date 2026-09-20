@@ -3,8 +3,9 @@
 
 A green test suite is only evidence when it can turn red. This tool takes a test path and a
 target function, runs the tests once unmodified (they must pass), then temporarily rewrites
-the target's source with mutants -- inverted comparisons, swapped operators, flipped
-booleans, dropped return values, and finally a version that does nothing at all -- and
+the target's source with mutants -- inverted comparisons, boundary shifts (>= becomes >),
+swapped operators, flipped booleans, dropped return values, and finally a version that does
+nothing at all -- and
 runs the tests again for each mutant. A mutant is *killed* when the tests fail.
 
 Verdict:
@@ -42,9 +43,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 BACKUP_SUFFIX = ".mgbak"
-KINDS = ("compare", "arith", "bool", "not", "if", "return", "const")
+KINDS = ("compare", "boundary", "arith", "bool", "not", "if", "return", "const")
 DEFAULT_MIN_SCORE = 0.5
 DEFAULT_MAX_MUTANTS = 30
 DEFAULT_TIMEOUT = 120
@@ -54,6 +55,9 @@ COMPARE_SWAPS: Dict[type, type] = {
     ast.Gt: ast.LtE, ast.GtE: ast.Lt, ast.Is: ast.IsNot, ast.IsNot: ast.Is,
     ast.In: ast.NotIn, ast.NotIn: ast.In,
 }
+# Boundary shifts move a comparison across its edge (>= becomes >). They catch the classic
+# off-by-one regression that a test far from the boundary can never notice.
+BOUNDARY_SWAPS: Dict[type, type] = {ast.Gt: ast.GtE, ast.GtE: ast.Gt, ast.Lt: ast.LtE, ast.LtE: ast.Lt}
 ARITH_SWAPS: Dict[type, type] = {
     ast.Add: ast.Sub, ast.Sub: ast.Add, ast.Mult: ast.Div, ast.Div: ast.Mult,
     ast.FloorDiv: ast.Mult, ast.Mod: ast.Mult, ast.Pow: ast.Mult,
@@ -190,6 +194,9 @@ class Mutator(ast.NodeTransformer):
             swap = COMPARE_SWAPS.get(type(op))
             if swap and self._hit("compare", node, f"{SYMBOLS[type(op)]} -> {SYMBOLS[swap]}"):
                 node.ops[position] = swap()
+            shift = BOUNDARY_SWAPS.get(type(op))
+            if shift and self._hit("boundary", node, f"{SYMBOLS[type(op)]} -> {SYMBOLS[shift]} (boundary shift)"):
+                node.ops[position] = shift()
         return node
 
     def visit_BinOp(self, node: ast.BinOp) -> ast.AST:

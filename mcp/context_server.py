@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 SERVER_NAME = "ai-context-mapping"
-SERVER_VERSION = "1.0.0"
+SERVER_VERSION = "1.0.1"
 SUPPORTED_PROTOCOLS = ("2025-06-18", "2025-03-26", "2024-11-05")
 MAP_RELATIVE_PATH = "maps/project-map.md"
 INVARIANTS_DOC = "invariants/negative-invariants.md"

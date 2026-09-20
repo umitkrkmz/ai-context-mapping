@@ -6,7 +6,7 @@ it too; the map test fails if the two files differ.
 
 Read this file completely before you change anything.
 
-## The Four Rules
+## The Five Rules
 
 ### Rule 1: Read the map before you search
 
@@ -42,6 +42,13 @@ history. Approval for one action does not extend to the next.
 Prefer the platform and the packages already in `package.json`. Do not run `npm install <pkg>`
 or edit `dependencies` or `devDependencies` unless the user approved it in this conversation.
 Node's built-in modules (`node:fs`, `node:path`, `node:test`) come first.
+
+### Rule 5: Do not invent project knowledge
+
+Never fill architectural gaps with plausible fiction. If an invariant, decision, or map entry
+does not clearly define a constraint or contract, **stop and ask the user** instead of assuming.
+Cite your source (a map row, an invariant or decision ID, or code you read) for every constraint
+you rely on, and say "I do not know" when you do not.
 
 ## Negative Invariants and Decisions
 
