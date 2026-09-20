@@ -49,12 +49,12 @@ A map that is too long defeats its purpose. If yours passes a few thousand token
 more aggressively rather than trimming descriptions.
 
 > **Measured caveat.** In [our A/B experiments](benchmark-results.md), unguided agents did not scan
-> repositories: they listed files and grepped, ignored the instruction to read the map first (0 of 3),
-> and the map saved no tokens. When the instruction was enforced by a hook, every agent read the map
-> first and the median cost fell by 27% at equal fix quality, on three trials per arm. So the token
-> diet appears to work only when the map is consulted before searching, and this is a preliminary
-> result, not a demonstrated saving; larger repositories and tasks that cannot be searched for are
-> untested.
+> repositories: they listed files and grepped, and the map saved no tokens. When a hook enforced
+> reading the map first, one experiment saw a 27% lower median cost (three trials per arm), but a
+> randomized re-test (four trials per arm) did not reproduce it, and blocking broad searches without a
+> map did not save cost either. So the token diet is **not demonstrated**; the map's demonstrated value
+> is orientation and guardrails. Context reduction is not inherently good: the goal is targeted context,
+> not less context. Larger repositories and tasks that cannot be searched for are untested.
 
 ## 3. Why a file-based store
 

@@ -167,25 +167,29 @@ From now on, adding a file without describing it in the map fails the build.
 
 ## Does it work? Honest results
 
-We ran A/B experiments: the same agent, model, and bug, with and without the framework, on a
-4,400-token and a 55,600-token project (14 agent runs, measured from transcripts).
+We ran four experiments: the same agent, model, and bug, with and without the framework, on a
+4,400-token and a 55,600-token project (30 agent runs, measured from transcripts). The last one is a
+randomized 2x2 ablation that tested our own headline claim.
 
 | Finding | Result |
 | ------- | ------ |
 | Correct fix, strong regression test | **8 of 8** runs, in both arms |
 | Token savings from the project map, **as an instruction** | **None measured.** Median cost +2% (large project), spread larger than the difference |
 | Did unguided agents scan the repository? | **No.** They grepped and read ~11 files, and their cost stayed flat as the project grew 12.7x |
-| Did agents follow "read the map first"? | **0 of 3** when it was an instruction; **3 of 3** when the gate enforced it |
-| Token cost with Rule 1 **enforced** by the map gate | **Median -27%** (117.6k vs 160.2k), same fix quality, 3 trials per arm: promising, **not proven** |
+| Did agents follow "read the map first"? | Varied. **0 of 3** as an instruction in experiments 2 and 3, but **4 of 4** in experiment 4. The gate makes it deterministic |
+| Token cost with Rule 1 **enforced** by the map gate | **Not reproduced.** Experiment 3 saw -27% (n=3); the randomized re-test (experiment 4, n=4) saw **+6%** versus the ungated map |
+| Does blocking broad searches (no map) save tokens? | **No.** Median cost +17% versus baseline (p = 0.17), though search output fell 94% |
 | What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
 
-So the evidence supports the framework as **verification and guardrails**, and suggests that the map saves
-tokens only when it is *consulted first*, which agents do not do on their own. With the Rule 1 gate,
-every agent read the map first and the median cost fell by 27%. That result rests on three trials per
-arm and one bug (the difference is consistent but not statistically conclusive), and gated agents also
-wrote fewer end-to-end tests. Larger repositories, other bugs, and tasks that cannot be grepped remain
-untested. Full data, method, and limits:
+So the evidence supports the framework as **verification and guardrails**, not as a token saver. The
+v1.0.4 headline of a 27% saving from the map gate was an observation on three sequential trials per arm,
+and the interleaved re-test in v1.1.0 did not reproduce it. The gate reliably makes Rule 1 deterministic
+and cuts search output, but neither lowered cost in the ablation, and the baseline was the cheapest arm.
+Every one of the 30 runs fixed the bug correctly with a strong test. Larger repositories, other bugs, and
+tasks that cannot be grepped remain untested. Full data, method, and limits:
 [docs/benchmark-results.md](docs/benchmark-results.md).
+
+> *Context reduction is not inherently good. The goal is targeted context, not less context.*
 
 ## The tools
 

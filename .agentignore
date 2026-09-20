@@ -167,3 +167,4 @@ secrets/
 # --- Benchmark fixtures: deliberately buggy projects (see docs/benchmark-results.md) ---------
 benchmarks/shipdesk/
 benchmarks/shipdesk-large/
+benchmarks/results/

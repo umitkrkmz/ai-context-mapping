@@ -1,0 +1,773 @@
+{
+  "schema_version": 1,
+  "transcripts_dir": "~/.claude/projects/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/subagents",
+  "weights": {
+    "input": 1.0,
+    "cache_write": 1.25,
+    "cache_read": 0.1,
+    "output": 5.0
+  },
+  "experiments": [
+    {
+      "id": "exp1",
+      "title": "Experiment 1: small project",
+      "date": "2026-09-20",
+      "version": "v1.0.1",
+      "fixture": "benchmarks/shipdesk (31 files, ~4,400 tokens)",
+      "project_tokens": 4369,
+      "arms": [
+        {
+          "id": "A",
+          "label": "No framework",
+          "map": false,
+          "gate": "off"
+        },
+        {
+          "id": "B",
+          "label": "Framework, advisory",
+          "map": true,
+          "gate": "off"
+        }
+      ],
+      "comparisons": [
+        {
+          "name": "Framework vs baseline",
+          "a": "A",
+          "b": "B"
+        }
+      ],
+      "trials": [
+        {
+          "id": "A",
+          "arm": "A",
+          "agent_id": "ac657233dda82db76",
+          "order": 1,
+          "harness": {
+            "duration_ms": 48441,
+            "subagent_tokens": 63951,
+            "tool_uses": 17
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "B",
+          "arm": "B",
+          "agent_id": "a14f723b26ca8dad5",
+          "order": 2,
+          "harness": {
+            "duration_ms": 66127,
+            "subagent_tokens": 85805,
+            "tool_uses": 18
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp2",
+      "title": "Experiment 2: large project",
+      "date": "2026-09-20",
+      "version": "v1.0.2",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "project_tokens": 55600,
+      "arms": [
+        {
+          "id": "A",
+          "label": "No framework",
+          "map": false,
+          "gate": "off"
+        },
+        {
+          "id": "B",
+          "label": "Framework, advisory",
+          "map": true,
+          "gate": "off"
+        }
+      ],
+      "comparisons": [
+        {
+          "name": "Framework vs baseline",
+          "a": "A",
+          "b": "B"
+        }
+      ],
+      "trials": [
+        {
+          "id": "A1",
+          "arm": "A",
+          "agent_id": "a23f48d6928337273",
+          "order": 1,
+          "harness": {
+            "duration_ms": 45539,
+            "subagent_tokens": 76988,
+            "tool_uses": 19
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B1",
+          "arm": "B",
+          "agent_id": "aeeab3f3b8c07ec2d",
+          "order": 2,
+          "harness": {
+            "duration_ms": 47537,
+            "subagent_tokens": 88391,
+            "tool_uses": 17
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B2",
+          "arm": "B",
+          "agent_id": "afda127357339de6d",
+          "order": 3,
+          "harness": {
+            "duration_ms": 219711,
+            "subagent_tokens": 102629,
+            "tool_uses": 24
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "A2",
+          "arm": "A",
+          "agent_id": "afe53ce59af92ed6e",
+          "order": 4,
+          "harness": {
+            "duration_ms": 44047,
+            "subagent_tokens": 82636,
+            "tool_uses": 18
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "A3",
+          "arm": "A",
+          "agent_id": "a1e5ac614032395e1",
+          "order": 5,
+          "harness": {
+            "duration_ms": 57247,
+            "subagent_tokens": 81993,
+            "tool_uses": 20
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B3",
+          "arm": "B",
+          "agent_id": "afd879955842c7152",
+          "order": 6,
+          "harness": {
+            "duration_ms": 52795,
+            "subagent_tokens": 91745,
+            "tool_uses": 17
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp3",
+      "title": "Experiment 3: Rule 1 gate on and off",
+      "date": "2026-09-20",
+      "version": "v1.0.4",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "project_tokens": 55600,
+      "arms": [
+        {
+          "id": "Bn",
+          "label": "Framework, gate off",
+          "map": true,
+          "gate": "off"
+        },
+        {
+          "id": "Bg",
+          "label": "Framework, map gate on",
+          "map": true,
+          "gate": "map-first"
+        }
+      ],
+      "comparisons": [
+        {
+          "name": "Gate on vs off (map provided)",
+          "a": "Bn",
+          "b": "Bg"
+        }
+      ],
+      "trials": [
+        {
+          "id": "Bn1",
+          "arm": "Bn",
+          "agent_id": "a409843e716da63e0",
+          "order": 1,
+          "harness": {
+            "duration_ms": 55996,
+            "subagent_tokens": 81036,
+            "tool_uses": 9
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "Bg1",
+          "arm": "Bg",
+          "agent_id": "a17493dbdcdeb1cbe",
+          "order": 2,
+          "harness": {
+            "duration_ms": 47507,
+            "subagent_tokens": 71550,
+            "tool_uses": 15
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "Bg2",
+          "arm": "Bg",
+          "agent_id": "a8bc3b58537b2b88a",
+          "order": 3,
+          "harness": {
+            "duration_ms": 53796,
+            "subagent_tokens": 83856,
+            "tool_uses": 15
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "Bn2",
+          "arm": "Bn",
+          "agent_id": "a7e25fae163ac749f",
+          "order": 4,
+          "harness": {
+            "duration_ms": 176556,
+            "subagent_tokens": 78320,
+            "tool_uses": 10
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "Bn3",
+          "arm": "Bn",
+          "agent_id": "a26748ceb856de881",
+          "order": 5,
+          "harness": {
+            "duration_ms": 59552,
+            "subagent_tokens": 88758,
+            "tool_uses": 18
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "Bg3",
+          "arm": "Bg",
+          "agent_id": "af397d8dd0b0fe1ba",
+          "order": 6,
+          "harness": {
+            "duration_ms": 40228,
+            "subagent_tokens": 69851,
+            "tool_uses": 14
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp4",
+      "title": "Experiment 4: ablation matrix",
+      "date": "2026-09-20",
+      "version": "v1.1.0",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "project_tokens": 55600,
+      "arms": [
+        {
+          "id": "A",
+          "label": "No map, no gate (baseline)",
+          "map": false,
+          "gate": "off"
+        },
+        {
+          "id": "B",
+          "label": "Map provided, gate off (advisory)",
+          "map": true,
+          "gate": "off"
+        },
+        {
+          "id": "C",
+          "label": "No map, search suppression only (ablation)",
+          "map": false,
+          "gate": "suppress-search"
+        },
+        {
+          "id": "D",
+          "label": "Map provided, map gate on (enforced)",
+          "map": true,
+          "gate": "map-first"
+        }
+      ],
+      "comparisons": [
+        {
+          "name": "Advisory map (B vs A)",
+          "a": "A",
+          "b": "B"
+        },
+        {
+          "name": "Suppression alone (C vs A)",
+          "a": "A",
+          "b": "C"
+        },
+        {
+          "name": "Map gate given a map (D vs B)",
+          "a": "B",
+          "b": "D"
+        },
+        {
+          "name": "Map added to suppression (D vs C)",
+          "a": "C",
+          "b": "D"
+        }
+      ],
+      "preregistration": {
+        "recorded_before_any_trial": true,
+        "question": "Is the cost reduction seen in experiment 3 caused by requiring the map, or merely by suppressing broad searches?",
+        "design": "2x2 factorial (map provided x gate on), 4 blocks; each block runs all four arms once in a seeded random order.",
+        "seed": 20260920,
+        "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
+        "secondary_metrics": [
+          "new_tokens",
+          "all_in_tokens",
+          "search_output_tokens",
+          "tool_calls",
+          "turns",
+          "latency",
+          "blocked_calls",
+          "acceptance (8/8)",
+          "mutation (4/4)",
+          "end-to-end test added",
+          "legacy module opened"
+        ],
+        "hypotheses": [
+          "H1: D costs less than B (replicates experiment 3).",
+          "H2: C differs from A (direction not predicted).",
+          "H3: D costs less than C, meaning the map adds value beyond suppression."
+        ],
+        "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
+        "decision_rules": [
+          "Suppression explains the saving if C is at least 10% cheaper than A and C is within 10% of D.",
+          "Targeted context (the map) explains the saving if D is at least 10% cheaper than C and C is not at least 10% cheaper than A.",
+          "If C is at least 10% more expensive than A, suppression alone harms.",
+          "Anything else is reported as inconclusive."
+        ],
+        "statistics": "Exact permutation test on mean weighted cost, reported per comparison; with n=4 per arm it is underpowered (minimum one-sided p = 1/70) and is not the decision rule.",
+        "stopping_rule": "All 16 trials run. No trial is excluded, including trials with hung commands."
+      },
+      "schedule": [
+        {
+          "block": 1,
+          "arm": "D"
+        },
+        {
+          "block": 1,
+          "arm": "B"
+        },
+        {
+          "block": 1,
+          "arm": "A"
+        },
+        {
+          "block": 1,
+          "arm": "C"
+        },
+        {
+          "block": 2,
+          "arm": "C"
+        },
+        {
+          "block": 2,
+          "arm": "A"
+        },
+        {
+          "block": 2,
+          "arm": "B"
+        },
+        {
+          "block": 2,
+          "arm": "D"
+        },
+        {
+          "block": 3,
+          "arm": "C"
+        },
+        {
+          "block": 3,
+          "arm": "A"
+        },
+        {
+          "block": 3,
+          "arm": "B"
+        },
+        {
+          "block": 3,
+          "arm": "D"
+        },
+        {
+          "block": 4,
+          "arm": "A"
+        },
+        {
+          "block": 4,
+          "arm": "D"
+        },
+        {
+          "block": 4,
+          "arm": "C"
+        },
+        {
+          "block": 4,
+          "arm": "B"
+        }
+      ],
+      "trials": [
+        {
+          "id": "D1",
+          "arm": "D",
+          "agent_id": "a68e84ded8a4c8a6c",
+          "order": 1,
+          "harness": {
+            "duration_ms": 61504,
+            "subagent_tokens": 74154,
+            "tool_uses": 18
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B1",
+          "arm": "B",
+          "agent_id": "a583db707f348996f",
+          "order": 2,
+          "harness": {
+            "duration_ms": 41684,
+            "subagent_tokens": 73010,
+            "tool_uses": 13
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "A1",
+          "arm": "A",
+          "agent_id": "afc4259690effe036",
+          "order": 3,
+          "harness": {
+            "duration_ms": 44801,
+            "subagent_tokens": 69275,
+            "tool_uses": 8
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "C1",
+          "arm": "C",
+          "agent_id": "aea81b969b0911e16",
+          "order": 4,
+          "harness": {
+            "duration_ms": 51400,
+            "subagent_tokens": 70210,
+            "tool_uses": 10
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "C2",
+          "arm": "C",
+          "agent_id": "ab190634c373ddf39",
+          "order": 5,
+          "harness": {
+            "duration_ms": 46018,
+            "subagent_tokens": 63638,
+            "tool_uses": 13
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "A2",
+          "arm": "A",
+          "agent_id": "a318051fcbbf93864",
+          "order": 6,
+          "harness": {
+            "duration_ms": 34405,
+            "subagent_tokens": 66274,
+            "tool_uses": 6
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B2",
+          "arm": "B",
+          "agent_id": "ab7a93dadb0dceee4",
+          "order": 7,
+          "harness": {
+            "duration_ms": 40081,
+            "subagent_tokens": 70738,
+            "tool_uses": 12
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "D2",
+          "arm": "D",
+          "agent_id": "a30df7dbe268755b3",
+          "order": 8,
+          "harness": {
+            "duration_ms": 41871,
+            "subagent_tokens": 75100,
+            "tool_uses": 11
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "C3",
+          "arm": "C",
+          "agent_id": "a1f4e349cdd9edc2c",
+          "order": 9,
+          "harness": {
+            "duration_ms": 39218,
+            "subagent_tokens": 61215,
+            "tool_uses": 9
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "A3",
+          "arm": "A",
+          "agent_id": "a15d4176e837a70b1",
+          "order": 10,
+          "harness": {
+            "duration_ms": 37554,
+            "subagent_tokens": 63176,
+            "tool_uses": 12
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "B3",
+          "arm": "B",
+          "agent_id": "ad67cea6539f02fb1",
+          "order": 11,
+          "harness": {
+            "duration_ms": 43135,
+            "subagent_tokens": 70876,
+            "tool_uses": 13
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "D3",
+          "arm": "D",
+          "agent_id": "a1a4da2d57eb68009",
+          "order": 12,
+          "harness": {
+            "duration_ms": 43131,
+            "subagent_tokens": 70588,
+            "tool_uses": 12
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "A4",
+          "arm": "A",
+          "agent_id": "a6f1d6a3438b87eb2",
+          "order": 13,
+          "harness": {
+            "duration_ms": 45216,
+            "subagent_tokens": 66386,
+            "tool_uses": 6
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "D4",
+          "arm": "D",
+          "agent_id": "a4e8617bc49835771",
+          "order": 14,
+          "harness": {
+            "duration_ms": 51274,
+            "subagent_tokens": 72669,
+            "tool_uses": 15
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": false
+          }
+        },
+        {
+          "id": "C4",
+          "arm": "C",
+          "agent_id": "a6ea41c50dfad817f",
+          "order": 15,
+          "harness": {
+            "duration_ms": 53115,
+            "subagent_tokens": 64662,
+            "tool_uses": 17
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": true,
+            "opened_legacy_module": true
+          }
+        },
+        {
+          "id": "B4",
+          "arm": "B",
+          "agent_id": "ab92614b3c9136933",
+          "order": 16,
+          "harness": {
+            "duration_ms": 35999,
+            "subagent_tokens": 69351,
+            "tool_uses": 10
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false
+          }
+        }
+      ]
+    }
+  ]
+}

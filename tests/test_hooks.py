@@ -416,3 +416,223 @@ def test_is_map_file_edge_cases(project: Path, nested_map: Path, monkeypatch: py
 
     monkeypatch.setattr(gate_module.os.path, "realpath", boom)
     assert is_map_file("maps/project-map.md", project) is False
+
+
+# --------------------------------------------------------------------------------------
+# Ablation mode: AI_GUARDRAILS_BLOCK_SEARCH_ONLY=1 suppresses broad searches, needs no map
+# --------------------------------------------------------------------------------------
+SUPPRESS = {"AI_GUARDRAILS_BLOCK_SEARCH_ONLY": "1"}
+
+
+def suppress(project: Path, data: Dict[str, Any], **more: str):
+    return run(project, data, **SUPPRESS, **more)
+
+
+@pytest.mark.parametrize("pattern", ["**/*", "**/*.py", "*.py", "*", "docs/**/*.md", "**/test_*.py", "{a,b}/*.py"])
+def test_suppression_blocks_broad_globs(project: Path, pattern: str) -> None:
+    code, message = suppress(project, payload("Glob", pattern=pattern))
+    assert code == 2 and message.startswith("Search suppressed:")
+
+
+@pytest.mark.parametrize("pattern", ["src/*.py", "tests/test_shipping*.py", "shipdesk/services/*.py", "docs/pricing-policy.md", "C:/proj/src/*.py"])
+def test_suppression_allows_targeted_globs(project: Path, pattern: str) -> None:
+    assert suppress(project, payload("Glob", pattern=pattern)) == (0, "")
+
+
+@pytest.mark.parametrize("tool_input", [{"pattern": "x"}, {"pattern": "x", "path": "src"}, {"pattern": "x", "path": "."}, {"pattern": "x", "path": "/proj/shipdesk/"}])
+def test_suppression_blocks_grep_over_directories(project: Path, tool_input: Dict[str, Any]) -> None:
+    assert suppress(project, payload("Grep", **tool_input))[0] == 2
+
+
+@pytest.mark.parametrize(
+    "tool_input",
+    [{"pattern": "x", "path": "src/app.py"}, {"pattern": "x", "path": "/proj/shipdesk/shipping.py"}, {"pattern": "x", "glob": "src/*.py"}],
+)
+def test_suppression_allows_grep_on_a_named_file_or_prefixed_glob(project: Path, tool_input: Dict[str, Any]) -> None:
+    assert suppress(project, payload("Grep", **tool_input)) == (0, "")
+
+
+@pytest.mark.parametrize(
+    "command",
+    [
+        "grep -rn free_shipping .", "grep -R x src", "grep needle src", "rg needle", "rg needle src/", "ag x",
+        "find . -name '*.py'", "tree", "ls -R", "git grep x", "cd proj && grep -r x .", "fd shipping",
+    ],
+)
+def test_suppression_blocks_broad_shell_searches(project: Path, command: str) -> None:
+    assert suppress(project, bash(command))[0] == 2, command
+
+
+@pytest.mark.parametrize(
+    "command",
+    [
+        "grep -n needle src/app.py", "grep -n needle src/app.py src/other.py", "rg needle src/app.py", "ls", "ls -la src",
+        "ls shipdesk/", "cat src/app.py", "sed -n 1,20p src/app.py", "git status", "python -m pytest -q",
+        "python -m pytest -q | grep passed", "cat README.md | grep -i license", "",
+    ],
+)
+def test_suppression_allows_direct_navigation(project: Path, command: str) -> None:
+    assert suppress(project, bash(command)) == (0, ""), command
+
+
+def test_suppression_powershell_paths(project: Path) -> None:
+    assert suppress(project, payload("PowerShell", command="Get-ChildItem -Recurse"))[0] == 2
+    assert suppress(project, payload("PowerShell", command="Select-String -Path src -Pattern x"))[0] == 2
+    assert suppress(project, payload("PowerShell", command="Select-String -Path src/app.py -Pattern x")) == (0, "")
+    assert suppress(project, payload("PowerShell", command="Get-ChildItem src")) == (0, "")
+
+
+def test_suppression_never_touches_other_tools(project: Path) -> None:
+    for tool in ("Read", "Write", "Edit", "WebFetch", "Agent"):
+        assert suppress(project, payload(tool, file_path=str(project / "src" / "app.py"))) == (0, "")
+    assert suppress(project, payload("mcp__github__search_code", query="x")) == (0, "")
+
+
+def test_suppression_does_not_need_or_consult_a_map(tmp_path: Path) -> None:
+    """A project without a map is still suppressed, and reading a map does not unlock anything."""
+    env = env_for(tmp_path, **SUPPRESS)
+    assert gate_module.gate(payload("Grep", pattern="x"), env)[0] == 2
+    (tmp_path / "maps").mkdir()
+    (tmp_path / "maps" / "project-map.md").write_text("# map\n", encoding="utf-8")
+    assert gate_module.gate(payload("Read", file_path="maps/project-map.md"), env) == (0, "")
+    assert gate_module.gate(payload("Grep", pattern="x"), env)[0] == 2
+    assert gate_module.gate(bash("cat maps/project-map.md"), env) == (0, "")
+    assert gate_module.gate(payload("Glob", pattern="**/*"), env)[0] == 2
+
+
+def test_suppression_is_stateless_and_deterministic(project: Path) -> None:
+    first = suppress(project, payload("Grep", pattern="x"))
+    for _ in range(5):
+        assert suppress(project, payload("Grep", pattern="x")) == first
+        assert suppress(project, payload("Glob", pattern="src/*.py")) == (0, "")
+    assert not (project / ".state").exists(), "suppression mode must not write any state"
+    # A different session or agent gets the same answer: nothing is remembered.
+    assert suppress(project, payload("Grep", session="other", agent="sub", pattern="x")) == first
+
+
+def test_suppression_message_does_not_mention_a_map(project: Path) -> None:
+    _code, message = suppress(project, payload("Glob", pattern="**/*"))
+    assert "map" not in message.lower()
+    assert "ls <dir>" in message
+
+
+@pytest.mark.parametrize("value", ["yes", "true", "2", "on", " 1", "1 "])
+def test_invalid_mode_values_fail_open_with_a_warning(project: Path, value: str) -> None:
+    code, message = run(project, payload("Grep", pattern="x"), AI_GUARDRAILS_BLOCK_SEARCH_ONLY=value)
+    assert code == 0
+    assert "AI_GUARDRAILS_BLOCK_SEARCH_ONLY" in message and "disabled" in message
+
+
+@pytest.mark.parametrize("value", ["", "0"])
+def test_mode_off_values_leave_the_normal_gate_in_charge(project: Path, value: str) -> None:
+    assert run(project, payload("Glob", pattern="src/*.py"), AI_GUARDRAILS_BLOCK_SEARCH_ONLY=value)[0] == 2  # map not read yet
+    assert run(project, payload("Read", file_path="maps/project-map.md"), AI_GUARDRAILS_BLOCK_SEARCH_ONLY=value) == (0, "")
+    assert run(project, payload("Glob", pattern="src/*.py"), AI_GUARDRAILS_BLOCK_SEARCH_ONLY=value) == (0, "")
+
+
+def test_permissive_bypass_wins_over_suppression(project: Path) -> None:
+    assert suppress(project, payload("Glob", pattern="**/*"), AI_GUARDRAILS_PERMISSIVE="1") == (0, "")
+    assert suppress(project, bash("grep -r x ."), AI_GUARDRAILS_PERMISSIVE="1") == (0, "")
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [{}, {"tool_name": None}, {"tool_name": "Glob", "tool_input": "oops"}, {"tool_name": "Bash", "tool_input": {"command": None}}],
+)
+def test_suppression_tolerates_malformed_payloads(project: Path, bad: Dict[str, Any]) -> None:
+    code, _ = suppress(project, bad)
+    assert code in (0, 2)
+
+
+def test_suppression_main_fails_open_on_garbage_and_internal_errors(project: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    for key, value in env_for(project, **SUPPRESS).items():
+        monkeypatch.setenv(key, value)
+    for text in ("", "not json", "[]", "null"):
+        assert gate_module.main([], stdin=io.StringIO(text), stderr=io.StringIO()) == 0
+
+    def explode(_payload):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(gate_module, "broad_search_reason", explode)
+    assert gate_module.main([], stdin=io.StringIO(json.dumps(payload("Grep", pattern="x"))), stderr=io.StringIO()) == 0
+
+
+def test_suppression_main_blocks_with_exit_code_two(project: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    for key, value in env_for(project, **SUPPRESS).items():
+        monkeypatch.setenv(key, value)
+    stderr = io.StringIO()
+    assert gate_module.main([], stdin=io.StringIO(json.dumps(payload("Glob", pattern="**/*"))), stderr=stderr) == 2
+    assert "Search suppressed" in stderr.getvalue()
+
+
+@pytest.mark.parametrize(
+    "path, expected",
+    [
+        ("shipping.py", True), ("a/b/c.md", True), ("C:\\proj\\a.py", True), ("src", False), ("src/", False),
+        (".", False), ("..", False), ("*.py", False), ("", False), (".gitignore", False),
+    ],
+)
+def test_is_targeted_path_shapes(path: str, expected: bool) -> None:
+    assert gate_module.is_targeted_path(path) is expected
+
+
+@pytest.mark.parametrize(
+    "program, args, piped, shell, expected",
+    [
+        ("select-string", ["-Path", "a.py", "-Pattern", "x"], False, "PowerShell", False),
+        ("select-string", ["-Pattern", "x", "-Path", "a.py"], False, "PowerShell", False),
+        ("select-string", ["-LiteralPath", "a.py", "-Pattern", "x"], False, "PowerShell", False),
+        ("select-string", ["-Path", "a.py", "-Recurse"], False, "PowerShell", True),
+        ("select-string", ["-Path", "src", "-Pattern", "x"], False, "PowerShell", True),
+        ("select-string", ["-Path", "a.py", "-Path", "src"], False, "PowerShell", True),
+        ("select-string", ["-Pattern", "x", "-Path"], False, "PowerShell", True),
+        ("select-string", ["-Pattern", "x"], False, "PowerShell", True),
+        ("select-string", ["-Pattern", "x"], True, "PowerShell", False),
+        ("get-childitem", ["-Recurse"], False, "PowerShell", True),
+        ("get-childitem", ["src"], False, "PowerShell", False),
+        ("git", ["status"], False, "Bash", False),
+        ("grep", ["needle", "a.py"], False, "Bash", False),
+        ("grep", ["-r", "needle", "a.py"], False, "Bash", True),
+        ("grep", ["needle", "a.py", "src"], False, "Bash", True),
+        ("rg", ["needle", "a.py"], False, "Bash", False),
+        ("rg", ["needle"], False, "Bash", True),
+        ("rg", ["needle"], True, "Bash", False),
+        ("find", ["."], False, "Bash", True),
+    ],
+)
+def test_is_broad_search_contract(program: str, args: list, piped: bool, shell: str, expected: bool) -> None:
+    assert gate_module.is_broad_search(program, args, piped, shell) is expected
+
+
+@pytest.mark.parametrize(
+    "pattern, expected",
+    [
+        ("README.md", True), ("docs/pricing-policy.md", True), ("src/*.py", True), ("src\\*.py", True), ("*.py", False),
+        ("**/*", False), ("", False), ("src/**/x.py", False), ("*/src/a.py", False), ("  ", False),
+    ],
+)
+def test_is_targeted_glob_shapes(pattern: str, expected: bool) -> None:
+    assert gate_module.is_targeted_glob(pattern) is expected
+
+
+@pytest.mark.parametrize("path, expected", [('"a.py"', True), ("'a.py'", True), ("src\\", False), ("  a.py  ", True), ("dir\\sub\\", False)])
+def test_is_targeted_path_quotes_and_backslashes(path: str, expected: bool) -> None:
+    assert gate_module.is_targeted_path(path) is expected
+
+
+@pytest.mark.parametrize(
+    "data, expected",
+    [
+        (payload("Glob", pattern="**/*"), "Glob"),
+        (payload("Glob", pattern="src/*.py"), ""),
+        (payload("Grep", pattern="x"), "Grep"),
+        (payload("Grep", pattern="x", path="a.py"), ""),
+        (bash("rg x"), "Bash: rg"),
+        (bash("ls"), ""),
+        (payload("PowerShell", command="Get-ChildItem -Recurse"), "PowerShell: get-childitem"),
+        (payload("Read", file_path="a.py"), ""),
+        ({}, ""),
+    ],
+)
+def test_broad_search_reason_values(data: Dict[str, Any], expected: str) -> None:
+    assert gate_module.broad_search_reason(data) == expected

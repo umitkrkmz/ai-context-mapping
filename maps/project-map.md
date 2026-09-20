@@ -39,7 +39,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `.claude/commands/verify-map.md` | manifesto | /verify-map: run init_mapping --check and the map tests, then repair a stale map. | - |
 | `.claude/hooks/` | script | Claude Code hook scripts. | - |
 | `.claude/hooks/guardrail_hook.py` | script | Hook adapter: runs verify_invariants on edited .py files (exit 2 on violation); detects git commits. | NI-001, NI-002, NI-005 |
-| `.claude/hooks/map_gate.py` | script | PreToolUse gate enforcing Rule 1: blocks Grep, Glob, and exploratory shell search until the map is read. | NI-001, NI-005, NI-010 |
+| `.claude/hooks/map_gate.py` | script | PreToolUse gate enforcing Rule 1: blocks Grep, Glob, and exploratory shell search until the map is read. Also holds the opt-in ablation mode `AI_GUARDRAILS_BLOCK_SEARCH_ONLY=1` (blocks broad searches, needs no map). | NI-001, NI-005, NI-010 |
 | `.claude/settings.json` | config | Claude Code hooks: map gate (Rule 1), invariant check after edits, and a commit gate (budget, map test). | - |
 | `.cursor/` | manifesto | Cursor editor configuration. | - |
 | `.cursor/rules/` | manifesto | Cursor rule files. | - |
@@ -54,9 +54,9 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `CLAUDE.md` | manifesto | Byte-identical mirror of AGENTS.md for Claude Code. | NI-008 |
 | `LICENSE` | legal | MIT license. | - |
 | `README.md` | docs | Landing page: diagrams, 3-minute quickstart, feature matrix, tools, contributing. | - |
-| `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: two fixtures (agent-ignored), framework layers, scoring, analysis. | - |
+| `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: two fixtures and `results/` (manifest.json and results.json; all agent-ignored), framework layers, scoring, analysis. | - |
 | `benchmarks/acceptance_check.py` | test | Hidden scoring check: exactly 50.00 must ship free. Not named test_*.py, so pytest skips it. | - |
-| `benchmarks/analyze_transcripts.py` | test | Derives tool calls, files read, tokens by type, and weighted cost from Claude Code agent transcripts. | - |
+| `benchmarks/analyze_transcripts.py` | test | Derives tool calls, files read, tokens by type, weighted cost, and the model ID from Claude Code agent transcripts; exports benchmarks/results/results.json and renders or checks the tables in docs/benchmark-results.md. | - |
 | `benchmarks/conftest.py` | test | Tells pytest to skip the benchmark fixtures when run from the repository root. | - |
 | `benchmarks/shipdesk-large-overlay/**` | test | Framework layer for the large benchmark: AGENTS.md, CLAUDE.md, a 147-row map, and four invariants. | - |
 | `benchmarks/shipdesk-overlay/**` | test | Framework layer for benchmark Agent B: AGENTS.md, CLAUDE.md, a hand-written map, and two invariants. | - |
@@ -105,7 +105,8 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest. | - |
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
-| `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass) and its settings wiring. | NI-010 |
+| `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
+| `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
 
 ## Route Table

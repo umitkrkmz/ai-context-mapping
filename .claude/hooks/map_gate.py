@@ -31,6 +31,12 @@ manual or CI runs, or ``AI_GUARDRAILS_ANY_MAP=1`` to let a nested project's own 
 (monorepos, benchmark harnesses). This is a guardrail against a reflex, not a security boundary: a
 determined agent can route around a shell heuristic.
 
+Ablation mode (``AI_GUARDRAILS_BLOCK_SEARCH_ONLY=1``): used by benchmark experiment 4 to separate two
+effects. The gate then blocks *broad* searches (directory scans, ``**`` and leading-wildcard globs) without
+providing or requiring a map: ``ls``, reading files, grepping one named file, and globs with a literal
+directory prefix stay allowed. It is stateless and deterministic. A value other than 0 or 1 disables the
+gate for the call (fail open) and prints a warning.
+
 Exit codes (see the Claude Code hooks reference): 0 allow, 2 block (stderr is fed back to Claude).
 
 Usage (normally invoked by .claude/settings.json):
@@ -58,6 +64,15 @@ MAP_RELATIVE = "maps/project-map.md"
 PERMISSIVE_ENV = "AI_GUARDRAILS_PERMISSIVE"  # INVARIANT(NI-010): keep the bypass for manual and CI runs.
 STATE_DIR_ENV = "AI_GUARDRAILS_STATE_DIR"
 ANY_MAP_ENV = "AI_GUARDRAILS_ANY_MAP"  # opt in: a nested project's own maps/project-map.md counts too
+SEARCH_ONLY_ENV = "AI_GUARDRAILS_BLOCK_SEARCH_ONLY"  # ablation: suppress broad searches, no map involved
+SUPPRESS_MESSAGE = (
+    "Search suppressed: broad repository searches (recursive grep, rg, find, tree, ls -R, and Glob patterns "
+    "such as '**/*' or '*.py') are disabled in this run."
+)
+SUPPRESS_HINT = (
+    "Next step: inspect directories directly (for example 'ls <dir>'), read files by path, grep one specific "
+    "file, or use a Glob pattern with a literal directory prefix such as 'src/*.py'."
+)
 STATE_TTL_SECONDS = 7 * 24 * 3600
 BLOCK_MESSAGE = (
     "Rule 1 Enforced: Access denied. You must inspect 'maps/project-map.md' or query the MCP context "
@@ -238,6 +253,68 @@ def is_search(program: str, args: Sequence[str], piped: bool, shell: str) -> boo
     return False
 
 
+def is_targeted_path(path: str) -> bool:
+    """True when ``path`` names one specific file, judged by shape alone (no filesystem access).
+
+    A targeted path has no wildcard, does not end in a separator, and its last segment looks like a file
+    name with an extension (``shipping.py``). ``.``, ``src``, and ``src/`` are directory-shaped.
+    """
+    text = path.strip().strip("\"'")
+    if not text or any(ch in text for ch in "*?[{") or text[-1] in "/\\":
+        return False
+    base = re.split(r"[\\/]", text)[-1]
+    return bool(re.match(r"^[^.\s][^\\/]*\.[A-Za-z0-9_]+$", base))
+
+
+def is_targeted_glob(pattern: str) -> bool:
+    """True when a glob names a literal file or has a literal directory prefix and no ``**``.
+
+    ``src/*.py`` and ``tests/test_x*.py`` are targeted; ``**/*``, ``*.py`` and ``docs/**/*.md`` are broad.
+    """
+    text = pattern.strip().replace("\\", "/")
+    if not text or "**" in text:
+        return False
+    if not any(ch in text for ch in "*?[{"):
+        return True
+    parts = [part for part in text.split("/") if part]
+    return len(parts) >= 2 and not any(ch in parts[0] for ch in "*?[{")
+
+
+def is_broad_search(program: str, args: Sequence[str], piped: bool, shell: str) -> bool:
+    """True for a search that scans directories; a search aimed at named files is not broad."""
+    if not is_search(program, args, piped, shell):
+        return False
+    if program in GREP_LIKE or program in RG_LIKE:
+        operands, recursive, pattern_given = parse_operands(args)
+        paths = operands if pattern_given else operands[1:]
+        return recursive or not paths or not all(is_targeted_path(p) for p in paths)
+    if shell == "PowerShell" and program in POWERSHELL_SEARCH:
+        lowered = [a.lower() for a in args]
+        if "-recurse" in lowered:
+            return True
+        paths = [args[i + 1] for i, a in enumerate(lowered) if a in ("-path", "-literalpath") and i + 1 < len(args)]
+        return not (paths and all(is_targeted_path(p) for p in paths))
+    return True  # find, fd, tree, ls -R, git grep, Get-ChildItem -Recurse: inherently directory scans
+
+
+def broad_search_reason(payload: Mapping[str, Any]) -> str:
+    """Return a short reason when the tool call is a broad search, or an empty string."""
+    name = str(payload.get("tool_name") or "")
+    tool_input = payload.get("tool_input")
+    tool_input = tool_input if isinstance(tool_input, dict) else {}
+    if name == "Glob":
+        return "" if is_targeted_glob(str(tool_input.get("pattern") or "")) else "Glob"
+    if name == "Grep":
+        targeted = is_targeted_path(str(tool_input.get("path") or "")) or is_targeted_glob(str(tool_input.get("glob") or ""))
+        return "" if targeted else "Grep"
+    if name in SHELL_TOOLS:
+        for segment, piped in split_segments(str(tool_input.get("command") or "")):
+            program, args = program_and_args(tokenize(segment, name))
+            if program and is_broad_search(program, args, piped, name):
+                return f"{name}: {program}"
+    return ""
+
+
 def _norm(path: str) -> str:
     return os.path.normcase(os.path.normpath(path.replace("\\", "/"))).replace("\\", "/")
 
@@ -371,6 +448,14 @@ def gate(payload: Mapping[str, Any], env: Optional[Mapping[str, str]] = None) ->
     env = os.environ if env is None else env
     if env.get(PERMISSIVE_ENV) == "1":
         return 0, ""
+    mode = env.get(SEARCH_ONLY_ENV, "")
+    if mode not in ("", "0", "1"):
+        # Misconfiguration must not wedge the agent: allow the call and say why. (fail open)
+        return 0, f"map_gate: {SEARCH_ONLY_ENV}={mode!r} is not 0 or 1, so the gate is disabled for this call."
+    if mode == "1":
+        # Ablation: block broad searches and nothing else. No map is required, provided, or consulted,
+        # and no state is written, so the result depends only on the payload.
+        return (2, f"{SUPPRESS_MESSAGE}\n{SUPPRESS_HINT}") if broad_search_reason(payload) else (0, "")
     root = project_root(payload, env)
     if not (root / MAP_RELATIVE).is_file():
         return 0, ""  # INVARIANT(NI-010): no map means nothing to enforce; fail open.

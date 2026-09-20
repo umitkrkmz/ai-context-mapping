@@ -29,6 +29,8 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 | `sh scripts/install_hooks.sh --uninstall`                       | `scripts/install_hooks.sh`         | Remove the managed hook                            | 0                                   |
 | `python -m pytest -q tests`                                     | `tests/test_maps.py`               | Run the self-guarding tests                        | pytest codes                        |
 | `python benchmarks/analyze_transcripts.py --dir D AGENT_ID` | `benchmarks/analyze_transcripts.py` | Tool calls, files read, tokens, and weighted cost from agent transcripts | 0 ok, 2 transcript not found |
+| `python benchmarks/analyze_transcripts.py --export MANIFEST` | `benchmarks/analyze_transcripts.py` | Builds `benchmarks/results/results.json` (all trial aggregates, model ID, statistics) | 0 ok, 2 bad manifest or transcript |
+| `python benchmarks/analyze_transcripts.py --render` / `--update-doc DOC` / `--check-doc DOC` | `benchmarks/analyze_transcripts.py` | Renders the markdown tables from results.json, rewrites them between `results:begin/end` markers, or verifies they match | 0 ok, 2 stale or missing markers |
 | `python mcp/context_server.py --check`                          | `mcp/context_server.py`            | Validate the map without a client                  | 0 ok, 1 invalid                     |
 | `python mcp/context_server.py --call TOOL --arg K=V`            | `mcp/context_server.py`            | Run one MCP tool from the shell                    | 0 ok, 1 tool error                  |
 
@@ -81,5 +83,6 @@ Transport: JSON-RPC 2.0 over stdio, served by `mcp/context_server.py`.
 | `AI_GUARDRAILS_STRICT`  | git pre-commit hook, Claude Code commit gate | `1` makes a missing pytest a failure     |
 | `AI_GUARDRAILS_PERMISSIVE` | `.claude/hooks/map_gate.py` | `1` disables the Rule 1 gate (manual or CI runs)            |
 | `AI_GUARDRAILS_ANY_MAP`    | `.claude/hooks/map_gate.py` | `1` lets a nested project's own map unlock searching (monorepos, benchmarks) |
+| `AI_GUARDRAILS_BLOCK_SEARCH_ONLY` | `.claude/hooks/map_gate.py` | `1` blocks broad searches without requiring a map (ablation studies); `0` or unset is off; any other value fails open with a warning |
 | `AI_GUARDRAILS_STATE_DIR`  | `.claude/hooks/map_gate.py` | Override the marker directory (default: system temp, per project) |
 | `MUTATION_GUARD`        | set by `mutation_guard.py` | `1` inside test runs launched by the guard                 |

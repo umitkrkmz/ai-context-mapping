@@ -1,0 +1,1886 @@
+{
+  "environment": {
+    "claude_code_versions": [
+      "2.1.275"
+    ],
+    "model_trial_counts": {
+      "claude-sonnet-5": 30
+    },
+    "models": [
+      "claude-sonnet-5"
+    ]
+  },
+  "experiments": [
+    {
+      "arms": [
+        {
+          "gate": "off",
+          "id": "A",
+          "label": "No framework",
+          "map": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 532919.0,
+                "mean": 532919.0,
+                "median": 532919.0,
+                "min": 532919.0,
+                "n": 1
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 1
+              },
+              "cache_read_tokens": {
+                "max": 465197.0,
+                "mean": 465197.0,
+                "median": 465197.0,
+                "min": 465197.0,
+                "n": 1
+              },
+              "latency_s": {
+                "max": 48.4,
+                "mean": 48.4,
+                "median": 48.4,
+                "min": 48.4,
+                "n": 1
+              },
+              "new_tokens": {
+                "max": 67722.0,
+                "mean": 67722.0,
+                "median": 67722.0,
+                "min": 67722.0,
+                "n": 1
+              },
+              "search_output_tokens": {
+                "max": 1148.0,
+                "mean": 1148.0,
+                "median": 1148.0,
+                "min": 1148.0,
+                "n": 1
+              },
+              "tool_calls": {
+                "max": 17.0,
+                "mean": 17.0,
+                "median": 17.0,
+                "min": 17.0,
+                "n": 1
+              },
+              "turns": {
+                "max": 9.0,
+                "mean": 9.0,
+                "median": 9.0,
+                "min": 9.0,
+                "n": 1
+              },
+              "weighted_cost": {
+                "max": 148721.0,
+                "mean": 148721.0,
+                "median": 148721.0,
+                "min": 148721.0,
+                "n": 1
+              }
+            },
+            "n": 1,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 1.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 1.0
+            }
+          }
+        },
+        {
+          "gate": "off",
+          "id": "B",
+          "label": "Framework, advisory",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 781239.0,
+                "mean": 781239.0,
+                "median": 781239.0,
+                "min": 781239.0,
+                "n": 1
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 1
+              },
+              "cache_read_tokens": {
+                "max": 727565.0,
+                "mean": 727565.0,
+                "median": 727565.0,
+                "min": 727565.0,
+                "n": 1
+              },
+              "latency_s": {
+                "max": 66.1,
+                "mean": 66.1,
+                "median": 66.1,
+                "min": 66.1,
+                "n": 1
+              },
+              "new_tokens": {
+                "max": 53674.0,
+                "mean": 53674.0,
+                "median": 53674.0,
+                "min": 53674.0,
+                "n": 1
+              },
+              "search_output_tokens": {
+                "max": 1635.0,
+                "mean": 1635.0,
+                "median": 1635.0,
+                "min": 1635.0,
+                "n": 1
+              },
+              "tool_calls": {
+                "max": 18.0,
+                "mean": 18.0,
+                "median": 18.0,
+                "min": 18.0,
+                "n": 1
+              },
+              "turns": {
+                "max": 11.0,
+                "mean": 11.0,
+                "median": 11.0,
+                "min": 11.0,
+                "n": 1
+              },
+              "weighted_cost": {
+                "max": 160450.0,
+                "mean": 160450.0,
+                "median": 160450.0,
+                "min": 160450.0,
+                "n": 1
+              }
+            },
+            "n": 1,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 1.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.0
+            }
+          }
+        }
+      ],
+      "comparisons": [
+        {
+          "a": "A",
+          "b": "B",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.5,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 0.7926,
+              "ratio_of_medians": 0.7926
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 1.4242,
+              "ratio_of_medians": 1.4242
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 1.0588,
+              "ratio_of_medians": 1.0588
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 1.0789,
+              "ratio_of_medians": 1.0789
+            }
+          },
+          "name": "Framework vs baseline"
+        }
+      ],
+      "date": "2026-09-20",
+      "fixture": "benchmarks/shipdesk (31 files, ~4,400 tokens)",
+      "id": "exp1",
+      "project_tokens": 4369,
+      "title": "Experiment 1: small project",
+      "trials": [
+        {
+          "acceptance": "8/8",
+          "agent_id": "ac657233dda82db76",
+          "all_in_tokens": 532919,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 465197,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 63951,
+          "id": "A",
+          "latency_s": 48.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 67722,
+          "opened_legacy_module": true,
+          "order": 1,
+          "output_tokens": 4681,
+          "search_output_tokens": 1148,
+          "tool_calls": 17,
+          "turns": 9,
+          "weighted_cost": 148721
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a14f723b26ca8dad5",
+          "all_in_tokens": 781239,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 727565,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 85805,
+          "id": "B",
+          "latency_s": 66.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 53674,
+          "opened_legacy_module": false,
+          "order": 2,
+          "output_tokens": 5495,
+          "search_output_tokens": 1635,
+          "tool_calls": 18,
+          "turns": 11,
+          "weighted_cost": 160450
+        }
+      ],
+      "version": "v1.0.1"
+    },
+    {
+      "arms": [
+        {
+          "gate": "off",
+          "id": "A",
+          "label": "No framework",
+          "map": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 733713.0,
+                "mean": 616588.0,
+                "median": 633811.0,
+                "min": 482240.0,
+                "n": 3
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 3
+              },
+              "cache_read_tokens": {
+                "max": 683547.0,
+                "mean": 556399.67,
+                "median": 584027.0,
+                "min": 401625.0,
+                "n": 3
+              },
+              "latency_s": {
+                "max": 57.2,
+                "mean": 48.9,
+                "median": 45.5,
+                "min": 44.0,
+                "n": 3
+              },
+              "new_tokens": {
+                "max": 80615.0,
+                "mean": 60188.33,
+                "median": 50166.0,
+                "min": 49784.0,
+                "n": 3
+              },
+              "search_output_tokens": {
+                "max": 9449.0,
+                "mean": 8190.0,
+                "median": 8407.0,
+                "min": 6714.0,
+                "n": 3
+              },
+              "tool_calls": {
+                "max": 20.0,
+                "mean": 19.0,
+                "median": 19.0,
+                "min": 18.0,
+                "n": 3
+              },
+              "turns": {
+                "max": 10.0,
+                "mean": 8.67,
+                "median": 9.0,
+                "min": 7.0,
+                "n": 3
+              },
+              "weighted_cost": {
+                "max": 158703.0,
+                "mean": 148862.33,
+                "median": 150887.0,
+                "min": 136997.0,
+                "n": 3
+              }
+            },
+            "n": 3,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 1.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.3333
+            }
+          }
+        },
+        {
+          "gate": "off",
+          "id": "B",
+          "label": "Framework, advisory",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 1302713.0,
+                "mean": 891872.33,
+                "median": 687862.0,
+                "min": 685042.0,
+                "n": 3
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 3
+              },
+              "cache_read_tokens": {
+                "max": 1229508.0,
+                "mean": 829274.33,
+                "median": 632318.0,
+                "min": 625997.0,
+                "n": 3
+              },
+              "latency_s": {
+                "max": 219.7,
+                "mean": 106.67,
+                "median": 52.8,
+                "min": 47.5,
+                "n": 3
+              },
+              "new_tokens": {
+                "max": 73205.0,
+                "mean": 62598.0,
+                "median": 59045.0,
+                "min": 55544.0,
+                "n": 3
+              },
+              "search_output_tokens": {
+                "max": 6758.0,
+                "mean": 5862.0,
+                "median": 5771.0,
+                "min": 5057.0,
+                "n": 3
+              },
+              "tool_calls": {
+                "max": 24.0,
+                "mean": 19.33,
+                "median": 17.0,
+                "min": 17.0,
+                "n": 3
+              },
+              "turns": {
+                "max": 15.0,
+                "mean": 11.0,
+                "median": 9.0,
+                "min": 9.0,
+                "n": 3
+              },
+              "weighted_cost": {
+                "max": 245991.0,
+                "mean": 183299.33,
+                "median": 154071.0,
+                "min": 149836.0,
+                "n": 3
+              }
+            },
+            "n": 3,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.3333,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.0
+            }
+          }
+        }
+      ],
+      "comparisons": [
+        {
+          "a": "A",
+          "b": "B",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.65,
+              "p_two_sided": 0.8,
+              "ratio_of_means": 1.04,
+              "ratio_of_medians": 1.177
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.1,
+              "p_two_sided": 0.2,
+              "ratio_of_means": 0.7158,
+              "ratio_of_medians": 0.6865
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.55,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 1.0174,
+              "ratio_of_medians": 0.8947
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.8,
+              "p_two_sided": 0.5,
+              "ratio_of_means": 1.2313,
+              "ratio_of_medians": 1.0211
+            }
+          },
+          "name": "Framework vs baseline"
+        }
+      ],
+      "date": "2026-09-20",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "id": "exp2",
+      "project_tokens": 55600,
+      "title": "Experiment 2: large project",
+      "trials": [
+        {
+          "acceptance": "8/8",
+          "agent_id": "a23f48d6928337273",
+          "all_in_tokens": 482240,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 401625,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 76988,
+          "id": "A1",
+          "latency_s": 45.5,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 80615,
+          "opened_legacy_module": false,
+          "order": 1,
+          "output_tokens": 4740,
+          "search_output_tokens": 6714,
+          "tool_calls": 19,
+          "turns": 7,
+          "weighted_cost": 158703
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "aeeab3f3b8c07ec2d",
+          "all_in_tokens": 687862,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 632318,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 88391,
+          "id": "B1",
+          "latency_s": 47.5,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 55544,
+          "opened_legacy_module": false,
+          "order": 2,
+          "output_tokens": 4581,
+          "search_output_tokens": 6758,
+          "tool_calls": 17,
+          "turns": 9,
+          "weighted_cost": 149836
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "afda127357339de6d",
+          "all_in_tokens": 1302713,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1229508,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 102629,
+          "id": "B2",
+          "latency_s": 219.7,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 73205,
+          "opened_legacy_module": false,
+          "order": 3,
+          "output_tokens": 8411,
+          "search_output_tokens": 5057,
+          "tool_calls": 24,
+          "turns": 15,
+          "weighted_cost": 245991
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "afe53ce59af92ed6e",
+          "all_in_tokens": 633811,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 584027,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 82636,
+          "id": "A2",
+          "latency_s": 44.0,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 49784,
+          "opened_legacy_module": true,
+          "order": 4,
+          "output_tokens": 4365,
+          "search_output_tokens": 9449,
+          "tool_calls": 18,
+          "turns": 9,
+          "weighted_cost": 136997
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a1e5ac614032395e1",
+          "all_in_tokens": 733713,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 683547,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 81993,
+          "id": "A3",
+          "latency_s": 57.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 50166,
+          "opened_legacy_module": false,
+          "order": 5,
+          "output_tokens": 5288,
+          "search_output_tokens": 8407,
+          "tool_calls": 20,
+          "turns": 10,
+          "weighted_cost": 150887
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "afd879955842c7152",
+          "all_in_tokens": 685042,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 625997,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 91745,
+          "id": "B3",
+          "latency_s": 52.8,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 59045,
+          "opened_legacy_module": false,
+          "order": 6,
+          "output_tokens": 4712,
+          "search_output_tokens": 5771,
+          "tool_calls": 17,
+          "turns": 9,
+          "weighted_cost": 154071
+        }
+      ],
+      "version": "v1.0.2"
+    },
+    {
+      "arms": [
+        {
+          "gate": "off",
+          "id": "Bn",
+          "label": "Framework, gate off",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 746253.0,
+                "mean": 670723.0,
+                "median": 635887.0,
+                "min": 630029.0,
+                "n": 3
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 3
+              },
+              "cache_read_tokens": {
+                "max": 689514.0,
+                "mean": 608620.33,
+                "median": 584455.0,
+                "min": 551892.0,
+                "n": 3
+              },
+              "latency_s": {
+                "max": 176.6,
+                "mean": 97.4,
+                "median": 59.6,
+                "min": 56.0,
+                "n": 3
+              },
+              "new_tokens": {
+                "max": 83995.0,
+                "mean": 62102.67,
+                "median": 56739.0,
+                "min": 45574.0,
+                "n": 3
+              },
+              "search_output_tokens": {
+                "max": 6903.0,
+                "mean": 6589.67,
+                "median": 6844.0,
+                "min": 6022.0,
+                "n": 3
+              },
+              "tool_calls": {
+                "max": 18.0,
+                "mean": 12.33,
+                "median": 10.0,
+                "min": 9.0,
+                "n": 3
+              },
+              "turns": {
+                "max": 10.0,
+                "mean": 9.33,
+                "median": 9.0,
+                "min": 9.0,
+                "n": 3
+              },
+              "weighted_cost": {
+                "max": 177470.0,
+                "mean": 156841.0,
+                "median": 160199.0,
+                "min": 132854.0,
+                "n": 3
+              }
+            },
+            "n": 3,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.6667,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.6667
+            }
+          }
+        },
+        {
+          "gate": "map-first",
+          "id": "Bg",
+          "label": "Framework, map gate on",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 574023.0,
+                "mean": 537984.33,
+                "median": 542000.0,
+                "min": 497930.0,
+                "n": 3
+              },
+              "blocked_calls": {
+                "max": 1.0,
+                "mean": 1.0,
+                "median": 1.0,
+                "min": 1.0,
+                "n": 3
+              },
+              "cache_read_tokens": {
+                "max": 535455.0,
+                "mean": 496074.33,
+                "median": 491180.0,
+                "min": 461588.0,
+                "n": 3
+              },
+              "latency_s": {
+                "max": 53.8,
+                "mean": 47.17,
+                "median": 47.5,
+                "min": 40.2,
+                "n": 3
+              },
+              "new_tokens": {
+                "max": 50820.0,
+                "mean": 41910.0,
+                "median": 38568.0,
+                "min": 36342.0,
+                "n": 3
+              },
+              "search_output_tokens": {
+                "max": 655.0,
+                "mean": 244.33,
+                "median": 39.0,
+                "min": 39.0,
+                "n": 3
+              },
+              "tool_calls": {
+                "max": 15.0,
+                "mean": 14.67,
+                "median": 15.0,
+                "min": 14.0,
+                "n": 3
+              },
+              "turns": {
+                "max": 9.0,
+                "mean": 8.33,
+                "median": 8.0,
+                "min": 8.0,
+                "n": 3
+              },
+              "weighted_cost": {
+                "max": 129379.0,
+                "mean": 117460.67,
+                "median": 117632.0,
+                "min": 105371.0,
+                "n": 3
+              }
+            },
+            "n": 3,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.0
+            }
+          }
+        }
+      ],
+      "comparisons": [
+        {
+          "a": "Bn",
+          "b": "Bg",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.1,
+              "p_two_sided": 0.2,
+              "ratio_of_means": 0.6749,
+              "ratio_of_medians": 0.6797
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.05,
+              "p_two_sided": 0.1,
+              "ratio_of_means": 0.0371,
+              "ratio_of_medians": 0.0057
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.85,
+              "p_two_sided": 0.4,
+              "ratio_of_means": 1.1898,
+              "ratio_of_medians": 1.5
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.05,
+              "p_two_sided": 0.1,
+              "ratio_of_means": 0.7489,
+              "ratio_of_medians": 0.7343
+            }
+          },
+          "name": "Gate on vs off (map provided)"
+        }
+      ],
+      "date": "2026-09-20",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "id": "exp3",
+      "project_tokens": 55600,
+      "title": "Experiment 3: Rule 1 gate on and off",
+      "trials": [
+        {
+          "acceptance": "8/8",
+          "agent_id": "a409843e716da63e0",
+          "all_in_tokens": 635887,
+          "arm": "Bn",
+          "blocked_calls": 0,
+          "cache_read_tokens": 551892,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 81036,
+          "id": "Bn1",
+          "latency_s": 56.0,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 83995,
+          "opened_legacy_module": true,
+          "order": 1,
+          "output_tokens": 4611,
+          "search_output_tokens": 6903,
+          "tool_calls": 9,
+          "turns": 9,
+          "weighted_cost": 177470
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a17493dbdcdeb1cbe",
+          "all_in_tokens": 574023,
+          "arm": "Bg",
+          "blocked_calls": 1,
+          "cache_read_tokens": 535455,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 71550,
+          "id": "Bg1",
+          "latency_s": 47.5,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 38568,
+          "opened_legacy_module": false,
+          "order": 2,
+          "output_tokens": 4235,
+          "search_output_tokens": 655,
+          "tool_calls": 15,
+          "turns": 9,
+          "weighted_cost": 117632
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a8bc3b58537b2b88a",
+          "all_in_tokens": 542000,
+          "arm": "Bg",
+          "blocked_calls": 1,
+          "cache_read_tokens": 491180,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 83856,
+          "id": "Bg2",
+          "latency_s": 53.8,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 50820,
+          "opened_legacy_module": false,
+          "order": 3,
+          "output_tokens": 4464,
+          "search_output_tokens": 39,
+          "tool_calls": 15,
+          "turns": 8,
+          "weighted_cost": 129379
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a7e25fae163ac749f",
+          "all_in_tokens": 630029,
+          "arm": "Bn",
+          "blocked_calls": 0,
+          "cache_read_tokens": 584455,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 78320,
+          "id": "Bn2",
+          "latency_s": 176.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 45574,
+          "opened_legacy_module": true,
+          "order": 4,
+          "output_tokens": 4652,
+          "search_output_tokens": 6844,
+          "tool_calls": 10,
+          "turns": 9,
+          "weighted_cost": 132854
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a26748ceb856de881",
+          "all_in_tokens": 746253,
+          "arm": "Bn",
+          "blocked_calls": 0,
+          "cache_read_tokens": 689514,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 88758,
+          "id": "Bn3",
+          "latency_s": 59.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 56739,
+          "opened_legacy_module": false,
+          "order": 5,
+          "output_tokens": 5421,
+          "search_output_tokens": 6022,
+          "tool_calls": 18,
+          "turns": 10,
+          "weighted_cost": 160199
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "af397d8dd0b0fe1ba",
+          "all_in_tokens": 497930,
+          "arm": "Bg",
+          "blocked_calls": 1,
+          "cache_read_tokens": 461588,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 69851,
+          "id": "Bg3",
+          "latency_s": 40.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 36342,
+          "opened_legacy_module": false,
+          "order": 6,
+          "output_tokens": 3677,
+          "search_output_tokens": 39,
+          "tool_calls": 14,
+          "turns": 8,
+          "weighted_cost": 105371
+        }
+      ],
+      "version": "v1.0.4"
+    },
+    {
+      "arms": [
+        {
+          "gate": "off",
+          "id": "A",
+          "label": "No map, no gate (baseline)",
+          "map": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 492006.0,
+                "mean": 451855.25,
+                "median": 446582.5,
+                "min": 422250.0,
+                "n": 4
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "cache_read_tokens": {
+                "max": 456255.0,
+                "mean": 419299.75,
+                "median": 415475.0,
+                "min": 389994.0,
+                "n": 4
+              },
+              "latency_s": {
+                "max": 45.2,
+                "mean": 40.5,
+                "median": 41.2,
+                "min": 34.4,
+                "n": 4
+              },
+              "new_tokens": {
+                "max": 35751.0,
+                "mean": 32555.5,
+                "median": 32485.5,
+                "min": 29500.0,
+                "n": 4
+              },
+              "search_output_tokens": {
+                "max": 4332.0,
+                "mean": 2886.75,
+                "median": 3301.0,
+                "min": 613.0,
+                "n": 4
+              },
+              "tool_calls": {
+                "max": 12.0,
+                "mean": 8.0,
+                "median": 7.0,
+                "min": 6.0,
+                "n": 4
+              },
+              "turns": {
+                "max": 8.0,
+                "mean": 7.5,
+                "median": 7.5,
+                "min": 7.0,
+                "n": 4
+              },
+              "weighted_cost": {
+                "max": 104639.0,
+                "mean": 96061.75,
+                "median": 94461.5,
+                "min": 90685.0,
+                "n": 4
+              }
+            },
+            "n": 4,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.5,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.25
+            }
+          }
+        },
+        {
+          "gate": "off",
+          "id": "B",
+          "label": "Map provided, gate off (advisory)",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 525490.0,
+                "mean": 471068.5,
+                "median": 486027.0,
+                "min": 386730.0,
+                "n": 4
+              },
+              "blocked_calls": {
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "cache_read_tokens": {
+                "max": 485887.0,
+                "mean": 433609.75,
+                "median": 448629.0,
+                "min": 351294.0,
+                "n": 4
+              },
+              "latency_s": {
+                "max": 43.1,
+                "mean": 40.23,
+                "median": 40.9,
+                "min": 36.0,
+                "n": 4
+              },
+              "new_tokens": {
+                "max": 39603.0,
+                "mean": 37458.75,
+                "median": 37398.0,
+                "min": 35436.0,
+                "n": 4
+              },
+              "search_output_tokens": {
+                "max": 613.0,
+                "mean": 322.75,
+                "median": 339.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "tool_calls": {
+                "max": 13.0,
+                "mean": 12.0,
+                "median": 12.5,
+                "min": 10.0,
+                "n": 4
+              },
+              "turns": {
+                "max": 8.0,
+                "mean": 7.25,
+                "median": 7.5,
+                "min": 6.0,
+                "n": 4
+              },
+              "weighted_cost": {
+                "max": 112001.0,
+                "mean": 103774.5,
+                "median": 105916.5,
+                "min": 91264.0,
+                "n": 4
+              }
+            },
+            "n": 4,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.25
+            }
+          }
+        },
+        {
+          "gate": "suppress-search",
+          "id": "C",
+          "label": "No map, search suppression only (ablation)",
+          "map": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 655459.0,
+                "mean": 566212.5,
+                "median": 545879.5,
+                "min": 517632.0,
+                "n": 4
+              },
+              "blocked_calls": {
+                "max": 2.0,
+                "mean": 1.5,
+                "median": 1.5,
+                "min": 1.0,
+                "n": 4
+              },
+              "cache_read_tokens": {
+                "max": 623262.0,
+                "mean": 525404.25,
+                "median": 494372.5,
+                "min": 489610.0,
+                "n": 4
+              },
+              "latency_s": {
+                "max": 53.1,
+                "mean": 47.42,
+                "median": 48.7,
+                "min": 39.2,
+                "n": 4
+              },
+              "new_tokens": {
+                "max": 73472.0,
+                "mean": 40808.25,
+                "median": 31248.0,
+                "min": 27265.0,
+                "n": 4
+              },
+              "search_output_tokens": {
+                "max": 574.0,
+                "mean": 245.5,
+                "median": 204.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "tool_calls": {
+                "max": 17.0,
+                "mean": 12.25,
+                "median": 11.5,
+                "min": 9.0,
+                "n": 4
+              },
+              "turns": {
+                "max": 11.0,
+                "mean": 9.5,
+                "median": 9.0,
+                "min": 9.0,
+                "n": 4
+              },
+              "weighted_cost": {
+                "max": 156490.0,
+                "mean": 118225.25,
+                "median": 110784.0,
+                "min": 94843.0,
+                "n": 4
+              }
+            },
+            "n": 4,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.5,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.75
+            }
+          }
+        },
+        {
+          "gate": "map-first",
+          "id": "D",
+          "label": "Map provided, map gate on (enforced)",
+          "map": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": 592541.0,
+                "mean": 508103.75,
+                "median": 496696.0,
+                "min": 446482.0,
+                "n": 4
+              },
+              "blocked_calls": {
+                "max": 1.0,
+                "mean": 0.25,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "cache_read_tokens": {
+                "max": 514158.0,
+                "mean": 458867.25,
+                "median": 455982.5,
+                "min": 409346.0,
+                "n": 4
+              },
+              "latency_s": {
+                "max": 61.5,
+                "mean": 49.45,
+                "median": 47.2,
+                "min": 41.9,
+                "n": 4
+              },
+              "new_tokens": {
+                "max": 78383.0,
+                "mean": 49236.5,
+                "median": 40713.5,
+                "min": 37136.0,
+                "n": 4
+              },
+              "search_output_tokens": {
+                "max": 2427.0,
+                "mean": 606.75,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 4
+              },
+              "tool_calls": {
+                "max": 18.0,
+                "mean": 14.0,
+                "median": 13.5,
+                "min": 11.0,
+                "n": 4
+              },
+              "turns": {
+                "max": 9.0,
+                "mean": 7.75,
+                "median": 7.5,
+                "min": 7.0,
+                "n": 4
+              },
+              "weighted_cost": {
+                "max": 169933.0,
+                "mean": 123926.75,
+                "median": 112114.5,
+                "min": 101545.0,
+                "n": 4
+              }
+            },
+            "n": 4,
+            "quality": {
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.5,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.0
+            }
+          }
+        }
+      ],
+      "comparisons": [
+        {
+          "a": "A",
+          "b": "B",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.9857,
+              "p_two_sided": 0.0571,
+              "ratio_of_means": 1.1506,
+              "ratio_of_medians": 1.1512
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.0286,
+              "p_two_sided": 0.0571,
+              "ratio_of_means": 0.1118,
+              "ratio_of_medians": 0.1027
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.9857,
+              "p_two_sided": 0.0857,
+              "ratio_of_means": 1.5,
+              "ratio_of_medians": 1.7857
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.9,
+              "p_two_sided": 0.2286,
+              "ratio_of_means": 1.0803,
+              "ratio_of_medians": 1.1213
+            }
+          },
+          "name": "Advisory map (B vs A)"
+        },
+        {
+          "a": "A",
+          "b": "C",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.5857,
+              "p_two_sided": 0.8571,
+              "ratio_of_means": 1.2535,
+              "ratio_of_medians": 0.9619
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.0143,
+              "p_two_sided": 0.0286,
+              "ratio_of_means": 0.085,
+              "ratio_of_medians": 0.0618
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.9571,
+              "p_two_sided": 0.1143,
+              "ratio_of_means": 1.5312,
+              "ratio_of_medians": 1.6429
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.9286,
+              "p_two_sided": 0.1714,
+              "ratio_of_means": 1.2307,
+              "ratio_of_medians": 1.1728
+            }
+          },
+          "name": "Suppression alone (C vs A)"
+        },
+        {
+          "a": "B",
+          "b": "D",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.9571,
+              "p_two_sided": 0.1143,
+              "ratio_of_means": 1.3144,
+              "ratio_of_medians": 1.0887
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.5571,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 1.8799,
+              "ratio_of_medians": 0.0
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.8857,
+              "p_two_sided": 0.4,
+              "ratio_of_means": 1.1667,
+              "ratio_of_medians": 1.08
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.8857,
+              "p_two_sided": 0.2571,
+              "ratio_of_means": 1.1942,
+              "ratio_of_medians": 1.0585
+            }
+          },
+          "name": "Map gate given a map (D vs B)"
+        },
+        {
+          "a": "C",
+          "b": "D",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": 0.7857,
+              "p_two_sided": 0.4571,
+              "ratio_of_means": 1.2065,
+              "ratio_of_medians": 1.3029
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": 0.5571,
+              "p_two_sided": 1.0,
+              "ratio_of_means": 2.4715,
+              "ratio_of_medians": 0.0
+            },
+            "tool_calls": {
+              "p_one_sided_lower": 0.8,
+              "p_two_sided": 0.5429,
+              "ratio_of_means": 1.1429,
+              "ratio_of_medians": 1.1739
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": 0.6857,
+              "p_two_sided": 0.6571,
+              "ratio_of_means": 1.0482,
+              "ratio_of_medians": 1.012
+            }
+          },
+          "name": "Map added to suppression (D vs C)"
+        }
+      ],
+      "date": "2026-09-20",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "id": "exp4",
+      "preregistration": {
+        "decision_rules": [
+          "Suppression explains the saving if C is at least 10% cheaper than A and C is within 10% of D.",
+          "Targeted context (the map) explains the saving if D is at least 10% cheaper than C and C is not at least 10% cheaper than A.",
+          "If C is at least 10% more expensive than A, suppression alone harms.",
+          "Anything else is reported as inconclusive."
+        ],
+        "design": "2x2 factorial (map provided x gate on), 4 blocks; each block runs all four arms once in a seeded random order.",
+        "hypotheses": [
+          "H1: D costs less than B (replicates experiment 3).",
+          "H2: C differs from A (direction not predicted).",
+          "H3: D costs less than C, meaning the map adds value beyond suppression."
+        ],
+        "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
+        "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
+        "question": "Is the cost reduction seen in experiment 3 caused by requiring the map, or merely by suppressing broad searches?",
+        "recorded_before_any_trial": true,
+        "secondary_metrics": [
+          "new_tokens",
+          "all_in_tokens",
+          "search_output_tokens",
+          "tool_calls",
+          "turns",
+          "latency",
+          "blocked_calls",
+          "acceptance (8/8)",
+          "mutation (4/4)",
+          "end-to-end test added",
+          "legacy module opened"
+        ],
+        "seed": 20260920,
+        "statistics": "Exact permutation test on mean weighted cost, reported per comparison; with n=4 per arm it is underpowered (minimum one-sided p = 1/70) and is not the decision rule.",
+        "stopping_rule": "All 16 trials run. No trial is excluded, including trials with hung commands."
+      },
+      "project_tokens": 55600,
+      "schedule": [
+        {
+          "arm": "D",
+          "block": 1
+        },
+        {
+          "arm": "B",
+          "block": 1
+        },
+        {
+          "arm": "A",
+          "block": 1
+        },
+        {
+          "arm": "C",
+          "block": 1
+        },
+        {
+          "arm": "C",
+          "block": 2
+        },
+        {
+          "arm": "A",
+          "block": 2
+        },
+        {
+          "arm": "B",
+          "block": 2
+        },
+        {
+          "arm": "D",
+          "block": 2
+        },
+        {
+          "arm": "C",
+          "block": 3
+        },
+        {
+          "arm": "A",
+          "block": 3
+        },
+        {
+          "arm": "B",
+          "block": 3
+        },
+        {
+          "arm": "D",
+          "block": 3
+        },
+        {
+          "arm": "A",
+          "block": 4
+        },
+        {
+          "arm": "D",
+          "block": 4
+        },
+        {
+          "arm": "C",
+          "block": 4
+        },
+        {
+          "arm": "B",
+          "block": 4
+        }
+      ],
+      "title": "Experiment 4: ablation matrix",
+      "trials": [
+        {
+          "acceptance": "8/8",
+          "agent_id": "a68e84ded8a4c8a6c",
+          "all_in_tokens": 592541,
+          "arm": "D",
+          "blocked_calls": 0,
+          "cache_read_tokens": 514158,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 74154,
+          "id": "D1",
+          "latency_s": 61.5,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 78383,
+          "opened_legacy_module": false,
+          "order": 1,
+          "output_tokens": 5478,
+          "search_output_tokens": 0,
+          "tool_calls": 18,
+          "turns": 9,
+          "weighted_cost": 169933
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a583db707f348996f",
+          "all_in_tokens": 525490,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 485887,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 73010,
+          "id": "B1",
+          "latency_s": 41.7,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 39603,
+          "opened_legacy_module": false,
+          "order": 2,
+          "output_tokens": 3710,
+          "search_output_tokens": 613,
+          "tool_calls": 13,
+          "turns": 8,
+          "weighted_cost": 112001
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "afc4259690effe036",
+          "all_in_tokens": 492006,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 456255,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 69275,
+          "id": "A1",
+          "latency_s": 44.8,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 35751,
+          "opened_legacy_module": true,
+          "order": 3,
+          "output_tokens": 3821,
+          "search_output_tokens": 3639,
+          "tool_calls": 8,
+          "turns": 8,
+          "weighted_cost": 104639
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "aea81b969b0911e16",
+          "all_in_tokens": 563082,
+          "arm": "C",
+          "blocked_calls": 2,
+          "cache_read_tokens": 489610,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 70210,
+          "id": "C1",
+          "latency_s": 51.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 73472,
+          "opened_legacy_module": true,
+          "order": 4,
+          "output_tokens": 4185,
+          "search_output_tokens": 166,
+          "tool_calls": 10,
+          "turns": 9,
+          "weighted_cost": 156490
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "ab190634c373ddf39",
+          "all_in_tokens": 528677,
+          "arm": "C",
+          "blocked_calls": 1,
+          "cache_read_tokens": 498378,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 63638,
+          "id": "C2",
+          "latency_s": 46.0,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 30299,
+          "opened_legacy_module": true,
+          "order": 5,
+          "output_tokens": 3640,
+          "search_output_tokens": 0,
+          "tool_calls": 13,
+          "turns": 9,
+          "weighted_cost": 101357
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a318051fcbbf93864",
+          "all_in_tokens": 422250,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 390145,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 66274,
+          "id": "A2",
+          "latency_s": 34.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 32105,
+          "opened_legacy_module": false,
+          "order": 6,
+          "output_tokens": 3078,
+          "search_output_tokens": 4332,
+          "tool_calls": 6,
+          "turns": 7,
+          "weighted_cost": 90685
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "ab7a93dadb0dceee4",
+          "all_in_tokens": 513020,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 475899,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 70738,
+          "id": "B2",
+          "latency_s": 40.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 37121,
+          "opened_legacy_module": false,
+          "order": 7,
+          "output_tokens": 3673,
+          "search_output_tokens": 556,
+          "tool_calls": 12,
+          "turns": 8,
+          "weighted_cost": 107761
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a30df7dbe268755b3",
+          "all_in_tokens": 475334,
+          "arm": "D",
+          "blocked_calls": 0,
+          "cache_read_tokens": 433919,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 75100,
+          "id": "D2",
+          "latency_s": 41.9,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 41415,
+          "opened_legacy_module": false,
+          "order": 8,
+          "output_tokens": 3707,
+          "search_output_tokens": 2427,
+          "tool_calls": 11,
+          "turns": 7,
+          "weighted_cost": 109058
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a1f4e349cdd9edc2c",
+          "all_in_tokens": 517632,
+          "arm": "C",
+          "blocked_calls": 2,
+          "cache_read_tokens": 490367,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 61215,
+          "id": "C3",
+          "latency_s": 39.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27265,
+          "opened_legacy_module": false,
+          "order": 9,
+          "output_tokens": 3128,
+          "search_output_tokens": 574,
+          "tool_calls": 9,
+          "turns": 9,
+          "weighted_cost": 94843
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a15d4176e837a70b1",
+          "all_in_tokens": 470305,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 440805,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 63176,
+          "id": "A3",
+          "latency_s": 37.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 29500,
+          "opened_legacy_module": false,
+          "order": 10,
+          "output_tokens": 3448,
+          "search_output_tokens": 613,
+          "tool_calls": 12,
+          "turns": 8,
+          "weighted_cost": 93882
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "ad67cea6539f02fb1",
+          "all_in_tokens": 459034,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 421359,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 70876,
+          "id": "B3",
+          "latency_s": 43.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 37675,
+          "opened_legacy_module": true,
+          "order": 11,
+          "output_tokens": 3959,
+          "search_output_tokens": 122,
+          "tool_calls": 13,
+          "turns": 7,
+          "weighted_cost": 104072
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a1a4da2d57eb68009",
+          "all_in_tokens": 446482,
+          "arm": "D",
+          "blocked_calls": 1,
+          "cache_read_tokens": 409346,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 70588,
+          "id": "D3",
+          "latency_s": 43.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 37136,
+          "opened_legacy_module": false,
+          "order": 12,
+          "output_tokens": 3785,
+          "search_output_tokens": 0,
+          "tool_calls": 12,
+          "turns": 7,
+          "weighted_cost": 101545
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a6f1d6a3438b87eb2",
+          "all_in_tokens": 422860,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 389994,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 66386,
+          "id": "A4",
+          "latency_s": 45.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 32866,
+          "opened_legacy_module": false,
+          "order": 13,
+          "output_tokens": 3990,
+          "search_output_tokens": 2963,
+          "tool_calls": 6,
+          "turns": 7,
+          "weighted_cost": 95041
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a4e8617bc49835771",
+          "all_in_tokens": 518058,
+          "arm": "D",
+          "blocked_calls": 0,
+          "cache_read_tokens": 478046,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 72669,
+          "id": "D4",
+          "latency_s": 51.3,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 40012,
+          "opened_legacy_module": false,
+          "order": 14,
+          "output_tokens": 4628,
+          "search_output_tokens": 0,
+          "tool_calls": 15,
+          "turns": 8,
+          "weighted_cost": 115171
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "a6ea41c50dfad817f",
+          "all_in_tokens": 655459,
+          "arm": "C",
+          "blocked_calls": 1,
+          "cache_read_tokens": 623262,
+          "client_version": "2.1.275",
+          "e2e_test_added": true,
+          "harness_subagent_tokens": 64662,
+          "id": "C4",
+          "latency_s": 53.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 32197,
+          "opened_legacy_module": true,
+          "order": 15,
+          "output_tokens": 4705,
+          "search_output_tokens": 242,
+          "tool_calls": 17,
+          "turns": 11,
+          "weighted_cost": 120211
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "ab92614b3c9136933",
+          "all_in_tokens": 386730,
+          "arm": "B",
+          "blocked_calls": 0,
+          "cache_read_tokens": 351294,
+          "client_version": "2.1.275",
+          "e2e_test_added": false,
+          "harness_subagent_tokens": 69351,
+          "id": "B4",
+          "latency_s": 36.0,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 35436,
+          "opened_legacy_module": false,
+          "order": 16,
+          "output_tokens": 3158,
+          "search_output_tokens": 0,
+          "tool_calls": 10,
+          "turns": 6,
+          "weighted_cost": 91264
+        }
+      ],
+      "version": "v1.1.0"
+    }
+  ],
+  "generated_by": "benchmarks/analyze_transcripts.py",
+  "schema_version": 1,
+  "weights": {
+    "cache_read": 0.1,
+    "cache_write": 1.25,
+    "input": 1.0,
+    "output": 5.0
+  }
+}
