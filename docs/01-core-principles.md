@@ -48,6 +48,12 @@ The diet has three rules.
 A map that is too long defeats its purpose. If yours passes a few thousand tokens, group
 more aggressively rather than trimming descriptions.
 
+> **Measured caveat.** In [two A/B experiments](benchmark-results.md), unguided agents did not scan
+> repositories: they listed files and grepped, and their cost did not grow with project size up to
+> 55,600 tokens. The token diet is a hypothesis for much larger repositories and for tasks that
+> cannot be found by searching, not a demonstrated saving. What the framework did deliver was
+> verification evidence (mutation-checked tests, invariant checks) at a small, roughly constant cost.
+
 ## 3. Why a file-based store
 
 [`decisions/0001-no-database-file-store.yaml`](../decisions/0001-no-database-file-store.yaml)

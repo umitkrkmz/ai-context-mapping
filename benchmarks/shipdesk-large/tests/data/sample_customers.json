@@ -1,0 +1,1082 @@
+[
+ {
+  "customer_id": "CUS00001",
+  "name": "Ben Nguyen",
+  "email": "ben.nguyen1@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 137,
+  "created": "2025-02-02"
+ },
+ {
+  "customer_id": "CUS00002",
+  "name": "Chloe Nguyen",
+  "email": "chloe.nguyen2@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 274,
+  "created": "2025-03-03"
+ },
+ {
+  "customer_id": "CUS00003",
+  "name": "Dev Nguyen",
+  "email": "dev.nguyen3@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 411,
+  "created": "2025-04-04"
+ },
+ {
+  "customer_id": "CUS00004",
+  "name": "Elena Nguyen",
+  "email": "elena.nguyen4@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 548,
+  "created": "2025-05-05"
+ },
+ {
+  "customer_id": "CUS00005",
+  "name": "Farid Nguyen",
+  "email": "farid.nguyen5@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 685,
+  "created": "2025-06-06"
+ },
+ {
+  "customer_id": "CUS00006",
+  "name": "Grace Nguyen",
+  "email": "grace.nguyen6@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 822,
+  "created": "2025-07-07"
+ },
+ {
+  "customer_id": "CUS00007",
+  "name": "Hiro Nguyen",
+  "email": "hiro.nguyen7@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 959,
+  "created": "2025-08-08"
+ },
+ {
+  "customer_id": "CUS00008",
+  "name": "Ines Nguyen",
+  "email": "ines.nguyen8@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 1096,
+  "created": "2025-09-09"
+ },
+ {
+  "customer_id": "CUS00009",
+  "name": "Jonas Nguyen",
+  "email": "jonas.nguyen9@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 1233,
+  "created": "2025-10-10"
+ },
+ {
+  "customer_id": "CUS00010",
+  "name": "Ada Okafor",
+  "email": "ada.okafor10@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 1370,
+  "created": "2025-11-11"
+ },
+ {
+  "customer_id": "CUS00011",
+  "name": "Ben Okafor",
+  "email": "ben.okafor11@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 1507,
+  "created": "2025-12-12"
+ },
+ {
+  "customer_id": "CUS00012",
+  "name": "Chloe Okafor",
+  "email": "chloe.okafor12@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 1644,
+  "created": "2025-01-13"
+ },
+ {
+  "customer_id": "CUS00013",
+  "name": "Dev Okafor",
+  "email": "dev.okafor13@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 1781,
+  "created": "2025-02-14"
+ },
+ {
+  "customer_id": "CUS00014",
+  "name": "Elena Okafor",
+  "email": "elena.okafor14@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 1918,
+  "created": "2025-03-15"
+ },
+ {
+  "customer_id": "CUS00015",
+  "name": "Farid Okafor",
+  "email": "farid.okafor15@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 2055,
+  "created": "2025-04-16"
+ },
+ {
+  "customer_id": "CUS00016",
+  "name": "Grace Okafor",
+  "email": "grace.okafor16@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 2192,
+  "created": "2025-05-17"
+ },
+ {
+  "customer_id": "CUS00017",
+  "name": "Hiro Okafor",
+  "email": "hiro.okafor17@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 2329,
+  "created": "2025-06-18"
+ },
+ {
+  "customer_id": "CUS00018",
+  "name": "Ines Okafor",
+  "email": "ines.okafor18@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 2466,
+  "created": "2025-07-19"
+ },
+ {
+  "customer_id": "CUS00019",
+  "name": "Jonas Okafor",
+  "email": "jonas.okafor19@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 2603,
+  "created": "2025-08-20"
+ },
+ {
+  "customer_id": "CUS00020",
+  "name": "Ada Silva",
+  "email": "ada.silva20@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 2740,
+  "created": "2025-09-21"
+ },
+ {
+  "customer_id": "CUS00021",
+  "name": "Ben Silva",
+  "email": "ben.silva21@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 2877,
+  "created": "2025-10-22"
+ },
+ {
+  "customer_id": "CUS00022",
+  "name": "Chloe Silva",
+  "email": "chloe.silva22@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 3014,
+  "created": "2025-11-23"
+ },
+ {
+  "customer_id": "CUS00023",
+  "name": "Dev Silva",
+  "email": "dev.silva23@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 3151,
+  "created": "2025-12-24"
+ },
+ {
+  "customer_id": "CUS00024",
+  "name": "Elena Silva",
+  "email": "elena.silva24@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 3288,
+  "created": "2025-01-25"
+ },
+ {
+  "customer_id": "CUS00025",
+  "name": "Farid Silva",
+  "email": "farid.silva25@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 3425,
+  "created": "2025-02-26"
+ },
+ {
+  "customer_id": "CUS00026",
+  "name": "Grace Silva",
+  "email": "grace.silva26@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 3562,
+  "created": "2025-03-27"
+ },
+ {
+  "customer_id": "CUS00027",
+  "name": "Hiro Silva",
+  "email": "hiro.silva27@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 3699,
+  "created": "2025-04-01"
+ },
+ {
+  "customer_id": "CUS00028",
+  "name": "Ines Silva",
+  "email": "ines.silva28@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 3836,
+  "created": "2025-05-02"
+ },
+ {
+  "customer_id": "CUS00029",
+  "name": "Jonas Silva",
+  "email": "jonas.silva29@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 3973,
+  "created": "2025-06-03"
+ },
+ {
+  "customer_id": "CUS00030",
+  "name": "Ada Novak",
+  "email": "ada.novak30@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 4110,
+  "created": "2025-07-04"
+ },
+ {
+  "customer_id": "CUS00031",
+  "name": "Ben Novak",
+  "email": "ben.novak31@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 4247,
+  "created": "2025-08-05"
+ },
+ {
+  "customer_id": "CUS00032",
+  "name": "Chloe Novak",
+  "email": "chloe.novak32@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 4384,
+  "created": "2025-09-06"
+ },
+ {
+  "customer_id": "CUS00033",
+  "name": "Dev Novak",
+  "email": "dev.novak33@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 4521,
+  "created": "2025-10-07"
+ },
+ {
+  "customer_id": "CUS00034",
+  "name": "Elena Novak",
+  "email": "elena.novak34@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 4658,
+  "created": "2025-11-08"
+ },
+ {
+  "customer_id": "CUS00035",
+  "name": "Farid Novak",
+  "email": "farid.novak35@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 4795,
+  "created": "2025-12-09"
+ },
+ {
+  "customer_id": "CUS00036",
+  "name": "Grace Novak",
+  "email": "grace.novak36@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 4932,
+  "created": "2025-01-10"
+ },
+ {
+  "customer_id": "CUS00037",
+  "name": "Hiro Novak",
+  "email": "hiro.novak37@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 5069,
+  "created": "2025-02-11"
+ },
+ {
+  "customer_id": "CUS00038",
+  "name": "Ines Novak",
+  "email": "ines.novak38@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 5206,
+  "created": "2025-03-12"
+ },
+ {
+  "customer_id": "CUS00039",
+  "name": "Jonas Novak",
+  "email": "jonas.novak39@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 5343,
+  "created": "2025-04-13"
+ },
+ {
+  "customer_id": "CUS00040",
+  "name": "Ada Kim",
+  "email": "ada.kim40@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 5480,
+  "created": "2025-05-14"
+ },
+ {
+  "customer_id": "CUS00041",
+  "name": "Ben Kim",
+  "email": "ben.kim41@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 5617,
+  "created": "2025-06-15"
+ },
+ {
+  "customer_id": "CUS00042",
+  "name": "Chloe Kim",
+  "email": "chloe.kim42@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 5754,
+  "created": "2025-07-16"
+ },
+ {
+  "customer_id": "CUS00043",
+  "name": "Dev Kim",
+  "email": "dev.kim43@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 5891,
+  "created": "2025-08-17"
+ },
+ {
+  "customer_id": "CUS00044",
+  "name": "Elena Kim",
+  "email": "elena.kim44@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 28,
+  "created": "2025-09-18"
+ },
+ {
+  "customer_id": "CUS00045",
+  "name": "Farid Kim",
+  "email": "farid.kim45@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 165,
+  "created": "2025-10-19"
+ },
+ {
+  "customer_id": "CUS00046",
+  "name": "Grace Kim",
+  "email": "grace.kim46@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 302,
+  "created": "2025-11-20"
+ },
+ {
+  "customer_id": "CUS00047",
+  "name": "Hiro Kim",
+  "email": "hiro.kim47@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 439,
+  "created": "2025-12-21"
+ },
+ {
+  "customer_id": "CUS00048",
+  "name": "Ines Kim",
+  "email": "ines.kim48@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 576,
+  "created": "2025-01-22"
+ },
+ {
+  "customer_id": "CUS00049",
+  "name": "Jonas Kim",
+  "email": "jonas.kim49@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 713,
+  "created": "2025-02-23"
+ },
+ {
+  "customer_id": "CUS00050",
+  "name": "Ada Rossi",
+  "email": "ada.rossi50@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 850,
+  "created": "2025-03-24"
+ },
+ {
+  "customer_id": "CUS00051",
+  "name": "Ben Rossi",
+  "email": "ben.rossi51@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 987,
+  "created": "2025-04-25"
+ },
+ {
+  "customer_id": "CUS00052",
+  "name": "Chloe Rossi",
+  "email": "chloe.rossi52@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 1124,
+  "created": "2025-05-26"
+ },
+ {
+  "customer_id": "CUS00053",
+  "name": "Dev Rossi",
+  "email": "dev.rossi53@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 1261,
+  "created": "2025-06-27"
+ },
+ {
+  "customer_id": "CUS00054",
+  "name": "Elena Rossi",
+  "email": "elena.rossi54@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 1398,
+  "created": "2025-07-01"
+ },
+ {
+  "customer_id": "CUS00055",
+  "name": "Farid Rossi",
+  "email": "farid.rossi55@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 1535,
+  "created": "2025-08-02"
+ },
+ {
+  "customer_id": "CUS00056",
+  "name": "Grace Rossi",
+  "email": "grace.rossi56@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 1672,
+  "created": "2025-09-03"
+ },
+ {
+  "customer_id": "CUS00057",
+  "name": "Hiro Rossi",
+  "email": "hiro.rossi57@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 1809,
+  "created": "2025-10-04"
+ },
+ {
+  "customer_id": "CUS00058",
+  "name": "Ines Rossi",
+  "email": "ines.rossi58@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 1946,
+  "created": "2025-11-05"
+ },
+ {
+  "customer_id": "CUS00059",
+  "name": "Jonas Rossi",
+  "email": "jonas.rossi59@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 2083,
+  "created": "2025-12-06"
+ },
+ {
+  "customer_id": "CUS00060",
+  "name": "Ada Haddad",
+  "email": "ada.haddad60@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 2220,
+  "created": "2025-01-07"
+ },
+ {
+  "customer_id": "CUS00061",
+  "name": "Ben Haddad",
+  "email": "ben.haddad61@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 2357,
+  "created": "2025-02-08"
+ },
+ {
+  "customer_id": "CUS00062",
+  "name": "Chloe Haddad",
+  "email": "chloe.haddad62@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 2494,
+  "created": "2025-03-09"
+ },
+ {
+  "customer_id": "CUS00063",
+  "name": "Dev Haddad",
+  "email": "dev.haddad63@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 2631,
+  "created": "2025-04-10"
+ },
+ {
+  "customer_id": "CUS00064",
+  "name": "Elena Haddad",
+  "email": "elena.haddad64@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 2768,
+  "created": "2025-05-11"
+ },
+ {
+  "customer_id": "CUS00065",
+  "name": "Farid Haddad",
+  "email": "farid.haddad65@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 2905,
+  "created": "2025-06-12"
+ },
+ {
+  "customer_id": "CUS00066",
+  "name": "Grace Haddad",
+  "email": "grace.haddad66@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 3042,
+  "created": "2025-07-13"
+ },
+ {
+  "customer_id": "CUS00067",
+  "name": "Hiro Haddad",
+  "email": "hiro.haddad67@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 3179,
+  "created": "2025-08-14"
+ },
+ {
+  "customer_id": "CUS00068",
+  "name": "Ines Haddad",
+  "email": "ines.haddad68@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 3316,
+  "created": "2025-09-15"
+ },
+ {
+  "customer_id": "CUS00069",
+  "name": "Jonas Haddad",
+  "email": "jonas.haddad69@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 3453,
+  "created": "2025-10-16"
+ },
+ {
+  "customer_id": "CUS00070",
+  "name": "Ada Larsen",
+  "email": "ada.larsen70@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 3590,
+  "created": "2025-11-17"
+ },
+ {
+  "customer_id": "CUS00071",
+  "name": "Ben Larsen",
+  "email": "ben.larsen71@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 3727,
+  "created": "2025-12-18"
+ },
+ {
+  "customer_id": "CUS00072",
+  "name": "Chloe Larsen",
+  "email": "chloe.larsen72@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 3864,
+  "created": "2025-01-19"
+ },
+ {
+  "customer_id": "CUS00073",
+  "name": "Dev Larsen",
+  "email": "dev.larsen73@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 4001,
+  "created": "2025-02-20"
+ },
+ {
+  "customer_id": "CUS00074",
+  "name": "Elena Larsen",
+  "email": "elena.larsen74@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 4138,
+  "created": "2025-03-21"
+ },
+ {
+  "customer_id": "CUS00075",
+  "name": "Farid Larsen",
+  "email": "farid.larsen75@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 4275,
+  "created": "2025-04-22"
+ },
+ {
+  "customer_id": "CUS00076",
+  "name": "Grace Larsen",
+  "email": "grace.larsen76@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 4412,
+  "created": "2025-05-23"
+ },
+ {
+  "customer_id": "CUS00077",
+  "name": "Hiro Larsen",
+  "email": "hiro.larsen77@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 4549,
+  "created": "2025-06-24"
+ },
+ {
+  "customer_id": "CUS00078",
+  "name": "Ines Larsen",
+  "email": "ines.larsen78@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 4686,
+  "created": "2025-07-25"
+ },
+ {
+  "customer_id": "CUS00079",
+  "name": "Jonas Larsen",
+  "email": "jonas.larsen79@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 4823,
+  "created": "2025-08-26"
+ },
+ {
+  "customer_id": "CUS00080",
+  "name": "Ada Moreau",
+  "email": "ada.moreau80@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 4960,
+  "created": "2025-09-27"
+ },
+ {
+  "customer_id": "CUS00081",
+  "name": "Ben Moreau",
+  "email": "ben.moreau81@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 5097,
+  "created": "2025-10-01"
+ },
+ {
+  "customer_id": "CUS00082",
+  "name": "Chloe Moreau",
+  "email": "chloe.moreau82@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 5234,
+  "created": "2025-11-02"
+ },
+ {
+  "customer_id": "CUS00083",
+  "name": "Dev Moreau",
+  "email": "dev.moreau83@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 5371,
+  "created": "2025-12-03"
+ },
+ {
+  "customer_id": "CUS00084",
+  "name": "Elena Moreau",
+  "email": "elena.moreau84@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 5508,
+  "created": "2025-01-04"
+ },
+ {
+  "customer_id": "CUS00085",
+  "name": "Farid Moreau",
+  "email": "farid.moreau85@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 5645,
+  "created": "2025-02-05"
+ },
+ {
+  "customer_id": "CUS00086",
+  "name": "Grace Moreau",
+  "email": "grace.moreau86@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 5782,
+  "created": "2025-03-06"
+ },
+ {
+  "customer_id": "CUS00087",
+  "name": "Hiro Moreau",
+  "email": "hiro.moreau87@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 5919,
+  "created": "2025-04-07"
+ },
+ {
+  "customer_id": "CUS00088",
+  "name": "Ines Moreau",
+  "email": "ines.moreau88@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 56,
+  "created": "2025-05-08"
+ },
+ {
+  "customer_id": "CUS00089",
+  "name": "Jonas Moreau",
+  "email": "jonas.moreau89@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 193,
+  "created": "2025-06-09"
+ },
+ {
+  "customer_id": "CUS00090",
+  "name": "Ada Tanaka",
+  "email": "ada.tanaka90@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 330,
+  "created": "2025-07-10"
+ },
+ {
+  "customer_id": "CUS00091",
+  "name": "Ben Tanaka",
+  "email": "ben.tanaka91@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 467,
+  "created": "2025-08-11"
+ },
+ {
+  "customer_id": "CUS00092",
+  "name": "Chloe Tanaka",
+  "email": "chloe.tanaka92@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 604,
+  "created": "2025-09-12"
+ },
+ {
+  "customer_id": "CUS00093",
+  "name": "Dev Tanaka",
+  "email": "dev.tanaka93@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 741,
+  "created": "2025-10-13"
+ },
+ {
+  "customer_id": "CUS00094",
+  "name": "Elena Tanaka",
+  "email": "elena.tanaka94@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 878,
+  "created": "2025-11-14"
+ },
+ {
+  "customer_id": "CUS00095",
+  "name": "Farid Tanaka",
+  "email": "farid.tanaka95@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 1015,
+  "created": "2025-12-15"
+ },
+ {
+  "customer_id": "CUS00096",
+  "name": "Grace Tanaka",
+  "email": "grace.tanaka96@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 1152,
+  "created": "2025-01-16"
+ },
+ {
+  "customer_id": "CUS00097",
+  "name": "Hiro Tanaka",
+  "email": "hiro.tanaka97@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 1289,
+  "created": "2025-02-17"
+ },
+ {
+  "customer_id": "CUS00098",
+  "name": "Ines Tanaka",
+  "email": "ines.tanaka98@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 1426,
+  "created": "2025-03-18"
+ },
+ {
+  "customer_id": "CUS00099",
+  "name": "Jonas Tanaka",
+  "email": "jonas.tanaka99@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 1563,
+  "created": "2025-04-19"
+ },
+ {
+  "customer_id": "CUS00100",
+  "name": "Ada Nguyen",
+  "email": "ada.nguyen100@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 1700,
+  "created": "2025-05-20"
+ },
+ {
+  "customer_id": "CUS00101",
+  "name": "Ben Nguyen",
+  "email": "ben.nguyen101@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 1837,
+  "created": "2025-06-21"
+ },
+ {
+  "customer_id": "CUS00102",
+  "name": "Chloe Nguyen",
+  "email": "chloe.nguyen102@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 1974,
+  "created": "2025-07-22"
+ },
+ {
+  "customer_id": "CUS00103",
+  "name": "Dev Nguyen",
+  "email": "dev.nguyen103@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 2111,
+  "created": "2025-08-23"
+ },
+ {
+  "customer_id": "CUS00104",
+  "name": "Elena Nguyen",
+  "email": "elena.nguyen104@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 2248,
+  "created": "2025-09-24"
+ },
+ {
+  "customer_id": "CUS00105",
+  "name": "Farid Nguyen",
+  "email": "farid.nguyen105@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 2385,
+  "created": "2025-10-25"
+ },
+ {
+  "customer_id": "CUS00106",
+  "name": "Grace Nguyen",
+  "email": "grace.nguyen106@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 2522,
+  "created": "2025-11-26"
+ },
+ {
+  "customer_id": "CUS00107",
+  "name": "Hiro Nguyen",
+  "email": "hiro.nguyen107@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 2659,
+  "created": "2025-12-27"
+ },
+ {
+  "customer_id": "CUS00108",
+  "name": "Ines Nguyen",
+  "email": "ines.nguyen108@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 2796,
+  "created": "2025-01-01"
+ },
+ {
+  "customer_id": "CUS00109",
+  "name": "Jonas Nguyen",
+  "email": "jonas.nguyen109@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 2933,
+  "created": "2025-02-02"
+ },
+ {
+  "customer_id": "CUS00110",
+  "name": "Ada Okafor",
+  "email": "ada.okafor110@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 3070,
+  "created": "2025-03-03"
+ },
+ {
+  "customer_id": "CUS00111",
+  "name": "Ben Okafor",
+  "email": "ben.okafor111@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 3207,
+  "created": "2025-04-04"
+ },
+ {
+  "customer_id": "CUS00112",
+  "name": "Chloe Okafor",
+  "email": "chloe.okafor112@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 3344,
+  "created": "2025-05-05"
+ },
+ {
+  "customer_id": "CUS00113",
+  "name": "Dev Okafor",
+  "email": "dev.okafor113@example.test",
+  "country": "US",
+  "region": "NY",
+  "loyalty_points": 3481,
+  "created": "2025-06-06"
+ },
+ {
+  "customer_id": "CUS00114",
+  "name": "Elena Okafor",
+  "email": "elena.okafor114@example.test",
+  "country": "CA",
+  "region": "ON",
+  "loyalty_points": 3618,
+  "created": "2025-07-07"
+ },
+ {
+  "customer_id": "CUS00115",
+  "name": "Farid Okafor",
+  "email": "farid.okafor115@example.test",
+  "country": "GB",
+  "region": "",
+  "loyalty_points": 3755,
+  "created": "2025-08-08"
+ },
+ {
+  "customer_id": "CUS00116",
+  "name": "Grace Okafor",
+  "email": "grace.okafor116@example.test",
+  "country": "DE",
+  "region": "",
+  "loyalty_points": 3892,
+  "created": "2025-09-09"
+ },
+ {
+  "customer_id": "CUS00117",
+  "name": "Hiro Okafor",
+  "email": "hiro.okafor117@example.test",
+  "country": "FR",
+  "region": "",
+  "loyalty_points": 4029,
+  "created": "2025-10-10"
+ },
+ {
+  "customer_id": "CUS00118",
+  "name": "Ines Okafor",
+  "email": "ines.okafor118@example.test",
+  "country": "JP",
+  "region": "",
+  "loyalty_points": 4166,
+  "created": "2025-11-11"
+ },
+ {
+  "customer_id": "CUS00119",
+  "name": "Jonas Okafor",
+  "email": "jonas.okafor119@example.test",
+  "country": "AU",
+  "region": "NSW",
+  "loyalty_points": 4303,
+  "created": "2025-12-12"
+ },
+ {
+  "customer_id": "CUS00120",
+  "name": "Ada Silva",
+  "email": "ada.silva120@example.test",
+  "country": "US",
+  "region": "CA",
+  "loyalty_points": 4440,
+  "created": "2025-01-13"
+ }
+]

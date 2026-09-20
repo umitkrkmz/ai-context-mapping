@@ -9,13 +9,16 @@ a reference benchmark, a scaling model, and a script to measure your own reposit
 > characters**, which is typically within roughly 15-25% of a real tokenizer for source code
 > and prose. Use the script in section 7 with your own repository and your own model's price.
 
-> **Empirical check.** An A/B run on a small project ([benchmark results](benchmark-results.md))
-> found that the framework arm used *more* tokens than the baseline, because the project (about
-> 4,400 tokens) was as small as the framework's own instructions. That is consistent with the
-> model below, which predicts savings only when the repository is much larger than the map. The
-> scaling claim itself has not been tested empirically.
+> **Empirical check: read this first.** Two A/B experiments ([benchmark results](benchmark-results.md))
+> tested this model with real agents on a 4,400-token and a 55,600-token project. They found
+> **no token savings from the map.** The baseline agents did not scan the repository: they listed
+> files and grepped, reading 10-12 files (about 3% of the project), and their cost stayed flat while
+> the project grew 12.7x. The "naive whole-repository read" below is therefore a **worst-case model of
+> an unguided agent**, not a description of the agents tested, and its percentages are an upper
+> bound. Whether the map pays off in much larger repositories, or for symptoms that cannot be
+> grepped, is untested.
 
-## 1. Headline
+## 1. Headline (worst-case model, not a measurement)
 
 | Approach                              | Tokens read to orient and locate the code | Relative |
 | ------------------------------------- | ----------------------------------------: | -------: |
@@ -123,26 +126,26 @@ excluded). These are point-in-time figures; rerun the script after the repositor
 
 | Quantity                                        |         Value |
 | ----------------------------------------------- | ------------: |
-| Readable files                                  |            43 |
-| Whole-repository tokens `N`                     |        83,023 |
-| Map rows / map tokens `M`                       |    67 / 2,324 |
-| Median file / largest file (tokens)             | 1,081 / 10,638 |
-| Guided cost: map + one median-size file         |         3,405 |
-| **Reduction: map + one median-size file**       |     **95.9%** |
-| Guided cost: map + the largest file             |        12,962 |
-| Reduction: map + the largest file               |         84.4% |
+| Readable files                                  |            56 |
+| Whole-repository tokens `N`                     |       103,275 |
+| Map rows / map tokens `M`                       |    75 / 2,613 |
+| Median file / largest file (tokens)             | 1,021 / 10,845 |
+| Guided cost: map + one median-size file         |         3,634 |
+| **Reduction: map + one median-size file**       |     **96.5%** |
+| Guided cost: map + the largest file             |        13,458 |
+| Reduction: map + the largest file               |         87.0% |
 
 What the numbers say:
 
 - **The typical case clears 95%.** Orienting with the map and opening one ordinary file costs
   about 4% of the repository.
 - **One huge file dominates the worst case.** The largest file here (`scripts/init_mapping.py`)
-  is about 13% of the whole repository, so a session that must open it spends roughly ten times
+  is about 10% of the whole repository, so a session that must open it spends roughly ten times
   what a median-file session spends on the file itself. The map cannot shrink a file you
   genuinely need to read. Keep modules small, and consider
   splitting anything much larger than a few thousand tokens.
 - **This map is verbose.** Every row has a full-sentence purpose, and the map carries a legend
-  and a route table. Its 2,324 tokens are more than three times the ~700-token compact map of the
+  and a route table. Its 2,613 tokens are nearly four times the ~700-token compact map of the
   reference scenario. A leaner map moves the typical case toward the 98% of section 2.
 
 ## 6. Scaling: the map grows slower than the repository
@@ -259,28 +262,28 @@ answer it, and only when asked.
 
 | Property                     | One bloated instruction file                 | Two-tier navigation                                   |
 | ---------------------------- | -------------------------------------------- | ----------------------------------------------------- |
-| Loaded at every session start | Everything: rules, tour, catalog, history    | Rules only (~1.2k tokens here)                        |
+| Loaded at every session start | Everything: rules, tour, catalog, history    | Rules only (~1.4k tokens here)                        |
 | Where file knowledge lives   | Prose paragraphs                             | Map rows, one per path                                |
 | Stays true because           | Someone remembers to edit it                 | `tests/test_maps.py` fails when a row is missing/stale |
-| Cost of looking up a file    | Already paid, whether needed or not          | Paid only when needed: ~2.3k (map) or ~0.1k (one row) |
+| Cost of looking up a file    | Already paid, whether needed or not          | Paid only when needed: ~2.6k (map) or ~0.1k (one row) |
 | Depth available              | Whatever fits in 500 lines                   | Unlimited: invariants, decisions, docs, read on demand |
 | Rule visibility              | Diluted by surrounding text                  | Rules are the whole file                              |
 
 ### The arithmetic
 
-Measured on this repository: `AGENTS.md` is **97 lines and about 1,211 tokens**, roughly 12.5
+Measured on this repository: `AGENTS.md` is **109 lines and about 1,394 tokens**, roughly 12.8
 tokens per line. Applying the same density to a file at the 500-line threshold:
 
 | Always-loaded cost                                   |    Tokens | Versus a 500-line file |
 | ---------------------------------------------------- | --------: | ---------------------: |
-| Bloated `CLAUDE.md`, 500 lines x ~12.5               |    ~6,200 |                      - |
-| Two-tier: rules file only                            |    ~1,210 |                   -81% |
-| Two-tier: rules file + the whole map, when needed    |    ~3,530 |                   -43% |
-| Two-tier: rules file + one `get_file_purpose` answer |    ~1,340 |                   -78% |
+| Bloated `CLAUDE.md`, 500 lines x ~12.8               |    ~6,400 |                      - |
+| Two-tier: rules file only                            |    ~1,390 |                   -78% |
+| Two-tier: rules file + the whole map, when needed    |    ~4,010 |                   -37% |
+| Two-tier: rules file + one `get_file_purpose` answer |    ~1,520 |                   -76% |
 
 Even in the worst case, where the agent reads the entire map, two-tier navigation loads about
-57% of what the bloated file loads on every session, and it loads the map only when the task
-needs it. Over 100 sessions the fixed cost is roughly 620k tokens versus 121k for the rules
+63% of what the bloated file loads on every session, and it loads the map only when the task
+needs it. Over 100 sessions the fixed cost is roughly 640k tokens versus 139k for the rules
 alone. The gap is larger still in the failure that matters most: with two-tier navigation, a
 stale description fails a test instead of misleading the agent.
 

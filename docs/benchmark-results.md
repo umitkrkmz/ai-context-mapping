@@ -1,220 +1,276 @@
-# Benchmark Results: A/B Test on a Localized Regression
+# Benchmark Results: Does the Framework Pay for Itself?
 
-An empirical comparison of two agents fixing the same bug in the same project, one with the
-framework and one without. **Read the summary before the tables: the result does not match the
-simple story that a project map always saves tokens.**
+Two A/B experiments on the same bug, in the same project at two sizes: **4,400 tokens** (v1.0.1) and
+**55,600 tokens** (v1.0.2). In each, one agent works with the framework and one without.
 
-Run date: 2026-09-20. One trial per arm. See [Threats to validity](#6-threats-to-validity)
-before quoting any number.
+**The short version: the results do not support the claim that a project map saves tokens.** The
+framework did not make agents fix the bug better or cheaper in either experiment. It did produce
+machine-checked evidence, at a small cost. Read section 1 before quoting any number, and section 8 for
+the limits of these experiments.
+
+Run dates: 2026-09-20 (both). Experiment 1 has one trial per arm; experiment 2 has three.
 
 ## 1. Summary
 
-| Question                                          | Result                                                      |
-| ------------------------------------------------- | ----------------------------------------------------------- |
-| Did both agents fix the bug correctly?            | **Yes.** Identical one-character fix; 8 of 8 hidden acceptance tests pass in both arms. |
-| Did both write a real regression test?            | **Yes.** Both tests fail on the unfixed code and kill 100% of mutants. |
-| Did the framework arm use fewer tokens?           | **No.** It used **34% more** (85,805 vs 63,951) on this small project. |
-| Was the framework arm faster?                     | **No.** 66.1 s vs 48.4 s (**37% slower**).                  |
-| Did the baseline agent read many irrelevant files?| **No.** It read 11 files, 5 of them outside the bug's path, about 1,600 tokens in total. |
-| What did the framework arm buy?                   | Machine-checked evidence: mutation score, invariant check, map check, dependency audit. It did not buy a better fix. |
-| Did the baseline arm miss anything?               | No. It also flagged the decoy module that the framework arm did not check. |
+| Question                                                        | Result |
+| --------------------------------------------------------------- | ------ |
+| Did every agent fix the bug correctly?                          | **Yes, 8 of 8.** The identical one-character fix; 8 of 8 hidden acceptance tests pass every time. |
+| Were the regression tests strong?                               | **Yes, 8 of 8.** Every agent's tests kill 100% of mutants, including the `>=` to `>` boundary shift. |
+| Did the framework arm cost fewer tokens?                        | **No.** Price-weighted cost was **+8%** at 4.4k tokens and a **+2% median** (+23% mean) at 55.6k tokens. |
+| Did the baseline's cost grow with project size?                 | **No.** It was flat: 148.7k at 4.4k tokens, **150.9k median at 55.6k** (12.7x larger). |
+| Did the baseline agent scan the whole repository?               | **No.** All 8 agents listed the tree, then grepped (experiment 2) or opened files by name (experiment 1). None read more than 12 files. |
+| Did the framework agents follow Rule 1 (read the map first)?    | **No, 0 of 3.** All three grepped first; two read the map afterwards; one never opened it. |
+| What did the framework arm buy?                                 | Mutation-verified tests, invariant, dependency, and map checks. It did not buy a better fix. |
+| What did it cost?                                               | About 7,000-12,000 extra tokens of instruction and script reading per task, and one hung command. |
 
-**Why.** The whole benchmark project is about 4,400 tokens. The framework's own instruction
-files (`AGENTS.md`, `CLAUDE.md`, the map, `.agentignore`, invariants) are about 4,100 tokens, so
-they are as large as the project they describe, and the framework arm also read the 7,000-token
-source of the mutation guard. A map cannot save exploration that is already cheap. This is exactly the regime that
-[`02-token-diet-calculator.md`](02-token-diet-calculator.md) predicts is unfavorable, and this
-benchmark does **not** test the scaling claim (section 7).
+**What this means for the earlier claims.** The token-diet model in
+[`02-token-diet-calculator.md`](02-token-diet-calculator.md) compares a map-guided read against an agent
+that reads the whole repository. No agent here did that. Agents navigate with `Glob` and `grep`, whose
+cost depends on how many files *match*, not on how large the repository is. The model is a worst case
+for an unguided agent, not a prediction, and this benchmark found no savings from the map at 55,600
+tokens.
 
-## 2. Scenario
+## 2. What we measured, and how
 
-**Task given to both agents** (verbatim):
+**Task given to every agent** (verbatim):
 
 > Customers whose cart subtotal (after discounts) is exactly $50.00 are being charged shipping.
 > Company policy says free shipping applies at $50.00 or more.
 > Find the root cause, fix it, and add a regression test. Keep the change minimal.
 
-**Project.** `benchmarks/shipdesk/`: a small checkout library with 17 modules, 10 test modules
-plus a `conftest.py` (27 passing tests), a business-rules document, and a changelog. 31 files,
-about 4,400 tokens. Money is integer cents.
+**The planted bug.** `shipdesk/shipping.py::qualifies_for_free_shipping` compares with `>` instead of
+`>=`. No existing test touches the boundary, so every existing test passes on the buggy code.
 
-**The planted bug.** `shipdesk/shipping.py::qualifies_for_free_shipping` compares with `>`
-instead of `>=`. No existing test touches the boundary, so all 27 tests pass on the buggy code.
+**Arms.** Agent A gets the project only. Agent B gets the same project plus a framework layer: `AGENTS.md`
+and `CLAUDE.md` (the Python template with all five rules), a hand-written `maps/project-map.md`,
+`invariants/negative-invariants.md`, copies of `scripts/` and `mcp/`, `.agentignore`, and
+`tests/test_maps.py`. Before each run, B's project passed its own map check, invariant check, and tests.
+Prompts were identical, including "follow any contributor instructions the project itself contains".
+Each trial used a fresh sub-agent with no prior context, its own copy of the project, and the same
+model. Runs were sequential.
 
-**Distractor.** `shipdesk/legacy_shipping.py::free_shipping` has the same `> 5000` pattern. It is
-deprecated and, according to the changelog, used only by an old importer. Whether it should also
-be fixed is a genuine question for the maintainers.
+**Measurements.** Everything below is derived from the agents' **transcripts** with
+[`benchmarks/analyze_transcripts.py`](../benchmarks/analyze_transcripts.py), not from self-reports.
 
-**Framework layer (Agent B only).** A hand-written `maps/project-map.md` with one row per file,
-`invariants/negative-invariants.md` with two invariants (NI-101: `to_cents` keeps `Decimal`;
-NI-102: money is integer cents, no `float()`), `AGENTS.md` and `CLAUDE.md` from the Python
-template, and copies of `scripts/`, `mcp/`, `.agentignore`, and `tests/test_maps.py`. Before the
-run, Agent B's project passed its own map check (51 of 51 paths), its invariant check, and 34
-tests.
+| Metric                      | Definition |
+| --------------------------- | ---------- |
+| **Weighted cost** (primary) | `input x 1 + cache write x 1.25 + cache read x 0.1 + output x 5`, in input-token units. The weights are typical published price ratios and are an assumption. The primary metric was fixed before the large-scale runs. |
+| New tokens                  | Input + output + cache-write tokens: text the model saw or wrote for the first time. |
+| Cache reads                 | Context re-read on each turn. Cheap per token, large in volume. |
+| All-in tokens               | New tokens + cache reads. |
+| Harness total               | The `subagent_tokens` figure the agent tool prints. Its composition is undocumented and it **could not be reproduced** from the transcripts. Reported for reference only. |
+| Files read, tool calls      | Counted from the transcript. `Read` calls only; a `cat` inside a shell command is not counted. |
+| Correctness                 | 8 hidden acceptance tests (`benchmarks/acceptance_check.py`). |
+| Mutation kill rate          | `scripts/mutation_guard.py`, all mutants, whole test suite, run by us after each trial. |
 
-## 3. Method
+## 3. Experiment 1: small project (4,400 tokens, 31 files), one trial per arm
 
-| Item              | Agent A (baseline)                              | Agent B (context mapping)                            |
-| ----------------- | ----------------------------------------------- | ---------------------------------------------------- |
-| Project           | `benchmarks/shipdesk/`, unmodified              | Same, plus the framework layer above                 |
-| Prompt            | Identical, including "follow any contributor instructions the project contains" | Identical |
-| Agent             | Fresh general-purpose sub-agent, no prior context | Fresh general-purpose sub-agent, no prior context   |
-| Model             | Same for both (session default; the harness does not record the exact ID) | Same |
-| Order             | Run first, sequentially                         | Run second, sequentially (no contention)             |
-| Isolation         | Separate directory; told not to read outside it | Same                                                 |
+`benchmarks/shipdesk/`: 17 modules, 10 test modules plus a `conftest.py` (27 passing tests), a
+pricing-policy document, and a changelog. A decoy, `legacy_shipping.py`, repeats the `> 5000` pattern.
 
-**Measurements**
+| Metric (transcript-derived)             | Agent A |  Agent B | B vs A |
+| --------------------------------------- | ------: | -------: | -----: |
+| **Weighted cost** (primary)             | 148,721 |  160,450 |    +8% |
+| New tokens                              |  67,722 |   53,674 |   -21% |
+| Cache reads                             | 465,197 |  727,565 |   +56% |
+| All-in tokens                           | 532,919 |  781,239 |   +47% |
+| *Harness total (not reproducible)*      |  63,951 |   85,805 |   +34% |
+| Tool calls                              |      17 |       18 |     +1 |
+| Latency                                 |  48.4 s |   66.1 s |   +37% |
+| Files read (`Read` tool)                |      11 |       12 |     +1 |
+| Project / framework tokens read         | 1,583 / 0 | 1,149 / 11,142 |    |
+| Acceptance tests / mutation kill rate   | 8/8, 4/4 | 8/8, 4/4 |  equal |
 
-| Metric                     | Source                                                         | Kind          |
-| -------------------------- | -------------------------------------------------------------- | ------------- |
-| Total tokens               | `subagent_tokens` reported by the agent harness                | Tool-reported (total, not split into input/output) |
-| Tool calls, latency        | `tool_uses` and `duration_ms` reported by the harness          | Tool-reported |
-| Files inspected            | The agent's own list of every file it opened                   | **Self-reported**; consistent with the tool-call counts |
-| Read size                  | Character count of each listed file divided by 4               | Estimate      |
-| Correctness                | 8 hidden acceptance tests (`benchmarks/acceptance_check.py`)   | Objective     |
-| Mutation kill rate         | `scripts/mutation_guard.py` run by us on each agent's result   | Objective     |
+**Mutation testing, by operator set** (target `qualifies_for_free_shipping`, whole suite):
 
-Agent A has no mutation guard in its project, so it could not check its own tests that way. We
-ran the same guard against both arms afterwards, with identical settings.
+| Suite scored                                        | v1.0.0 operators | v1.0.1 operators (adds `boundary`) |
+| --------------------------------------------------- | ---------------: | ---------------------------------: |
+| Agent A's tests                                     |      3/3 (100%)  |                        4/4 (100%)  |
+| Agent B's tests                                     |      3/3 (100%)  |                        4/4 (100%)  |
+| **Control:** original suite, no regression test     |  **3/3 (100%)**  |                    **3/4 (75%)**   |
 
-## 4. Results
+The control row is why v1.0.1 added `boundary` operators to `mutation_guard.py`. The original suite has no
+test at the boundary, yet the v1.0.0 operators scored it 100%: they only turn `>=` into `<`, which any
+test far from 50.00 already catches. The new operator turns `>=` into `>`, which is the bug itself.
 
-### 4.1 Comparison matrix
+**Correction to v1.0.1.** The first version of this document led with the harness total (+34% tokens).
+The transcripts show that figure was the least informative one available: depending on the accounting,
+Agent B used 21% *fewer* new tokens, 8% more weighted cost, or 47% more all-in tokens. The agents'
+self-reported file lists were checked against the transcripts and were **exactly right**.
 
-| Metric                                  | Agent A (baseline) | Agent B (context mapping) | B relative to A |
-| --------------------------------------- | -----------------: | ------------------------: | --------------: |
-| **Total tokens** (harness-reported)     |             63,951 |                    85,805 |           +34%  |
-| **Files inspected**                     |                 11 |                        12 |           +1    |
-| - of which project files                |                 11 |                         6 |           -5    |
-| - of which framework files              |                  0 |                         6 |           +6    |
-| Estimated size of files read (tokens)   |             ~1,583 |                   ~12,291 |         ~7.8x   |
-| - project files / framework files       |         1,583 / 0  |            1,149 / 11,142 |                 |
-| **Tool calls**                          |                 17 |                        18 |           +1    |
-| **Latency**                             |             48.4 s |                    66.1 s |           +37%  |
-| Hidden acceptance tests passed          |                8/8 |                       8/8 |          equal  |
-| Files changed                           | 3 (1 source, 2 tests) |  3 (1 source, 2 tests) |          equal  |
-| Regression tests added                  |                  2 |                         3 |           +1    |
-| **Mutation kill rate** (agent's new tests) |       4/4 (100%) |                  4/4 (100%) |          equal  |
-| Mutation kill rate (whole suite)        |            4/4 (100%) |                4/4 (100%) |          equal  |
+## 4. Experiment 2: large project (55,600 tokens, 224 files), three trials per arm
 
-Files read by Agent B that were framework files: `CLAUDE.md`, `AGENTS.md` (the same content
-twice, about 1,000 tokens each), `maps/project-map.md` (~1,035), `.agentignore` (~650),
-`invariants/negative-invariants.md` (~365), and `scripts/mutation_guard.py` (~7,060). It read
-`shipping.py`, `config.py`, `checkout.py`, the pricing policy, and the two relevant test files,
-and went straight to them from the map.
+`benchmarks/shipdesk-large/` is the small project with everything around it grown: 8 carrier adapters,
+10 tier tables, 6 exporters, 8 region helpers, notification templates, repositories, analytics, services,
+tax tables for 27 EU states and 50 US states, currency formatting, delivery-zone and holiday tables,
+integrations, an audit log, search, seed data and three sample data sets, six ADRs, and 32 more
+documents. **271 tests pass on the buggy code.** The bug, its function, and the bug report are
+identical to experiment 1, so the only variable is scale.
 
-### 4.2 Mutation testing
+It is built to have realistic decoys. A case-insensitive search for `free shipping` matches 18 files. A
+promotion banner (`services/promotions.py`) and the free-shipping analytics also deal with the threshold.
+Five tier tables and the audit retention rule deliberately use a **strict** `>` that is correct under
+their documented business rules; five other tier tables use `>=`. `legacy_shipping.py` repeats the bug and is frozen by ADR 0005.
 
-Target: `shipdesk/shipping.py::qualifies_for_free_shipping` (the fixed function). All runs use
-`--max-mutants 0` (every mutant) and the whole `tests/` directory unless noted.
+Agent B's map has 147 rows and ~3,700 tokens (the framework's own `--stats` warns that this exceeds its
+3,000-token guidance). Trials ran in the order A1, B1, B2, A2, A3, B3.
 
-| Test suite scored                                        | v1.0.0 operators | v1.0.1 operators (adds `boundary`) |
-| -------------------------------------------------------- | ---------------: | ---------------------------------: |
-| Agent A: only its new regression tests                   |      3/3 (100%)  |                        4/4 (100%)  |
-| Agent B: only its new regression tests                   |      3/3 (100%)  |                        4/4 (100%)  |
-| Agent A: whole suite                                     |      3/3 (100%)  |                        4/4 (100%)  |
-| Agent B: whole suite                                     |      3/3 (100%)  |                        4/4 (100%)  |
-| **Control:** original suite, no regression test          |  **3/3 (100%)**  |                    **3/4 (75%)**   |
+### 4.1 Per-trial results
 
-The control row is the reason this release adds `boundary` operators to `mutation_guard.py`.
-The original suite contains no test at the boundary, yet the v1.0.0 operators score it 100%:
-they only turn `>=` into `<`, which any test on a value far from 50.00 already detects. The
-new operator turns `>=` into `>`, which is the bug itself; the original suite lets it survive
-(`line 31: >= -> > (boundary shift)`), and both agents' new tests kill it. A mutation score is
-only as sharp as its operators.
+| Trial | Weighted cost | New tokens | Cache reads | Harness total | Latency | Tool calls | Files read | Project / framework tokens read | Map read? |
+| ----- | ------------: | ---------: | ----------: | ------------: | ------: | ---------: | ---------: | ------------------------------: | --------- |
+| A1    |       158,703 |     80,615 |     401,625 |        76,988 |  45.5 s |         19 |         11 |                     1,692 / 0   | n/a |
+| A2    |       136,997 |     49,784 |     584,027 |        82,636 |  44.0 s |         18 |         12 |                     1,818 / 0   | n/a |
+| A3    |       150,887 |     50,166 |     683,547 |        81,993 |  57.2 s |         20 |         10 |                     1,890 / 0   | n/a |
+| B1    |       149,836 |     55,544 |     632,318 |        88,391 |  47.5 s |         17 |         10 |                 1,127 / 6,943    | after a grep |
+| B2    |   **245,991** |     73,205 |   1,229,508 |       102,629 | **219.7 s** |     24 |         10 |                1,302 / 11,981    | after a grep |
+| B3    |       154,071 |     59,045 |     625,997 |        91,745 |  52.8 s |         17 |         11 |                1,244 / 10,314    | **never** |
 
-## 5. Interpretation
+B2 lost about three minutes to a hung shell command (a malformed heredoc that it then had to kill) and
+re-read a growing context on every turn. It is a real event and stays in the data.
 
-**What the data supports**
+### 4.2 Aggregates
 
-1. **Both arms produced a correct, minimal, well-tested fix.** Correctness and test strength
-   were equal. On a small, well-documented project, an unconstrained agent is already good.
-2. **The framework cost more than it saved here.** Agent B's reads were dominated by framework
-   files (11,142 of 12,291 tokens read), not by project files (1,149 vs Agent A's 1,583).
-   The map did its job: Agent B opened 6 project files, Agent A opened 11. But saving five small
-   files (about 430 tokens) cannot repay ~11,000 tokens of framework reading.
-3. **The extra tokens and time bought verification, not a better fix.** `AGENTS.md` Rule 2 sent
-   Agent B through the mutation guard, the invariant check, the dependency audit, and the map
-   check. That is the framework working as designed. On this task the verification confirmed a
-   fix that was already right.
-4. **Agent A was more thorough about the decoy.** It noticed the identical comparison in
-   `legacy_shipping.py`, left it alone, and asked whether to fix it. Agent B relied on the map
-   ("not used by checkout"), did not check it, and said so. Neither changed it, which is the
-   safe choice.
-5. **Rule 5 (do not invent project knowledge) showed a small tension.** Agent B inferred the
-   `TEE-02` price from an existing test instead of opening `catalog.py`. It guarded the
-   assumption with an assertion on the subtotal, but the price was not verified from a source.
+| Metric                                | Agent A: median (range)     | Agent B: median (range)       | B/A median | B/A mean |
+| ------------------------------------- | --------------------------: | ----------------------------: | ---------: | -------: |
+| **Weighted cost** (primary)           | 150,887 (136,997-158,703)   | 154,071 (149,836-245,991)     |  **1.02x** |    1.23x |
+| New tokens                            |  50,166 (49,784-80,615)     |  59,045 (55,544-73,205)       |      1.18x |    1.04x |
+| All-in tokens                         | 633,811 (482,240-733,713)   | 687,862 (685,042-1,302,713)   |      1.09x |    1.45x |
+| *Harness total*                       |  81,993 (76,988-82,636)     |  91,745 (88,391-102,629)      |      1.12x |    1.17x |
+| Latency                               |  45.5 s (44.0-57.2)         |  52.8 s (47.5-219.7)          |      1.16x |    2.18x |
+| Tool calls                            |  19 (18-20)                 |  17 (17-24)                   |      0.89x |    1.02x |
+| Files read                            |  11 (10-12)                 |  10 (10-11)                   |          - |        - |
+| Project tokens read                   |  1,818 (1,692-1,890)        |  1,244 (1,127-1,302)          |          - |        - |
 
-**What the data does not support**
+The median cost difference (+2%) is well inside the spread within each arm. With three trials per arm,
+it should be read as **no measurable difference**; the mean is inflated by one hung command.
 
-- The claim that the baseline agent reads "10+ irrelevant files" or bloats its context. It did
-  not, because the project is small enough to navigate by name.
-- The claim that the baseline test is weaker or mocked. It was not.
-- Any claim about tokens saved at scale (section 7).
+### 4.3 Quality
 
-**Improvements this suggests (not implemented in v1.0.1)**
+| Measure                                      | Agent A (3 trials) | Agent B (3 trials) |
+| -------------------------------------------- | -----------------: | -----------------: |
+| Identical one-character fix                  |                3/3 |                3/3 |
+| Hidden acceptance tests passed               |          8/8 (x3)  |          8/8 (x3)  |
+| Files changed outside the fix and its tests  |                  0 |                  0 |
+| Mutation kill rate of the agent's suite      |          4/4 (x3)  |          4/4 (x3)  |
+| Ran the mutation guard themselves            |    n/a (not provided) |              3/3 |
+| Opened `legacy_shipping.py` and reported its sibling bug | 1/3    |                0/3 |
+| Touched `legacy_shipping.py`                 |                0/3 |                0/3 |
 
-- Agents should not read a script's source to use it. `--help` costs a fraction of a 7,000-token
-  file. Rule 1 could say so explicitly.
-- Duplicating `CLAUDE.md` and `AGENTS.md` costs ~1,000 tokens when a tool loads both. Tools that
-  read `AGENTS.md` natively should not also read `CLAUDE.md`.
-- A map row for a deprecated module could say *"same threshold rule; do not fix without asking"*
-  so that the framework arm surfaces the decoy question as reliably as the baseline did.
+**Control:** the original suite (no regression test) scores 3/4 (75%) against the fixed function; the
+survivor is `line 31: >= -> > (boundary shift)`. The boundary operator added in v1.0.1 still tells a
+boundary test from a non-boundary test at 55,600 tokens.
 
-## 6. Threats to validity
+### 4.4 What the transcripts show about behavior
 
-- **One trial per arm.** LLM runs vary. A second run could move every number in the matrix.
-  Treat differences under roughly 20% as noise; the token and latency gaps here are larger, but
-  one run is still one run.
-- **We wrote the fixture, the framework layer, and the acceptance tests.** We knew the bug. The
-  hand-written map and invariants are a best case for Agent B.
-- **The fixture is tiny** (about 4,400 tokens across 31 files). It is the worst case for a
-  routing map, and the only regime tested.
-- **Token accounting.** `subagent_tokens` is a harness total whose exact composition (cached
-  input, repeated context, output) is not documented. Read it as a relative measure between the
-  two runs, not an absolute cost.
-- **Files inspected is self-reported.** The counts agree with the tool-call totals but were not
-  independently audited.
-- **Agents used file reads, not the MCP protocol.** Sub-agents did not have the MCP server
-  configured, so Agent B read `maps/project-map.md` as a file. The server's tools return the
-  same content.
-- **Operators changed before the runs.** The `boundary` operators were added before either agent
-  ran and were applied identically to both arms, but their addition is a choice we made after
-  designing the scenario. Both operator sets are reported.
-- **Sequential runs.** Latency was not distorted by contention, but API load may differ between
-  the two minutes in which the runs happened.
+- **Every agent, in both arms, began with `Glob **/*` (the whole file list, about 1,700 tokens) and a
+  targeted `grep`.** No agent read more than 12 files. The baseline read 10-12 files, about 1,700-1,900
+  tokens: **3.0-3.4% of the project**, with no map.
+- **Rule 1 was not followed.** B1 and B2 grepped, then read the map. B3 never opened it; the map appeared
+  only in a grep result. The agents' self-reports said so honestly. Rule 1 is advisory, and here it was
+  overridden by the reflex to search first.
+- **Framework reading was pure overhead here.** B read `AGENTS.md` and `CLAUDE.md` (identical, about
+  1,000 tokens each), the map (~3,700), `.agentignore` (~700), the invariants (~560), and, in B2 and B3,
+  the 7,100-token source of `mutation_guard.py`: 6,900-12,000 tokens per trial against 1,100-1,300 tokens
+  of project files.
+- **The framework agents skipped the sibling bug.** Trusting the frozen-module invariant, none opened
+  `legacy_shipping.py`. One baseline agent opened it and told the user it has the same off-by-one.
+  That is useful information the framework arm did not surface.
+- **Cost is dominated by the agent loop, not by project content.** About 45-76k tokens are written to
+  the cache over a run (mostly the system prompt, tool definitions, and the files read), and every turn
+  re-reads the growing context. That is why 12.7x more project barely moved the total.
 
-## 7. What this benchmark does not test
+## 5. Scale: 4,400 to 55,600 tokens
 
-The token-diet claim is about *scale*: a map lets an agent skip files, and the saving grows with
-the repository while the map grows much more slowly. At 4,400 tokens the framework's
-instructions (~4,100 tokens) are as large as the project. The break-even is a hypothesis to test, not
-a result:
+| Quantity (weighted cost unless noted)      | Small (n=1 each) | Large (n=3 each, median) | Change |
+| ------------------------------------------ | ---------------: | -----------------------: | -----: |
+| Project size (tokens / files)              |      4,369 / 31  |             55,600 / 224 | 12.7x  |
+| **Agent A, weighted cost**                 |          148,721 |                  150,887 |   +1.5% |
+| **Agent B, weighted cost**                 |          160,450 |                  154,071 |   -4.0% |
+| B relative to A                            |            +8%   |                     +2%  |  -6 points |
+| Agent A: files read / project tokens read  |     11 / 1,583   |             11 / 1,818   | flat |
+| Agent B: framework tokens read             |          11,142  |                  10,314  | flat |
 
-- run the same protocol on a fixture of 50,000 tokens or more, with the bug in one of many
-  similar modules,
-- repeat each arm at least five times and report medians and ranges,
-- include a distractor whose wrong fix passes a weak test, so that test quality can differ,
-- measure through the real MCP server.
+A 12.7x larger project moved neither arm's cost. The gap between arms shrank by six points, which is
+inside the noise. **There is no sign that the map's value grows with project size over this range.**
 
-Until then, the honest summary is: **the framework is not free, and on a small project it does
-not pay for itself in tokens. Its value on small projects is verification evidence and
-guardrails; its token value is a scaling claim that remains untested.**
+## 6. Interpretation
 
-## 8. Reproduce
+**Supported by the data**
 
-Everything needed is in the repository: the buggy project (`benchmarks/shipdesk/`), the framework
-layer (`benchmarks/shipdesk-overlay/`), and the scoring check (`benchmarks/acceptance_check.py`).
+1. **Both approaches reach the same correct, well-tested fix**, at both scales, in 8 of 8 trials.
+2. **A grep-capable agent does not pay for repository size.** Its navigation cost follows the number of
+   matches for a distinctive symptom (`free shipping`, `qualifies_for_free_shipping`), and that stayed
+   small even with 20+ matching files.
+3. **The framework's fixed overhead is real and roughly constant** (7,000-12,000 tokens of reading per
+   trial), so it cannot pay for itself on a task the baseline already does in ~1,800 tokens of reading.
+4. **Advisory rules are followed partially.** Rule 1 was violated in 3 of 3 framework trials. The
+   scripts (Rules 2 and 4, and invariants) were run in 3 of 3, presumably because `AGENTS.md` names the
+   command to run.
+
+**Not supported, and now withdrawn or qualified**
+
+- *"A map cuts orientation cost by 95% or more."* That compares against a whole-repository read that no
+  agent performed. It remains a valid statement about a worst-case agent, not about the agents tested.
+- *"Token waste is a major cost of unguided agents."* Not observed at 55,600 tokens with a greppable
+  symptom.
+- *"The map's advantage grows with repository size."* Not observed between 4,400 and 55,600 tokens.
+
+**What the framework did show value for**
+
+- **Evidence, not outcomes.** B's tests were verified by an independent mutation run; A's equally strong
+  tests were unverified until we ran the guard ourselves.
+- **Guard rails that were not needed here.** The invariants (NI-101 to NI-104) protected against
+  plausible wrong fixes such as unifying tier operators or editing the frozen module. No agent tried,
+  so we cannot say whether they would have.
+
+## 7. What would change the picture (untested)
+
+- **A symptom that cannot be grepped.** "Wrong total for some German orders" has no distinctive string.
+  There the baseline must explore, and a map might route it. This benchmark's bug was chosen to be
+  typical, and it is greppable.
+- **Repositories 10x to 100x larger**, where even matches are numerous and `Glob **/*` itself is
+  expensive (here: ~1,700 tokens; at 5,000 files it would be tens of thousands).
+- **Enforcing Rule 1 rather than requesting it.** A Claude Code `PreToolUse` hook could deny `Glob` and
+  `Grep` until the map has been read. That is consistent with the framework's own design principle
+  (advisory rules need a script behind them), and it is untested.
+- **Trimming the overhead:** an agent should run a script with `--help`, not read its source;
+  `CLAUDE.md` and `AGENTS.md` should not both be read; the map should stay under ~3,000 tokens.
+- **More trials and more bug types.** Three trials per arm and one bug do not support statistics.
+
+## 8. Threats to validity
+
+- **Three trials per arm (one in experiment 1).** LLM runs vary; B2 shows how far one run can move a
+  mean. Differences under about 20% are noise here.
+- **One bug, one kind (an off-by-one), one language, one model.** The model is the session default; the
+  harness does not record its exact ID.
+- **We wrote everything:** the fixtures, the map, the invariants, the decoys, and the acceptance tests.
+  The framework layer is a best case. The large fixture is partly template-generated, so many modules
+  are structurally similar, which may make grep results easier to read than in real code.
+- **Cost weights are assumptions.** With other prices, the ranking of B and A by weighted cost could
+  change, though the conclusion "no large difference" is stable across the four accountings we report.
+- **`Read` calls only.** A `cat` inside a shell command is not counted as a file read (A2 read two small
+  files that way; B2 read `CLAUDE.md`, `AGENTS.md`, and the README).
+- **Sequential runs at different moments.** API load may differ between trials, which affects latency.
+- **Agents used file reads, not the MCP protocol.** The server returns the same content.
+- **The boundary operators were added before the runs** and applied identically to all arms (see the
+  operator comparison in section 3).
+
+## 9. Reproduce
+
+Everything is in the repository. The fixtures (`benchmarks/shipdesk/`, `benchmarks/shipdesk-large/`) are
+listed in `.agentignore` because they contain deliberate bugs; `benchmarks/conftest.py` keeps `pytest`
+from collecting them.
 
 ```bash
 WORK=/tmp/bench && mkdir -p $WORK/A $WORK/B
 
-# Agent A: the project only
-cp -r benchmarks/shipdesk/. $WORK/A/
+# Agent A: the project only (use benchmarks/shipdesk for the small experiment)
+cp -r benchmarks/shipdesk-large/. $WORK/A/
 
 # Agent B: the project plus the framework layer
-cp -r benchmarks/shipdesk/. $WORK/B/
-cp -r benchmarks/shipdesk-overlay/. $WORK/B/
+cp -r benchmarks/shipdesk-large/. $WORK/B/
+cp -r benchmarks/shipdesk-large-overlay/. $WORK/B/     # or benchmarks/shipdesk-overlay for the small one
 cp -r scripts mcp $WORK/B/
 cp .agentignore $WORK/B/
 cp templates/python/tests/test_maps.py $WORK/B/tests/
@@ -223,21 +279,19 @@ cp templates/python/tests/test_maps.py $WORK/B/tests/
 (cd $WORK/B && python scripts/init_mapping.py --check && python scripts/verify_invariants.py && python -m pytest -q)
 ```
 
-Give each agent the prompt in section 2 in a fresh session, pointing it at its own directory, and
-record tokens, tool calls, and latency from your agent tool. Then score each result:
+Give each agent the prompt from section 2 in a fresh session pointed at its own directory. Then:
 
 ```bash
-# Correctness (must pass 8/8)
+# Correctness (8/8 expected)
 BENCH_PROJECT=$WORK/A python -m pytest benchmarks/acceptance_check.py -q
 
 # Test strength, from inside the agent's directory
-cd $WORK/A
-python /path/to/repo/scripts/mutation_guard.py --test tests \
-  --target shipdesk/shipping.py:qualifies_for_free_shipping \
-  --max-mutants 0 --min-score 0
-# v1.0.0 operator set for comparison:
-#   --operators compare,arith,bool,not,if,return,const
+(cd $WORK/A && python /path/to/repo/scripts/mutation_guard.py --test tests \
+  --target shipdesk/shipping.py:qualifies_for_free_shipping --max-mutants 0 --min-score 0)
+
+# Tokens, tool calls, and files read, from the transcripts
+python benchmarks/analyze_transcripts.py --dir <session>/subagents --sequence AGENT_ID [AGENT_ID ...]
 ```
 
-`benchmarks/acceptance_check.py` is deliberately not named `test_*.py`, so a plain `pytest` run
-from the repository root does not collect it (it fails on the unfixed fixture by design).
+`benchmarks/acceptance_check.py` is deliberately not named `test_*.py`, so it is not collected; it fails
+on the unfixed fixtures by design.

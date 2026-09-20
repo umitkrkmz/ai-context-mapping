@@ -31,7 +31,7 @@ context, encode a constraint, or verify a change does not belong here.
 | Failure mode                | What it looks like                                                     |
 | --------------------------- | ---------------------------------------------------------------------- |
 | **Context drift**           | The agent invents structure, edits the wrong file, or uses a stale API. |
-| **Token waste**             | Half the window is spent grepping and reading files just to orient.     |
+| **Token waste**             | Context is spent listing, grepping, and reading files just to orient. (Small in our benchmarks; see [results](docs/benchmark-results.md).) |
 | **Destructive refactoring** | A "redundant" guard is deleted; a bug you fixed last month comes back.  |
 
 ## The idea
@@ -62,7 +62,7 @@ flowchart LR
     A[Agent session] --> B[AGENTS.md / CLAUDE.md<br/>Copilot + Cursor rules]
     B --> C{{MCP server<br/>read_project_map<br/>get_file_purpose}}
     C --> D[maps/project-map.md]
-    D --> E[Targeted file reads<br/>about 2% of the repo]
+    D --> E[Targeted file reads<br/>only the files that matter]
     D --> F[Negative invariants<br/>+ decision records]
     E --> G[Code change]
     F --> G
@@ -159,6 +159,23 @@ From now on, adding a file without describing it in the map fails the build.
 | Claude Code hooks                   | Violations left in place          | `.claude/settings.json`, `.claude/hooks/`      | Claude Code     |
 | Persona cards                       | Unfocused agents                  | `personas/*.md`                                | Agent session   |
 | Stack templates                     | Slow adoption                     | `templates/python`, `typescript`, `generic`    | Copy and go     |
+
+## Does it work? Honest results
+
+We ran A/B experiments: the same agent, model, and bug, with and without the framework, on a
+4,400-token and a 55,600-token project (8 agent runs, measured from transcripts).
+
+| Finding | Result |
+| ------- | ------ |
+| Correct fix, strong regression test | **8 of 8** runs, in both arms |
+| Token savings from the project map | **None measured.** Median cost +2% (large project), spread larger than the difference |
+| Did unguided agents scan the repository? | **No.** They grepped and read ~11 files, and their cost stayed flat as the project grew 12.7x |
+| Did agents follow "read the map first"? | **0 of 3.** Advisory rules are followed only partly |
+| What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
+
+So the evidence supports the framework as **verification and guardrails**, not (yet) as a token saver.
+Larger repositories and tasks that cannot be grepped remain untested. Full data, method, and limits:
+[docs/benchmark-results.md](docs/benchmark-results.md).
 
 ## The tools
 

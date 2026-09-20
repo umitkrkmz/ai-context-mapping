@@ -28,6 +28,7 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 | `sh scripts/install_hooks.sh`                                   | `scripts/install_hooks.sh`         | Install the pre-commit hook                        | 0 ok, 1 error                       |
 | `sh scripts/install_hooks.sh --uninstall`                       | `scripts/install_hooks.sh`         | Remove the managed hook                            | 0                                   |
 | `python -m pytest -q tests`                                     | `tests/test_maps.py`               | Run the self-guarding tests                        | pytest codes                        |
+| `python benchmarks/analyze_transcripts.py --dir D AGENT_ID` | `benchmarks/analyze_transcripts.py` | Tool calls, files read, tokens, and weighted cost from agent transcripts | 0 ok, 2 transcript not found |
 | `python mcp/context_server.py --check`                          | `mcp/context_server.py`            | Validate the map without a client                  | 0 ok, 1 invalid                     |
 | `python mcp/context_server.py --call TOOL --arg K=V`            | `mcp/context_server.py`            | Run one MCP tool from the shell                    | 0 ok, 1 tool error                  |
 

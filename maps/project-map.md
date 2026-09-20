@@ -53,17 +53,19 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `CLAUDE.md` | manifesto | Byte-identical mirror of AGENTS.md for Claude Code. | NI-008 |
 | `LICENSE` | legal | MIT license. | - |
 | `README.md` | docs | Landing page: diagrams, 3-minute quickstart, feature matrix, tools, contributing. | - |
-| `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: fixture project, framework layer, scoring check. | - |
+| `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: two fixtures (agent-ignored), framework layers, scoring, analysis. | - |
 | `benchmarks/acceptance_check.py` | test | Hidden scoring check: exactly 50.00 must ship free. Not named test_*.py, so pytest skips it. | - |
+| `benchmarks/analyze_transcripts.py` | test | Derives tool calls, files read, tokens by type, and weighted cost from Claude Code agent transcripts. | - |
+| `benchmarks/conftest.py` | test | Tells pytest to skip the benchmark fixtures when run from the repository root. | - |
+| `benchmarks/shipdesk-large-overlay/**` | test | Framework layer for the large benchmark: AGENTS.md, CLAUDE.md, a 147-row map, and four invariants. | - |
 | `benchmarks/shipdesk-overlay/**` | test | Framework layer for benchmark Agent B: AGENTS.md, CLAUDE.md, a hand-written map, and two invariants. | - |
-| `benchmarks/shipdesk/**` | test | ShipDesk fixture: a checkout library with a planted off-by-one bug in shipping.py (31 files). | - |
 | `decisions/` | decision | Machine-readable architecture decision records. | ADR-0001 |
 | `decisions/0001-no-database-file-store.yaml` | decision | ADR-0001: state lives in plain files; forbids databases, ORMs, and services. | ADR-0001 |
 | `decisions/README.md` | decision | Schema, YAML subset, and usage rules for decision records. | - |
 | `docs/` | docs | Long-form documentation. | - |
 | `docs/01-core-principles.md` | docs | Rationale: token diet, file-based stores, and the guardrail layers. | - |
 | `docs/02-token-diet-calculator.md` | docs | Token and cost model: whole-repo scanning vs map-guided reads, with a measuring script. | - |
-| `docs/benchmark-results.md` | docs | Empirical A/B benchmark: baseline vs framework agent on one regression; honest results and limits. | - |
+| `docs/benchmark-results.md` | docs | Two A/B experiments (4.4k and 55.6k-token projects): no measured token savings; correctness parity; limits. | - |
 | `docs/case-study-mediagrab.md` | docs | Case study of the MediaGrab architecture: zero DB, 100+ tests, map-guided AI work. | - |
 | `invariants/` | invariant | Negative invariants. | - |
 | `invariants/negative-invariants.md` | invariant | Defines negative invariants, templates, and the live machine-checked NI-* rules. | NI-001, NI-002, NI-003, NI-004, NI-005, NI-006, NI-007, NI-009 |

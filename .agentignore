@@ -163,3 +163,7 @@ secrets/
 
 # --- Claude Code local, per-user state ---------------------------------------------------
 .claude/settings.local.json
+
+# --- Benchmark fixtures: deliberately buggy projects (see docs/benchmark-results.md) ---------
+benchmarks/shipdesk/
+benchmarks/shipdesk-large/

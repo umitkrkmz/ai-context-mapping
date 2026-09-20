@@ -1,0 +1,1262 @@
+[
+ {
+  "return_id": "RET00001",
+  "order_id": "ORD00004",
+  "reason": "wrong item",
+  "days_since_delivery": 5,
+  "tenure_days": 29,
+  "paid_cents": 2111,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00002",
+  "order_id": "ORD00007",
+  "reason": "changed mind",
+  "days_since_delivery": 10,
+  "tenure_days": 58,
+  "paid_cents": 2722,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00003",
+  "order_id": "ORD00010",
+  "reason": "late delivery",
+  "days_since_delivery": 15,
+  "tenure_days": 87,
+  "paid_cents": 3333,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00004",
+  "order_id": "ORD00013",
+  "reason": "not as described",
+  "days_since_delivery": 20,
+  "tenure_days": 116,
+  "paid_cents": 3944,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00005",
+  "order_id": "ORD00016",
+  "reason": "duplicate order",
+  "days_since_delivery": 25,
+  "tenure_days": 145,
+  "paid_cents": 4555,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00006",
+  "order_id": "ORD00019",
+  "reason": "damaged",
+  "days_since_delivery": 30,
+  "tenure_days": 174,
+  "paid_cents": 5166,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00007",
+  "order_id": "ORD00022",
+  "reason": "wrong item",
+  "days_since_delivery": 35,
+  "tenure_days": 203,
+  "paid_cents": 5777,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00008",
+  "order_id": "ORD00025",
+  "reason": "changed mind",
+  "days_since_delivery": 40,
+  "tenure_days": 232,
+  "paid_cents": 6388,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00009",
+  "order_id": "ORD00028",
+  "reason": "late delivery",
+  "days_since_delivery": 45,
+  "tenure_days": 261,
+  "paid_cents": 6999,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00010",
+  "order_id": "ORD00031",
+  "reason": "not as described",
+  "days_since_delivery": 0,
+  "tenure_days": 290,
+  "paid_cents": 7610,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00011",
+  "order_id": "ORD00034",
+  "reason": "duplicate order",
+  "days_since_delivery": 5,
+  "tenure_days": 319,
+  "paid_cents": 8221,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00012",
+  "order_id": "ORD00037",
+  "reason": "damaged",
+  "days_since_delivery": 10,
+  "tenure_days": 348,
+  "paid_cents": 8832,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00013",
+  "order_id": "ORD00040",
+  "reason": "wrong item",
+  "days_since_delivery": 15,
+  "tenure_days": 377,
+  "paid_cents": 9443,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00014",
+  "order_id": "ORD00043",
+  "reason": "changed mind",
+  "days_since_delivery": 20,
+  "tenure_days": 406,
+  "paid_cents": 10054,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00015",
+  "order_id": "ORD00046",
+  "reason": "late delivery",
+  "days_since_delivery": 25,
+  "tenure_days": 435,
+  "paid_cents": 10665,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00016",
+  "order_id": "ORD00049",
+  "reason": "not as described",
+  "days_since_delivery": 30,
+  "tenure_days": 464,
+  "paid_cents": 1776,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00017",
+  "order_id": "ORD00052",
+  "reason": "duplicate order",
+  "days_since_delivery": 35,
+  "tenure_days": 493,
+  "paid_cents": 2387,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00018",
+  "order_id": "ORD00055",
+  "reason": "damaged",
+  "days_since_delivery": 40,
+  "tenure_days": 522,
+  "paid_cents": 2998,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00019",
+  "order_id": "ORD00058",
+  "reason": "wrong item",
+  "days_since_delivery": 45,
+  "tenure_days": 551,
+  "paid_cents": 3609,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00020",
+  "order_id": "ORD00061",
+  "reason": "changed mind",
+  "days_since_delivery": 0,
+  "tenure_days": 580,
+  "paid_cents": 4220,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00021",
+  "order_id": "ORD00064",
+  "reason": "late delivery",
+  "days_since_delivery": 5,
+  "tenure_days": 609,
+  "paid_cents": 4831,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00022",
+  "order_id": "ORD00067",
+  "reason": "not as described",
+  "days_since_delivery": 10,
+  "tenure_days": 638,
+  "paid_cents": 5442,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00023",
+  "order_id": "ORD00070",
+  "reason": "duplicate order",
+  "days_since_delivery": 15,
+  "tenure_days": 667,
+  "paid_cents": 6053,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00024",
+  "order_id": "ORD00073",
+  "reason": "damaged",
+  "days_since_delivery": 20,
+  "tenure_days": 696,
+  "paid_cents": 6664,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00025",
+  "order_id": "ORD00076",
+  "reason": "wrong item",
+  "days_since_delivery": 25,
+  "tenure_days": 725,
+  "paid_cents": 7275,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00026",
+  "order_id": "ORD00079",
+  "reason": "changed mind",
+  "days_since_delivery": 30,
+  "tenure_days": 754,
+  "paid_cents": 7886,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00027",
+  "order_id": "ORD00082",
+  "reason": "late delivery",
+  "days_since_delivery": 35,
+  "tenure_days": 783,
+  "paid_cents": 8497,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00028",
+  "order_id": "ORD00085",
+  "reason": "not as described",
+  "days_since_delivery": 40,
+  "tenure_days": 812,
+  "paid_cents": 9108,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00029",
+  "order_id": "ORD00088",
+  "reason": "duplicate order",
+  "days_since_delivery": 45,
+  "tenure_days": 841,
+  "paid_cents": 9719,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00030",
+  "order_id": "ORD00091",
+  "reason": "damaged",
+  "days_since_delivery": 0,
+  "tenure_days": 870,
+  "paid_cents": 10330,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00031",
+  "order_id": "ORD00094",
+  "reason": "wrong item",
+  "days_since_delivery": 5,
+  "tenure_days": 899,
+  "paid_cents": 10941,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00032",
+  "order_id": "ORD00097",
+  "reason": "changed mind",
+  "days_since_delivery": 10,
+  "tenure_days": 928,
+  "paid_cents": 2052,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00033",
+  "order_id": "ORD00100",
+  "reason": "late delivery",
+  "days_since_delivery": 15,
+  "tenure_days": 957,
+  "paid_cents": 2663,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00034",
+  "order_id": "ORD00103",
+  "reason": "not as described",
+  "days_since_delivery": 20,
+  "tenure_days": 986,
+  "paid_cents": 3274,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00035",
+  "order_id": "ORD00106",
+  "reason": "duplicate order",
+  "days_since_delivery": 25,
+  "tenure_days": 1015,
+  "paid_cents": 3885,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00036",
+  "order_id": "ORD00109",
+  "reason": "damaged",
+  "days_since_delivery": 30,
+  "tenure_days": 1044,
+  "paid_cents": 4496,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00037",
+  "order_id": "ORD00112",
+  "reason": "wrong item",
+  "days_since_delivery": 35,
+  "tenure_days": 1073,
+  "paid_cents": 5107,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00038",
+  "order_id": "ORD00115",
+  "reason": "changed mind",
+  "days_since_delivery": 40,
+  "tenure_days": 1102,
+  "paid_cents": 5718,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00039",
+  "order_id": "ORD00118",
+  "reason": "late delivery",
+  "days_since_delivery": 45,
+  "tenure_days": 1131,
+  "paid_cents": 6329,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00040",
+  "order_id": "ORD00001",
+  "reason": "not as described",
+  "days_since_delivery": 0,
+  "tenure_days": 1160,
+  "paid_cents": 6940,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00041",
+  "order_id": "ORD00004",
+  "reason": "duplicate order",
+  "days_since_delivery": 5,
+  "tenure_days": 1189,
+  "paid_cents": 7551,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00042",
+  "order_id": "ORD00007",
+  "reason": "damaged",
+  "days_since_delivery": 10,
+  "tenure_days": 1218,
+  "paid_cents": 8162,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00043",
+  "order_id": "ORD00010",
+  "reason": "wrong item",
+  "days_since_delivery": 15,
+  "tenure_days": 1247,
+  "paid_cents": 8773,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00044",
+  "order_id": "ORD00013",
+  "reason": "changed mind",
+  "days_since_delivery": 20,
+  "tenure_days": 1276,
+  "paid_cents": 9384,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00045",
+  "order_id": "ORD00016",
+  "reason": "late delivery",
+  "days_since_delivery": 25,
+  "tenure_days": 5,
+  "paid_cents": 9995,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00046",
+  "order_id": "ORD00019",
+  "reason": "not as described",
+  "days_since_delivery": 30,
+  "tenure_days": 34,
+  "paid_cents": 10606,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00047",
+  "order_id": "ORD00022",
+  "reason": "duplicate order",
+  "days_since_delivery": 35,
+  "tenure_days": 63,
+  "paid_cents": 1717,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00048",
+  "order_id": "ORD00025",
+  "reason": "damaged",
+  "days_since_delivery": 40,
+  "tenure_days": 92,
+  "paid_cents": 2328,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00049",
+  "order_id": "ORD00028",
+  "reason": "wrong item",
+  "days_since_delivery": 45,
+  "tenure_days": 121,
+  "paid_cents": 2939,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00050",
+  "order_id": "ORD00031",
+  "reason": "changed mind",
+  "days_since_delivery": 0,
+  "tenure_days": 150,
+  "paid_cents": 3550,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00051",
+  "order_id": "ORD00034",
+  "reason": "late delivery",
+  "days_since_delivery": 5,
+  "tenure_days": 179,
+  "paid_cents": 4161,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00052",
+  "order_id": "ORD00037",
+  "reason": "not as described",
+  "days_since_delivery": 10,
+  "tenure_days": 208,
+  "paid_cents": 4772,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00053",
+  "order_id": "ORD00040",
+  "reason": "duplicate order",
+  "days_since_delivery": 15,
+  "tenure_days": 237,
+  "paid_cents": 5383,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00054",
+  "order_id": "ORD00043",
+  "reason": "damaged",
+  "days_since_delivery": 20,
+  "tenure_days": 266,
+  "paid_cents": 5994,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00055",
+  "order_id": "ORD00046",
+  "reason": "wrong item",
+  "days_since_delivery": 25,
+  "tenure_days": 295,
+  "paid_cents": 6605,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00056",
+  "order_id": "ORD00049",
+  "reason": "changed mind",
+  "days_since_delivery": 30,
+  "tenure_days": 324,
+  "paid_cents": 7216,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00057",
+  "order_id": "ORD00052",
+  "reason": "late delivery",
+  "days_since_delivery": 35,
+  "tenure_days": 353,
+  "paid_cents": 7827,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00058",
+  "order_id": "ORD00055",
+  "reason": "not as described",
+  "days_since_delivery": 40,
+  "tenure_days": 382,
+  "paid_cents": 8438,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00059",
+  "order_id": "ORD00058",
+  "reason": "duplicate order",
+  "days_since_delivery": 45,
+  "tenure_days": 411,
+  "paid_cents": 9049,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00060",
+  "order_id": "ORD00061",
+  "reason": "damaged",
+  "days_since_delivery": 0,
+  "tenure_days": 440,
+  "paid_cents": 9660,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00061",
+  "order_id": "ORD00064",
+  "reason": "wrong item",
+  "days_since_delivery": 5,
+  "tenure_days": 469,
+  "paid_cents": 10271,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00062",
+  "order_id": "ORD00067",
+  "reason": "changed mind",
+  "days_since_delivery": 10,
+  "tenure_days": 498,
+  "paid_cents": 10882,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00063",
+  "order_id": "ORD00070",
+  "reason": "late delivery",
+  "days_since_delivery": 15,
+  "tenure_days": 527,
+  "paid_cents": 1993,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00064",
+  "order_id": "ORD00073",
+  "reason": "not as described",
+  "days_since_delivery": 20,
+  "tenure_days": 556,
+  "paid_cents": 2604,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00065",
+  "order_id": "ORD00076",
+  "reason": "duplicate order",
+  "days_since_delivery": 25,
+  "tenure_days": 585,
+  "paid_cents": 3215,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00066",
+  "order_id": "ORD00079",
+  "reason": "damaged",
+  "days_since_delivery": 30,
+  "tenure_days": 614,
+  "paid_cents": 3826,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00067",
+  "order_id": "ORD00082",
+  "reason": "wrong item",
+  "days_since_delivery": 35,
+  "tenure_days": 643,
+  "paid_cents": 4437,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00068",
+  "order_id": "ORD00085",
+  "reason": "changed mind",
+  "days_since_delivery": 40,
+  "tenure_days": 672,
+  "paid_cents": 5048,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00069",
+  "order_id": "ORD00088",
+  "reason": "late delivery",
+  "days_since_delivery": 45,
+  "tenure_days": 701,
+  "paid_cents": 5659,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00070",
+  "order_id": "ORD00091",
+  "reason": "not as described",
+  "days_since_delivery": 0,
+  "tenure_days": 730,
+  "paid_cents": 6270,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00071",
+  "order_id": "ORD00094",
+  "reason": "duplicate order",
+  "days_since_delivery": 5,
+  "tenure_days": 759,
+  "paid_cents": 6881,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00072",
+  "order_id": "ORD00097",
+  "reason": "damaged",
+  "days_since_delivery": 10,
+  "tenure_days": 788,
+  "paid_cents": 7492,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00073",
+  "order_id": "ORD00100",
+  "reason": "wrong item",
+  "days_since_delivery": 15,
+  "tenure_days": 817,
+  "paid_cents": 8103,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00074",
+  "order_id": "ORD00103",
+  "reason": "changed mind",
+  "days_since_delivery": 20,
+  "tenure_days": 846,
+  "paid_cents": 8714,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00075",
+  "order_id": "ORD00106",
+  "reason": "late delivery",
+  "days_since_delivery": 25,
+  "tenure_days": 875,
+  "paid_cents": 9325,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00076",
+  "order_id": "ORD00109",
+  "reason": "not as described",
+  "days_since_delivery": 30,
+  "tenure_days": 904,
+  "paid_cents": 9936,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00077",
+  "order_id": "ORD00112",
+  "reason": "duplicate order",
+  "days_since_delivery": 35,
+  "tenure_days": 933,
+  "paid_cents": 10547,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00078",
+  "order_id": "ORD00115",
+  "reason": "damaged",
+  "days_since_delivery": 40,
+  "tenure_days": 962,
+  "paid_cents": 1658,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00079",
+  "order_id": "ORD00118",
+  "reason": "wrong item",
+  "days_since_delivery": 45,
+  "tenure_days": 991,
+  "paid_cents": 2269,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00080",
+  "order_id": "ORD00001",
+  "reason": "changed mind",
+  "days_since_delivery": 0,
+  "tenure_days": 1020,
+  "paid_cents": 2880,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00081",
+  "order_id": "ORD00004",
+  "reason": "late delivery",
+  "days_since_delivery": 5,
+  "tenure_days": 1049,
+  "paid_cents": 3491,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00082",
+  "order_id": "ORD00007",
+  "reason": "not as described",
+  "days_since_delivery": 10,
+  "tenure_days": 1078,
+  "paid_cents": 4102,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00083",
+  "order_id": "ORD00010",
+  "reason": "duplicate order",
+  "days_since_delivery": 15,
+  "tenure_days": 1107,
+  "paid_cents": 4713,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00084",
+  "order_id": "ORD00013",
+  "reason": "damaged",
+  "days_since_delivery": 20,
+  "tenure_days": 1136,
+  "paid_cents": 5324,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00085",
+  "order_id": "ORD00016",
+  "reason": "wrong item",
+  "days_since_delivery": 25,
+  "tenure_days": 1165,
+  "paid_cents": 5935,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00086",
+  "order_id": "ORD00019",
+  "reason": "changed mind",
+  "days_since_delivery": 30,
+  "tenure_days": 1194,
+  "paid_cents": 6546,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00087",
+  "order_id": "ORD00022",
+  "reason": "late delivery",
+  "days_since_delivery": 35,
+  "tenure_days": 1223,
+  "paid_cents": 7157,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00088",
+  "order_id": "ORD00025",
+  "reason": "not as described",
+  "days_since_delivery": 40,
+  "tenure_days": 1252,
+  "paid_cents": 7768,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00089",
+  "order_id": "ORD00028",
+  "reason": "duplicate order",
+  "days_since_delivery": 45,
+  "tenure_days": 1281,
+  "paid_cents": 8379,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00090",
+  "order_id": "ORD00031",
+  "reason": "damaged",
+  "days_since_delivery": 0,
+  "tenure_days": 10,
+  "paid_cents": 8990,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00091",
+  "order_id": "ORD00034",
+  "reason": "wrong item",
+  "days_since_delivery": 5,
+  "tenure_days": 39,
+  "paid_cents": 9601,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00092",
+  "order_id": "ORD00037",
+  "reason": "changed mind",
+  "days_since_delivery": 10,
+  "tenure_days": 68,
+  "paid_cents": 10212,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00093",
+  "order_id": "ORD00040",
+  "reason": "late delivery",
+  "days_since_delivery": 15,
+  "tenure_days": 97,
+  "paid_cents": 10823,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00094",
+  "order_id": "ORD00043",
+  "reason": "not as described",
+  "days_since_delivery": 20,
+  "tenure_days": 126,
+  "paid_cents": 1934,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00095",
+  "order_id": "ORD00046",
+  "reason": "duplicate order",
+  "days_since_delivery": 25,
+  "tenure_days": 155,
+  "paid_cents": 2545,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00096",
+  "order_id": "ORD00049",
+  "reason": "damaged",
+  "days_since_delivery": 30,
+  "tenure_days": 184,
+  "paid_cents": 3156,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00097",
+  "order_id": "ORD00052",
+  "reason": "wrong item",
+  "days_since_delivery": 35,
+  "tenure_days": 213,
+  "paid_cents": 3767,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00098",
+  "order_id": "ORD00055",
+  "reason": "changed mind",
+  "days_since_delivery": 40,
+  "tenure_days": 242,
+  "paid_cents": 4378,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00099",
+  "order_id": "ORD00058",
+  "reason": "late delivery",
+  "days_since_delivery": 45,
+  "tenure_days": 271,
+  "paid_cents": 4989,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00100",
+  "order_id": "ORD00061",
+  "reason": "not as described",
+  "days_since_delivery": 0,
+  "tenure_days": 300,
+  "paid_cents": 5600,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00101",
+  "order_id": "ORD00064",
+  "reason": "duplicate order",
+  "days_since_delivery": 5,
+  "tenure_days": 329,
+  "paid_cents": 6211,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00102",
+  "order_id": "ORD00067",
+  "reason": "damaged",
+  "days_since_delivery": 10,
+  "tenure_days": 358,
+  "paid_cents": 6822,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00103",
+  "order_id": "ORD00070",
+  "reason": "wrong item",
+  "days_since_delivery": 15,
+  "tenure_days": 387,
+  "paid_cents": 7433,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00104",
+  "order_id": "ORD00073",
+  "reason": "changed mind",
+  "days_since_delivery": 20,
+  "tenure_days": 416,
+  "paid_cents": 8044,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00105",
+  "order_id": "ORD00076",
+  "reason": "late delivery",
+  "days_since_delivery": 25,
+  "tenure_days": 445,
+  "paid_cents": 8655,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00106",
+  "order_id": "ORD00079",
+  "reason": "not as described",
+  "days_since_delivery": 30,
+  "tenure_days": 474,
+  "paid_cents": 9266,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00107",
+  "order_id": "ORD00082",
+  "reason": "duplicate order",
+  "days_since_delivery": 35,
+  "tenure_days": 503,
+  "paid_cents": 9877,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00108",
+  "order_id": "ORD00085",
+  "reason": "damaged",
+  "days_since_delivery": 40,
+  "tenure_days": 532,
+  "paid_cents": 10488,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00109",
+  "order_id": "ORD00088",
+  "reason": "wrong item",
+  "days_since_delivery": 45,
+  "tenure_days": 561,
+  "paid_cents": 1599,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00110",
+  "order_id": "ORD00091",
+  "reason": "changed mind",
+  "days_since_delivery": 0,
+  "tenure_days": 590,
+  "paid_cents": 2210,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00111",
+  "order_id": "ORD00094",
+  "reason": "late delivery",
+  "days_since_delivery": 5,
+  "tenure_days": 619,
+  "paid_cents": 2821,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00112",
+  "order_id": "ORD00097",
+  "reason": "not as described",
+  "days_since_delivery": 10,
+  "tenure_days": 648,
+  "paid_cents": 3432,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00113",
+  "order_id": "ORD00100",
+  "reason": "duplicate order",
+  "days_since_delivery": 15,
+  "tenure_days": 677,
+  "paid_cents": 4043,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00114",
+  "order_id": "ORD00103",
+  "reason": "damaged",
+  "days_since_delivery": 20,
+  "tenure_days": 706,
+  "paid_cents": 4654,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00115",
+  "order_id": "ORD00106",
+  "reason": "wrong item",
+  "days_since_delivery": 25,
+  "tenure_days": 735,
+  "paid_cents": 5265,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00116",
+  "order_id": "ORD00109",
+  "reason": "changed mind",
+  "days_since_delivery": 30,
+  "tenure_days": 764,
+  "paid_cents": 5876,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00117",
+  "order_id": "ORD00112",
+  "reason": "late delivery",
+  "days_since_delivery": 35,
+  "tenure_days": 793,
+  "paid_cents": 6487,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00118",
+  "order_id": "ORD00115",
+  "reason": "not as described",
+  "days_since_delivery": 40,
+  "tenure_days": 822,
+  "paid_cents": 7098,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00119",
+  "order_id": "ORD00118",
+  "reason": "duplicate order",
+  "days_since_delivery": 45,
+  "tenure_days": 851,
+  "paid_cents": 7709,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00120",
+  "order_id": "ORD00001",
+  "reason": "damaged",
+  "days_since_delivery": 0,
+  "tenure_days": 880,
+  "paid_cents": 8320,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00121",
+  "order_id": "ORD00004",
+  "reason": "wrong item",
+  "days_since_delivery": 5,
+  "tenure_days": 909,
+  "paid_cents": 8931,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00122",
+  "order_id": "ORD00007",
+  "reason": "changed mind",
+  "days_since_delivery": 10,
+  "tenure_days": 938,
+  "paid_cents": 9542,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00123",
+  "order_id": "ORD00010",
+  "reason": "late delivery",
+  "days_since_delivery": 15,
+  "tenure_days": 967,
+  "paid_cents": 10153,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00124",
+  "order_id": "ORD00013",
+  "reason": "not as described",
+  "days_since_delivery": 20,
+  "tenure_days": 996,
+  "paid_cents": 10764,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00125",
+  "order_id": "ORD00016",
+  "reason": "duplicate order",
+  "days_since_delivery": 25,
+  "tenure_days": 1025,
+  "paid_cents": 1875,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00126",
+  "order_id": "ORD00019",
+  "reason": "damaged",
+  "days_since_delivery": 30,
+  "tenure_days": 1054,
+  "paid_cents": 2486,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00127",
+  "order_id": "ORD00022",
+  "reason": "wrong item",
+  "days_since_delivery": 35,
+  "tenure_days": 1083,
+  "paid_cents": 3097,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00128",
+  "order_id": "ORD00025",
+  "reason": "changed mind",
+  "days_since_delivery": 40,
+  "tenure_days": 1112,
+  "paid_cents": 3708,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00129",
+  "order_id": "ORD00028",
+  "reason": "late delivery",
+  "days_since_delivery": 45,
+  "tenure_days": 1141,
+  "paid_cents": 4319,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00130",
+  "order_id": "ORD00031",
+  "reason": "not as described",
+  "days_since_delivery": 0,
+  "tenure_days": 1170,
+  "paid_cents": 4930,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00131",
+  "order_id": "ORD00034",
+  "reason": "duplicate order",
+  "days_since_delivery": 5,
+  "tenure_days": 1199,
+  "paid_cents": 5541,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00132",
+  "order_id": "ORD00037",
+  "reason": "damaged",
+  "days_since_delivery": 10,
+  "tenure_days": 1228,
+  "paid_cents": 6152,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00133",
+  "order_id": "ORD00040",
+  "reason": "wrong item",
+  "days_since_delivery": 15,
+  "tenure_days": 1257,
+  "paid_cents": 6763,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00134",
+  "order_id": "ORD00043",
+  "reason": "changed mind",
+  "days_since_delivery": 20,
+  "tenure_days": 1286,
+  "paid_cents": 7374,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00135",
+  "order_id": "ORD00046",
+  "reason": "late delivery",
+  "days_since_delivery": 25,
+  "tenure_days": 15,
+  "paid_cents": 7985,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00136",
+  "order_id": "ORD00049",
+  "reason": "not as described",
+  "days_since_delivery": 30,
+  "tenure_days": 44,
+  "paid_cents": 8596,
+  "status": "requested"
+ },
+ {
+  "return_id": "RET00137",
+  "order_id": "ORD00052",
+  "reason": "duplicate order",
+  "days_since_delivery": 35,
+  "tenure_days": 73,
+  "paid_cents": 9207,
+  "status": "approved"
+ },
+ {
+  "return_id": "RET00138",
+  "order_id": "ORD00055",
+  "reason": "damaged",
+  "days_since_delivery": 40,
+  "tenure_days": 102,
+  "paid_cents": 9818,
+  "status": "received"
+ },
+ {
+  "return_id": "RET00139",
+  "order_id": "ORD00058",
+  "reason": "wrong item",
+  "days_since_delivery": 45,
+  "tenure_days": 131,
+  "paid_cents": 10429,
+  "status": "refunded"
+ },
+ {
+  "return_id": "RET00140",
+  "order_id": "ORD00061",
+  "reason": "changed mind",
+  "days_since_delivery": 0,
+  "tenure_days": 160,
+  "paid_cents": 1540,
+  "status": "requested"
+ }
+]

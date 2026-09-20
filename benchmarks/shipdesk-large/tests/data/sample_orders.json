@@ -1,0 +1,1442 @@
+[
+ {
+  "order_id": "ORD00001",
+  "date": "2026-02-02",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 1273,
+  "shipping_cents": 599,
+  "total_cents": 1872,
+  "lines": {
+   "SEED-0008": 2
+  }
+ },
+ {
+  "order_id": "ORD00002",
+  "date": "2026-03-03",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 1646,
+  "shipping_cents": 599,
+  "total_cents": 2245,
+  "lines": {
+   "SEED-0015": 3
+  }
+ },
+ {
+  "order_id": "ORD00003",
+  "date": "2026-04-04",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 2019,
+  "shipping_cents": 599,
+  "total_cents": 2618,
+  "lines": {
+   "SEED-0022": 1
+  }
+ },
+ {
+  "order_id": "ORD00004",
+  "date": "2026-05-05",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 2392,
+  "shipping_cents": 599,
+  "total_cents": 2991,
+  "lines": {
+   "SEED-0029": 2
+  }
+ },
+ {
+  "order_id": "ORD00005",
+  "date": "2026-06-06",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 2765,
+  "shipping_cents": 599,
+  "total_cents": 3364,
+  "lines": {
+   "SEED-0036": 3
+  }
+ },
+ {
+  "order_id": "ORD00006",
+  "date": "2026-01-07",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 3138,
+  "shipping_cents": 599,
+  "total_cents": 3737,
+  "lines": {
+   "SEED-0043": 1
+  }
+ },
+ {
+  "order_id": "ORD00007",
+  "date": "2026-02-08",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 3511,
+  "shipping_cents": 599,
+  "total_cents": 4110,
+  "lines": {
+   "SEED-0050": 2
+  }
+ },
+ {
+  "order_id": "ORD00008",
+  "date": "2026-03-09",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 3884,
+  "shipping_cents": 599,
+  "total_cents": 4483,
+  "lines": {
+   "SEED-0057": 3
+  }
+ },
+ {
+  "order_id": "ORD00009",
+  "date": "2026-04-10",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 4257,
+  "shipping_cents": 599,
+  "total_cents": 4856,
+  "lines": {
+   "SEED-0064": 1
+  }
+ },
+ {
+  "order_id": "ORD00010",
+  "date": "2026-05-11",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 4630,
+  "shipping_cents": 599,
+  "total_cents": 5229,
+  "lines": {
+   "SEED-0071": 2
+  }
+ },
+ {
+  "order_id": "ORD00011",
+  "date": "2026-06-12",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 5003,
+  "shipping_cents": 0,
+  "total_cents": 5003,
+  "lines": {
+   "SEED-0078": 3
+  }
+ },
+ {
+  "order_id": "ORD00012",
+  "date": "2026-01-13",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 5376,
+  "shipping_cents": 0,
+  "total_cents": 5376,
+  "lines": {
+   "SEED-0085": 1
+  }
+ },
+ {
+  "order_id": "ORD00013",
+  "date": "2026-02-14",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 5749,
+  "shipping_cents": 0,
+  "total_cents": 5749,
+  "lines": {
+   "SEED-0092": 2
+  }
+ },
+ {
+  "order_id": "ORD00014",
+  "date": "2026-03-15",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 6122,
+  "shipping_cents": 0,
+  "total_cents": 6122,
+  "lines": {
+   "SEED-0099": 3
+  }
+ },
+ {
+  "order_id": "ORD00015",
+  "date": "2026-04-16",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 6495,
+  "shipping_cents": 0,
+  "total_cents": 6495,
+  "lines": {
+   "SEED-0006": 1
+  }
+ },
+ {
+  "order_id": "ORD00016",
+  "date": "2026-05-17",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 6868,
+  "shipping_cents": 0,
+  "total_cents": 6868,
+  "lines": {
+   "SEED-0013": 2
+  }
+ },
+ {
+  "order_id": "ORD00017",
+  "date": "2026-06-18",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 7241,
+  "shipping_cents": 0,
+  "total_cents": 7241,
+  "lines": {
+   "SEED-0020": 3
+  }
+ },
+ {
+  "order_id": "ORD00018",
+  "date": "2026-01-19",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 7614,
+  "shipping_cents": 0,
+  "total_cents": 7614,
+  "lines": {
+   "SEED-0027": 1
+  }
+ },
+ {
+  "order_id": "ORD00019",
+  "date": "2026-02-20",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 7987,
+  "shipping_cents": 0,
+  "total_cents": 7987,
+  "lines": {
+   "SEED-0034": 2
+  }
+ },
+ {
+  "order_id": "ORD00020",
+  "date": "2026-03-21",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 8360,
+  "shipping_cents": 0,
+  "total_cents": 8360,
+  "lines": {
+   "SEED-0041": 3
+  }
+ },
+ {
+  "order_id": "ORD00021",
+  "date": "2026-04-22",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 8733,
+  "shipping_cents": 0,
+  "total_cents": 8733,
+  "lines": {
+   "SEED-0048": 1
+  }
+ },
+ {
+  "order_id": "ORD00022",
+  "date": "2026-05-23",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 9106,
+  "shipping_cents": 0,
+  "total_cents": 9106,
+  "lines": {
+   "SEED-0055": 2
+  }
+ },
+ {
+  "order_id": "ORD00023",
+  "date": "2026-06-24",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 9479,
+  "shipping_cents": 0,
+  "total_cents": 9479,
+  "lines": {
+   "SEED-0062": 3
+  }
+ },
+ {
+  "order_id": "ORD00024",
+  "date": "2026-01-25",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 9852,
+  "shipping_cents": 0,
+  "total_cents": 9852,
+  "lines": {
+   "SEED-0069": 1
+  }
+ },
+ {
+  "order_id": "ORD00025",
+  "date": "2026-02-26",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 1225,
+  "shipping_cents": 599,
+  "total_cents": 1824,
+  "lines": {
+   "SEED-0076": 2
+  }
+ },
+ {
+  "order_id": "ORD00026",
+  "date": "2026-03-27",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 1598,
+  "shipping_cents": 599,
+  "total_cents": 2197,
+  "lines": {
+   "SEED-0083": 3
+  }
+ },
+ {
+  "order_id": "ORD00027",
+  "date": "2026-04-28",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 1971,
+  "shipping_cents": 599,
+  "total_cents": 2570,
+  "lines": {
+   "SEED-0090": 1
+  }
+ },
+ {
+  "order_id": "ORD00028",
+  "date": "2026-05-01",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 2344,
+  "shipping_cents": 599,
+  "total_cents": 2943,
+  "lines": {
+   "SEED-0097": 2
+  }
+ },
+ {
+  "order_id": "ORD00029",
+  "date": "2026-06-02",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 2717,
+  "shipping_cents": 599,
+  "total_cents": 3316,
+  "lines": {
+   "SEED-0004": 3
+  }
+ },
+ {
+  "order_id": "ORD00030",
+  "date": "2026-01-03",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 3090,
+  "shipping_cents": 599,
+  "total_cents": 3689,
+  "lines": {
+   "SEED-0011": 1
+  }
+ },
+ {
+  "order_id": "ORD00031",
+  "date": "2026-02-04",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 3463,
+  "shipping_cents": 599,
+  "total_cents": 4062,
+  "lines": {
+   "SEED-0018": 2
+  }
+ },
+ {
+  "order_id": "ORD00032",
+  "date": "2026-03-05",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 3836,
+  "shipping_cents": 599,
+  "total_cents": 4435,
+  "lines": {
+   "SEED-0025": 3
+  }
+ },
+ {
+  "order_id": "ORD00033",
+  "date": "2026-04-06",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 4209,
+  "shipping_cents": 599,
+  "total_cents": 4808,
+  "lines": {
+   "SEED-0032": 1
+  }
+ },
+ {
+  "order_id": "ORD00034",
+  "date": "2026-05-07",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 4582,
+  "shipping_cents": 599,
+  "total_cents": 5181,
+  "lines": {
+   "SEED-0039": 2
+  }
+ },
+ {
+  "order_id": "ORD00035",
+  "date": "2026-06-08",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 4955,
+  "shipping_cents": 599,
+  "total_cents": 5554,
+  "lines": {
+   "SEED-0046": 3
+  }
+ },
+ {
+  "order_id": "ORD00036",
+  "date": "2026-01-09",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 5328,
+  "shipping_cents": 0,
+  "total_cents": 5328,
+  "lines": {
+   "SEED-0053": 1
+  }
+ },
+ {
+  "order_id": "ORD00037",
+  "date": "2026-02-10",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 5701,
+  "shipping_cents": 0,
+  "total_cents": 5701,
+  "lines": {
+   "SEED-0060": 2
+  }
+ },
+ {
+  "order_id": "ORD00038",
+  "date": "2026-03-11",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 6074,
+  "shipping_cents": 0,
+  "total_cents": 6074,
+  "lines": {
+   "SEED-0067": 3
+  }
+ },
+ {
+  "order_id": "ORD00039",
+  "date": "2026-04-12",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 6447,
+  "shipping_cents": 0,
+  "total_cents": 6447,
+  "lines": {
+   "SEED-0074": 1
+  }
+ },
+ {
+  "order_id": "ORD00040",
+  "date": "2026-05-13",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 6820,
+  "shipping_cents": 0,
+  "total_cents": 6820,
+  "lines": {
+   "SEED-0081": 2
+  }
+ },
+ {
+  "order_id": "ORD00041",
+  "date": "2026-06-14",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 7193,
+  "shipping_cents": 0,
+  "total_cents": 7193,
+  "lines": {
+   "SEED-0088": 3
+  }
+ },
+ {
+  "order_id": "ORD00042",
+  "date": "2026-01-15",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 7566,
+  "shipping_cents": 0,
+  "total_cents": 7566,
+  "lines": {
+   "SEED-0095": 1
+  }
+ },
+ {
+  "order_id": "ORD00043",
+  "date": "2026-02-16",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 7939,
+  "shipping_cents": 0,
+  "total_cents": 7939,
+  "lines": {
+   "SEED-0002": 2
+  }
+ },
+ {
+  "order_id": "ORD00044",
+  "date": "2026-03-17",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 8312,
+  "shipping_cents": 0,
+  "total_cents": 8312,
+  "lines": {
+   "SEED-0009": 3
+  }
+ },
+ {
+  "order_id": "ORD00045",
+  "date": "2026-04-18",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 8685,
+  "shipping_cents": 0,
+  "total_cents": 8685,
+  "lines": {
+   "SEED-0016": 1
+  }
+ },
+ {
+  "order_id": "ORD00046",
+  "date": "2026-05-19",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 9058,
+  "shipping_cents": 0,
+  "total_cents": 9058,
+  "lines": {
+   "SEED-0023": 2
+  }
+ },
+ {
+  "order_id": "ORD00047",
+  "date": "2026-06-20",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 9431,
+  "shipping_cents": 0,
+  "total_cents": 9431,
+  "lines": {
+   "SEED-0030": 3
+  }
+ },
+ {
+  "order_id": "ORD00048",
+  "date": "2026-01-21",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 9804,
+  "shipping_cents": 0,
+  "total_cents": 9804,
+  "lines": {
+   "SEED-0037": 1
+  }
+ },
+ {
+  "order_id": "ORD00049",
+  "date": "2026-02-22",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 1177,
+  "shipping_cents": 599,
+  "total_cents": 1776,
+  "lines": {
+   "SEED-0044": 2
+  }
+ },
+ {
+  "order_id": "ORD00050",
+  "date": "2026-03-23",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 1550,
+  "shipping_cents": 599,
+  "total_cents": 2149,
+  "lines": {
+   "SEED-0051": 3
+  }
+ },
+ {
+  "order_id": "ORD00051",
+  "date": "2026-04-24",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 1923,
+  "shipping_cents": 599,
+  "total_cents": 2522,
+  "lines": {
+   "SEED-0058": 1
+  }
+ },
+ {
+  "order_id": "ORD00052",
+  "date": "2026-05-25",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 2296,
+  "shipping_cents": 599,
+  "total_cents": 2895,
+  "lines": {
+   "SEED-0065": 2
+  }
+ },
+ {
+  "order_id": "ORD00053",
+  "date": "2026-06-26",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 2669,
+  "shipping_cents": 599,
+  "total_cents": 3268,
+  "lines": {
+   "SEED-0072": 3
+  }
+ },
+ {
+  "order_id": "ORD00054",
+  "date": "2026-01-27",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 3042,
+  "shipping_cents": 599,
+  "total_cents": 3641,
+  "lines": {
+   "SEED-0079": 1
+  }
+ },
+ {
+  "order_id": "ORD00055",
+  "date": "2026-02-28",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 3415,
+  "shipping_cents": 599,
+  "total_cents": 4014,
+  "lines": {
+   "SEED-0086": 2
+  }
+ },
+ {
+  "order_id": "ORD00056",
+  "date": "2026-03-01",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 3788,
+  "shipping_cents": 599,
+  "total_cents": 4387,
+  "lines": {
+   "SEED-0093": 3
+  }
+ },
+ {
+  "order_id": "ORD00057",
+  "date": "2026-04-02",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 4161,
+  "shipping_cents": 599,
+  "total_cents": 4760,
+  "lines": {
+   "SEED-0100": 1
+  }
+ },
+ {
+  "order_id": "ORD00058",
+  "date": "2026-05-03",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 4534,
+  "shipping_cents": 599,
+  "total_cents": 5133,
+  "lines": {
+   "SEED-0007": 2
+  }
+ },
+ {
+  "order_id": "ORD00059",
+  "date": "2026-06-04",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 4907,
+  "shipping_cents": 599,
+  "total_cents": 5506,
+  "lines": {
+   "SEED-0014": 3
+  }
+ },
+ {
+  "order_id": "ORD00060",
+  "date": "2026-01-05",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 5280,
+  "shipping_cents": 0,
+  "total_cents": 5280,
+  "lines": {
+   "SEED-0021": 1
+  }
+ },
+ {
+  "order_id": "ORD00061",
+  "date": "2026-02-06",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 5653,
+  "shipping_cents": 0,
+  "total_cents": 5653,
+  "lines": {
+   "SEED-0028": 2
+  }
+ },
+ {
+  "order_id": "ORD00062",
+  "date": "2026-03-07",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 6026,
+  "shipping_cents": 0,
+  "total_cents": 6026,
+  "lines": {
+   "SEED-0035": 3
+  }
+ },
+ {
+  "order_id": "ORD00063",
+  "date": "2026-04-08",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 6399,
+  "shipping_cents": 0,
+  "total_cents": 6399,
+  "lines": {
+   "SEED-0042": 1
+  }
+ },
+ {
+  "order_id": "ORD00064",
+  "date": "2026-05-09",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 6772,
+  "shipping_cents": 0,
+  "total_cents": 6772,
+  "lines": {
+   "SEED-0049": 2
+  }
+ },
+ {
+  "order_id": "ORD00065",
+  "date": "2026-06-10",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 7145,
+  "shipping_cents": 0,
+  "total_cents": 7145,
+  "lines": {
+   "SEED-0056": 3
+  }
+ },
+ {
+  "order_id": "ORD00066",
+  "date": "2026-01-11",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 7518,
+  "shipping_cents": 0,
+  "total_cents": 7518,
+  "lines": {
+   "SEED-0063": 1
+  }
+ },
+ {
+  "order_id": "ORD00067",
+  "date": "2026-02-12",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 7891,
+  "shipping_cents": 0,
+  "total_cents": 7891,
+  "lines": {
+   "SEED-0070": 2
+  }
+ },
+ {
+  "order_id": "ORD00068",
+  "date": "2026-03-13",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 8264,
+  "shipping_cents": 0,
+  "total_cents": 8264,
+  "lines": {
+   "SEED-0077": 3
+  }
+ },
+ {
+  "order_id": "ORD00069",
+  "date": "2026-04-14",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 8637,
+  "shipping_cents": 0,
+  "total_cents": 8637,
+  "lines": {
+   "SEED-0084": 1
+  }
+ },
+ {
+  "order_id": "ORD00070",
+  "date": "2026-05-15",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 9010,
+  "shipping_cents": 0,
+  "total_cents": 9010,
+  "lines": {
+   "SEED-0091": 2
+  }
+ },
+ {
+  "order_id": "ORD00071",
+  "date": "2026-06-16",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 9383,
+  "shipping_cents": 0,
+  "total_cents": 9383,
+  "lines": {
+   "SEED-0098": 3
+  }
+ },
+ {
+  "order_id": "ORD00072",
+  "date": "2026-01-17",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 9756,
+  "shipping_cents": 0,
+  "total_cents": 9756,
+  "lines": {
+   "SEED-0005": 1
+  }
+ },
+ {
+  "order_id": "ORD00073",
+  "date": "2026-02-18",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 1129,
+  "shipping_cents": 599,
+  "total_cents": 1728,
+  "lines": {
+   "SEED-0012": 2
+  }
+ },
+ {
+  "order_id": "ORD00074",
+  "date": "2026-03-19",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 1502,
+  "shipping_cents": 599,
+  "total_cents": 2101,
+  "lines": {
+   "SEED-0019": 3
+  }
+ },
+ {
+  "order_id": "ORD00075",
+  "date": "2026-04-20",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 1875,
+  "shipping_cents": 599,
+  "total_cents": 2474,
+  "lines": {
+   "SEED-0026": 1
+  }
+ },
+ {
+  "order_id": "ORD00076",
+  "date": "2026-05-21",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 2248,
+  "shipping_cents": 599,
+  "total_cents": 2847,
+  "lines": {
+   "SEED-0033": 2
+  }
+ },
+ {
+  "order_id": "ORD00077",
+  "date": "2026-06-22",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 2621,
+  "shipping_cents": 599,
+  "total_cents": 3220,
+  "lines": {
+   "SEED-0040": 3
+  }
+ },
+ {
+  "order_id": "ORD00078",
+  "date": "2026-01-23",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 2994,
+  "shipping_cents": 599,
+  "total_cents": 3593,
+  "lines": {
+   "SEED-0047": 1
+  }
+ },
+ {
+  "order_id": "ORD00079",
+  "date": "2026-02-24",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 3367,
+  "shipping_cents": 599,
+  "total_cents": 3966,
+  "lines": {
+   "SEED-0054": 2
+  }
+ },
+ {
+  "order_id": "ORD00080",
+  "date": "2026-03-25",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 3740,
+  "shipping_cents": 599,
+  "total_cents": 4339,
+  "lines": {
+   "SEED-0061": 3
+  }
+ },
+ {
+  "order_id": "ORD00081",
+  "date": "2026-04-26",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 4113,
+  "shipping_cents": 599,
+  "total_cents": 4712,
+  "lines": {
+   "SEED-0068": 1
+  }
+ },
+ {
+  "order_id": "ORD00082",
+  "date": "2026-05-27",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 4486,
+  "shipping_cents": 599,
+  "total_cents": 5085,
+  "lines": {
+   "SEED-0075": 2
+  }
+ },
+ {
+  "order_id": "ORD00083",
+  "date": "2026-06-28",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 4859,
+  "shipping_cents": 599,
+  "total_cents": 5458,
+  "lines": {
+   "SEED-0082": 3
+  }
+ },
+ {
+  "order_id": "ORD00084",
+  "date": "2026-01-01",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 5232,
+  "shipping_cents": 0,
+  "total_cents": 5232,
+  "lines": {
+   "SEED-0089": 1
+  }
+ },
+ {
+  "order_id": "ORD00085",
+  "date": "2026-02-02",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 5605,
+  "shipping_cents": 0,
+  "total_cents": 5605,
+  "lines": {
+   "SEED-0096": 2
+  }
+ },
+ {
+  "order_id": "ORD00086",
+  "date": "2026-03-03",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 5978,
+  "shipping_cents": 0,
+  "total_cents": 5978,
+  "lines": {
+   "SEED-0003": 3
+  }
+ },
+ {
+  "order_id": "ORD00087",
+  "date": "2026-04-04",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 6351,
+  "shipping_cents": 0,
+  "total_cents": 6351,
+  "lines": {
+   "SEED-0010": 1
+  }
+ },
+ {
+  "order_id": "ORD00088",
+  "date": "2026-05-05",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 6724,
+  "shipping_cents": 0,
+  "total_cents": 6724,
+  "lines": {
+   "SEED-0017": 2
+  }
+ },
+ {
+  "order_id": "ORD00089",
+  "date": "2026-06-06",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 7097,
+  "shipping_cents": 0,
+  "total_cents": 7097,
+  "lines": {
+   "SEED-0024": 3
+  }
+ },
+ {
+  "order_id": "ORD00090",
+  "date": "2026-01-07",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 7470,
+  "shipping_cents": 0,
+  "total_cents": 7470,
+  "lines": {
+   "SEED-0031": 1
+  }
+ },
+ {
+  "order_id": "ORD00091",
+  "date": "2026-02-08",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 7843,
+  "shipping_cents": 0,
+  "total_cents": 7843,
+  "lines": {
+   "SEED-0038": 2
+  }
+ },
+ {
+  "order_id": "ORD00092",
+  "date": "2026-03-09",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 8216,
+  "shipping_cents": 0,
+  "total_cents": 8216,
+  "lines": {
+   "SEED-0045": 3
+  }
+ },
+ {
+  "order_id": "ORD00093",
+  "date": "2026-04-10",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 8589,
+  "shipping_cents": 0,
+  "total_cents": 8589,
+  "lines": {
+   "SEED-0052": 1
+  }
+ },
+ {
+  "order_id": "ORD00094",
+  "date": "2026-05-11",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 8962,
+  "shipping_cents": 0,
+  "total_cents": 8962,
+  "lines": {
+   "SEED-0059": 2
+  }
+ },
+ {
+  "order_id": "ORD00095",
+  "date": "2026-06-12",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 9335,
+  "shipping_cents": 0,
+  "total_cents": 9335,
+  "lines": {
+   "SEED-0066": 3
+  }
+ },
+ {
+  "order_id": "ORD00096",
+  "date": "2026-01-13",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 9708,
+  "shipping_cents": 0,
+  "total_cents": 9708,
+  "lines": {
+   "SEED-0073": 1
+  }
+ },
+ {
+  "order_id": "ORD00097",
+  "date": "2026-02-14",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 1081,
+  "shipping_cents": 599,
+  "total_cents": 1680,
+  "lines": {
+   "SEED-0080": 2
+  }
+ },
+ {
+  "order_id": "ORD00098",
+  "date": "2026-03-15",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 1454,
+  "shipping_cents": 599,
+  "total_cents": 2053,
+  "lines": {
+   "SEED-0087": 3
+  }
+ },
+ {
+  "order_id": "ORD00099",
+  "date": "2026-04-16",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 1827,
+  "shipping_cents": 599,
+  "total_cents": 2426,
+  "lines": {
+   "SEED-0094": 1
+  }
+ },
+ {
+  "order_id": "ORD00100",
+  "date": "2026-05-17",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 2200,
+  "shipping_cents": 599,
+  "total_cents": 2799,
+  "lines": {
+   "SEED-0001": 2
+  }
+ },
+ {
+  "order_id": "ORD00101",
+  "date": "2026-06-18",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 2573,
+  "shipping_cents": 599,
+  "total_cents": 3172,
+  "lines": {
+   "SEED-0008": 3
+  }
+ },
+ {
+  "order_id": "ORD00102",
+  "date": "2026-01-19",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 2946,
+  "shipping_cents": 599,
+  "total_cents": 3545,
+  "lines": {
+   "SEED-0015": 1
+  }
+ },
+ {
+  "order_id": "ORD00103",
+  "date": "2026-02-20",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 3319,
+  "shipping_cents": 599,
+  "total_cents": 3918,
+  "lines": {
+   "SEED-0022": 2
+  }
+ },
+ {
+  "order_id": "ORD00104",
+  "date": "2026-03-21",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 3692,
+  "shipping_cents": 599,
+  "total_cents": 4291,
+  "lines": {
+   "SEED-0029": 3
+  }
+ },
+ {
+  "order_id": "ORD00105",
+  "date": "2026-04-22",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 4065,
+  "shipping_cents": 599,
+  "total_cents": 4664,
+  "lines": {
+   "SEED-0036": 1
+  }
+ },
+ {
+  "order_id": "ORD00106",
+  "date": "2026-05-23",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 4438,
+  "shipping_cents": 599,
+  "total_cents": 5037,
+  "lines": {
+   "SEED-0043": 2
+  }
+ },
+ {
+  "order_id": "ORD00107",
+  "date": "2026-06-24",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 4811,
+  "shipping_cents": 599,
+  "total_cents": 5410,
+  "lines": {
+   "SEED-0050": 3
+  }
+ },
+ {
+  "order_id": "ORD00108",
+  "date": "2026-01-25",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 5184,
+  "shipping_cents": 0,
+  "total_cents": 5184,
+  "lines": {
+   "SEED-0057": 1
+  }
+ },
+ {
+  "order_id": "ORD00109",
+  "date": "2026-02-26",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 5557,
+  "shipping_cents": 0,
+  "total_cents": 5557,
+  "lines": {
+   "SEED-0064": 2
+  }
+ },
+ {
+  "order_id": "ORD00110",
+  "date": "2026-03-27",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 5930,
+  "shipping_cents": 0,
+  "total_cents": 5930,
+  "lines": {
+   "SEED-0071": 3
+  }
+ },
+ {
+  "order_id": "ORD00111",
+  "date": "2026-04-28",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 6303,
+  "shipping_cents": 0,
+  "total_cents": 6303,
+  "lines": {
+   "SEED-0078": 1
+  }
+ },
+ {
+  "order_id": "ORD00112",
+  "date": "2026-05-01",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 6676,
+  "shipping_cents": 0,
+  "total_cents": 6676,
+  "lines": {
+   "SEED-0085": 2
+  }
+ },
+ {
+  "order_id": "ORD00113",
+  "date": "2026-06-02",
+  "country": "US",
+  "region": "NY",
+  "subtotal_cents": 7049,
+  "shipping_cents": 0,
+  "total_cents": 7049,
+  "lines": {
+   "SEED-0092": 3
+  }
+ },
+ {
+  "order_id": "ORD00114",
+  "date": "2026-01-03",
+  "country": "US",
+  "region": "TX",
+  "subtotal_cents": 7422,
+  "shipping_cents": 0,
+  "total_cents": 7422,
+  "lines": {
+   "SEED-0099": 1
+  }
+ },
+ {
+  "order_id": "ORD00115",
+  "date": "2026-02-04",
+  "country": "CA",
+  "region": "ON",
+  "subtotal_cents": 7795,
+  "shipping_cents": 0,
+  "total_cents": 7795,
+  "lines": {
+   "SEED-0006": 2
+  }
+ },
+ {
+  "order_id": "ORD00116",
+  "date": "2026-03-05",
+  "country": "DE",
+  "region": "",
+  "subtotal_cents": 8168,
+  "shipping_cents": 0,
+  "total_cents": 8168,
+  "lines": {
+   "SEED-0013": 3
+  }
+ },
+ {
+  "order_id": "ORD00117",
+  "date": "2026-04-06",
+  "country": "GB",
+  "region": "",
+  "subtotal_cents": 8541,
+  "shipping_cents": 0,
+  "total_cents": 8541,
+  "lines": {
+   "SEED-0020": 1
+  }
+ },
+ {
+  "order_id": "ORD00118",
+  "date": "2026-05-07",
+  "country": "FR",
+  "region": "",
+  "subtotal_cents": 8914,
+  "shipping_cents": 0,
+  "total_cents": 8914,
+  "lines": {
+   "SEED-0027": 2
+  }
+ },
+ {
+  "order_id": "ORD00119",
+  "date": "2026-06-08",
+  "country": "JP",
+  "region": "",
+  "subtotal_cents": 9287,
+  "shipping_cents": 0,
+  "total_cents": 9287,
+  "lines": {
+   "SEED-0034": 3
+  }
+ },
+ {
+  "order_id": "ORD00120",
+  "date": "2026-01-09",
+  "country": "US",
+  "region": "CA",
+  "subtotal_cents": 9660,
+  "shipping_cents": 0,
+  "total_cents": 9660,
+  "lines": {
+   "SEED-0041": 1
+  }
+ }
+]
