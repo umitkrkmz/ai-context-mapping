@@ -241,6 +241,24 @@ order (`Path`, `Category`, `Purpose`, `Invariants`) silently disables the guardr
 }
 ```
 
+### NI-010: The Rule 1 gate keeps its bypass and fails open
+
+`.claude/hooks/map_gate.py` blocks searches until the map is read. A gate that can wedge an agent is
+worse than no gate, so it must keep two safety valves: the `AI_GUARDRAILS_PERMISSIVE=1` bypass for manual
+and CI runs, and fail-open behavior (no map, malformed input, or any internal error means the call is
+allowed). Never make the gate stricter without keeping both, and never make it block anything other
+than searches.
+
+```invariant-rule
+{
+  "id": "NI-010",
+  "type": "required-text",
+  "description": "The map gate must keep its bypass variable and its fail-open markers.",
+  "file": ".claude/hooks/map_gate.py",
+  "contains": ["INVARIANT(NI-010)", "AI_GUARDRAILS_PERMISSIVE", "fail open"]
+}
+```
+
 ## How to add an invariant
 
 1. Pick the next free ID and write the narrative entry.

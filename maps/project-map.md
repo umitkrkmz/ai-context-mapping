@@ -39,16 +39,17 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `.claude/commands/verify-map.md` | manifesto | /verify-map: run init_mapping --check and the map tests, then repair a stale map. | - |
 | `.claude/hooks/` | script | Claude Code hook scripts. | - |
 | `.claude/hooks/guardrail_hook.py` | script | Hook adapter: runs verify_invariants on edited .py files (exit 2 on violation); detects git commits. | NI-001, NI-002, NI-005 |
-| `.claude/settings.json` | config | Claude Code hooks: PostToolUse invariant check on edits; PreToolUse commit gate (budget, map test). | - |
+| `.claude/hooks/map_gate.py` | script | PreToolUse gate enforcing Rule 1: blocks Grep, Glob, and exploratory shell search until the map is read. | NI-001, NI-005, NI-010 |
+| `.claude/settings.json` | config | Claude Code hooks: map gate (Rule 1), invariant check after edits, and a commit gate (budget, map test). | - |
 | `.cursor/` | manifesto | Cursor editor configuration. | - |
 | `.cursor/rules/` | manifesto | Cursor rule files. | - |
 | `.cursor/rules/context-guardrails.mdc` | manifesto | Always-on Cursor rule: use the map, respect invariants, ask before destructive actions. | - |
-| `.gitignore` | ignore | Files Git must not track: caches, virtual environments, mutation leftovers, local settings. | - |
 | `.gitattributes` | config | Forces LF line endings for scripts and the AGENTS.md/CLAUDE.md pair on every OS. | - |
 | `.github/` | ci | GitHub-specific configuration. | - |
 | `.github/copilot-instructions.md` | manifesto | Copilot instructions: map first, invariants, the five rules. | - |
 | `.github/workflows/` | ci | GitHub Actions workflows. | - |
 | `.github/workflows/ai-guardrails.yml` | ci | CI: map freshness, invariants, dependency budget, tests, MCP handshake, CLAUDE.md mirror. | - |
+| `.gitignore` | ignore | Files Git must not track: caches, virtual environments, mutation leftovers, local settings. | - |
 | `AGENTS.md` | manifesto | Primary operating manifesto for AI agents: the five rules, commands, definition of done. | NI-008 |
 | `CLAUDE.md` | manifesto | Byte-identical mirror of AGENTS.md for Claude Code. | NI-008 |
 | `LICENSE` | legal | MIT license. | - |
@@ -104,6 +105,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest. | - |
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
+| `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass) and its settings wiring. | NI-010 |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
 
 ## Route Table
@@ -111,6 +113,8 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | Kind | Route | Handler | File |
 | ---- | ----- | ------- | ---- |
 | CLI | `python .claude/hooks/guardrail_hook.py` | `main()` | `.claude/hooks/guardrail_hook.py` |
+| CLI | `python .claude/hooks/map_gate.py` | `main()` | `.claude/hooks/map_gate.py` |
+| CLI | `python benchmarks/analyze_transcripts.py` | `main()` | `benchmarks/analyze_transcripts.py` |
 | CLI | `python mcp/context_server.py` | `main()` | `mcp/context_server.py` |
 | CLI | `python scripts/check_dependency_budget.py` | `main()` | `scripts/check_dependency_budget.py` |
 | CLI | `python scripts/init_mapping.py` | `main()` | `scripts/init_mapping.py` |

@@ -42,6 +42,7 @@ Slash commands are Markdown files in `.claude/commands/`; hooks are configured i
 | `/verify-invariants`     | `verify_invariants.py [paths]`                                 | Enforce invariant rules; fix violations in code    |
 | `/mutation-test`         | `mutation_guard.py --test T --target F.py:func`                | Prove a regression test can fail                   |
 | `/diet-check`            | `init_mapping.py --stats`                                      | Report repository, map, and instruction-file size  |
+| `PreToolUse` map gate    | `.claude/hooks/map_gate.py` (on Grep, Glob, Read, Bash, PowerShell, MCP tools) | Rule 1: block searches until the map is read; exit 2 |
 | `PostToolUse` hook       | `.claude/hooks/guardrail_hook.py post-edit`                    | Check an edited `.py` file; exit 2 feeds back to Claude |
 | `PreToolUse` hook (Bash) | `guardrail_hook.py is-git-commit`, then `check_dependency_budget.py` and `pytest tests/test_maps.py` | Commit gate; exit 2 blocks the commit |
 
@@ -78,4 +79,6 @@ Transport: JSON-RPC 2.0 over stdio, served by `mcp/context_server.py`.
 | `AI_CONTEXT_DEBUG`      | `mcp/context_server.py`    | Log protocol traffic to stderr                             |
 | `SKIP_AI_GUARDRAILS`    | installed pre-commit hook  | `1` skips the hook once                                    |
 | `AI_GUARDRAILS_STRICT`  | git pre-commit hook, Claude Code commit gate | `1` makes a missing pytest a failure     |
+| `AI_GUARDRAILS_PERMISSIVE` | `.claude/hooks/map_gate.py` | `1` disables the Rule 1 gate (manual or CI runs)            |
+| `AI_GUARDRAILS_STATE_DIR`  | `.claude/hooks/map_gate.py` | Override the marker directory (default: system temp, per project) |
 | `MUTATION_GUARD`        | set by `mutation_guard.py` | `1` inside test runs launched by the guard                 |

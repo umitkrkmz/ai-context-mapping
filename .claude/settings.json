@@ -16,6 +16,16 @@
     ],
     "PreToolUse": [
       {
+        "matcher": "Grep|Glob|Read|Bash|PowerShell|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" || exit 0; if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; exec \"$PY\" .claude/hooks/map_gate.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {

@@ -18,6 +18,9 @@ the invariants that protect it. Use it to jump straight to the file you need.
 - Only fall back to searching when the map has no entry for what you need. When that
   happens, the map is incomplete: add the missing entry as part of your change.
 - Never read paths excluded by `.agentignore`; they are noise for your context window.
+- In Claude Code this rule is **enforced, not just requested**: the `Grep` and `Glob` tools and shell
+  searches (`grep -r`, `rg`, `find`, `ls -R`) are blocked until you have read the map. Read it first
+  and you will never see the block. Other tools and commands are never blocked by this gate.
 
 ### Rule 2 — A bug is not fixed until a regression test proves it
 
@@ -97,9 +100,11 @@ does not clearly define a constraint or contract, **stop and ask the user** inst
 
 - Slash commands in `.claude/commands/`: `/verify-map`, `/verify-invariants`, `/mutation-test`,
   and `/diet-check`. They run the scripts above and explain how to act on the result.
-- Hooks in `.claude/settings.json` run automatically. After you edit a `.py` file, the invariant
+- Hooks in `.claude/settings.json` run automatically. Before you search, the map gate (Rule 1)
+  requires that you have read `maps/project-map.md`. After you edit a `.py` file, the invariant
   checker runs and feeds violations back to you; fix the code, never the rule. Before a
   `git commit`, the dependency budget and the map test must pass.
+- Humans can bypass the map gate for manual or CI runs with `AI_GUARDRAILS_PERMISSIVE=1`; agents must not.
 - Keep this file short. Detail belongs in the map, `invariants/`, `decisions/`, or `docs/`.
 
 ## Definition of Done

@@ -108,9 +108,13 @@ framework stacks independent layers so that a mistake must slip through several 
 | 5     | Any of layers 1-3 fail locally                        | `install_hooks.sh` hook                      |
 | 6     | Any check fails on the server                         | `.github/workflows/ai-guardrails.yml`        |
 
-Layer 0 is the only advisory layer, and that is deliberate. Everything an instruction says
-that matters is also checked by a script, so a distracted or non-compliant agent still hits a
-wall.
+Layer 0 is advisory by nature, and that is deliberate: everything an instruction says that matters is
+also checked by a script, so a distracted or non-compliant agent still hits a wall. The benchmark
+([results](benchmark-results.md)) showed why this matters: Rule 1 (read the map first) was followed
+0 of 3 times when it was only a request. In Claude Code it is now enforced by a `PreToolUse` gate
+(`.claude/hooks/map_gate.py`) that blocks searches until the map has been read, so for that one rule
+the wall exists at the moment of the mistake, not after it. Tools without hooks (Cursor, Copilot)
+still get only the request.
 
 ### Design properties shared by every layer
 

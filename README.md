@@ -83,11 +83,15 @@ Defined in [`AGENTS.md`](AGENTS.md) and mirrored to every agent format:
 
 | #   | Rule                                | What it requires                                                                 | Pillar         | Backed by                                        |
 | --- | ----------------------------------- | -------------------------------------------------------------------------------- | -------------- | ------------------------------------------------ |
-| 1   | **Map before search**               | Read `maps/project-map.md` before any exploratory `grep` or `find`               | Map            | `tests/test_maps.py`, MCP server                 |
+| 1   | **Map before search**               | Read `maps/project-map.md` before any exploratory `grep` or `find`               | Map            | **Enforced in Claude Code** by `.claude/hooks/map_gate.py`; `tests/test_maps.py`, MCP server |
 | 2   | **No fix without a regression test** | The test must survive mutation verification                                     | Verify         | `scripts/mutation_guard.py`                      |
 | 3   | **Consent before destruction**      | Ask before `git push --force`, deleting data, or wiping files                    | Constrain      | Review, pre-commit hook                          |
 | 4   | **Zero unauthorized dependencies**  | Standard library first                                                           | Constrain      | `scripts/check_dependency_budget.py`             |
 | 5   | **Do not invent project knowledge** | If an invariant, decision, or map entry does not define a constraint or contract, stop and ask | Map + Constrain | Map, invariants, and ADRs as the only sources of truth |
+
+Rule 1 used to be advisory. Our benchmark showed agents ignored it (0 of 3 read the map first), so in
+Claude Code it is now a `PreToolUse` gate that blocks searches until the map is read. Cursor and
+GitHub Copilot have no equivalent hook, so there Rule 1 remains a request.
 
 Rule 5 is the only rule that no script can fully enforce, so it is worded as a duty to ask:
 an agent that cannot cite a map row, an invariant ID, a decision ID, or code it read for a
@@ -157,6 +161,7 @@ From now on, adding a file without describing it in the map fails the build.
 | Pre-commit hook                     | Broken commits                    | `scripts/install_hooks.sh`                     | git             |
 | Claude Code slash commands          | Skipped checks                    | `.claude/commands/*.md`                        | Claude Code     |
 | Claude Code hooks                   | Violations left in place          | `.claude/settings.json`, `.claude/hooks/`      | Claude Code     |
+| Map gate (Rule 1 enforced)          | Blind searching before the map    | `.claude/hooks/map_gate.py`                    | Claude Code     |
 | Persona cards                       | Unfocused agents                  | `personas/*.md`                                | Agent session   |
 | Stack templates                     | Slow adoption                     | `templates/python`, `typescript`, `generic`    | Copy and go     |
 
@@ -174,6 +179,8 @@ We ran A/B experiments: the same agent, model, and bug, with and without the fra
 | What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
 
 So the evidence supports the framework as **verification and guardrails**, not (yet) as a token saver.
+The Rule 1 map gate (v1.0.3) was built in response; its unit tests and a live check show it blocks and
+unblocks correctly, but **its effect on cost and behavior has not been re-benchmarked**.
 Larger repositories and tasks that cannot be grepped remain untested. Full data, method, and limits:
 [docs/benchmark-results.md](docs/benchmark-results.md).
 
@@ -202,8 +209,16 @@ without being asked.
 | `/mutation-test`     | Runs `mutation_guard.py`; explains the parameters and how to read the result |
 | `/diet-check`        | Runs `init_mapping.py --stats`: repository size, map size, estimated token savings |
 
-Two hooks in `.claude/settings.json` run automatically:
+Three hooks in `.claude/settings.json` run automatically:
 
+- **Before any search** (`PreToolUse`), the **map gate** enforces Rule 1. `Grep`, `Glob`, and
+  exploratory shell commands (`grep -r`, `rg`, `ag`, `find`, `ls -R`, `git grep`, and PowerShell
+  equivalents) are blocked with exit code 2 until the agent has read `maps/project-map.md`, run
+  `python mcp/context_server.py --call read_project_map`, or called the MCP `read_project_map` or
+  `get_file_purpose` tool. Everything else is never blocked, including `git status`, running
+  tests, editing files, and pipeline filters such as `pytest | grep passed`. Each agent, including
+  each sub-agent, has its own scope. The gate fails open (no map, bad input, or any error allows
+  the call) and can be bypassed for manual or CI runs with `AI_GUARDRAILS_PERMISSIVE=1`.
 - **After every edit to a `.py` file** (`PostToolUse`), the invariant checker runs on that file.
   A violation is fed back to Claude (exit code 2) so it repairs the code immediately.
 - **Before every `git commit`** (`PreToolUse` on `Bash`), the dependency budget and
@@ -211,7 +226,7 @@ Two hooks in `.claude/settings.json` run automatically:
   event, so the hook inspects Bash commands and acts only on `git commit`.
 
 Project hooks execute shell commands on your machine, so review `.claude/settings.json` and
-`.claude/hooks/guardrail_hook.py` before trusting a copy of them. Both use only the Python
+`.claude/hooks/guardrail_hook.py`, and `.claude/hooks/map_gate.py` before trusting a copy of them. Both use only the Python
 standard library. Personal overrides belong in `.claude/settings.local.json`, which
 `.agentignore` excludes.
 

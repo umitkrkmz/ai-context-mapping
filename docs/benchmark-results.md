@@ -231,9 +231,12 @@ inside the noise. **There is no sign that the map's value grows with project siz
   typical, and it is greppable.
 - **Repositories 10x to 100x larger**, where even matches are numerous and `Glob **/*` itself is
   expensive (here: ~1,700 tokens; at 5,000 files it would be tens of thousands).
-- **Enforcing Rule 1 rather than requesting it.** A Claude Code `PreToolUse` hook could deny `Glob` and
-  `Grep` until the map has been read. That is consistent with the framework's own design principle
-  (advisory rules need a script behind them), and it is untested.
+- **Enforcing Rule 1 rather than requesting it.** *Implemented in v1.0.3* as `.claude/hooks/map_gate.py`,
+  a `PreToolUse` gate that denies `Glob`, `Grep`, and exploratory shell searches until the map has been
+  read. It is unit-tested, and a live check showed a fresh sub-agent blocked on its first `Grep`,
+  reading the map as instructed, and succeeding on the retry (3 tool calls). **Its effect on token
+  cost, latency, and fix quality has not been benchmarked**; a gate could just as well add turns as
+  remove searching. Re-running experiment 2 with the gate enabled is the obvious next test.
 - **Trimming the overhead:** an agent should run a script with `--help`, not read its source;
   `CLAUDE.md` and `AGENTS.md` should not both be read; the map should stay under ~3,000 tokens.
 - **More trials and more bug types.** Three trials per arm and one bug do not support statistics.
