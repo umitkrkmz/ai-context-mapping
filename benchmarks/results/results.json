@@ -2387,172 +2387,6 @@
         },
         {
           "gate": "off",
-          "id": "N",
-          "label": "Framework, rules not preloaded (AGENTS.md only), gate off",
-          "map": true,
-          "rules_preloaded": false,
-          "summary": {
-            "metrics": {
-              "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              }
-            },
-            "n": 0,
-            "quality": {
-              "acceptance_full_rate": null,
-              "e2e_test_rate": null,
-              "mutation_full_rate": null,
-              "opened_legacy_rate": null,
-              "project_instructions_rate": null,
-              "whole_tree_glob_first_rate": null
-            }
-          }
-        },
-        {
-          "gate": "map-first",
-          "id": "NG",
-          "label": "Framework, rules not preloaded, map gate on",
-          "map": true,
-          "rules_preloaded": false,
-          "summary": {
-            "metrics": {
-              "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              },
-              "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
-              }
-            },
-            "n": 0,
-            "quality": {
-              "acceptance_full_rate": null,
-              "e2e_test_rate": null,
-              "mutation_full_rate": null,
-              "opened_legacy_rate": null,
-              "project_instructions_rate": null,
-              "whole_tree_glob_first_rate": null
-            }
-          }
-        },
-        {
-          "gate": "off",
           "id": "P",
           "label": "Framework, rules preloaded (CLAUDE.md), gate off",
           "map": true,
@@ -2720,38 +2554,7 @@
       ],
       "comparisons": [
         {
-          "a": "N",
-          "b": "NG",
-          "metrics": {
-            "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            }
-          },
-          "name": "Gate, rules not preloaded: exp3 replication (NG vs N)"
-        },
-        {
-          "a": "N",
+          "a": "A",
           "b": "P",
           "metrics": {
             "new_tokens": {
@@ -2779,7 +2582,7 @@
               "ratio_of_medians": null
             }
           },
-          "name": "Preloading the rules (P vs N)"
+          "name": "Framework with rules preloaded vs bare project (P vs A)"
         },
         {
           "a": "P",
@@ -2842,37 +2645,6 @@
             }
           },
           "name": "Shipped framework vs bare project (PG vs A)"
-        },
-        {
-          "a": "A",
-          "b": "N",
-          "metrics": {
-            "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            },
-            "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
-            }
-          },
-          "name": "Framework layer, not preloaded (N vs A)"
         }
       ],
       "date": "2026-10-22",
@@ -2880,18 +2652,15 @@
       "id": "exp5",
       "preregistration": {
         "decision_rules": [
-          "H1 is supported if the NG median is at least 10% below the N median; refuted if NG is within 10% of N or above it.",
-          "H2 is supported if the P median is at least 10% below the N median.",
-          "H3 and H4 are reported as: cheaper (at least 10% lower), more expensive (at least 10% higher), or no meaningful difference."
+          "Each comparison is reported as: cheaper (median at least 10% lower), more expensive (median at least 10% higher), or no meaningful difference (within 10%)."
         ],
-        "design": "5 arms x 5 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
+        "design": "3 arms x 8 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
         "hypotheses": [
-          "H1 (replication): NG costs at least 10% less than N.",
-          "H2 (preloading): P costs at least 10% less than N.",
-          "H3 (gate in the adopter setup): PG differs from P (direction not predicted).",
-          "H4 (as shipped): PG compared with A (direction not predicted)."
+          "H1 (framework, rules preloaded): P compared with A (direction not predicted).",
+          "H2 (gate when the rules are already in context): PG compared with P (direction not predicted).",
+          "H3 (as shipped): PG compared with A (direction not predicted)."
         ],
-        "manipulation_check": "Before scoring, every trial's starting attachments must show project instructions loaded if and only if the arm is P or PG, and no other CLAUDE.md content. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
+        "manipulation_check": "Before scoring, every trial's starting attachments must show exactly the trial's own CLAUDE.md loaded for P and PG, and no project instructions for A. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
         "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
         "pilot": "Two pilot trials (NG and P) verify the harness before the schedule starts; they are reported separately and not pooled.",
         "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
@@ -2913,13 +2682,13 @@
           "legacy module opened"
         ],
         "seed": 20261022,
-        "statistics": "Exact permutation test on mean weighted cost per comparison (n=5 per arm: minimum one-sided p = 1/252). Reported, not used as the decision rule.",
-        "stopping_rule": "All 25 trials run. No trial is excluded for its outcome, including trials with hung commands."
+        "statistics": "Exact permutation test on mean weighted cost per comparison (n=8 per arm: minimum one-sided p = 1/12870). Reported, not used as the decision rule.",
+        "stopping_rule": "All 24 trials run. No trial is excluded for its outcome, including trials with hung commands."
       },
       "project_tokens": 55600,
       "schedule": [
         {
-          "arm": "N",
+          "arm": "A",
           "block": 1
         },
         {
@@ -2927,35 +2696,19 @@
           "block": 1
         },
         {
-          "arm": "A",
-          "block": 1
-        },
-        {
           "arm": "PG",
           "block": 1
         },
         {
-          "arm": "NG",
-          "block": 1
+          "arm": "A",
+          "block": 2
         },
         {
           "arm": "P",
           "block": 2
         },
         {
-          "arm": "NG",
-          "block": 2
-        },
-        {
-          "arm": "A",
-          "block": 2
-        },
-        {
           "arm": "PG",
-          "block": 2
-        },
-        {
-          "arm": "N",
           "block": 2
         },
         {
@@ -2963,7 +2716,7 @@
           "block": 3
         },
         {
-          "arm": "NG",
+          "arm": "PG",
           "block": 3
         },
         {
@@ -2971,12 +2724,8 @@
           "block": 3
         },
         {
-          "arm": "N",
-          "block": 3
-        },
-        {
-          "arm": "PG",
-          "block": 3
+          "arm": "P",
+          "block": 4
         },
         {
           "arm": "PG",
@@ -2988,26 +2737,6 @@
         },
         {
           "arm": "P",
-          "block": 4
-        },
-        {
-          "arm": "NG",
-          "block": 4
-        },
-        {
-          "arm": "N",
-          "block": 4
-        },
-        {
-          "arm": "P",
-          "block": 5
-        },
-        {
-          "arm": "A",
-          "block": 5
-        },
-        {
-          "arm": "NG",
           "block": 5
         },
         {
@@ -3015,8 +2744,44 @@
           "block": 5
         },
         {
-          "arm": "N",
+          "arm": "A",
           "block": 5
+        },
+        {
+          "arm": "P",
+          "block": 6
+        },
+        {
+          "arm": "A",
+          "block": 6
+        },
+        {
+          "arm": "PG",
+          "block": 6
+        },
+        {
+          "arm": "P",
+          "block": 7
+        },
+        {
+          "arm": "PG",
+          "block": 7
+        },
+        {
+          "arm": "A",
+          "block": 7
+        },
+        {
+          "arm": "PG",
+          "block": 8
+        },
+        {
+          "arm": "P",
+          "block": 8
+        },
+        {
+          "arm": "A",
+          "block": 8
         }
       ],
       "title": "Experiment 5: clean replication in project-rooted sessions",

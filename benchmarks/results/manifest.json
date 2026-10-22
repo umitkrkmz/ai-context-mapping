@@ -785,20 +785,6 @@
           "gate": "off"
         },
         {
-          "id": "N",
-          "label": "Framework, rules not preloaded (AGENTS.md only), gate off",
-          "map": true,
-          "rules_preloaded": false,
-          "gate": "off"
-        },
-        {
-          "id": "NG",
-          "label": "Framework, rules not preloaded, map gate on",
-          "map": true,
-          "rules_preloaded": false,
-          "gate": "map-first"
-        },
-        {
           "id": "P",
           "label": "Framework, rules preloaded (CLAUDE.md), gate off",
           "map": true,
@@ -815,13 +801,8 @@
       ],
       "comparisons": [
         {
-          "name": "Gate, rules not preloaded: exp3 replication (NG vs N)",
-          "a": "N",
-          "b": "NG"
-        },
-        {
-          "name": "Preloading the rules (P vs N)",
-          "a": "N",
+          "name": "Framework with rules preloaded vs bare project (P vs A)",
+          "a": "A",
           "b": "P"
         },
         {
@@ -833,11 +814,6 @@
           "name": "Shipped framework vs bare project (PG vs A)",
           "a": "A",
           "b": "PG"
-        },
-        {
-          "name": "Framework layer, not preloaded (N vs A)",
-          "a": "A",
-          "b": "N"
         }
       ],
       "harness": {
@@ -852,7 +828,7 @@
         "recorded_before_any_trial": true,
         "recorded_at": "2026-10-22T10:51:13+00:00",
         "question": "Does enforcing Rule 1 save cost when no rules leak into the context (replicating experiment 3), and does preloading the rules (as Claude Code does for a real adopter) change cost or behavior?",
-        "design": "5 arms x 5 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
+        "design": "3 arms x 8 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
         "seed": 20261022,
         "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
         "secondary_metrics": [
@@ -870,42 +846,35 @@
           "legacy module opened"
         ],
         "hypotheses": [
-          "H1 (replication): NG costs at least 10% less than N.",
-          "H2 (preloading): P costs at least 10% less than N.",
-          "H3 (gate in the adopter setup): PG differs from P (direction not predicted).",
-          "H4 (as shipped): PG compared with A (direction not predicted)."
+          "H1 (framework, rules preloaded): P compared with A (direction not predicted).",
+          "H2 (gate when the rules are already in context): PG compared with P (direction not predicted).",
+          "H3 (as shipped): PG compared with A (direction not predicted)."
         ],
         "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
         "decision_rules": [
-          "H1 is supported if the NG median is at least 10% below the N median; refuted if NG is within 10% of N or above it.",
-          "H2 is supported if the P median is at least 10% below the N median.",
-          "H3 and H4 are reported as: cheaper (at least 10% lower), more expensive (at least 10% higher), or no meaningful difference."
+          "Each comparison is reported as: cheaper (median at least 10% lower), more expensive (median at least 10% higher), or no meaningful difference (within 10%)."
         ],
-        "manipulation_check": "Before scoring, every trial's starting attachments must show project instructions loaded if and only if the arm is P or PG, and no other CLAUDE.md content. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
+        "manipulation_check": "Before scoring, every trial's starting attachments must show exactly the trial's own CLAUDE.md loaded for P and PG, and no project instructions for A. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
         "pilot": "Two pilot trials (NG and P) verify the harness before the schedule starts; they are reported separately and not pooled.",
-        "statistics": "Exact permutation test on mean weighted cost per comparison (n=5 per arm: minimum one-sided p = 1/252). Reported, not used as the decision rule.",
-        "stopping_rule": "All 25 trials run. No trial is excluded for its outcome, including trials with hung commands."
+        "statistics": "Exact permutation test on mean weighted cost per comparison (n=8 per arm: minimum one-sided p = 1/12870). Reported, not used as the decision rule.",
+        "stopping_rule": "All 24 trials run. No trial is excluded for its outcome, including trials with hung commands."
       },
       "schedule": [
         {
           "block": 1,
-          "arm": "N"
+          "arm": "A"
         },
         {
           "block": 1,
           "arm": "P"
-        },
-        {
-          "block": 1,
-          "arm": "A"
         },
         {
           "block": 1,
           "arm": "PG"
         },
         {
-          "block": 1,
-          "arm": "NG"
+          "block": 2,
+          "arm": "A"
         },
         {
           "block": 2,
@@ -913,19 +882,7 @@
         },
         {
           "block": 2,
-          "arm": "NG"
-        },
-        {
-          "block": 2,
-          "arm": "A"
-        },
-        {
-          "block": 2,
           "arm": "PG"
-        },
-        {
-          "block": 2,
-          "arm": "N"
         },
         {
           "block": 3,
@@ -933,19 +890,15 @@
         },
         {
           "block": 3,
-          "arm": "NG"
+          "arm": "PG"
         },
         {
           "block": 3,
           "arm": "A"
         },
         {
-          "block": 3,
-          "arm": "N"
-        },
-        {
-          "block": 3,
-          "arm": "PG"
+          "block": 4,
+          "arm": "P"
         },
         {
           "block": 4,
@@ -956,28 +909,8 @@
           "arm": "A"
         },
         {
-          "block": 4,
-          "arm": "P"
-        },
-        {
-          "block": 4,
-          "arm": "NG"
-        },
-        {
-          "block": 4,
-          "arm": "N"
-        },
-        {
           "block": 5,
           "arm": "P"
-        },
-        {
-          "block": 5,
-          "arm": "A"
-        },
-        {
-          "block": 5,
-          "arm": "NG"
         },
         {
           "block": 5,
@@ -985,10 +918,259 @@
         },
         {
           "block": 5,
-          "arm": "N"
+          "arm": "A"
+        },
+        {
+          "block": 6,
+          "arm": "P"
+        },
+        {
+          "block": 6,
+          "arm": "A"
+        },
+        {
+          "block": 6,
+          "arm": "PG"
+        },
+        {
+          "block": 7,
+          "arm": "P"
+        },
+        {
+          "block": 7,
+          "arm": "PG"
+        },
+        {
+          "block": 7,
+          "arm": "A"
+        },
+        {
+          "block": 8,
+          "arm": "PG"
+        },
+        {
+          "block": 8,
+          "arm": "P"
+        },
+        {
+          "block": 8,
+          "arm": "A"
         }
       ],
-      "trials": []
+      "trials": [],
+      "pilots": [
+        {
+          "id": "pilot_NG",
+          "arm": "NG",
+          "session_id": "9b28852c-548f-495d-9fc6-3f9919c39131",
+          "instruction_files_loaded": [
+            "AGENTS.md"
+          ],
+          "exit_code": 0,
+          "num_turns": 15,
+          "manipulation_check": "failed: project instructions loaded although the arm has no CLAUDE.md"
+        },
+        {
+          "id": "pilot_P",
+          "arm": "P",
+          "session_id": "e52a9e6b-b6d8-4ba1-a326-71ebdb1ffbdf",
+          "instruction_files_loaded": [
+            "CLAUDE.md"
+          ],
+          "exit_code": 0,
+          "num_turns": 14,
+          "manipulation_check": "passed"
+        }
+      ],
+      "amendments": [
+        {
+          "id": 1,
+          "recorded_at": "2026-10-22T11:00:21+00:00",
+          "recorded_before_any_scheduled_trial": true,
+          "reason": "Pilot pilot_NG showed that Claude Code 2.1.304 loads AGENTS.md as project instructions when CLAUDE.md is absent, so arms N and NG could not produce the 'rules not preloaded' condition (manipulation check failed). Pilot pilot_P loaded CLAUDE.md only. With this client, an adopter whose manifesto sits at the project root always has the rules in context, so experiment 3's condition no longer occurs in practice.",
+          "change": "Dropped arms N and NG and the experiment 3 replication (former H1, H2). Kept A, P, PG; raised n from 5 to 8 per arm.",
+          "decided_by": "repository owner, choosing among three options presented after the pilots",
+          "superseded": {
+            "arms": [
+              {
+                "id": "A",
+                "label": "Bare project (baseline)",
+                "map": false,
+                "rules_preloaded": false,
+                "gate": "off"
+              },
+              {
+                "id": "N",
+                "label": "Framework, rules not preloaded (AGENTS.md only), gate off",
+                "map": true,
+                "rules_preloaded": false,
+                "gate": "off"
+              },
+              {
+                "id": "NG",
+                "label": "Framework, rules not preloaded, map gate on",
+                "map": true,
+                "rules_preloaded": false,
+                "gate": "map-first"
+              },
+              {
+                "id": "P",
+                "label": "Framework, rules preloaded (CLAUDE.md), gate off",
+                "map": true,
+                "rules_preloaded": true,
+                "gate": "off"
+              },
+              {
+                "id": "PG",
+                "label": "Framework, rules preloaded, map gate on (as shipped)",
+                "map": true,
+                "rules_preloaded": true,
+                "gate": "map-first"
+              }
+            ],
+            "comparisons": [
+              {
+                "name": "Gate, rules not preloaded: exp3 replication (NG vs N)",
+                "a": "N",
+                "b": "NG"
+              },
+              {
+                "name": "Preloading the rules (P vs N)",
+                "a": "N",
+                "b": "P"
+              },
+              {
+                "name": "Gate, rules preloaded: adopter setup (PG vs P)",
+                "a": "P",
+                "b": "PG"
+              },
+              {
+                "name": "Shipped framework vs bare project (PG vs A)",
+                "a": "A",
+                "b": "PG"
+              },
+              {
+                "name": "Framework layer, not preloaded (N vs A)",
+                "a": "A",
+                "b": "N"
+              }
+            ],
+            "schedule": [
+              {
+                "block": 1,
+                "arm": "N"
+              },
+              {
+                "block": 1,
+                "arm": "P"
+              },
+              {
+                "block": 1,
+                "arm": "A"
+              },
+              {
+                "block": 1,
+                "arm": "PG"
+              },
+              {
+                "block": 1,
+                "arm": "NG"
+              },
+              {
+                "block": 2,
+                "arm": "P"
+              },
+              {
+                "block": 2,
+                "arm": "NG"
+              },
+              {
+                "block": 2,
+                "arm": "A"
+              },
+              {
+                "block": 2,
+                "arm": "PG"
+              },
+              {
+                "block": 2,
+                "arm": "N"
+              },
+              {
+                "block": 3,
+                "arm": "P"
+              },
+              {
+                "block": 3,
+                "arm": "NG"
+              },
+              {
+                "block": 3,
+                "arm": "A"
+              },
+              {
+                "block": 3,
+                "arm": "N"
+              },
+              {
+                "block": 3,
+                "arm": "PG"
+              },
+              {
+                "block": 4,
+                "arm": "PG"
+              },
+              {
+                "block": 4,
+                "arm": "A"
+              },
+              {
+                "block": 4,
+                "arm": "P"
+              },
+              {
+                "block": 4,
+                "arm": "NG"
+              },
+              {
+                "block": 4,
+                "arm": "N"
+              },
+              {
+                "block": 5,
+                "arm": "P"
+              },
+              {
+                "block": 5,
+                "arm": "A"
+              },
+              {
+                "block": 5,
+                "arm": "NG"
+              },
+              {
+                "block": 5,
+                "arm": "PG"
+              },
+              {
+                "block": 5,
+                "arm": "N"
+              }
+            ],
+            "hypotheses": [
+              "H1 (replication): NG costs at least 10% less than N.",
+              "H2 (preloading): P costs at least 10% less than N.",
+              "H3 (gate in the adopter setup): PG differs from P (direction not predicted).",
+              "H4 (as shipped): PG compared with A (direction not predicted)."
+            ],
+            "decision_rules": [
+              "H1 is supported if the NG median is at least 10% below the N median; refuted if NG is within 10% of N or above it.",
+              "H2 is supported if the P median is at least 10% below the N median.",
+              "H3 and H4 are reported as: cheaper (at least 10% lower), more expensive (at least 10% higher), or no meaningful difference."
+            ]
+          }
+        }
+      ]
     }
   ]
 }
