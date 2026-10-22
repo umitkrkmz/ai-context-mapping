@@ -74,9 +74,13 @@ def _parse_time(stamp: Optional[str]) -> Optional[datetime.datetime]:
         return None
 
 
-def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT_WEIGHTS) -> Dict[str, Any]:
-    """Parse one transcript and return its metrics."""
-    path = os.path.join(os.path.expanduser(directory), f"agent-{agent_id}.jsonl")
+def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT_WEIGHTS, path: Optional[str] = None) -> Dict[str, Any]:
+    """Parse one transcript and return its metrics.
+
+    Sub-agent transcripts live at ``<directory>/agent-<id>.jsonl``. A headless session (``claude -p``) writes
+    ``<session-id>.jsonl`` under the project it ran in; pass that file as ``path``.
+    """
+    path = os.path.expanduser(path) if path else os.path.join(os.path.expanduser(directory), f"agent-{agent_id}.jsonl")
     if not os.path.isfile(path):
         raise FileNotFoundError(path)
     per_message: Dict[str, Dict[str, int]] = {}
@@ -258,7 +262,7 @@ def _rate(values: Iterable[Any]) -> Optional[float]:
 # --------------------------------------------------------------------------------------
 def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float]) -> Dict[str, Any]:
     """Derive one trial's numbers from its transcript, merged with the manifest's harness and scoring data."""
-    parsed = load_agent(directory, str(trial["agent_id"]), weights)
+    parsed = load_agent(directory, str(trial["agent_id"]), weights, path=trial.get("transcript"))
     harness = trial.get("harness") or {}
     latency = harness.get("duration_ms")
     scoring = trial.get("scoring") or {}

@@ -148,6 +148,17 @@ def test_context_attachments_before_the_first_turn(tmp_path: Path) -> None:
     assert bare["project_instructions_loaded"] is False and bare["first_call"] is None
 
 
+def test_a_trial_can_point_at_a_session_transcript(tmp_path: Path) -> None:
+    session_dir = tmp_path / "projects" / "C--trial"
+    simple_agent(session_dir, "x", 2)
+    (session_dir / "agent-x.jsonl").rename(session_dir / "0000-session.jsonl")
+    trial = {"id": "T1", "arm": "A", "agent_id": "0000-session", "transcript": str(session_dir / "0000-session.jsonl")}
+    via_path = tool.trial_metrics(trial, str(tmp_path / "unused"), tool.DEFAULT_WEIGHTS)
+    simple_agent(tmp_path, "y", 2)
+    via_dir = tool.trial_metrics({"id": "T2", "arm": "A", "agent_id": "y"}, str(tmp_path), tool.DEFAULT_WEIGHTS)
+    assert via_path["weighted_cost"] == via_dir["weighted_cost"] > 0
+
+
 def test_transcript_span_and_missing_file(tmp_path: Path) -> None:
     simple_agent(tmp_path, "a6", 1)
     assert tool.load_agent(str(tmp_path), "a6")["transcript_span_s"] == 30.0

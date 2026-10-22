@@ -768,6 +768,227 @@
           }
         }
       ]
+    },
+    {
+      "id": "exp5",
+      "title": "Experiment 5: clean replication in project-rooted sessions",
+      "date": "2026-10-22",
+      "version": "v1.2.0",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "project_tokens": 55600,
+      "arms": [
+        {
+          "id": "A",
+          "label": "Bare project (baseline)",
+          "map": false,
+          "rules_preloaded": false,
+          "gate": "off"
+        },
+        {
+          "id": "N",
+          "label": "Framework, rules not preloaded (AGENTS.md only), gate off",
+          "map": true,
+          "rules_preloaded": false,
+          "gate": "off"
+        },
+        {
+          "id": "NG",
+          "label": "Framework, rules not preloaded, map gate on",
+          "map": true,
+          "rules_preloaded": false,
+          "gate": "map-first"
+        },
+        {
+          "id": "P",
+          "label": "Framework, rules preloaded (CLAUDE.md), gate off",
+          "map": true,
+          "rules_preloaded": true,
+          "gate": "off"
+        },
+        {
+          "id": "PG",
+          "label": "Framework, rules preloaded, map gate on (as shipped)",
+          "map": true,
+          "rules_preloaded": true,
+          "gate": "map-first"
+        }
+      ],
+      "comparisons": [
+        {
+          "name": "Gate, rules not preloaded: exp3 replication (NG vs N)",
+          "a": "N",
+          "b": "NG"
+        },
+        {
+          "name": "Preloading the rules (P vs N)",
+          "a": "N",
+          "b": "P"
+        },
+        {
+          "name": "Gate, rules preloaded: adopter setup (PG vs P)",
+          "a": "P",
+          "b": "PG"
+        },
+        {
+          "name": "Shipped framework vs bare project (PG vs A)",
+          "a": "A",
+          "b": "PG"
+        },
+        {
+          "name": "Framework layer, not preloaded (N vs A)",
+          "a": "A",
+          "b": "N"
+        }
+      ],
+      "harness": {
+        "runner": "headless Claude Code, one session per trial, working directory = the trial's own copy",
+        "command": "claude -p PROMPT --model claude-sonnet-5 --setting-sources project --strict-mcp-config --disable-slash-commands --permission-mode acceptEdits --allowedTools Bash,PowerShell,Read,Edit,Write,Glob,Grep --output-format json --session-id UUID",
+        "client": "Claude Code 2.1.304 (bundled with the desktop app); experiments 1-4 used 2.1.275",
+        "environment": "CLAUDE*/ANTHROPIC_* session variables of the parent removed; no user settings, MCP servers, skills or user CLAUDE.md",
+        "rules_preloaded_means": "the trial directory contains CLAUDE.md, which Claude Code loads at session start; arms N and NG have AGENTS.md only (map row for CLAUDE.md removed)",
+        "gate_means": "the trial directory's own .claude/settings.json runs .claude/hooks/map_gate.py (shipped logic, no opt-ins)"
+      },
+      "preregistration": {
+        "recorded_before_any_trial": true,
+        "recorded_at": "2026-10-22T10:51:13+00:00",
+        "question": "Does enforcing Rule 1 save cost when no rules leak into the context (replicating experiment 3), and does preloading the rules (as Claude Code does for a real adopter) change cost or behavior?",
+        "design": "5 arms x 5 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
+        "seed": 20261022,
+        "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
+        "secondary_metrics": [
+          "new_tokens",
+          "all_in_tokens",
+          "search_output_tokens",
+          "tool_calls",
+          "turns",
+          "latency",
+          "blocked_calls",
+          "first call is a whole-tree Glob",
+          "acceptance (8/8)",
+          "mutation (4/4)",
+          "end-to-end test added",
+          "legacy module opened"
+        ],
+        "hypotheses": [
+          "H1 (replication): NG costs at least 10% less than N.",
+          "H2 (preloading): P costs at least 10% less than N.",
+          "H3 (gate in the adopter setup): PG differs from P (direction not predicted).",
+          "H4 (as shipped): PG compared with A (direction not predicted)."
+        ],
+        "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
+        "decision_rules": [
+          "H1 is supported if the NG median is at least 10% below the N median; refuted if NG is within 10% of N or above it.",
+          "H2 is supported if the P median is at least 10% below the N median.",
+          "H3 and H4 are reported as: cheaper (at least 10% lower), more expensive (at least 10% higher), or no meaningful difference."
+        ],
+        "manipulation_check": "Before scoring, every trial's starting attachments must show project instructions loaded if and only if the arm is P or PG, and no other CLAUDE.md content. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
+        "pilot": "Two pilot trials (NG and P) verify the harness before the schedule starts; they are reported separately and not pooled.",
+        "statistics": "Exact permutation test on mean weighted cost per comparison (n=5 per arm: minimum one-sided p = 1/252). Reported, not used as the decision rule.",
+        "stopping_rule": "All 25 trials run. No trial is excluded for its outcome, including trials with hung commands."
+      },
+      "schedule": [
+        {
+          "block": 1,
+          "arm": "N"
+        },
+        {
+          "block": 1,
+          "arm": "P"
+        },
+        {
+          "block": 1,
+          "arm": "A"
+        },
+        {
+          "block": 1,
+          "arm": "PG"
+        },
+        {
+          "block": 1,
+          "arm": "NG"
+        },
+        {
+          "block": 2,
+          "arm": "P"
+        },
+        {
+          "block": 2,
+          "arm": "NG"
+        },
+        {
+          "block": 2,
+          "arm": "A"
+        },
+        {
+          "block": 2,
+          "arm": "PG"
+        },
+        {
+          "block": 2,
+          "arm": "N"
+        },
+        {
+          "block": 3,
+          "arm": "P"
+        },
+        {
+          "block": 3,
+          "arm": "NG"
+        },
+        {
+          "block": 3,
+          "arm": "A"
+        },
+        {
+          "block": 3,
+          "arm": "N"
+        },
+        {
+          "block": 3,
+          "arm": "PG"
+        },
+        {
+          "block": 4,
+          "arm": "PG"
+        },
+        {
+          "block": 4,
+          "arm": "A"
+        },
+        {
+          "block": 4,
+          "arm": "P"
+        },
+        {
+          "block": 4,
+          "arm": "NG"
+        },
+        {
+          "block": 4,
+          "arm": "N"
+        },
+        {
+          "block": 5,
+          "arm": "P"
+        },
+        {
+          "block": 5,
+          "arm": "A"
+        },
+        {
+          "block": 5,
+          "arm": "NG"
+        },
+        {
+          "block": 5,
+          "arm": "PG"
+        },
+        {
+          "block": 5,
+          "arm": "N"
+        }
+      ],
+      "trials": []
     }
   ]
 }

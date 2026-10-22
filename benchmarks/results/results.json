@@ -2299,6 +2299,729 @@
         }
       ],
       "version": "v1.1.0"
+    },
+    {
+      "arms": [
+        {
+          "gate": "off",
+          "id": "A",
+          "label": "Bare project (baseline)",
+          "map": false,
+          "rules_preloaded": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "blocked_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "cache_read_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "latency_s": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "new_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "search_output_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "tool_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "turns": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "weighted_cost": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              }
+            },
+            "n": 0,
+            "quality": {
+              "acceptance_full_rate": null,
+              "e2e_test_rate": null,
+              "mutation_full_rate": null,
+              "opened_legacy_rate": null,
+              "project_instructions_rate": null,
+              "whole_tree_glob_first_rate": null
+            }
+          }
+        },
+        {
+          "gate": "off",
+          "id": "N",
+          "label": "Framework, rules not preloaded (AGENTS.md only), gate off",
+          "map": true,
+          "rules_preloaded": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "blocked_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "cache_read_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "latency_s": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "new_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "search_output_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "tool_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "turns": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "weighted_cost": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              }
+            },
+            "n": 0,
+            "quality": {
+              "acceptance_full_rate": null,
+              "e2e_test_rate": null,
+              "mutation_full_rate": null,
+              "opened_legacy_rate": null,
+              "project_instructions_rate": null,
+              "whole_tree_glob_first_rate": null
+            }
+          }
+        },
+        {
+          "gate": "map-first",
+          "id": "NG",
+          "label": "Framework, rules not preloaded, map gate on",
+          "map": true,
+          "rules_preloaded": false,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "blocked_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "cache_read_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "latency_s": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "new_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "search_output_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "tool_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "turns": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "weighted_cost": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              }
+            },
+            "n": 0,
+            "quality": {
+              "acceptance_full_rate": null,
+              "e2e_test_rate": null,
+              "mutation_full_rate": null,
+              "opened_legacy_rate": null,
+              "project_instructions_rate": null,
+              "whole_tree_glob_first_rate": null
+            }
+          }
+        },
+        {
+          "gate": "off",
+          "id": "P",
+          "label": "Framework, rules preloaded (CLAUDE.md), gate off",
+          "map": true,
+          "rules_preloaded": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "blocked_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "cache_read_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "latency_s": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "new_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "search_output_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "tool_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "turns": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "weighted_cost": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              }
+            },
+            "n": 0,
+            "quality": {
+              "acceptance_full_rate": null,
+              "e2e_test_rate": null,
+              "mutation_full_rate": null,
+              "opened_legacy_rate": null,
+              "project_instructions_rate": null,
+              "whole_tree_glob_first_rate": null
+            }
+          }
+        },
+        {
+          "gate": "map-first",
+          "id": "PG",
+          "label": "Framework, rules preloaded, map gate on (as shipped)",
+          "map": true,
+          "rules_preloaded": true,
+          "summary": {
+            "metrics": {
+              "all_in_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "blocked_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "cache_read_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "latency_s": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "new_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "search_output_tokens": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "tool_calls": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "turns": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              },
+              "weighted_cost": {
+                "max": null,
+                "mean": null,
+                "median": null,
+                "min": null,
+                "n": 0
+              }
+            },
+            "n": 0,
+            "quality": {
+              "acceptance_full_rate": null,
+              "e2e_test_rate": null,
+              "mutation_full_rate": null,
+              "opened_legacy_rate": null,
+              "project_instructions_rate": null,
+              "whole_tree_glob_first_rate": null
+            }
+          }
+        }
+      ],
+      "comparisons": [
+        {
+          "a": "N",
+          "b": "NG",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "tool_calls": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            }
+          },
+          "name": "Gate, rules not preloaded: exp3 replication (NG vs N)"
+        },
+        {
+          "a": "N",
+          "b": "P",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "tool_calls": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            }
+          },
+          "name": "Preloading the rules (P vs N)"
+        },
+        {
+          "a": "P",
+          "b": "PG",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "tool_calls": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            }
+          },
+          "name": "Gate, rules preloaded: adopter setup (PG vs P)"
+        },
+        {
+          "a": "A",
+          "b": "PG",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "tool_calls": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            }
+          },
+          "name": "Shipped framework vs bare project (PG vs A)"
+        },
+        {
+          "a": "A",
+          "b": "N",
+          "metrics": {
+            "new_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "search_output_tokens": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "tool_calls": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            },
+            "weighted_cost": {
+              "p_one_sided_lower": null,
+              "p_two_sided": null,
+              "ratio_of_means": null,
+              "ratio_of_medians": null
+            }
+          },
+          "name": "Framework layer, not preloaded (N vs A)"
+        }
+      ],
+      "date": "2026-10-22",
+      "fixture": "benchmarks/shipdesk-large (224 files, ~55,600 tokens)",
+      "id": "exp5",
+      "preregistration": {
+        "decision_rules": [
+          "H1 is supported if the NG median is at least 10% below the N median; refuted if NG is within 10% of N or above it.",
+          "H2 is supported if the P median is at least 10% below the N median.",
+          "H3 and H4 are reported as: cheaper (at least 10% lower), more expensive (at least 10% higher), or no meaningful difference."
+        ],
+        "design": "5 arms x 5 blocks; each block runs every arm once in a seeded random order. Sessions are rooted in each trial's directory.",
+        "hypotheses": [
+          "H1 (replication): NG costs at least 10% less than N.",
+          "H2 (preloading): P costs at least 10% less than N.",
+          "H3 (gate in the adopter setup): PG differs from P (direction not predicted).",
+          "H4 (as shipped): PG compared with A (direction not predicted)."
+        ],
+        "manipulation_check": "Before scoring, every trial's starting attachments must show project instructions loaded if and only if the arm is P or PG, and no other CLAUDE.md content. If any trial fails, the run stops; results from a failed harness are not pooled, and the failure is reported.",
+        "materiality": "A difference of medians below 10% is treated as no meaningful difference.",
+        "pilot": "Two pilot trials (NG and P) verify the harness before the schedule starts; they are reported separately and not pooled.",
+        "primary_metric": "weighted_cost (input x1 + cache write x1.25 + cache read x0.1 + output x5), derived from transcripts",
+        "question": "Does enforcing Rule 1 save cost when no rules leak into the context (replicating experiment 3), and does preloading the rules (as Claude Code does for a real adopter) change cost or behavior?",
+        "recorded_at": "2026-10-22T10:51:13+00:00",
+        "recorded_before_any_trial": true,
+        "secondary_metrics": [
+          "new_tokens",
+          "all_in_tokens",
+          "search_output_tokens",
+          "tool_calls",
+          "turns",
+          "latency",
+          "blocked_calls",
+          "first call is a whole-tree Glob",
+          "acceptance (8/8)",
+          "mutation (4/4)",
+          "end-to-end test added",
+          "legacy module opened"
+        ],
+        "seed": 20261022,
+        "statistics": "Exact permutation test on mean weighted cost per comparison (n=5 per arm: minimum one-sided p = 1/252). Reported, not used as the decision rule.",
+        "stopping_rule": "All 25 trials run. No trial is excluded for its outcome, including trials with hung commands."
+      },
+      "project_tokens": 55600,
+      "schedule": [
+        {
+          "arm": "N",
+          "block": 1
+        },
+        {
+          "arm": "P",
+          "block": 1
+        },
+        {
+          "arm": "A",
+          "block": 1
+        },
+        {
+          "arm": "PG",
+          "block": 1
+        },
+        {
+          "arm": "NG",
+          "block": 1
+        },
+        {
+          "arm": "P",
+          "block": 2
+        },
+        {
+          "arm": "NG",
+          "block": 2
+        },
+        {
+          "arm": "A",
+          "block": 2
+        },
+        {
+          "arm": "PG",
+          "block": 2
+        },
+        {
+          "arm": "N",
+          "block": 2
+        },
+        {
+          "arm": "P",
+          "block": 3
+        },
+        {
+          "arm": "NG",
+          "block": 3
+        },
+        {
+          "arm": "A",
+          "block": 3
+        },
+        {
+          "arm": "N",
+          "block": 3
+        },
+        {
+          "arm": "PG",
+          "block": 3
+        },
+        {
+          "arm": "PG",
+          "block": 4
+        },
+        {
+          "arm": "A",
+          "block": 4
+        },
+        {
+          "arm": "P",
+          "block": 4
+        },
+        {
+          "arm": "NG",
+          "block": 4
+        },
+        {
+          "arm": "N",
+          "block": 4
+        },
+        {
+          "arm": "P",
+          "block": 5
+        },
+        {
+          "arm": "A",
+          "block": 5
+        },
+        {
+          "arm": "NG",
+          "block": 5
+        },
+        {
+          "arm": "PG",
+          "block": 5
+        },
+        {
+          "arm": "N",
+          "block": 5
+        }
+      ],
+      "title": "Experiment 5: clean replication in project-rooted sessions",
+      "trials": [],
+      "version": "v1.2.0"
     }
   ],
   "generated_by": "benchmarks/analyze_transcripts.py",
