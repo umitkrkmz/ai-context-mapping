@@ -14,9 +14,9 @@ a reference benchmark, a scaling model, and a script to measure your own reposit
 > *requested*, they found **no token savings**: the baseline agents did not scan the repository (they
 > listed files and grepped, reading 10-12 files, about 3% of the project), their cost stayed flat while
 > the project grew 12.7x, and they mostly ignored the instruction to read the map. With the map *enforced*
-> by a hook, one experiment saw a 27% lower median cost (three trials per arm). It has not been
-> replicated under the same conditions (a later re-test had a harness confound), so treat the saving as
-> unconfirmed. The "naive
+> by a hook, one experiment saw a 27% lower median cost (three trials per arm), for agents without the
+> rules in context. In the adopter setup (experiment 5) the framework cost 38% more than a bare project, so
+> treat the model below as a worst-case bound, not a prediction of savings. The "naive
 > whole-repository read" below is therefore a **worst-case model of an unguided agent**, not a
 > description of the agents tested, and its percentages are an upper bound. Whether the map pays off
 > in much larger repositories, or for symptoms that cannot be grepped, is untested.

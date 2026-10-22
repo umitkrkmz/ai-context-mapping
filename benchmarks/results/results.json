@@ -1,10 +1,11 @@
 {
   "environment": {
     "claude_code_versions": [
-      "2.1.275"
+      "2.1.275",
+      "2.1.304"
     ],
     "model_trial_counts": {
-      "claude-sonnet-5": 30
+      "claude-sonnet-5": 54
     },
     "models": [
       "claude-sonnet-5"
@@ -88,10 +89,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 1.0,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -170,10 +171,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.0,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         }
@@ -237,6 +238,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 63951,
           "id": "A",
           "latency_s": 48.4,
@@ -250,8 +252,7 @@
           "search_output_tokens": 1148,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 148721,
-          "whole_tree_glob_first": true
+          "weighted_cost": 148721
         },
         {
           "acceptance": "8/8",
@@ -273,6 +274,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 85805,
           "id": "B",
           "latency_s": 66.1,
@@ -286,8 +288,7 @@
           "search_output_tokens": 1635,
           "tool_calls": 18,
           "turns": 11,
-          "weighted_cost": 160450,
-          "whole_tree_glob_first": true
+          "weighted_cost": 160450
         }
       ],
       "version": "v1.0.1"
@@ -369,10 +370,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.3333,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -451,10 +452,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.3333,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.0,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         }
@@ -518,6 +519,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 76988,
           "id": "A1",
           "latency_s": 45.5,
@@ -531,8 +533,7 @@
           "search_output_tokens": 6714,
           "tool_calls": 19,
           "turns": 7,
-          "weighted_cost": 158703,
-          "whole_tree_glob_first": true
+          "weighted_cost": 158703
         },
         {
           "acceptance": "8/8",
@@ -554,6 +555,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 88391,
           "id": "B1",
           "latency_s": 47.5,
@@ -567,8 +569,7 @@
           "search_output_tokens": 6758,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 149836,
-          "whole_tree_glob_first": true
+          "weighted_cost": 149836
         },
         {
           "acceptance": "8/8",
@@ -590,6 +591,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 102629,
           "id": "B2",
           "latency_s": 219.7,
@@ -603,8 +605,7 @@
           "search_output_tokens": 5057,
           "tool_calls": 24,
           "turns": 15,
-          "weighted_cost": 245991,
-          "whole_tree_glob_first": true
+          "weighted_cost": 245991
         },
         {
           "acceptance": "8/8",
@@ -626,6 +627,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 82636,
           "id": "A2",
           "latency_s": 44.0,
@@ -639,8 +641,7 @@
           "search_output_tokens": 9449,
           "tool_calls": 18,
           "turns": 9,
-          "weighted_cost": 136997,
-          "whole_tree_glob_first": true
+          "weighted_cost": 136997
         },
         {
           "acceptance": "8/8",
@@ -662,6 +663,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 81993,
           "id": "A3",
           "latency_s": 57.2,
@@ -675,8 +677,7 @@
           "search_output_tokens": 8407,
           "tool_calls": 20,
           "turns": 10,
-          "weighted_cost": 150887,
-          "whole_tree_glob_first": true
+          "weighted_cost": 150887
         },
         {
           "acceptance": "8/8",
@@ -698,6 +699,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 91745,
           "id": "B3",
           "latency_s": 52.8,
@@ -711,8 +713,7 @@
           "search_output_tokens": 5771,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 154071,
-          "whole_tree_glob_first": true
+          "weighted_cost": 154071
         }
       ],
       "version": "v1.0.2"
@@ -794,10 +795,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.6667,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.6667,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -876,10 +877,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.0,
+              "first_call_search_rate": 1.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.0,
-              "project_instructions_rate": 0.0,
-              "whole_tree_glob_first_rate": 1.0
+              "project_instructions_rate": 0.0
             }
           }
         }
@@ -943,6 +944,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 81036,
           "id": "Bn1",
           "latency_s": 56.0,
@@ -956,8 +958,7 @@
           "search_output_tokens": 6903,
           "tool_calls": 9,
           "turns": 9,
-          "weighted_cost": 177470,
-          "whole_tree_glob_first": true
+          "weighted_cost": 177470
         },
         {
           "acceptance": "8/8",
@@ -979,6 +980,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 71550,
           "id": "Bg1",
           "latency_s": 47.5,
@@ -992,8 +994,7 @@
           "search_output_tokens": 655,
           "tool_calls": 15,
           "turns": 9,
-          "weighted_cost": 117632,
-          "whole_tree_glob_first": true
+          "weighted_cost": 117632
         },
         {
           "acceptance": "8/8",
@@ -1015,6 +1016,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 83856,
           "id": "Bg2",
           "latency_s": 53.8,
@@ -1028,8 +1030,7 @@
           "search_output_tokens": 39,
           "tool_calls": 15,
           "turns": 8,
-          "weighted_cost": 129379,
-          "whole_tree_glob_first": true
+          "weighted_cost": 129379
         },
         {
           "acceptance": "8/8",
@@ -1051,6 +1052,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 78320,
           "id": "Bn2",
           "latency_s": 176.6,
@@ -1064,8 +1066,7 @@
           "search_output_tokens": 6844,
           "tool_calls": 10,
           "turns": 9,
-          "weighted_cost": 132854,
-          "whole_tree_glob_first": true
+          "weighted_cost": 132854
         },
         {
           "acceptance": "8/8",
@@ -1087,6 +1088,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 88758,
           "id": "Bn3",
           "latency_s": 59.6,
@@ -1100,8 +1102,7 @@
           "search_output_tokens": 6022,
           "tool_calls": 18,
           "turns": 10,
-          "weighted_cost": 160199,
-          "whole_tree_glob_first": true
+          "weighted_cost": 160199
         },
         {
           "acceptance": "8/8",
@@ -1123,6 +1124,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 69851,
           "id": "Bg3",
           "latency_s": 40.2,
@@ -1136,8 +1138,7 @@
           "search_output_tokens": 39,
           "tool_calls": 14,
           "turns": 8,
-          "weighted_cost": 105371,
-          "whole_tree_glob_first": true
+          "weighted_cost": 105371
         }
       ],
       "version": "v1.0.4"
@@ -1219,10 +1220,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
+              "first_call_search_rate": 0.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.25,
-              "project_instructions_rate": 1.0,
-              "whole_tree_glob_first_rate": 0.0
+              "project_instructions_rate": 1.0
             }
           }
         },
@@ -1301,10 +1302,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.0,
+              "first_call_search_rate": 0.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.25,
-              "project_instructions_rate": 1.0,
-              "whole_tree_glob_first_rate": 0.0
+              "project_instructions_rate": 1.0
             }
           }
         },
@@ -1383,10 +1384,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
+              "first_call_search_rate": 0.25,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.75,
-              "project_instructions_rate": 1.0,
-              "whole_tree_glob_first_rate": 0.25
+              "project_instructions_rate": 1.0
             }
           }
         },
@@ -1465,10 +1466,10 @@
             "quality": {
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
+              "first_call_search_rate": 0.0,
               "mutation_full_rate": 1.0,
               "opened_legacy_rate": 0.0,
-              "project_instructions_rate": 1.0,
-              "whole_tree_glob_first_rate": 0.0
+              "project_instructions_rate": 1.0
             }
           }
         }
@@ -1726,6 +1727,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 74154,
           "id": "D1",
           "latency_s": 61.5,
@@ -1739,8 +1741,7 @@
           "search_output_tokens": 0,
           "tool_calls": 18,
           "turns": 9,
-          "weighted_cost": 169933,
-          "whole_tree_glob_first": false
+          "weighted_cost": 169933
         },
         {
           "acceptance": "8/8",
@@ -1763,6 +1764,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 73010,
           "id": "B1",
           "latency_s": 41.7,
@@ -1776,8 +1778,7 @@
           "search_output_tokens": 613,
           "tool_calls": 13,
           "turns": 8,
-          "weighted_cost": 112001,
-          "whole_tree_glob_first": false
+          "weighted_cost": 112001
         },
         {
           "acceptance": "8/8",
@@ -1800,6 +1801,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 69275,
           "id": "A1",
           "latency_s": 44.8,
@@ -1813,8 +1815,7 @@
           "search_output_tokens": 3639,
           "tool_calls": 8,
           "turns": 8,
-          "weighted_cost": 104639,
-          "whole_tree_glob_first": false
+          "weighted_cost": 104639
         },
         {
           "acceptance": "8/8",
@@ -1837,6 +1838,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
+          "first_call_is_search": true,
           "harness_subagent_tokens": 70210,
           "id": "C1",
           "latency_s": 51.4,
@@ -1850,8 +1852,7 @@
           "search_output_tokens": 166,
           "tool_calls": 10,
           "turns": 9,
-          "weighted_cost": 156490,
-          "whole_tree_glob_first": true
+          "weighted_cost": 156490
         },
         {
           "acceptance": "8/8",
@@ -1874,6 +1875,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "PowerShell(Get-ChildItem -Force \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-13)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 63638,
           "id": "C2",
           "latency_s": 46.0,
@@ -1887,8 +1889,7 @@
           "search_output_tokens": 0,
           "tool_calls": 13,
           "turns": 9,
-          "weighted_cost": 101357,
-          "whole_tree_glob_first": false
+          "weighted_cost": 101357
         },
         {
           "acceptance": "8/8",
@@ -1911,6 +1912,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 66274,
           "id": "A2",
           "latency_s": 34.4,
@@ -1924,8 +1926,7 @@
           "search_output_tokens": 4332,
           "tool_calls": 6,
           "turns": 7,
-          "weighted_cost": 90685,
-          "whole_tree_glob_first": false
+          "weighted_cost": 90685
         },
         {
           "acceptance": "8/8",
@@ -1948,6 +1949,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 70738,
           "id": "B2",
           "latency_s": 40.1,
@@ -1961,8 +1963,7 @@
           "search_output_tokens": 556,
           "tool_calls": 12,
           "turns": 8,
-          "weighted_cost": 107761,
-          "whole_tree_glob_first": false
+          "weighted_cost": 107761
         },
         {
           "acceptance": "8/8",
@@ -1985,6 +1986,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 75100,
           "id": "D2",
           "latency_s": 41.9,
@@ -1998,8 +2000,7 @@
           "search_output_tokens": 2427,
           "tool_calls": 11,
           "turns": 7,
-          "weighted_cost": 109058,
-          "whole_tree_glob_first": false
+          "weighted_cost": 109058
         },
         {
           "acceptance": "8/8",
@@ -2022,6 +2023,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 61215,
           "id": "C3",
           "latency_s": 39.2,
@@ -2035,8 +2037,7 @@
           "search_output_tokens": 574,
           "tool_calls": 9,
           "turns": 9,
-          "weighted_cost": 94843,
-          "whole_tree_glob_first": false
+          "weighted_cost": 94843
         },
         {
           "acceptance": "8/8",
@@ -2059,6 +2060,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 63176,
           "id": "A3",
           "latency_s": 37.6,
@@ -2072,8 +2074,7 @@
           "search_output_tokens": 613,
           "tool_calls": 12,
           "turns": 8,
-          "weighted_cost": 93882,
-          "whole_tree_glob_first": false
+          "weighted_cost": 93882
         },
         {
           "acceptance": "8/8",
@@ -2096,6 +2097,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 70876,
           "id": "B3",
           "latency_s": 43.1,
@@ -2109,8 +2111,7 @@
           "search_output_tokens": 122,
           "tool_calls": 13,
           "turns": 7,
-          "weighted_cost": 104072,
-          "whole_tree_glob_first": false
+          "weighted_cost": 104072
         },
         {
           "acceptance": "8/8",
@@ -2133,6 +2134,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Glob(*)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 70588,
           "id": "D3",
           "latency_s": 43.1,
@@ -2146,8 +2148,7 @@
           "search_output_tokens": 0,
           "tool_calls": 12,
           "turns": 7,
-          "weighted_cost": 101545,
-          "whole_tree_glob_first": false
+          "weighted_cost": 101545
         },
         {
           "acceptance": "8/8",
@@ -2170,6 +2171,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 66386,
           "id": "A4",
           "latency_s": 45.2,
@@ -2183,8 +2185,7 @@
           "search_output_tokens": 2963,
           "tool_calls": 6,
           "turns": 7,
-          "weighted_cost": 95041,
-          "whole_tree_glob_first": false
+          "weighted_cost": 95041
         },
         {
           "acceptance": "8/8",
@@ -2207,6 +2208,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 72669,
           "id": "D4",
           "latency_s": 51.3,
@@ -2220,8 +2222,7 @@
           "search_output_tokens": 0,
           "tool_calls": 15,
           "turns": 8,
-          "weighted_cost": 115171,
-          "whole_tree_glob_first": false
+          "weighted_cost": 115171
         },
         {
           "acceptance": "8/8",
@@ -2244,6 +2245,7 @@
           ],
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 64662,
           "id": "C4",
           "latency_s": 53.1,
@@ -2257,8 +2259,7 @@
           "search_output_tokens": 242,
           "tool_calls": 17,
           "turns": 11,
-          "weighted_cost": 120211,
-          "whole_tree_glob_first": false
+          "weighted_cost": 120211
         },
         {
           "acceptance": "8/8",
@@ -2281,6 +2282,7 @@
           ],
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
           "harness_subagent_tokens": 69351,
           "id": "B4",
           "latency_s": 36.0,
@@ -2294,8 +2296,7 @@
           "search_output_tokens": 0,
           "tool_calls": 10,
           "turns": 6,
-          "weighted_cost": 91264,
-          "whole_tree_glob_first": false
+          "weighted_cost": 91264
         }
       ],
       "version": "v1.1.0"
@@ -2311,77 +2312,77 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 444476.0,
+                "mean": 351352.25,
+                "median": 350539.5,
+                "min": 239232.0,
+                "n": 8
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 8
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 423887.0,
+                "mean": 332906.62,
+                "median": 332424.5,
+                "min": 223259.0,
+                "n": 8
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 66.3,
+                "mean": 46.89,
+                "median": 44.9,
+                "min": 33.4,
+                "n": 8
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 20589.0,
+                "mean": 18445.62,
+                "median": 18720.0,
+                "min": 15973.0,
+                "n": 8
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 2053.0,
+                "mean": 1318.38,
+                "median": 1232.0,
+                "min": 703.0,
+                "n": 8
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 13.0,
+                "mean": 10.5,
+                "median": 10.5,
+                "min": 8.0,
+                "n": 8
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 12.0,
+                "mean": 9.88,
+                "median": 10.0,
+                "min": 7.0,
+                "n": 8
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 80299.0,
+                "mean": 68246.12,
+                "median": 69838.0,
+                "min": 51870.0,
+                "n": 8
               }
             },
-            "n": 0,
+            "n": 8,
             "quality": {
-              "acceptance_full_rate": null,
-              "e2e_test_rate": null,
-              "mutation_full_rate": null,
-              "opened_legacy_rate": null,
-              "project_instructions_rate": null,
-              "whole_tree_glob_first_rate": null
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.0,
+              "first_call_search_rate": 1.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.375,
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -2394,77 +2395,77 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 599675.0,
+                "mean": 487384.75,
+                "median": 487236.0,
+                "min": 419464.0,
+                "n": 8
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 8
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 569914.0,
+                "mean": 459602.88,
+                "median": 459536.5,
+                "min": 392609.0,
+                "n": 8
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 76.3,
+                "mean": 64.58,
+                "median": 62.9,
+                "min": 52.7,
+                "n": 8
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 29761.0,
+                "mean": 27781.88,
+                "median": 27699.5,
+                "min": 26390.0,
+                "n": 8
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 247.0,
+                "mean": 59.75,
+                "median": 34.0,
+                "min": 5.0,
+                "n": 8
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 15.0,
+                "mean": 13.0,
+                "median": 13.0,
+                "min": 11.0,
+                "n": 8
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 14.0,
+                "mean": 11.5,
+                "median": 11.5,
+                "min": 10.0,
+                "n": 8
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 113749.0,
+                "mean": 96915.62,
+                "median": 96212.0,
+                "min": 86236.0,
+                "n": 8
               }
             },
-            "n": 0,
+            "n": 8,
             "quality": {
-              "acceptance_full_rate": null,
-              "e2e_test_rate": null,
-              "mutation_full_rate": null,
-              "opened_legacy_rate": null,
-              "project_instructions_rate": null,
-              "whole_tree_glob_first_rate": null
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.0,
+              "first_call_search_rate": 0.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.125,
+              "project_instructions_rate": 1.0
             }
           }
         },
@@ -2477,77 +2478,77 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 559316.0,
+                "mean": 486325.38,
+                "median": 470249.0,
+                "min": 425767.0,
+                "n": 8
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 8
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 529597.0,
+                "mean": 457931.88,
+                "median": 442086.5,
+                "min": 398414.0,
+                "n": 8
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 74.4,
+                "mean": 65.59,
+                "median": 65.25,
+                "min": 58.2,
+                "n": 8
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 29893.0,
+                "mean": 28393.5,
+                "median": 28162.5,
+                "min": 27353.0,
+                "n": 8
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 153.0,
+                "mean": 39.88,
+                "median": 5.0,
+                "min": 0.0,
+                "n": 8
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 15.0,
+                "mean": 13.38,
+                "median": 13.0,
+                "min": 12.0,
+                "n": 8
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 13.0,
+                "mean": 11.38,
+                "median": 11.0,
+                "min": 10.0,
+                "n": 8
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 106666.0,
+                "mean": 97347.25,
+                "median": 95008.5,
+                "min": 88851.0,
+                "n": 8
               }
             },
-            "n": 0,
+            "n": 8,
             "quality": {
-              "acceptance_full_rate": null,
-              "e2e_test_rate": null,
-              "mutation_full_rate": null,
-              "opened_legacy_rate": null,
-              "project_instructions_rate": null,
-              "whole_tree_glob_first_rate": null
+              "acceptance_full_rate": 1.0,
+              "e2e_test_rate": 0.0,
+              "first_call_search_rate": 0.0,
+              "mutation_full_rate": 1.0,
+              "opened_legacy_rate": 0.0,
+              "project_instructions_rate": 1.0
             }
           }
         }
@@ -2558,28 +2559,28 @@
           "b": "P",
           "metrics": {
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 1.5062,
+              "ratio_of_medians": 1.4797
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0001,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 0.0453,
+              "ratio_of_medians": 0.0276
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.9992,
+              "p_two_sided": 0.0067,
+              "ratio_of_means": 1.2381,
+              "ratio_of_medians": 1.2381
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 1.4201,
+              "ratio_of_medians": 1.3776
             }
           },
           "name": "Framework with rules preloaded vs bare project (P vs A)"
@@ -2589,28 +2590,28 @@
           "b": "PG",
           "metrics": {
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.8636,
+              "p_two_sided": 0.273,
+              "ratio_of_means": 1.022,
+              "ratio_of_medians": 1.0167
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.2949,
+              "p_two_sided": 0.5897,
+              "ratio_of_means": 0.6674,
+              "ratio_of_medians": 0.1471
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.7979,
+              "p_two_sided": 0.6783,
+              "ratio_of_means": 1.0292,
+              "ratio_of_medians": 1.0
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.5414,
+              "p_two_sided": 0.9173,
+              "ratio_of_means": 1.0045,
+              "ratio_of_medians": 0.9875
             }
           },
           "name": "Gate, rules preloaded: adopter setup (PG vs P)"
@@ -2620,28 +2621,28 @@
           "b": "PG",
           "metrics": {
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 1.5393,
+              "ratio_of_medians": 1.5044
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0001,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 0.0302,
+              "ratio_of_medians": 0.0041
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.9998,
+              "p_two_sided": 0.0026,
+              "ratio_of_means": 1.2743,
+              "ratio_of_medians": 1.2381
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 1.0,
+              "p_two_sided": 0.0002,
+              "ratio_of_means": 1.4264,
+              "ratio_of_medians": 1.3604
             }
           },
           "name": "Shipped framework vs bare project (PG vs A)"
@@ -2785,7 +2786,936 @@
         }
       ],
       "title": "Experiment 5: clean replication in project-rooted sessions",
-      "trials": [],
+      "trials": [
+        {
+          "acceptance": "8/8",
+          "agent_id": "d41237bf-9bb2-4f69-a252-7d545527bcc3",
+          "all_in_tokens": 239232,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 223259,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Glob(**/*.py)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A1",
+          "latency_s": 33.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 15973,
+          "opened_legacy_module": false,
+          "order": 1,
+          "output_tokens": 2555,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 703,
+          "tool_calls": 8,
+          "turns": 7,
+          "weighted_cost": 51870
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "d17fc228-ac02-477a-adb7-6a8f972e1e6d",
+          "all_in_tokens": 553954,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 525275,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P1",
+          "latency_s": 73.7,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 28679,
+          "opened_legacy_module": false,
+          "order": 2,
+          "output_tokens": 4833,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 34,
+          "tool_calls": 14,
+          "turns": 13,
+          "weighted_cost": 106494
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "273c87ce-1d4a-4dfe-aff1-af890db5ea9f",
+          "all_in_tokens": 548855,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 519986,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG1",
+          "latency_s": 74.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 28869,
+          "opened_legacy_module": false,
+          "order": 3,
+          "output_tokens": 4453,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 153,
+          "tool_calls": 15,
+          "turns": 13,
+          "weighted_cost": 104777
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "e06a773f-a6cd-4a3b-ac68-87afad2db450",
+          "all_in_tokens": 444476,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 423887,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(find \"/c/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scrat)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A2",
+          "latency_s": 39.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 20589,
+          "opened_legacy_module": true,
+          "order": 4,
+          "output_tokens": 3248,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 2053,
+          "tool_calls": 11,
+          "turns": 12,
+          "weighted_cost": 80299
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "0dbe9260-162e-4e6f-9b1b-8571a2afcc6b",
+          "all_in_tokens": 420853,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 394463,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P2",
+          "latency_s": 56.7,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 26390,
+          "opened_legacy_module": false,
+          "order": 5,
+          "output_tokens": 3682,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 247,
+          "tool_calls": 11,
+          "turns": 10,
+          "weighted_cost": 86236
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "5520f511-87eb-4756-8fdf-5dc89f4a2129",
+          "all_in_tokens": 470149,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 441776,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG2",
+          "latency_s": 64.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 28373,
+          "opened_legacy_module": false,
+          "order": 6,
+          "output_tokens": 4287,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 13,
+          "turns": 11,
+          "weighted_cost": 95715
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "977bc887-3308-4577-9139-bc0b4a3750e5",
+          "all_in_tokens": 420035,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 393198,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P3",
+          "latency_s": 61.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 26837,
+          "opened_legacy_module": true,
+          "order": 7,
+          "output_tokens": 4064,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 34,
+          "tool_calls": 13,
+          "turns": 10,
+          "weighted_cost": 88101
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "3f00fb57-a366-45a1-9ce0-5bcf93e8b336",
+          "all_in_tokens": 519454,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 489561,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG3",
+          "latency_s": 71.4,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 29893,
+          "opened_legacy_module": false,
+          "order": 8,
+          "output_tokens": 4982,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 133,
+          "tool_calls": 14,
+          "turns": 12,
+          "weighted_cost": 104999
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "9ad4fdc6-b0ca-472c-a272-ba7eb8edc884",
+          "all_in_tokens": 284303,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 265886,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(find \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scrat)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A3",
+          "latency_s": 40.8,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 18417,
+          "opened_legacy_module": false,
+          "order": 9,
+          "output_tokens": 2974,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1293,
+          "tool_calls": 12,
+          "turns": 8,
+          "weighted_cost": 60758
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "12a0af86-8ddd-434b-9f8b-9d9d958013f9",
+          "all_in_tokens": 466490,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 439338,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P4",
+          "latency_s": 52.7,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27152,
+          "opened_legacy_module": false,
+          "order": 10,
+          "output_tokens": 3931,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 13,
+          "turns": 11,
+          "weighted_cost": 92610
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "bb9e05fc-4111-4a7c-9009-849776683e78",
+          "all_in_tokens": 470349,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 442397,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG4",
+          "latency_s": 62.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27952,
+          "opened_legacy_module": false,
+          "order": 11,
+          "output_tokens": 4034,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "tool_calls": 12,
+          "turns": 11,
+          "weighted_cost": 94302
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "dac57fb1-b9ec-414c-9229-64cef6f76242",
+          "all_in_tokens": 359284,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 339305,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Glob(**/*.py)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A4",
+          "latency_s": 66.3,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 19979,
+          "opened_legacy_module": true,
+          "order": 12,
+          "output_tokens": 3845,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1171,
+          "tool_calls": 13,
+          "turns": 10,
+          "weighted_cost": 73318
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "3d219052-cc60-4917-990d-046cbff0672b",
+          "all_in_tokens": 507982,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 479735,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P5",
+          "latency_s": 70.5,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 28247,
+          "opened_legacy_module": false,
+          "order": 13,
+          "output_tokens": 4531,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 34,
+          "tool_calls": 13,
+          "turns": 12,
+          "weighted_cost": 100268
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "8faaa753-1a8d-4531-aad7-07a40345ad90",
+          "all_in_tokens": 468758,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 441398,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG5",
+          "latency_s": 59.9,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27360,
+          "opened_legacy_module": false,
+          "order": 14,
+          "output_tokens": 3968,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 13,
+          "turns": 11,
+          "weighted_cost": 93214
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "8cbaad8d-fc88-4b0c-8dc9-cd3ac2bcad8b",
+          "all_in_tokens": 341795,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 325544,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Glob(**/*.py)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A5",
+          "latency_s": 43.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 16251,
+          "opened_legacy_module": true,
+          "order": 15,
+          "output_tokens": 2780,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 736,
+          "tool_calls": 9,
+          "turns": 10,
+          "weighted_cost": 63288
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "e93979b5-58d8-410e-9d04-582ed939e694",
+          "all_in_tokens": 510625,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 482291,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P6",
+          "latency_s": 64.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 28334,
+          "opened_legacy_module": false,
+          "order": 16,
+          "output_tokens": 4313,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 13,
+          "turns": 12,
+          "weighted_cost": 99814
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "b8ca7b88-174f-4c07-ac1d-bd7b740db255",
+          "all_in_tokens": 326318,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 307295,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A6",
+          "latency_s": 46.6,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 19023,
+          "opened_legacy_module": false,
+          "order": 17,
+          "output_tokens": 3161,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1705,
+          "tool_calls": 10,
+          "turns": 9,
+          "weighted_cost": 66358
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "f7767709-efd9-49bb-84d3-9ad01a312641",
+          "all_in_tokens": 427955,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 400326,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG6",
+          "latency_s": 65.9,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27629,
+          "opened_legacy_module": false,
+          "order": 18,
+          "output_tokens": 4184,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 13,
+          "turns": 10,
+          "weighted_cost": 90254
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "1461e4d6-50c4-45a2-9977-a6d4c0bed7dc",
+          "all_in_tokens": 419464,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 392609,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P7",
+          "latency_s": 60.9,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 26855,
+          "opened_legacy_module": false,
+          "order": 19,
+          "output_tokens": 4061,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 5,
+          "tool_calls": 12,
+          "turns": 10,
+          "weighted_cost": 88053
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "c35c25c2-8ecd-424f-9945-bc4376c1ec8a",
+          "all_in_tokens": 559316,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 529597,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG7",
+          "latency_s": 68.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 29719,
+          "opened_legacy_module": false,
+          "order": 20,
+          "output_tokens": 4417,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 18,
+          "tool_calls": 15,
+          "turns": 13,
+          "weighted_cost": 106666
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "fa69c518-31f1-4e3d-a24a-2da92aafb3af",
+          "all_in_tokens": 396868,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 377754,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A7",
+          "latency_s": 51.1,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 19114,
+          "opened_legacy_module": false,
+          "order": 21,
+          "output_tokens": 3276,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1758,
+          "tool_calls": 10,
+          "turns": 11,
+          "weighted_cost": 73947
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "bbb50816-ea74-41ca-b970-34c4da906d5d",
+          "all_in_tokens": 425767,
+          "arm": "PG",
+          "blocked_calls": 0,
+          "cache_read_tokens": 398414,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "PG8",
+          "latency_s": 58.2,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 27353,
+          "opened_legacy_module": false,
+          "order": 22,
+          "output_tokens": 3953,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "tool_calls": 12,
+          "turns": 10,
+          "weighted_cost": 88851
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "d620c725-2f1a-4aaf-a3f6-1e245ae38c58",
+          "all_in_tokens": 599675,
+          "arm": "P",
+          "blocked_calls": 0,
+          "cache_read_tokens": 569914,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "P8",
+          "latency_s": 76.3,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 29761,
+          "opened_legacy_module": false,
+          "order": 23,
+          "output_tokens": 5217,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 114,
+          "tool_calls": 15,
+          "turns": 14,
+          "weighted_cost": 113749
+        },
+        {
+          "acceptance": "8/8",
+          "agent_id": "75838e33-85f0-432a-96ad-ef020c0229c7",
+          "all_in_tokens": 418542,
+          "arm": "A",
+          "blocked_calls": 0,
+          "cache_read_tokens": 400323,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "A8",
+          "latency_s": 54.3,
+          "model": "claude-sonnet-5",
+          "mutation": "4/4",
+          "new_tokens": 18219,
+          "opened_legacy_module": false,
+          "order": 24,
+          "output_tokens": 3555,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1128,
+          "tool_calls": 11,
+          "turns": 12,
+          "weighted_cost": 76131
+        }
+      ],
       "version": "v1.2.0"
     }
   ],

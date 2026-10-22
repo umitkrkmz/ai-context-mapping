@@ -957,7 +957,512 @@
           "arm": "A"
         }
       ],
-      "trials": [],
+      "trials": [
+        {
+          "id": "A1",
+          "arm": "A",
+          "agent_id": "d41237bf-9bb2-4f69-a252-7d545527bcc3",
+          "order": 1,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A1/d41237bf-9bb2-4f69-a252-7d545527bcc3.jsonl",
+          "harness": {
+            "duration_ms": 33438,
+            "api_cost_usd": 0.1238,
+            "num_turns": 9,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P1",
+          "arm": "P",
+          "agent_id": "d17fc228-ac02-477a-adb7-6a8f972e1e6d",
+          "order": 2,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P1/d17fc228-ac02-477a-adb7-6a8f972e1e6d.jsonl",
+          "harness": {
+            "duration_ms": 73743,
+            "api_cost_usd": 0.2487,
+            "num_turns": 15,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG1",
+          "arm": "PG",
+          "agent_id": "273c87ce-1d4a-4dfe-aff1-af890db5ea9f",
+          "order": 3,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG1/273c87ce-1d4a-4dfe-aff1-af890db5ea9f.jsonl",
+          "harness": {
+            "duration_ms": 74391,
+            "api_cost_usd": 0.2461,
+            "num_turns": 16,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A2",
+          "arm": "A",
+          "agent_id": "e06a773f-a6cd-4a3b-ac68-87afad2db450",
+          "order": 4,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A2/e06a773f-a6cd-4a3b-ac68-87afad2db450.jsonl",
+          "harness": {
+            "duration_ms": 39365,
+            "api_cost_usd": 0.1866,
+            "num_turns": 12,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P2",
+          "arm": "P",
+          "agent_id": "0dbe9260-162e-4e6f-9b1b-8571a2afcc6b",
+          "order": 5,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P2/0dbe9260-162e-4e6f-9b1b-8571a2afcc6b.jsonl",
+          "harness": {
+            "duration_ms": 56652,
+            "api_cost_usd": 0.2065,
+            "num_turns": 12,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG2",
+          "arm": "PG",
+          "agent_id": "5520f511-87eb-4756-8fdf-5dc89f4a2129",
+          "order": 6,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG2/5520f511-87eb-4756-8fdf-5dc89f4a2129.jsonl",
+          "harness": {
+            "duration_ms": 64617,
+            "api_cost_usd": 0.2275,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P3",
+          "arm": "P",
+          "agent_id": "977bc887-3308-4577-9139-bc0b4a3750e5",
+          "order": 7,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P3/977bc887-3308-4577-9139-bc0b4a3750e5.jsonl",
+          "harness": {
+            "duration_ms": 61563,
+            "api_cost_usd": 0.2103,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG3",
+          "arm": "PG",
+          "agent_id": "3f00fb57-a366-45a1-9ce0-5bcf93e8b336",
+          "order": 8,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG3/3f00fb57-a366-45a1-9ce0-5bcf93e8b336.jsonl",
+          "harness": {
+            "duration_ms": 71417,
+            "api_cost_usd": 0.2473,
+            "num_turns": 15,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A3",
+          "arm": "A",
+          "agent_id": "9ad4fdc6-b0ca-472c-a272-ba7eb8edc884",
+          "order": 9,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A3/9ad4fdc6-b0ca-472c-a272-ba7eb8edc884.jsonl",
+          "harness": {
+            "duration_ms": 40823,
+            "api_cost_usd": 0.1447,
+            "num_turns": 13,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P4",
+          "arm": "P",
+          "agent_id": "12a0af86-8ddd-434b-9f8b-9d9d958013f9",
+          "order": 10,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P4/12a0af86-8ddd-434b-9f8b-9d9d958013f9.jsonl",
+          "harness": {
+            "duration_ms": 52672,
+            "api_cost_usd": 0.22,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG4",
+          "arm": "PG",
+          "agent_id": "bb9e05fc-4111-4a7c-9009-849776683e78",
+          "order": 11,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG4/bb9e05fc-4111-4a7c-9009-849776683e78.jsonl",
+          "harness": {
+            "duration_ms": 62152,
+            "api_cost_usd": 0.2244,
+            "num_turns": 13,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A4",
+          "arm": "A",
+          "agent_id": "dac57fb1-b9ec-414c-9229-64cef6f76242",
+          "order": 12,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A4/dac57fb1-b9ec-414c-9229-64cef6f76242.jsonl",
+          "harness": {
+            "duration_ms": 66255,
+            "api_cost_usd": 0.1708,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P5",
+          "arm": "P",
+          "agent_id": "3d219052-cc60-4917-990d-046cbff0672b",
+          "order": 13,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P5/3d219052-cc60-4917-990d-046cbff0672b.jsonl",
+          "harness": {
+            "duration_ms": 70495,
+            "api_cost_usd": 0.2361,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG5",
+          "arm": "PG",
+          "agent_id": "8faaa753-1a8d-4531-aad7-07a40345ad90",
+          "order": 14,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG5/8faaa753-1a8d-4531-aad7-07a40345ad90.jsonl",
+          "harness": {
+            "duration_ms": 59946,
+            "api_cost_usd": 0.2215,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A5",
+          "arm": "A",
+          "agent_id": "8cbaad8d-fc88-4b0c-8dc9-cd3ac2bcad8b",
+          "order": 15,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A5/8cbaad8d-fc88-4b0c-8dc9-cd3ac2bcad8b.jsonl",
+          "harness": {
+            "duration_ms": 43250,
+            "api_cost_usd": 0.1468,
+            "num_turns": 10,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": true,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P6",
+          "arm": "P",
+          "agent_id": "e93979b5-58d8-410e-9d04-582ed939e694",
+          "order": 16,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P6/e93979b5-58d8-410e-9d04-582ed939e694.jsonl",
+          "harness": {
+            "duration_ms": 64235,
+            "api_cost_usd": 0.2356,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A6",
+          "arm": "A",
+          "agent_id": "b8ca7b88-174f-4c07-ac1d-bd7b740db255",
+          "order": 17,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A6/b8ca7b88-174f-4c07-ac1d-bd7b740db255.jsonl",
+          "harness": {
+            "duration_ms": 46614,
+            "api_cost_usd": 0.1565,
+            "num_turns": 11,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG6",
+          "arm": "PG",
+          "agent_id": "f7767709-efd9-49bb-84d3-9ad01a312641",
+          "order": 18,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG6/f7767709-efd9-49bb-84d3-9ad01a312641.jsonl",
+          "harness": {
+            "duration_ms": 65942,
+            "api_cost_usd": 0.2156,
+            "num_turns": 14,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P7",
+          "arm": "P",
+          "agent_id": "1461e4d6-50c4-45a2-9977-a6d4c0bed7dc",
+          "order": 19,
+          "block": 7,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P7/1461e4d6-50c4-45a2-9977-a6d4c0bed7dc.jsonl",
+          "harness": {
+            "duration_ms": 60927,
+            "api_cost_usd": 0.2103,
+            "num_turns": 13,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG7",
+          "arm": "PG",
+          "agent_id": "c35c25c2-8ecd-424f-9945-bc4376c1ec8a",
+          "order": 20,
+          "block": 7,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG7/c35c25c2-8ecd-424f-9945-bc4376c1ec8a.jsonl",
+          "harness": {
+            "duration_ms": 68119,
+            "api_cost_usd": 0.2512,
+            "num_turns": 16,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A7",
+          "arm": "A",
+          "agent_id": "fa69c518-31f1-4e3d-a24a-2da92aafb3af",
+          "order": 21,
+          "block": 7,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A7/fa69c518-31f1-4e3d-a24a-2da92aafb3af.jsonl",
+          "harness": {
+            "duration_ms": 51120,
+            "api_cost_usd": 0.1716,
+            "num_turns": 11,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "PG8",
+          "arm": "PG",
+          "agent_id": "bbb50816-ea74-41ca-b970-34c4da906d5d",
+          "order": 22,
+          "block": 8,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-PG8/bbb50816-ea74-41ca-b970-34c4da906d5d.jsonl",
+          "harness": {
+            "duration_ms": 58171,
+            "api_cost_usd": 0.2128,
+            "num_turns": 13,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "P8",
+          "arm": "P",
+          "agent_id": "d620c725-2f1a-4aaf-a3f6-1e245ae38c58",
+          "order": 23,
+          "block": 8,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-P8/d620c725-2f1a-4aaf-a3f6-1e245ae38c58.jsonl",
+          "harness": {
+            "duration_ms": 76273,
+            "api_cost_usd": 0.2643,
+            "num_turns": 16,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        },
+        {
+          "id": "A8",
+          "arm": "A",
+          "agent_id": "75838e33-85f0-432a-96ad-ef020c0229c7",
+          "order": 24,
+          "block": 8,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-claude-E--projeler-ai-context-mapping-2e4edb23-3608-4eb3-a81e-139b3859ab15-scratchpad-exp5-trials-A8/75838e33-85f0-432a-96ad-ef020c0229c7.jsonl",
+          "harness": {
+            "duration_ms": 54322,
+            "api_cost_usd": 0.1742,
+            "num_turns": 12,
+            "exit_code": 0
+          },
+          "scoring": {
+            "acceptance": "8/8",
+            "mutation": "4/4",
+            "e2e_test_added": false,
+            "opened_legacy_module": false,
+            "stray_changes": []
+          }
+        }
+      ],
       "pilots": [
         {
           "id": "pilot_NG",

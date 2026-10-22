@@ -167,31 +167,35 @@ From now on, adding a file without describing it in the map fails the build.
 
 ## Does it work? Honest results
 
-We ran four experiments: the same agent, model, and bug, with and without the framework, on a
-4,400-token and a 55,600-token project (30 agent runs, measured from transcripts). The last one is a
-randomized 2x2 ablation. Re-analysis later found that our harness gave its agents different starting
-context than the earlier runs, so it was not the replication we first reported (v1.1.1 correction).
+We ran five experiments: the same model and bug, with and without the framework, on a 4,400-token and a
+55,600-token project (54 agent runs, measured from transcripts). The most trustworthy is the last one
+(v1.2.0): pre-registered, randomized, 8 runs per arm, each run a separate Claude Code session in its own
+project, as an adopter would use it.
 
-| Finding | Result |
-| ------- | ------ |
-| Correct fix, strong regression test | **8 of 8** runs, in both arms |
+| Finding (experiment 5, adopter setup) | Result |
+| ------------------------------------- | ------ |
+| Cost of the framework vs a bare project | **+38% median** (96.2k vs 69.8k weighted tokens), every framework run above every bare run (p < 0.001) |
+| Cost effect of the map gate, rules preloaded | **None** (0.99x, p = 0.92). It blocked 0 calls: agents already read the map first |
+| Fix quality | **Identical.** 24 of 24 correct, mutation-strong tests, no stray edits |
+| Behavior | Framework agents navigated by the map: first call was a search in **0 of 16** runs, against 8 of 8 bare runs |
+
+| Earlier findings (experiments 1-4) | Result |
+| ---------------------------------- | ------ |
+| Correct fix, strong regression test | **30 of 30** runs, in every arm |
 | Token savings from the project map, **as an instruction** | **None measured.** Median cost +2% (large project), spread larger than the difference |
 | Did unguided agents scan the repository? | **No.** They grepped and read ~11 files, and their cost stayed flat as the project grew 12.7x |
 | Did agents follow "read the map first"? | **0 of 3** when they had to discover the rules in the project; **4 of 4** when the rules were in their starting context. The gate makes it deterministic |
 | Token cost with Rule 1 **enforced** by the map gate | **Unresolved.** One experiment saw -27% (n=3, not replicated). The re-test ran under a different condition and is not a valid replication |
 | With the rules already in context, did the gate, search blocking, or the map save tokens? | **No.** Gate +6% vs no gate; search blocking alone +17% vs baseline (p = 0.17); map on top of blocking +1% |
-| Do preloaded rules change agent behavior? | **Apparently yes** (untested hypothesis): 14 of 14 agents without them opened with a whole-tree `Glob`, 1 of 16 with them |
 | What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
 
-So the evidence supports the framework as **verification and guardrails**, not as a token saver. The
-v1.0.4 headline of a 27% saving from the map gate was an observation on three sequential trials per arm.
-v1.1.0 reported that it "did not reproduce". That was wrong: in the re-test every agent, in every arm,
-already had this repository's `CLAUDE.md` in context, and the earlier agents did not
-([section 12](docs/benchmark-results.md#12-correction-a-harness-confound-v111)). So the 27% is neither
-confirmed nor refuted. The gate reliably makes Rule 1 deterministic and cuts search output. Every one of
-the 30 runs fixed the bug correctly with a strong test. Larger repositories, other bugs, and
-tasks that cannot be grepped remain untested. Full data, method, and limits:
-[docs/benchmark-results.md](docs/benchmark-results.md).
+**So: on a bug that one `grep` finds, the framework is overhead.** It makes agents read the rules, follow
+the map and verify their tests, and that costs about a third more without improving the fix. It is **not
+a token saver**. The v1.0.4 headline of a 27% saving from the map gate came from agents that did not have
+the rules in context, a condition current Claude Code no longer produces once a project has a root
+`CLAUDE.md` or `AGENTS.md`. The framework's real claim, that it stops harmful changes and proves tests can
+fail, needs tasks where an unguided agent goes wrong. Those have not been run yet. Full data, method, the
+v1.1.1 correction, and limits: [docs/benchmark-results.md](docs/benchmark-results.md).
 
 > *Context reduction is not inherently good. The goal is targeted context, not less context.*
 

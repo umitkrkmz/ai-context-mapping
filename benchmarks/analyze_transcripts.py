@@ -53,6 +53,20 @@ GATE_MESSAGE = "Rule 1 Enforced"  # the map gate's block message (.claude/hooks/
 SUPPRESS_MESSAGE = "Search suppressed"  # the ablation mode's block message
 BLOCK_MARKERS = (GATE_MESSAGE, SUPPRESS_MESSAGE)
 SEARCH_COMMAND = re.compile(r"(^|[\s;&|(])(grep|egrep|fgrep|rg|ag|ack|find|fd|tree)\b|ls\s+-\w*R")
+GLOB_RECURSIVE = "**"
+
+
+def is_repo_wide_search(name: str, tool_input: Dict[str, Any]) -> bool:
+    """A Grep, a recursive Glob, or a shell search command (grep, rg, find, tree, ls -R)."""
+    if name == "Grep":
+        return True
+    if name == "Glob":
+        return GLOB_RECURSIVE in str(tool_input.get("pattern", ""))
+    if name in ("Bash", "PowerShell"):
+        return bool(SEARCH_COMMAND.search(str(tool_input.get("command", ""))))
+    return False
+
+
 READ_COMMAND = re.compile(r"\b(cat|head|tail|sed|less|more|nl|bat|Get-Content|type)\b")
 MARKER = "<!-- results:{kind} {experiment} -->"
 COMPARED_METRICS = ("weighted_cost", "new_tokens", "search_output_tokens", "tool_calls")
@@ -94,6 +108,7 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
     # Attachments recorded before the first model turn are the context the agent started with. "instructions"
     # means project instructions (a CLAUDE.md) were loaded, possibly inherited from the parent session.
     context_attachments: Set[str] = set()
+    first_call_search: Optional[bool] = None
     started_turns = False
     first_ts: Optional[str] = None
     last_ts: Optional[str] = None
@@ -147,6 +162,8 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
                     target = tool_input.get("file_path") or tool_input.get("pattern") or tool_input.get("command") or ""
                     name = str(block.get("name"))
                     calls.append((name, str(target).replace("\n", " ")[:120]))
+                    if first_call_search is None:
+                        first_call_search = is_repo_wide_search(name, tool_input)
                     command = str(tool_input.get("command") or "")
                     if name in ("Bash", "PowerShell"):
                         kind = "shell-search" if SEARCH_COMMAND.search(command) else "shell-read" if READ_COMMAND.search(command) else "shell-other"
@@ -174,6 +191,7 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
         "files_read": [target for name, target in calls if name == "Read"],
         "sequence": calls,
         "first_call": f"{calls[0][0]}({calls[0][1]})" if calls else None,
+        "first_call_is_search": bool(first_call_search),
         "context_attachments": sorted(context_attachments),
         "project_instructions_loaded": "instructions" in context_attachments,
         "blocked_by_gate": blocked,
@@ -291,7 +309,7 @@ def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float
         "project_instructions_loaded": parsed["project_instructions_loaded"],
         "context_attachments": parsed["context_attachments"],
         "first_call": parsed["first_call"],
-        "whole_tree_glob_first": bool(parsed["sequence"]) and parsed["sequence"][0] == ("Glob", "**/*"),
+        "first_call_is_search": parsed["first_call_is_search"],
     }
 
 
@@ -311,7 +329,7 @@ def summarize_arm(trials: List[Dict[str, Any]]) -> Dict[str, Any]:
             "e2e_test_rate": _rate(t.get("e2e_test_added") for t in trials),
             "opened_legacy_rate": _rate(t.get("opened_legacy_module") for t in trials),
             "project_instructions_rate": _rate(t.get("project_instructions_loaded") for t in trials),
-            "whole_tree_glob_first_rate": _rate(t.get("whole_tree_glob_first") for t in trials),
+            "first_call_search_rate": _rate(t.get("first_call_is_search") for t in trials),
         },
     }
 
@@ -394,6 +412,13 @@ def _range(agg: Dict[str, Any], digits: int = 0) -> str:
     return f"{_n(agg['median'], digits)} ({_n(agg['min'], digits)}-{_n(agg['max'], digits)})"
 
 
+def _p_text(value: Optional[float]) -> str:
+    """Three decimals, but never print an exact-test p-value as 0.000."""
+    if value is None:
+        return "n/a"
+    return "<0.001" if value < 0.001 else f"{value:.3f}"
+
+
 def _pct(value: Optional[float]) -> str:
     return "n/a" if value is None else f"{round(value * 100):d}%"
 
@@ -419,7 +444,7 @@ def render_experiment(exp: Dict[str, Any]) -> str:
         )
     lines += [
         "", "**Per-arm aggregates** (median, with the range in parentheses)", "",
-        "| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call `Glob **/*` |",
+        "| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call is a search |",
         "| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: | -------------------: | ---------------------: |",
     ]
     for arm in exp["arms"]:
@@ -428,7 +453,7 @@ def render_experiment(exp: Dict[str, Any]) -> str:
             f"| {arm['id']}: {labels[arm['id']]} | {s['n']} | {_range(m['weighted_cost'])} | {_range(m['new_tokens'])} | "
             f"{_range(m['search_output_tokens'])} | {_range(m['tool_calls'])} | {_range(m['turns'])} | {_range(m['latency_s'], 1)} | "
             f"{_pct(q['acceptance_full_rate'])} | {_pct(q['mutation_full_rate'])} | {_pct(q['e2e_test_rate'])} | {_pct(q['opened_legacy_rate'])} | "
-            f"{_pct(q.get('project_instructions_rate'))} | {_pct(q.get('whole_tree_glob_first_rate'))} |"
+            f"{_pct(q.get('project_instructions_rate'))} | {_pct(q.get('first_call_search_rate'))} |"
         )
     if exp["comparisons"]:
         lines += [
@@ -438,8 +463,7 @@ def render_experiment(exp: Dict[str, Any]) -> str:
         ]
         for c in exp["comparisons"]:
             cost, new, search = c["metrics"]["weighted_cost"], c["metrics"]["new_tokens"], c["metrics"]["search_output_tokens"]
-            p_low = "n/a" if cost["p_one_sided_lower"] is None else f"{cost['p_one_sided_lower']:.3f}"
-            p_two = "n/a" if cost["p_two_sided"] is None else f"{cost['p_two_sided']:.3f}"
+            p_low, p_two = _p_text(cost["p_one_sided_lower"]), _p_text(cost["p_two_sided"])
             lines.append(
                 f"| {c['name']} | {_ratio_text(cost['ratio_of_medians'])} | {_ratio_text(cost['ratio_of_means'])} | {p_low} | {p_two} | "
                 f"{_ratio_text(new['ratio_of_medians'])} | {_ratio_text(search['ratio_of_medians'])} |"

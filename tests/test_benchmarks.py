@@ -364,3 +364,34 @@ def test_documented_tables_match_results_json() -> None:
     text = DOC.read_text(encoding="utf-8")
     assert "<!-- results:begin exp4 -->" in text, "docs/benchmark-results.md is missing the experiment 4 markers"
     assert tool.update_document(text, results) == text, "run: python benchmarks/analyze_transcripts.py --update-doc docs/benchmark-results.md"
+
+
+@pytest.mark.parametrize("name, tool_input, expected", [
+    ("Glob", {"pattern": "**/*"}, True),
+    ("Glob", {"pattern": "**/*.py"}, True),
+    ("Glob", {"pattern": "tests/test_shipping.py"}, False),
+    ("Grep", {"pattern": "free_shipping"}, True),
+    ("Bash", {"command": 'find "C:/proj" -name "*.py"'}, True),
+    ("Bash", {"command": "grep -rn x ."}, True),
+    ("Bash", {"command": "ls -la && cat README.md"}, False),
+    ("Read", {"file_path": "maps/project-map.md"}, False),
+])
+def test_is_repo_wide_search(name: str, tool_input: Dict[str, Any], expected: bool) -> None:
+    assert tool.is_repo_wide_search(name, tool_input) is expected
+
+
+def test_first_call_is_search_comes_from_the_first_tool_call(tmp_path: Path) -> None:
+    write_transcript(tmp_path, "f1", [
+        assistant("m1", "claude-test-1", "9.9.9", usage(), [tool_use("t1", "Read", file_path="maps/project-map.md")]),
+        assistant("m2", "claude-test-1", "9.9.9", usage(), [tool_use("t2", "Glob", pattern="**/*")]),
+    ])
+    assert tool.load_agent(str(tmp_path), "f1")["first_call_is_search"] is False
+    write_transcript(tmp_path, "f2", [assistant("m1", "claude-test-1", "9.9.9", usage(), [tool_use("t1", "Glob", pattern="**/*.py")])])
+    assert tool.load_agent(str(tmp_path), "f2")["first_call_is_search"] is True
+
+
+def test_p_values_never_render_as_zero() -> None:
+    assert tool._p_text(0.0002) == "<0.001"
+    assert tool._p_text(0.001) == "0.001"
+    assert tool._p_text(0.9173) == "0.917"
+    assert tool._p_text(None) == "n/a"

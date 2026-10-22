@@ -66,7 +66,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `docs/` | docs | Long-form documentation. | - |
 | `docs/01-core-principles.md` | docs | Rationale: token diet, file-based stores, and the guardrail layers. | - |
 | `docs/02-token-diet-calculator.md` | docs | Token and cost model: whole-repo scanning vs map-guided reads, with a measuring script. | - |
-| `docs/benchmark-results.md` | docs | Four experiments (4.4k and 55.6k-token projects, incl. the 2x2 gate ablation and its harness-confound correction): no demonstrated token saving; correctness parity; limits. | - |
+| `docs/benchmark-results.md` | docs | Five experiments (4.4k and 55.6k-token projects; gate ablation; v1.1.1 confound correction; adopter-setup run): framework +38% cost, equal fix quality; limits. | - |
 | `docs/case-study-mediagrab.md` | docs | Case study of the MediaGrab architecture: zero DB, 100+ tests, map-guided AI work. | - |
 | `invariants/` | invariant | Negative invariants. | - |
 | `invariants/negative-invariants.md` | invariant | Defines negative invariants, templates, and the live machine-checked NI-* rules. | NI-001, NI-002, NI-003, NI-004, NI-005, NI-006, NI-007, NI-009 |

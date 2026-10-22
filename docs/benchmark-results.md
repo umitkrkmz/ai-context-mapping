@@ -1,28 +1,33 @@
 # Benchmark Results: Does the Framework Pay for Itself?
 
-Four experiments on the same bug: in a **4,400-token** project (v1.0.1), in a **55,600-token**
-project (v1.0.2), in the same large project with **Rule 1 enforced by a gate** (v1.0.3 hook), and a
-**2x2 ablation** that separates the map from the search blocking (v1.1.0).
+Five experiments on the same bug: in a **4,400-token** project (v1.0.1), in a **55,600-token**
+project (v1.0.2), in the same large project with **Rule 1 enforced by a gate** (v1.0.3 hook), a
+**2x2 ablation** (v1.1.0), and a pre-registered run **as an adopter would use it**, one Claude Code session
+per trial rooted in its own project (v1.2.0).
 
-**The short version.** In experiments 1 and 2 the map saved no tokens. Experiment 3 found a 27% lower
-median cost with the gate on, on three trials per arm. Experiment 4, a randomized 2x2 re-test, found no
-saving, and v1.1.0 reported that as "did not reproduce". **That was wrong (corrected in v1.1.1, section
-12):** in experiment 4 every agent, in every arm, started with this repository's own `CLAUDE.md` (the five
-rules, including "read the map first") in its context, and no agent in experiments 1-3 did. Experiment 4
-therefore tested a different condition and is **not a replication** of experiment 3. The 27% is neither
-confirmed nor refuted. Every trial in every experiment produced the same correct, well-tested fix. Read
-section 1 before quoting any number, section 12 for the confound, and section 9 for the limits.
+**The short version.** Experiment 5 is the most trustworthy result here (section 13): pre-registered, 8
+trials per arm, randomized, each trial in its own session with only its own project's instructions. In
+that adopter setup, on this greppable bug, **the framework cost a median 38% more than a bare project**
+(p < 0.001), the **map gate changed nothing** (0.99x, it blocked 0 calls), and **fix quality was identical**
+(24 of 24 correct, mutation-strong, no stray edits). With the rules preloaded, framework agents navigated by
+the map instead of searching (0 of 16 opened with a search, against 8 of 8 bare agents), and that cost more,
+not less. The earlier experiments are context: experiment 3's -27% came from a condition that the current
+Claude Code no longer produces (section 13), and experiment 4 was not a valid replication (section 12).
+The framework's case therefore rests on verification and guardrails, not on tokens, and that case is
+still unmeasured. Read section 1 before quoting any number, and section 9 for the limits.
 
 > *Context reduction is not inherently good. The goal is targeted context, not less context.*
 
-Run dates: 2026-09-20 (all four). Experiment 1 has one trial per arm; experiments 2 and 3 have three;
-experiment 4 has four.
+Run dates: 2026-09-20 (experiments 1-4), 2026-10-22 (experiment 5). Experiment 1 has one trial per arm;
+experiments 2 and 3 have three; experiment 4 has four; experiment 5 has eight.
 
 ## 1. Summary
 
 | Question                                                        | Result |
 | --------------------------------------------------------------- | ------ |
-| Did every agent fix the bug correctly?                          | **Yes, 8 of 8.** The identical one-character fix; 8 of 8 hidden acceptance tests pass every time. |
+| **In an adopter's setup, does the framework cost more?** (experiment 5) | **Yes, a median +38%** (96.2k vs 69.8k, every framework run above every bare run, p < 0.001), for the same fix. The extra cost is reading the rules, map and invariants and running the guardrail scripts. |
+| **Does the map gate add anything when the rules are preloaded?** (experiment 5) | **No.** 0.99x (95.0k vs 96.2k, p = 0.92). It blocked 0 calls: agents already read the map first. |
+| Did every agent fix the bug correctly?                          | **Yes, 54 of 54** across all five experiments. The identical one-character fix; 8 of 8 hidden acceptance tests pass every time. |
 | Were the regression tests strong?                               | **Yes, 8 of 8.** Every agent's tests kill 100% of mutants, including the `>=` to `>` boundary shift. |
 | Did the framework arm cost fewer tokens?                        | **No.** Price-weighted cost was **+8%** at 4.4k tokens and a **+2% median** (+23% mean) at 55.6k tokens. |
 | Did the baseline's cost grow with project size?                 | **No.** It was flat: 148.7k at 4.4k tokens, **150.9k median at 55.6k** (12.7x larger). |
@@ -30,10 +35,10 @@ experiment 4 has four.
 | Did the framework agents follow Rule 1 (read the map first)?    | **No, 0 of 3** (experiment 2). All three grepped first; two read the map afterwards; one never opened it. Their project's `CLAUDE.md` was never preloaded, as it would be for a real adopter (section 12). |
 | **Does enforcing Rule 1 change the cost?**                      | **Unresolved.** Experiment 3 (n=3, sequential) saw **-27%** (117.6k vs 160.2k), an unreplicated observation. Experiment 4 is not a valid replication: all its agents were already told Rule 1 (section 12). |
 | When agents are already told Rule 1, does a gate or a map add anything? (experiment 4) | **No saving was seen.** Gate vs no gate: +6% (D 112.1k vs B 105.9k). Suppression alone: +17% vs baseline (110.8k vs 94.5k, p = 0.17). Map added to suppression: +1% (p = 0.66). |
-| Does preloading the rules change behavior? (experiments 1-3 vs 4) | **It changed the first move.** 14 of 14 agents without the rules in context opened with `Glob **/*`; 1 of 16 with them did. A cross-experiment comparison, so suggestive only (section 12). |
+| Does preloading the rules change behavior? | **Yes, confirmed in experiment 5.** First call was a repository-wide search in 8 of 8 bare runs and 0 of 16 framework runs (rules preloaded). Search output fell from 1,232 to 5-34 tokens. Cost rose. |
 | Did the gate hurt fix quality?                                  | **No** on the measured outcome (8/8 acceptance, 4/4 mutants). But gated agents wrote unit tests only (0 of 3 added an end-to-end test vs 2 of 3) and none opened the frozen legacy module. |
 | What did the framework arm buy?                                 | Mutation-verified tests, invariant, dependency, and map checks. It did not buy a better fix. |
-| What did it cost?                                               | About 7,000-12,000 extra tokens of instruction and script reading per task, and one hung command. |
+| What did it cost?                                               | About 7,000-12,000 extra tokens of instruction and script reading per task in experiments 1-2, and about 9,000 new tokens (+38% weighted cost) in experiment 5. |
 
 **What this means for the earlier claims.** The token-diet model in
 [`02-token-diet-calculator.md`](02-token-diet-calculator.md) compares a map-guided read against an agent
@@ -333,6 +338,12 @@ inside the noise. **There is no sign that the map's value grows with project siz
   symptom.
 - *"The map's advantage grows with repository size."* Not observed between 4,400 and 55,600 tokens.
 
+**Experiment 5 settles the practical question for this bug (section 13).** Run as an adopter runs it, the
+framework made agents navigate by the map and verify their work, at a median 38% higher cost and with the
+same fix. The gate had nothing to enforce. Less search output did not mean lower cost: the targeted context
+(rules, map, invariants) is itself context, and on a task a bare agent solves with one `grep`, it does not
+pay for itself in tokens. Whether it pays for itself in safety is untested.
+
 **Experiment 3 qualified the conclusions above; experiment 4 could not test that qualification.** With
 Rule 1 enforced, experiment 3's agents read the map first and cost a median 27% less (n=3, sequential, not
 replicated). Experiment 4 gave every arm this repository's `CLAUDE.md`, so all its agents were already told
@@ -355,10 +366,11 @@ A token saving has not been demonstrated, and scale was not measured.
   typical, and it is greppable.
 - **Repositories 10x to 100x larger**, where even matches are numerous and `Glob **/*` itself is
   expensive (here: ~1,700 tokens; at 5,000 files it would be tens of thousands).
-- **Enforcing Rule 1 rather than requesting it.** Implemented in v1.0.3 and measured in experiment 3;
-  experiment 4 measured a different condition (section 12). What remains: a clean replication in sessions
-  rooted in each trial's directory, with "rules preloaded" as an explicit factor, five or more trials per
-  arm, a larger project, and a second bug type.
+- **Enforcing Rule 1 rather than requesting it.** Measured in experiments 3-5. With the rules preloaded,
+  as Claude Code 2.1.304 does for any root `CLAUDE.md` or `AGENTS.md`, there is nothing left to enforce
+  (experiment 5). The gate remains a backstop for sessions that lack the rules.
+- **Guardrails under pressure.** A task that tempts a harmful change ("simplify the shipping code"),
+  framework against bare project: the framework's main claim, still unmeasured.
 - **Trimming the overhead:** an agent should run a script with `--help`, not read its source;
   `CLAUDE.md` and `AGENTS.md` should not both be read; the map should stay under ~3,000 tokens.
 - **More trials and more bug types.** Three trials per arm and one bug do not support statistics.
@@ -391,6 +403,9 @@ A token saving has not been demonstrated, and scale was not measured.
   none did, and none loaded its trial project's own `CLAUDE.md` either, as Claude Code would for a real
   adopter. Arm A cost 151k in experiment 2 and 94k in experiment 4 on otherwise identical inputs. Compare
   costs only within an experiment. `results.json` now records each trial's starting context.
+- **Experiment 5 changed the client.** It ran Claude Code 2.1.304 headless with user settings, MCP servers
+  and skills disabled; experiments 1-4 ran 2.1.275 sub-agents with all of those present. Its costs are not
+  comparable with earlier experiments, only within itself. It also has one bug, one fixture and one model.
 - **Experiment 4 has four trials per arm.** The smallest possible exact one-sided p-value is 1/70. It is a
   null result at this sample size, not evidence of no effect. It also has one bug and one fixture, and the
   hook configuration was swapped between trials of a single session.
@@ -481,7 +496,7 @@ blocks recursive `grep`/`rg`, `find`, `tree`, `ls -R`, `Get-ChildItem -Recurse`,
 consults a map, is deterministic, and fails open on a misconfigured value (tests in `tests/test_hooks.py`).
 
 <!-- results:begin exp4 -->
-Model: `claude-sonnet-5` (30 trials). Claude Code client: `2.1.275`. Cost weights: input 1, cache write 1.25, cache read 0.1, output 5.
+Model: `claude-sonnet-5` (54 trials). Claude Code client: `2.1.275`, `2.1.304`. Cost weights: input 1, cache write 1.25, cache read 0.1, output 5.
 
 **Per-trial results** (all values derived from transcripts)
 
@@ -506,7 +521,7 @@ Model: `claude-sonnet-5` (30 trials). Claude Code client: `2.1.275`. Cost weight
 
 **Per-arm aggregates** (median, with the range in parentheses)
 
-| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call `Glob **/*` |
+| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call is a search |
 | --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: | -------------------: | ---------------------: |
 | A: No map, no gate (baseline) | 4 | 94,462 (90,685-104,639) | 32,486 (29,500-35,751) | 3,301 (613-4,332) | 7 (6-12) | 8 (7-8) | 41.2 (34.4-45.2) | 100% | 100% | 50% | 25% | 100% | 0% |
 | B: Map provided, gate off (advisory) | 4 | 105,916 (91,264-112,001) | 37,398 (35,436-39,603) | 339 (0-613) | 12 (10-13) | 8 (6-8) | 40.9 (36.0-43.1) | 100% | 100% | 0% | 25% | 100% | 0% |
@@ -644,12 +659,152 @@ We have not confirmed that.
 2. **Experiments 1-3 understate a real adopter's setup.** Claude Code loads a project's `CLAUDE.md`
    automatically. Our framework arms never got that: their agents found `AGENTS.md` only after a first
    whole-tree `Glob`, which is why "0 of 3 read the map first".
-3. **A new, untested hypothesis.** Having the rules in the starting context changed the first move in 15 of
-   16 agents, and arm A's median cost was 94k with them against 151k without (experiment 2). That compares
-   experiments run at different times, so it is a hypothesis, not a result: *preloaded rules may matter more
-   than either the map or the gate.*
+3. **A new hypothesis, since tested.** Having the rules in the starting context changed the first move in 15
+   of 16 agents, and arm A's median cost was 94k with them against 151k without (experiment 2). That compared
+   experiments run at different times. Experiment 5 tested it within one randomized design: preloaded rules
+   do change the first move (section 13), but they **raise** cost rather than lower it.
 
 **What changed in v1.1.1.** `analyze_transcripts.py` records each trial's starting attachments,
 `project_instructions_loaded`, and first tool call in `results.json` (schema 2). The per-arm tables show
-"CLAUDE.md in context" and "First call `Glob **/*`". The next experiment will run every trial in a session
-rooted in its own directory and make "rules preloaded" an explicit factor.
+"CLAUDE.md in context" and, since v1.2.0, "First call is a search" (a `Grep`, a recursive `Glob`, or a
+shell search). Experiment 5 (section 13) runs every trial in a session rooted in its own directory.
+
+## 13. Experiment 5: the framework as an adopter runs it (v1.2.0)
+
+Every earlier experiment ran its trials as sub-agents of one Claude Code session, which section 12 showed
+can leak instructions. Experiment 5 runs each trial as its own headless session (`claude -p`) whose working
+directory is the trial's own copy of the project, so only that project's instructions can load, exactly as
+for an adopter. User settings, MCP servers and skills were disabled in every arm. Model `claude-sonnet-5`,
+Claude Code 2.1.304, same bug and prompt as before.
+
+| Arm | Project | What it represents |
+| --- | ------- | ------------------ |
+| **A** | `benchmarks/shipdesk-large` only | A bare project. |
+| **P** | A + the framework layer (`CLAUDE.md`, `AGENTS.md`, map, invariants, scripts, MCP server) | An adopter with the rules, map gate off. |
+| **PG** | P + the project's own `.claude/settings.json` running `map_gate.py` | The framework as shipped. |
+
+**Pre-registration.** Hypotheses, the 10% materiality threshold, decision rules, a manipulation check and the
+stop rule were committed before any trial ran (commit `87fa0d0`). The original design had two more arms
+meant to run without preloaded rules (`AGENTS.md` only). **Two pilot trials then showed that Claude Code
+2.1.304 loads `AGENTS.md` as project instructions when `CLAUDE.md` is absent** (and loads only `CLAUDE.md`
+when both exist), so those arms could not exist. Amendment 1, committed before any scheduled trial
+(`71c44b0`), dropped them and raised n from 5 to 8. Both versions, the pilots and the reason are in
+`benchmarks/results/manifest.json`. The pilots are not pooled.
+
+**Manipulation check.** Every trial's starting context was checked from its transcript before scoring:
+arm A loaded no instructions, P and PG loaded exactly their own `CLAUDE.md`. All 24 passed. No trial was
+excluded; no trial used sub-agents.
+
+<!-- results:begin exp5 -->
+Model: `claude-sonnet-5` (54 trials). Claude Code client: `2.1.275`, `2.1.304`. Cost weights: input 1, cache write 1.25, cache read 0.1, output 5.
+
+**Per-trial results** (all values derived from transcripts)
+
+| Trial | Arm | Weighted cost | New tokens | Cache reads | Search output | Blocked | Tool calls | Turns | Latency | Acceptance | Mutation |
+| ----- | --- | ------------: | ---------: | ----------: | ------------: | ------: | ---------: | ----: | ------: | ---------- | -------- |
+| A1 | A | 51,870 | 15,973 | 223,259 | ~703 | 0 | 8 | 7 | 33.4 s | 8/8 | 4/4 |
+| P1 | P | 106,494 | 28,679 | 525,275 | ~34 | 0 | 14 | 13 | 73.7 s | 8/8 | 4/4 |
+| PG1 | PG | 104,777 | 28,869 | 519,986 | ~153 | 0 | 15 | 13 | 74.4 s | 8/8 | 4/4 |
+| A2 | A | 80,299 | 20,589 | 423,887 | ~2,053 | 0 | 11 | 12 | 39.4 s | 8/8 | 4/4 |
+| P2 | P | 86,236 | 26,390 | 394,463 | ~247 | 0 | 11 | 10 | 56.7 s | 8/8 | 4/4 |
+| PG2 | PG | 95,715 | 28,373 | 441,776 | ~5 | 0 | 13 | 11 | 64.6 s | 8/8 | 4/4 |
+| P3 | P | 88,101 | 26,837 | 393,198 | ~34 | 0 | 13 | 10 | 61.6 s | 8/8 | 4/4 |
+| PG3 | PG | 104,999 | 29,893 | 489,561 | ~133 | 0 | 14 | 12 | 71.4 s | 8/8 | 4/4 |
+| A3 | A | 60,758 | 18,417 | 265,886 | ~1,293 | 0 | 12 | 8 | 40.8 s | 8/8 | 4/4 |
+| P4 | P | 92,610 | 27,152 | 439,338 | ~5 | 0 | 13 | 11 | 52.7 s | 8/8 | 4/4 |
+| PG4 | PG | 94,302 | 27,952 | 442,397 | ~0 | 0 | 12 | 11 | 62.2 s | 8/8 | 4/4 |
+| A4 | A | 73,318 | 19,979 | 339,305 | ~1,171 | 0 | 13 | 10 | 66.3 s | 8/8 | 4/4 |
+| P5 | P | 100,268 | 28,247 | 479,735 | ~34 | 0 | 13 | 12 | 70.5 s | 8/8 | 4/4 |
+| PG5 | PG | 93,214 | 27,360 | 441,398 | ~5 | 0 | 13 | 11 | 59.9 s | 8/8 | 4/4 |
+| A5 | A | 63,288 | 16,251 | 325,544 | ~736 | 0 | 9 | 10 | 43.2 s | 8/8 | 4/4 |
+| P6 | P | 99,814 | 28,334 | 482,291 | ~5 | 0 | 13 | 12 | 64.2 s | 8/8 | 4/4 |
+| A6 | A | 66,358 | 19,023 | 307,295 | ~1,705 | 0 | 10 | 9 | 46.6 s | 8/8 | 4/4 |
+| PG6 | PG | 90,254 | 27,629 | 400,326 | ~5 | 0 | 13 | 10 | 65.9 s | 8/8 | 4/4 |
+| P7 | P | 88,053 | 26,855 | 392,609 | ~5 | 0 | 12 | 10 | 60.9 s | 8/8 | 4/4 |
+| PG7 | PG | 106,666 | 29,719 | 529,597 | ~18 | 0 | 15 | 13 | 68.1 s | 8/8 | 4/4 |
+| A7 | A | 73,947 | 19,114 | 377,754 | ~1,758 | 0 | 10 | 11 | 51.1 s | 8/8 | 4/4 |
+| PG8 | PG | 88,851 | 27,353 | 398,414 | ~0 | 0 | 12 | 10 | 58.2 s | 8/8 | 4/4 |
+| P8 | P | 113,749 | 29,761 | 569,914 | ~114 | 0 | 15 | 14 | 76.3 s | 8/8 | 4/4 |
+| A8 | A | 76,131 | 18,219 | 400,323 | ~1,128 | 0 | 11 | 12 | 54.3 s | 8/8 | 4/4 |
+
+**Per-arm aggregates** (median, with the range in parentheses)
+
+| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call is a search |
+| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: | -------------------: | ---------------------: |
+| A: Bare project (baseline) | 8 | 69,838 (51,870-80,299) | 18,720 (15,973-20,589) | 1,232 (703-2,053) | 10 (8-13) | 10 (7-12) | 44.9 (33.4-66.3) | 100% | 100% | 0% | 38% | 0% | 100% |
+| P: Framework, rules preloaded (CLAUDE.md), gate off | 8 | 96,212 (86,236-113,749) | 27,700 (26,390-29,761) | 34 (5-247) | 13 (11-15) | 12 (10-14) | 62.9 (52.7-76.3) | 100% | 100% | 0% | 12% | 100% | 0% |
+| PG: Framework, rules preloaded, map gate on (as shipped) | 8 | 95,008 (88,851-106,666) | 28,162 (27,353-29,893) | 5 (0-153) | 13 (12-15) | 11 (10-13) | 65.2 (58.2-74.4) | 100% | 100% | 0% | 0% | 100% | 0% |
+
+**Comparisons** (ratio of the second arm to the first; p-values are exact permutation tests on mean weighted cost)
+
+| Comparison | Cost, ratio of medians | Cost, ratio of means | p (one-sided, cheaper) | p (two-sided) | New tokens, ratio of medians | Search output, ratio of medians |
+| ---------- | ---------------------: | -------------------: | ---------------------: | ------------: | ---------------------------: | -----------------------------: |
+| Framework with rules preloaded vs bare project (P vs A) | 1.38x | 1.42x | 1.000 | <0.001 | 1.48x | 0.03x |
+| Gate, rules preloaded: adopter setup (PG vs P) | 0.99x | 1.00x | 0.541 | 0.917 | 1.02x | 0.15x |
+| Shipped framework vs bare project (PG vs A) | 1.36x | 1.43x | 1.000 | <0.001 | 1.50x | 0.00x |
+<!-- results:end exp5 -->
+
+### 13.1 Findings (pre-registered decision rules, 10% materiality on medians)
+
+| Hypothesis | Ratio of medians | p (two-sided) | Decision |
+| ---------- | ---------------: | ------------: | -------- |
+| H1: framework with rules preloaded vs bare (P vs A) | 1.38x | < 0.001 | **More expensive** |
+| H2: map gate when the rules are preloaded (PG vs P) | 0.99x | 0.92 | **No meaningful difference** |
+| H3: framework as shipped vs bare (PG vs A) | 1.36x | < 0.001 | **More expensive** |
+
+- **The cost difference is not noise.** Every one of the 16 framework runs cost more than every one of the 8
+  bare runs (lowest framework run 86,236; highest bare run 80,299).
+- **Where the cost goes.** Framework agents read the map and the invariants and ran the guardrail scripts
+  (mutation guard, invariant check, dependency budget, map check); bare agents ran only the tests. That
+  added about 9,000 new tokens per run (median 27.7k-28.2k against 18.7k), one or two turns, and about 20
+  seconds.
+- **The rules change behavior.** The first call was a repository-wide search in 8 of 8 bare runs and 0 of 16
+  framework runs, and median search output fell from 1,232 tokens to 34 (P) and 5 (PG). Agents navigated by
+  the map, as designed.
+- **The gate had nothing to do.** It blocked 0 calls in 8 runs, because the agents already read the map
+  first. Experiment 3's saving came from agents that did *not* have the rules in context. With a root
+  `CLAUDE.md` or `AGENTS.md`, the current client never produces that condition.
+- **Quality was identical.** 24 of 24 runs passed 8 of 8 hidden acceptance tests, killed 4 of 4 mutants, and
+  changed nothing outside the fix and its test. None added an end-to-end test. Bare agents opened the frozen
+  `legacy_shipping.py` in 3 of 8 runs, framework agents in 1 of 16; no agent edited it.
+
+### 13.2 What this means
+
+For a bug that one `grep` finds, the framework is overhead: a bare agent finds it cheaply, and the
+framework's reading and verification cost about a third more without improving the fix. This is the motto
+in practice. *Context reduction is not inherently good. The goal is targeted context, not less context.*
+The framework did produce targeted context, and less search output, and it still cost more, because the
+rules, the map and the checks are context too.
+
+The result does not say the framework is not worth using. Its stated value is preventing harmful changes
+and proving that tests can fail. On this task no agent attempted a harmful change, and every agent's test
+was already strong. Those claims need tasks where an unguided agent goes wrong, and those have not been run
+yet.
+
+### 13.3 Limits
+
+- **One greppable off-by-one, one fixture, one model, one client version.** The fixture and the framework
+  layer were written by us.
+- **Eight trials per arm.** Enough to detect the 38% difference (minimum exact one-sided p = 1/12870), not
+  enough to rule out small effects of the gate.
+- **Costs are not comparable with experiments 1-4** (different client, no skills, no MCP, headless).
+- **The trials ran sequentially on one machine**, interleaved in seeded random blocks.
+- **`AGENTS.md` auto-loading was observed in one client version.** The repository keeps `CLAUDE.md` as a
+  mirror (NI-008) for clients that do not do this.
+
+### 13.4 Reproduce experiment 5
+
+Build each trial's directory as in section 10. Arm P adds the framework layer, and arm PG also adds
+`.claude/hooks/map_gate.py` and a `.claude/settings.json` that runs it on `PreToolUse`. Then run one
+headless session per trial, from inside the trial's directory:
+
+```bash
+claude -p "<the section 2 prompt>" --model claude-sonnet-5 --setting-sources project --strict-mcp-config \
+  --disable-slash-commands --permission-mode acceptEdits --allowedTools Bash,PowerShell,Read,Edit,Write,Glob,Grep \
+  --output-format json --session-id <uuid>
+```
+
+Record each trial in `benchmarks/results/manifest.json` with `"transcript"` pointing at the session file
+(`~/.claude/projects/<project>/<session-id>.jsonl`), then run the `--export`, `--update-doc` and
+`--check-doc` commands from section 11.4. The per-arm table's "CLAUDE.md in context" column is the
+manipulation check.
