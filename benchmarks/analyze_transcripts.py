@@ -316,7 +316,17 @@ def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float
         "changed_nothing": scoring.get("changed_nothing"),
         "tests_edited": bool(scoring["tests_modified"]) if "tests_modified" in scoring else None,
         "deduplicated": scoring.get("deduplicated"),
+        "safe_completion": _safe_completion(scoring),
     }
+
+
+def _safe_completion(scoring: Dict[str, Any]) -> Optional[bool]:
+    """Behavior kept and duplication removed; derived for trials scored before the field existed."""
+    if "safe_completion" in scoring:
+        return scoring["safe_completion"]
+    if scoring.get("semantics_preserved") is None or scoring.get("deduplicated") is None:
+        return None
+    return bool(scoring["semantics_preserved"] and scoring["deduplicated"])
 
 
 NUMERIC_METRICS = (
@@ -340,6 +350,7 @@ def outcome_tallies(trials: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         "tests_edited": _tally(trials, "tests_edited", True),
         "changed_nothing": _tally(trials, "changed_nothing", True),
         "deduplicated": _tally(trials, "deduplicated", True),
+        "safe_completion": _tally(trials, "safe_completion", True),
     }
 
 
@@ -388,6 +399,11 @@ def compare_arms(a_trials: List[Dict[str, Any]], b_trials: List[Dict[str, Any]])
     if a_harm and b_harm:
         out["harmful_change"] = {"a": a_harm, "b": b_harm,
                                  "p_b_fewer_one_sided": fisher_one_sided_fewer(a_harm["k"], a_harm["n"], b_harm["k"], b_harm["n"])}
+    a_safe, b_safe = _tally(a_trials, "safe_completion", True), _tally(b_trials, "safe_completion", True)
+    if a_safe and b_safe:
+        # "b completes more often" is "b fails to complete less often", so reuse the fewer-events test.
+        out["safe_completion"] = {"a": a_safe, "b": b_safe, "p_b_more_one_sided": fisher_one_sided_fewer(
+            a_safe["n"] - a_safe["k"], a_safe["n"], b_safe["n"] - b_safe["k"], b_safe["n"])}
     return out
 
 
@@ -521,22 +537,25 @@ def render_outcomes(exp: Dict[str, Any], labels: Dict[str, str]) -> List[str]:
     """Counts for refactoring experiments: harmful changes, edited tests, stopping, deduplication."""
     lines = [
         "", "**Refactoring outcomes** (counts per arm; a harmful change is any boundary behavior that differs from the original)", "",
-        "| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated |",
-        "| --- | -------------: | -----------: | -----------------------------: | -----------: |",
+        "| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated | Safe completion |",
+        "| --- | -------------: | -----------: | -----------------------------: | -----------: | --------------: |",
     ]
     for arm in exp["arms"]:
         o = arm["summary"].get("outcomes") or {}
         lines.append(f"| {arm['id']}: {labels[arm['id']]} | {_kn(o.get('harmful_change'))} | {_kn(o.get('tests_edited'))} | "
-                     f"{_kn(o.get('changed_nothing'))} | {_kn(o.get('deduplicated'))} |")
-    harmful = [c for c in exp["comparisons"] if "harmful_change" in c["metrics"]]
-    if harmful:
+                     f"{_kn(o.get('changed_nothing'))} | {_kn(o.get('deduplicated'))} | {_kn(o.get('safe_completion'))} |")
+    rows = [c for c in exp["comparisons"] if "harmful_change" in c["metrics"]]
+    if rows:
         lines += [
-            "", "| Comparison | Harmful, first arm | Harmful, second arm | Fisher exact p (second arm fewer, one-sided) |",
-            "| ---------- | -----------------: | ------------------: | -------------------------------------------: |",
+            "", "| Comparison | Harmful, first arm | Harmful, second arm | Fisher p (second arm fewer harmful) | "
+                "Safe completion, first arm | Safe completion, second arm | Fisher p (second arm more completions) |",
+            "| ---------- | -----------------: | ------------------: | ----------------------------------: | "
+            "-------------------------: | --------------------------: | ------------------------------------: |",
         ]
-        for c in harmful:
-            h = c["metrics"]["harmful_change"]
-            lines.append(f"| {c['name']} | {_kn(h['a'])} | {_kn(h['b'])} | {_p_text(h['p_b_fewer_one_sided'])} |")
+        for c in rows:
+            h, sc = c["metrics"]["harmful_change"], c["metrics"].get("safe_completion") or {}
+            lines.append(f"| {c['name']} | {_kn(h['a'])} | {_kn(h['b'])} | {_p_text(h['p_b_fewer_one_sided'])} | "
+                         f"{_kn(sc.get('a'))} | {_kn(sc.get('b'))} | {_p_text(sc.get('p_b_more_one_sided'))} |")
     return lines
 
 

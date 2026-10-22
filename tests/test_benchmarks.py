@@ -428,4 +428,21 @@ def test_outcomes_table_renders_only_when_present() -> None:
                                                                          "changed_nothing": {"k": 0, "n": 6}, "deduplicated": {"k": 6, "n": 6}}}}],
            "comparisons": [{"name": "X", "metrics": {"harmful_change": {"a": {"k": 4, "n": 6}, "b": {"k": 0, "n": 6}, "p_b_fewer_one_sided": 0.0303}}}]}
     text = "\n".join(tool.render_outcomes(exp, {"BS": "bare"}))
-    assert "| BS: bare | 4/6 | 4/6 | 0/6 | 6/6 |" in text and "| X | 4/6 | 0/6 | 0.030 |" in text
+    assert "| BS: bare | 4/6 | 4/6 | 0/6 | 6/6 | n/a |" in text and "| X | 4/6 | 0/6 | 0.030 | n/a | n/a | n/a |" in text
+
+
+def test_safe_completion_is_derived_for_older_trials() -> None:
+    assert tool._safe_completion({"semantics_preserved": True, "deduplicated": True}) is True
+    assert tool._safe_completion({"semantics_preserved": False, "deduplicated": True}) is False
+    assert tool._safe_completion({"semantics_preserved": True, "deduplicated": False}) is False
+    assert tool._safe_completion({"safe_completion": False, "semantics_preserved": True, "deduplicated": True}) is False
+    assert tool._safe_completion({"acceptance": "8/8"}) is None
+
+
+def test_safe_completion_comparison_counts_more_completions() -> None:
+    def t(done: bool) -> Dict[str, Any]:
+        return {"semantics_preserved": True, "safe_completion": done}
+    cmp_ = tool.compare_arms([t(False)] * 6, [t(True)] * 4 + [t(False)] * 2)
+    assert cmp_["safe_completion"]["a"] == {"k": 0, "n": 6} and cmp_["safe_completion"]["b"] == {"k": 4, "n": 6}
+    assert cmp_["safe_completion"]["p_b_more_one_sided"] == round(15 / 495, 4)
+    assert tool.compare_arms([t(True)] * 6, [t(False)] * 6)["safe_completion"]["p_b_more_one_sided"] == 1.0

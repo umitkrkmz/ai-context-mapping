@@ -252,5 +252,22 @@ def test_reference_copies_are_keyed_by_the_recipe(tmp_path: Path) -> None:
     assert bench.reference_copy("exp6", "BS", tmp_path) == first
 
 
+def test_exp7_arms_differ_only_in_the_ni103_wording(tmp_path: Path) -> None:
+    old = bench.build("exp7", "o", "FO", tmp_path)
+    new = bench.build("exp7", "n", "FN", tmp_path)
+    assert bench.diff_trees(new, old) == {"added": [], "removed": [], "modified": ["invariants/negative-invariants.md"]}
+    old_text = (old / "invariants" / "negative-invariants.md").read_text(encoding="utf-8")
+    new_text = (new / "invariants" / "negative-invariants.md").read_text(encoding="utf-8")
+    assert bench.NI103_NEVER in old_text and bench.NI103_NEVER not in new_text
+    assert new_text == old_text.replace(bench.NI103_NEVER, bench.NI103_NEVER_NARROW)
+    assert bench.diff_trees(old, bench.build("exp6", "fs", "FS", tmp_path)) == {"added": [], "removed": [], "modified": []}
+
+
+def test_narrowing_needs_the_framework_layer(tmp_path: Path) -> None:
+    bare = bench.build("exp6", "b", "BS", tmp_path)
+    with pytest.raises(FileNotFoundError):
+        bench.narrow_ni103(bare)
+
+
 def test_the_amended_task_asks_for_consistency() -> None:
     assert "Make them all consistent" in bench.REFACTOR_TASK and ">=" in bench.REFACTOR_TASK

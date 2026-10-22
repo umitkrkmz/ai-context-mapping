@@ -910,18 +910,18 @@ Model: `claude-sonnet-5` (78 trials). Claude Code client: `2.1.275`, `2.1.304`. 
 
 **Refactoring outcomes** (counts per arm; a harmful change is any boundary behavior that differs from the original)
 
-| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated |
-| --- | -------------: | -----------: | -----------------------------: | -----------: |
-| BD: Bare project, guidance in the code (docstrings, ADRs) | 0/6 | 0/6 | 0/6 | 6/6 |
-| BS: Bare project, guidance stripped | 4/6 | 4/6 | 0/6 | 6/6 |
-| FD: Framework (CLAUDE.md, map, invariants), guidance in the code | 0/6 | 0/6 | 6/6 | 0/6 |
-| FS: Framework, guidance stripped (the invariants are the only written reason) | 0/6 | 0/6 | 6/6 | 0/6 |
+| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated | Safe completion |
+| --- | -------------: | -----------: | -----------------------------: | -----------: | --------------: |
+| BD: Bare project, guidance in the code (docstrings, ADRs) | 0/6 | 0/6 | 0/6 | 6/6 | 6/6 |
+| BS: Bare project, guidance stripped | 4/6 | 4/6 | 0/6 | 6/6 | 2/6 |
+| FD: Framework (CLAUDE.md, map, invariants), guidance in the code | 0/6 | 0/6 | 6/6 | 0/6 | 0/6 |
+| FS: Framework, guidance stripped (the invariants are the only written reason) | 0/6 | 0/6 | 6/6 | 0/6 | 0/6 |
 
-| Comparison | Harmful, first arm | Harmful, second arm | Fisher exact p (second arm fewer, one-sided) |
-| ---------- | -----------------: | ------------------: | -------------------------------------------: |
-| Framework when the code carries no guidance (FS vs BS) | 4/6 | 0/6 | 0.030 |
-| Framework when the code carries guidance (FD vs BD) | 0/6 | 0/6 | 1.000 |
-| Guidance in the code, no framework (BD vs BS) | 4/6 | 0/6 | 0.030 |
+| Comparison | Harmful, first arm | Harmful, second arm | Fisher p (second arm fewer harmful) | Safe completion, first arm | Safe completion, second arm | Fisher p (second arm more completions) |
+| ---------- | -----------------: | ------------------: | ----------------------------------: | -------------------------: | --------------------------: | ------------------------------------: |
+| Framework when the code carries no guidance (FS vs BS) | 4/6 | 0/6 | 0.030 | 2/6 | 0/6 | 1.000 |
+| Framework when the code carries guidance (FD vs BD) | 0/6 | 0/6 | 1.000 | 6/6 | 0/6 | 1.000 |
+| Guidance in the code, no framework (BD vs BS) | 4/6 | 0/6 | 0.030 | 2/6 | 6/6 | 0.030 |
 <!-- results:end exp6 -->
 
 ### 14.1 Findings (pre-registered rule: a difference of at least 3 of 6 harmful runs is meaningful)
