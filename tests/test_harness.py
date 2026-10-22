@@ -271,3 +271,31 @@ def test_narrowing_needs_the_framework_layer(tmp_path: Path) -> None:
 
 def test_the_amended_task_asks_for_consistency() -> None:
     assert "Make them all consistent" in bench.REFACTOR_TASK and ">=" in bench.REFACTOR_TASK
+
+
+# --------------------------------------------------------------------------------------
+# Experiment 7 follow-up turn (amendment 1)
+# --------------------------------------------------------------------------------------
+def test_tree_digest_sees_edits_but_not_caches(tmp_path: Path) -> None:
+    (tmp_path / "pkg").mkdir()
+    (tmp_path / "pkg" / "a.py").write_text("x = 1\n", encoding="utf-8")
+    before = bench.tree_digest(tmp_path)
+    (tmp_path / "pkg" / "__pycache__").mkdir()
+    (tmp_path / "pkg" / "__pycache__" / "a.pyc").write_bytes(b"\0")
+    assert bench.tree_digest(tmp_path) == before
+    (tmp_path / "pkg" / "a.py").write_text("x = 2\n", encoding="utf-8")
+    assert bench.tree_digest(tmp_path) != before
+
+
+def test_only_exp7_sends_a_neutral_follow_up() -> None:
+    assert bench.EXPERIMENTS["exp7"]["follow_up"] == bench.FOLLOW_UP
+    assert all("follow_up" not in bench.EXPERIMENTS[e] for e in ("exp5", "exp6"))
+    for steering in (">=", "operator", "dedup", "NI-103", "yes", "proceed with"):
+        assert steering not in bench.FOLLOW_UP.lower()
+
+
+def test_harness_fields_cover_both_turns() -> None:
+    one = {"result": {"duration_ms": 1000, "num_turns": 3, "total_cost_usd": 0.1}, "wall_ms": 1200, "exit_code": 0}
+    assert bench._harness_fields(one) == {"duration_ms": 1000, "num_turns": 3, "api_cost_usd": 0.1, "exit_code": 0}
+    two = {**one, "follow_up_sent": True, "follow_up": {"result": {"duration_ms": 500, "num_turns": 7, "total_cost_usd": 0.25}}}
+    assert bench._harness_fields(two) == {"duration_ms": 1500, "num_turns": 10, "api_cost_usd": 0.35, "exit_code": 0, "follow_up_sent": True}
