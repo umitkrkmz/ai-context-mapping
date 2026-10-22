@@ -39,6 +39,7 @@ import argparse
 import datetime
 import itertools
 import json
+import math
 import os
 import re
 import statistics
@@ -310,6 +311,11 @@ def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float
         "context_attachments": parsed["context_attachments"],
         "first_call": parsed["first_call"],
         "first_call_is_search": parsed["first_call_is_search"],
+        # Refactoring experiments (experiment 6): scored by benchmarks/tier_semantics_check.py and the harness.
+        "semantics_preserved": scoring.get("semantics_preserved"),
+        "changed_nothing": scoring.get("changed_nothing"),
+        "tests_edited": bool(scoring["tests_modified"]) if "tests_modified" in scoring else None,
+        "deduplicated": scoring.get("deduplicated"),
     }
 
 
@@ -319,8 +325,38 @@ NUMERIC_METRICS = (
 )
 
 
-def summarize_arm(trials: List[Dict[str, Any]]) -> Dict[str, Any]:
+def _tally(trials: List[Dict[str, Any]], key: str, value: Any) -> Optional[Dict[str, int]]:
+    """How many trials have ``key == value``, out of those that record ``key``; None if none record it."""
+    known = [t[key] for t in trials if t.get(key) is not None]
+    return {"k": sum(1 for v in known if v == value), "n": len(known)} if known else None
+
+
+def outcome_tallies(trials: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    harmful = _tally(trials, "semantics_preserved", False)
+    if harmful is None:
+        return None
     return {
+        "harmful_change": harmful,
+        "tests_edited": _tally(trials, "tests_edited", True),
+        "changed_nothing": _tally(trials, "changed_nothing", True),
+        "deduplicated": _tally(trials, "deduplicated", True),
+    }
+
+
+def fisher_one_sided_fewer(k_a: int, n_a: int, k_b: int, n_b: int) -> Optional[float]:
+    """Exact (Fisher) probability that arm b shows k_b or fewer events, given the pooled total; one-sided."""
+    if n_a <= 0 or n_b <= 0:
+        return None
+    total = k_a + k_b
+    denominator = math.comb(n_a + n_b, total)
+    tail = sum(math.comb(n_b, x) * math.comb(n_a, total - x) for x in range(max(0, total - n_a), k_b + 1))
+    return round(tail / denominator, 4)
+
+
+def summarize_arm(trials: List[Dict[str, Any]]) -> Dict[str, Any]:
+    outcomes = outcome_tallies(trials)
+    return {
+        **({"outcomes": outcomes} if outcomes else {}),
         "n": len(trials),
         "metrics": {name: aggregate([t[name] for t in trials if t.get(name) is not None]) for name in NUMERIC_METRICS},
         "quality": {
@@ -348,6 +384,10 @@ def compare_arms(a_trials: List[Dict[str, Any]], b_trials: List[Dict[str, Any]])
             "p_one_sided_lower": p_lower,
             "p_two_sided": p_two,
         }
+    a_harm, b_harm = _tally(a_trials, "semantics_preserved", False), _tally(b_trials, "semantics_preserved", False)
+    if a_harm and b_harm:
+        out["harmful_change"] = {"a": a_harm, "b": b_harm,
+                                 "p_b_fewer_one_sided": fisher_one_sided_fewer(a_harm["k"], a_harm["n"], b_harm["k"], b_harm["n"])}
     return out
 
 
@@ -468,7 +508,36 @@ def render_experiment(exp: Dict[str, Any]) -> str:
                 f"| {c['name']} | {_ratio_text(cost['ratio_of_medians'])} | {_ratio_text(cost['ratio_of_means'])} | {p_low} | {p_two} | "
                 f"{_ratio_text(new['ratio_of_medians'])} | {_ratio_text(search['ratio_of_medians'])} |"
             )
+    if any("outcomes" in arm["summary"] for arm in exp["arms"]):
+        lines += render_outcomes(exp, labels)
     return "\n".join(lines) + "\n"
+
+
+def _kn(tally: Optional[Dict[str, int]]) -> str:
+    return "n/a" if not tally else f"{tally['k']}/{tally['n']}"
+
+
+def render_outcomes(exp: Dict[str, Any], labels: Dict[str, str]) -> List[str]:
+    """Counts for refactoring experiments: harmful changes, edited tests, stopping, deduplication."""
+    lines = [
+        "", "**Refactoring outcomes** (counts per arm; a harmful change is any boundary behavior that differs from the original)", "",
+        "| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated |",
+        "| --- | -------------: | -----------: | -----------------------------: | -----------: |",
+    ]
+    for arm in exp["arms"]:
+        o = arm["summary"].get("outcomes") or {}
+        lines.append(f"| {arm['id']}: {labels[arm['id']]} | {_kn(o.get('harmful_change'))} | {_kn(o.get('tests_edited'))} | "
+                     f"{_kn(o.get('changed_nothing'))} | {_kn(o.get('deduplicated'))} |")
+    harmful = [c for c in exp["comparisons"] if "harmful_change" in c["metrics"]]
+    if harmful:
+        lines += [
+            "", "| Comparison | Harmful, first arm | Harmful, second arm | Fisher exact p (second arm fewer, one-sided) |",
+            "| ---------- | -----------------: | ------------------: | -------------------------------------------: |",
+        ]
+        for c in harmful:
+            h = c["metrics"]["harmful_change"]
+            lines.append(f"| {c['name']} | {_kn(h['a'])} | {_kn(h['b'])} | {_p_text(h['p_b_fewer_one_sided'])} |")
+    return lines
 
 
 def render_environment(results: Dict[str, Any]) -> str:

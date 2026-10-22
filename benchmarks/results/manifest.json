@@ -1866,7 +1866,680 @@
           "arm": "FD"
         }
       ],
-      "trials": [],
+      "trials": [
+        {
+          "id": "FS1",
+          "arm": "FS",
+          "agent_id": "fda5f67a-a97c-41f6-85ce-7d8c718eb074",
+          "order": 1,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS1/fda5f67a-a97c-41f6-85ce-7d8c718eb074.jsonl",
+          "harness": {
+            "duration_ms": 16942,
+            "num_turns": 3,
+            "api_cost_usd": 0.1006,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD1",
+          "arm": "BD",
+          "agent_id": "58473489-6c07-4d4e-afbf-6f433ad44d24",
+          "order": 2,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD1/58473489-6c07-4d4e-afbf-6f433ad44d24.jsonl",
+          "harness": {
+            "duration_ms": 162647,
+            "num_turns": 36,
+            "api_cost_usd": 0.6296,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS1",
+          "arm": "BS",
+          "agent_id": "cbc3ac62-eb5e-44f9-ba47-881c85213e94",
+          "order": 3,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS1/cbc3ac62-eb5e-44f9-ba47-881c85213e94.jsonl",
+          "harness": {
+            "duration_ms": 274855,
+            "num_turns": 49,
+            "api_cost_usd": 0.7513,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "6/11",
+            "semantics_preserved": false,
+            "own_tests": "271/271",
+            "tests_modified": [
+              "tests/test_tiers_gift_wrap.py",
+              "tests/test_tiers_handling_fee.py",
+              "tests/test_tiers_restocking_fee.py",
+              "tests/test_tiers_return_window.py",
+              "tests/test_tiers_sla_priority.py"
+            ],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD1",
+          "arm": "FD",
+          "agent_id": "598e0897-67f9-4849-9825-35e85cb76a48",
+          "order": 4,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD1/598e0897-67f9-4849-9825-35e85cb76a48.jsonl",
+          "harness": {
+            "duration_ms": 27441,
+            "num_turns": 4,
+            "api_cost_usd": 0.112,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FS2",
+          "arm": "FS",
+          "agent_id": "9f82423a-8446-4b84-967f-99bbad132196",
+          "order": 5,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS2/9f82423a-8446-4b84-967f-99bbad132196.jsonl",
+          "harness": {
+            "duration_ms": 26708,
+            "num_turns": 5,
+            "api_cost_usd": 0.1231,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS2",
+          "arm": "BS",
+          "agent_id": "e5022e09-5192-4c79-815a-2b7d603f10c2",
+          "order": 6,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS2/e5022e09-5192-4c79-815a-2b7d603f10c2.jsonl",
+          "harness": {
+            "duration_ms": 260687,
+            "num_turns": 62,
+            "api_cost_usd": 0.8293,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "6/11",
+            "semantics_preserved": false,
+            "own_tests": "271/271",
+            "tests_modified": [
+              "tests/test_tiers_gift_wrap.py",
+              "tests/test_tiers_handling_fee.py",
+              "tests/test_tiers_restocking_fee.py",
+              "tests/test_tiers_return_window.py",
+              "tests/test_tiers_sla_priority.py"
+            ],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD2",
+          "arm": "BD",
+          "agent_id": "eff859ae-73f9-4d81-b2a4-bdf62035aa55",
+          "order": 7,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD2/eff859ae-73f9-4d81-b2a4-bdf62035aa55.jsonl",
+          "harness": {
+            "duration_ms": 162118,
+            "num_turns": 37,
+            "api_cost_usd": 0.6564,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD2",
+          "arm": "FD",
+          "agent_id": "dc3708fa-e443-465b-84f3-8cbfc669705c",
+          "order": 8,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD2/dc3708fa-e443-465b-84f3-8cbfc669705c.jsonl",
+          "harness": {
+            "duration_ms": 22521,
+            "num_turns": 4,
+            "api_cost_usd": 0.1084,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD3",
+          "arm": "FD",
+          "agent_id": "2225f239-8192-4020-a095-05c3804b92bd",
+          "order": 9,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD3/2225f239-8192-4020-a095-05c3804b92bd.jsonl",
+          "harness": {
+            "duration_ms": 23704,
+            "num_turns": 8,
+            "api_cost_usd": 0.1558,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FS3",
+          "arm": "FS",
+          "agent_id": "a3e6484e-de66-4ffa-aff5-1390900f95da",
+          "order": 10,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS3/a3e6484e-de66-4ffa-aff5-1390900f95da.jsonl",
+          "harness": {
+            "duration_ms": 68500,
+            "num_turns": 14,
+            "api_cost_usd": 0.1993,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS3",
+          "arm": "BS",
+          "agent_id": "ead44041-7157-4d42-a090-6b9e3305a282",
+          "order": 11,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS3/ead44041-7157-4d42-a090-6b9e3305a282.jsonl",
+          "harness": {
+            "duration_ms": 185453,
+            "num_turns": 42,
+            "api_cost_usd": 0.5978,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD3",
+          "arm": "BD",
+          "agent_id": "3ce59fa4-dd91-48e0-b0af-e8564d4d0144",
+          "order": 12,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD3/3ce59fa4-dd91-48e0-b0af-e8564d4d0144.jsonl",
+          "harness": {
+            "duration_ms": 162553,
+            "num_turns": 41,
+            "api_cost_usd": 0.4865,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD4",
+          "arm": "FD",
+          "agent_id": "1416037f-77bd-495a-9646-625a3b69e1c9",
+          "order": 13,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD4/1416037f-77bd-495a-9646-625a3b69e1c9.jsonl",
+          "harness": {
+            "duration_ms": 15222,
+            "num_turns": 3,
+            "api_cost_usd": 0.0958,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS4",
+          "arm": "BS",
+          "agent_id": "0e7f0b8b-94c0-4e71-adcb-39b1c17b15cd",
+          "order": 14,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS4/0e7f0b8b-94c0-4e71-adcb-39b1c17b15cd.jsonl",
+          "harness": {
+            "duration_ms": 245663,
+            "num_turns": 54,
+            "api_cost_usd": 0.8603,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "6/11",
+            "semantics_preserved": false,
+            "own_tests": "271/271",
+            "tests_modified": [
+              "tests/test_tiers_gift_wrap.py",
+              "tests/test_tiers_handling_fee.py",
+              "tests/test_tiers_restocking_fee.py",
+              "tests/test_tiers_return_window.py",
+              "tests/test_tiers_sla_priority.py"
+            ],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD4",
+          "arm": "BD",
+          "agent_id": "1f914687-7b90-44a2-aca8-5c3c9fc615e8",
+          "order": 15,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD4/1f914687-7b90-44a2-aca8-5c3c9fc615e8.jsonl",
+          "harness": {
+            "duration_ms": 157456,
+            "num_turns": 23,
+            "api_cost_usd": 0.5357,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FS4",
+          "arm": "FS",
+          "agent_id": "f1ec28b0-fe2e-41df-a647-449dd83b1d7f",
+          "order": 16,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS4/f1ec28b0-fe2e-41df-a647-449dd83b1d7f.jsonl",
+          "harness": {
+            "duration_ms": 27636,
+            "num_turns": 5,
+            "api_cost_usd": 0.1235,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD5",
+          "arm": "BD",
+          "agent_id": "5a6db390-9cfd-4d48-b88f-61f2e37f762d",
+          "order": 17,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD5/5a6db390-9cfd-4d48-b88f-61f2e37f762d.jsonl",
+          "harness": {
+            "duration_ms": 144937,
+            "num_turns": 36,
+            "api_cost_usd": 0.5031,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FS5",
+          "arm": "FS",
+          "agent_id": "1800e864-fbc6-4e0e-a023-a84a6e40911c",
+          "order": 18,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS5/1800e864-fbc6-4e0e-a023-a84a6e40911c.jsonl",
+          "harness": {
+            "duration_ms": 21217,
+            "num_turns": 4,
+            "api_cost_usd": 0.1072,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS5",
+          "arm": "BS",
+          "agent_id": "a9d56bdf-8268-471e-ba90-b99762003262",
+          "order": 19,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS5/a9d56bdf-8268-471e-ba90-b99762003262.jsonl",
+          "harness": {
+            "duration_ms": 243577,
+            "num_turns": 49,
+            "api_cost_usd": 0.8119,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "6/11",
+            "semantics_preserved": false,
+            "own_tests": "271/271",
+            "tests_modified": [
+              "tests/test_tiers_gift_wrap.py",
+              "tests/test_tiers_handling_fee.py",
+              "tests/test_tiers_restocking_fee.py",
+              "tests/test_tiers_return_window.py",
+              "tests/test_tiers_sla_priority.py"
+            ],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD5",
+          "arm": "FD",
+          "agent_id": "f97f9283-c584-4e32-b460-b4861c9a679d",
+          "order": 20,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD5/f97f9283-c584-4e32-b460-b4861c9a679d.jsonl",
+          "harness": {
+            "duration_ms": 17567,
+            "num_turns": 4,
+            "api_cost_usd": 0.1037,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FS6",
+          "arm": "FS",
+          "agent_id": "fb4264b3-4e26-47a5-98ea-13ad202b5d12",
+          "order": 21,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FS6/fb4264b3-4e26-47a5-98ea-13ad202b5d12.jsonl",
+          "harness": {
+            "duration_ms": 23867,
+            "num_turns": 3,
+            "api_cost_usd": 0.0988,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BS6",
+          "arm": "BS",
+          "agent_id": "c52b049c-dc8a-4f23-be6e-6962b0057573",
+          "order": 22,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BS6/c52b049c-dc8a-4f23-be6e-6962b0057573.jsonl",
+          "harness": {
+            "duration_ms": 179715,
+            "num_turns": 37,
+            "api_cost_usd": 0.6903,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "BD6",
+          "arm": "BD",
+          "agent_id": "c28c00c1-343e-4747-aaaa-a45ae5d0de20",
+          "order": 23,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-BD6/c28c00c1-343e-4747-aaaa-a45ae5d0de20.jsonl",
+          "harness": {
+            "duration_ms": 211216,
+            "num_turns": 40,
+            "api_cost_usd": 0.5904,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "271/271",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "map_updated": false,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FD6",
+          "arm": "FD",
+          "agent_id": "d57aaf47-b87a-4c5b-8c5e-23f014ea3881",
+          "order": 24,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp6-trials-FD6/d57aaf47-b87a-4c5b-8c5e-23f014ea3881.jsonl",
+          "harness": {
+            "duration_ms": 20088,
+            "num_turns": 4,
+            "api_cost_usd": 0.1043,
+            "exit_code": 0
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": true,
+            "report_flags_conflict": true
+          }
+        }
+      ],
       "pilots": [
         {
           "id": "pilot_BS",

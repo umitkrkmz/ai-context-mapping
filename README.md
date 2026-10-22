@@ -167,10 +167,19 @@ From now on, adding a file without describing it in the map fails the build.
 
 ## Does it work? Honest results
 
-We ran five experiments: the same model and bug, with and without the framework, on a 4,400-token and a
-55,600-token project (54 agent runs, measured from transcripts). The most trustworthy is the last one
-(v1.2.0): pre-registered, randomized, 8 runs per arm, each run a separate Claude Code session in its own
-project, as an adopter would use it.
+We ran six experiments (78 agent runs, measured from transcripts) with the same model, with and without
+the framework. The two most trustworthy are pre-registered and randomized, with each run a separate Claude
+Code session in its own project, as an adopter would use it:
+
+- **Experiment 5 (v1.2.0)** measured cost on a bug fix.
+- **Experiment 6 (v1.3.0)** measured protection against a harmful "make it consistent" request.
+
+| Finding (experiment 6, guardrails) | Result |
+| ---------------------------------- | ------ |
+| Harmful change when nothing but tests records the reason | **4 of 6** without the framework; **0 of 6** with it (Fisher p = 0.030) |
+| Did the tests stop it? | **No.** The agents rewrote the boundary tests to match their change, and disclosed it |
+| What the framework agents did | **Stopped and asked**, 12 of 12, citing the invariant; none did the safe part of the task |
+| Reason written in the code, no framework | **0 of 6** harmful, and all 6 finished the safe refactor |
 
 | Finding (experiment 5, adopter setup) | Result |
 | ------------------------------------- | ------ |
@@ -193,9 +202,12 @@ project, as an adopter would use it.
 the map and verify their tests, and that costs about a third more without improving the fix. It is **not
 a token saver**. The v1.0.4 headline of a 27% saving from the map gate came from agents that did not have
 the rules in context, a condition current Claude Code no longer produces once a project has a root
-`CLAUDE.md` or `AGENTS.md`. The framework's real claim, that it stops harmful changes and proves tests can
-fail, needs tasks where an unguided agent goes wrong. Those have not been run yet. Full data, method, the
-v1.1.1 correction, and limits: [docs/benchmark-results.md](docs/benchmark-results.md).
+`CLAUDE.md` or `AGENTS.md`. **And on the request it exists for, the framework works, with a catch.** Asked to make the tier tables
+"consistent", agents that had nothing but tests to go on broke the business rule in 4 of 6 runs and edited
+the tests to match. With the framework's invariant, 0 of 6 did, because every agent stopped and asked. A
+reason written next to the code worked as well and let the agent finish the safe part of the job. Treat the
+framework as a backstop for knowledge that has no other home, and word its "Never" rules narrowly. Full
+data, method, the v1.1.1 correction, and limits: [docs/benchmark-results.md](docs/benchmark-results.md).
 
 > *Context reduction is not inherently good. The goal is targeted context, not less context.*
 

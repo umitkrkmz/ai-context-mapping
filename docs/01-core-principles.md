@@ -53,7 +53,9 @@ more aggressively rather than trimming descriptions.
 > reading the map first, one experiment saw a 27% lower median cost (three trials per arm), but only for
 > agents that did not have the rules in context. Run as an adopter runs it (experiment 5, eight trials per
 > arm), the framework cost a median 38% more than a bare project for the same fix, and the gate changed
-> nothing. So the token diet is **not demonstrated**, and on easy bugs the framework is overhead; the map's demonstrated value
+> nothing. Asked to break a business rule that only the invariants recorded, agents without the framework
+> did so in 4 of 6 runs and agents with it in 0 of 6 (experiment 6); a reason written in the code did as
+> well. So the token diet is **not demonstrated**, and on easy bugs the framework is overhead; the map's demonstrated value
 > is orientation and guardrails. Context reduction is not inherently good: the goal is targeted context,
 > not less context. Larger repositories and tasks that cannot be searched for are untested.
 

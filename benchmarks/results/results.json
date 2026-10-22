@@ -5,7 +5,7 @@
       "2.1.304"
     ],
     "model_trial_counts": {
-      "claude-sonnet-5": 54
+      "claude-sonnet-5": 78
     },
     "models": [
       "claude-sonnet-5"
@@ -225,6 +225,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 465197,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -236,6 +237,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -250,6 +252,8 @@
           "output_tokens": 4681,
           "project_instructions_loaded": false,
           "search_output_tokens": 1148,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 17,
           "turns": 9,
           "weighted_cost": 148721
@@ -261,6 +265,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 727565,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -272,6 +277,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -286,6 +292,8 @@
           "output_tokens": 5495,
           "project_instructions_loaded": false,
           "search_output_tokens": 1635,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 18,
           "turns": 11,
           "weighted_cost": 160450
@@ -506,6 +514,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 401625,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -517,6 +526,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -531,6 +541,8 @@
           "output_tokens": 4740,
           "project_instructions_loaded": false,
           "search_output_tokens": 6714,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 19,
           "turns": 7,
           "weighted_cost": 158703
@@ -542,6 +554,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 632318,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -553,6 +566,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -567,6 +581,8 @@
           "output_tokens": 4581,
           "project_instructions_loaded": false,
           "search_output_tokens": 6758,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 17,
           "turns": 9,
           "weighted_cost": 149836
@@ -578,6 +594,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 1229508,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -589,6 +606,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -603,6 +621,8 @@
           "output_tokens": 8411,
           "project_instructions_loaded": false,
           "search_output_tokens": 5057,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 24,
           "turns": 15,
           "weighted_cost": 245991
@@ -614,6 +634,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 584027,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -625,6 +646,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -639,6 +661,8 @@
           "output_tokens": 4365,
           "project_instructions_loaded": false,
           "search_output_tokens": 9449,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 18,
           "turns": 9,
           "weighted_cost": 136997
@@ -650,6 +674,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 683547,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -661,6 +686,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -675,6 +701,8 @@
           "output_tokens": 5288,
           "project_instructions_loaded": false,
           "search_output_tokens": 8407,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 20,
           "turns": 10,
           "weighted_cost": 150887
@@ -686,6 +714,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 625997,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -697,6 +726,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -711,6 +741,8 @@
           "output_tokens": 4712,
           "project_instructions_loaded": false,
           "search_output_tokens": 5771,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 17,
           "turns": 9,
           "weighted_cost": 154071
@@ -931,6 +963,7 @@
           "arm": "Bn",
           "blocked_calls": 0,
           "cache_read_tokens": 551892,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -942,6 +975,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -956,6 +990,8 @@
           "output_tokens": 4611,
           "project_instructions_loaded": false,
           "search_output_tokens": 6903,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 9,
           "turns": 9,
           "weighted_cost": 177470
@@ -967,6 +1003,7 @@
           "arm": "Bg",
           "blocked_calls": 1,
           "cache_read_tokens": 535455,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -978,6 +1015,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -992,6 +1030,8 @@
           "output_tokens": 4235,
           "project_instructions_loaded": false,
           "search_output_tokens": 655,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 9,
           "weighted_cost": 117632
@@ -1003,6 +1043,7 @@
           "arm": "Bg",
           "blocked_calls": 1,
           "cache_read_tokens": 491180,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1014,6 +1055,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -1028,6 +1070,8 @@
           "output_tokens": 4464,
           "project_instructions_loaded": false,
           "search_output_tokens": 39,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 8,
           "weighted_cost": 129379
@@ -1039,6 +1083,7 @@
           "arm": "Bn",
           "blocked_calls": 0,
           "cache_read_tokens": 584455,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1050,6 +1095,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -1064,6 +1110,8 @@
           "output_tokens": 4652,
           "project_instructions_loaded": false,
           "search_output_tokens": 6844,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 10,
           "turns": 9,
           "weighted_cost": 132854
@@ -1075,6 +1123,7 @@
           "arm": "Bn",
           "blocked_calls": 0,
           "cache_read_tokens": 689514,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1086,6 +1135,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -1100,6 +1150,8 @@
           "output_tokens": 5421,
           "project_instructions_loaded": false,
           "search_output_tokens": 6022,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 18,
           "turns": 10,
           "weighted_cost": 160199
@@ -1111,6 +1163,7 @@
           "arm": "Bg",
           "blocked_calls": 1,
           "cache_read_tokens": 461588,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1122,6 +1175,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -1136,6 +1190,8 @@
           "output_tokens": 3677,
           "project_instructions_loaded": false,
           "search_output_tokens": 39,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 14,
           "turns": 8,
           "weighted_cost": 105371
@@ -1713,6 +1769,7 @@
           "arm": "D",
           "blocked_calls": 0,
           "cache_read_tokens": 514158,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1725,6 +1782,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "first_call_is_search": false,
@@ -1739,6 +1797,8 @@
           "output_tokens": 5478,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 18,
           "turns": 9,
           "weighted_cost": 169933
@@ -1750,6 +1810,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 485887,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1762,6 +1823,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "first_call_is_search": false,
@@ -1776,6 +1838,8 @@
           "output_tokens": 3710,
           "project_instructions_loaded": true,
           "search_output_tokens": 613,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 8,
           "weighted_cost": 112001
@@ -1787,6 +1851,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 456255,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1799,6 +1864,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "first_call_is_search": false,
@@ -1813,6 +1879,8 @@
           "output_tokens": 3821,
           "project_instructions_loaded": true,
           "search_output_tokens": 3639,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 8,
           "turns": 8,
           "weighted_cost": 104639
@@ -1824,6 +1892,7 @@
           "arm": "C",
           "blocked_calls": 2,
           "cache_read_tokens": 489610,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1836,6 +1905,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Glob(**/*)",
           "first_call_is_search": true,
@@ -1850,6 +1920,8 @@
           "output_tokens": 4185,
           "project_instructions_loaded": true,
           "search_output_tokens": 166,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 10,
           "turns": 9,
           "weighted_cost": 156490
@@ -1861,6 +1933,7 @@
           "arm": "C",
           "blocked_calls": 1,
           "cache_read_tokens": 498378,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1873,6 +1946,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "PowerShell(Get-ChildItem -Force \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-13)",
           "first_call_is_search": false,
@@ -1887,6 +1961,8 @@
           "output_tokens": 3640,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 9,
           "weighted_cost": 101357
@@ -1898,6 +1974,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 390145,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1910,6 +1987,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
           "first_call_is_search": false,
@@ -1924,6 +2002,8 @@
           "output_tokens": 3078,
           "project_instructions_loaded": true,
           "search_output_tokens": 4332,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 6,
           "turns": 7,
           "weighted_cost": 90685
@@ -1935,6 +2015,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 475899,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1947,6 +2028,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "first_call_is_search": false,
@@ -1961,6 +2043,8 @@
           "output_tokens": 3673,
           "project_instructions_loaded": true,
           "search_output_tokens": 556,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 8,
           "weighted_cost": 107761
@@ -1972,6 +2056,7 @@
           "arm": "D",
           "blocked_calls": 0,
           "cache_read_tokens": 433919,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -1984,6 +2069,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -1998,6 +2084,8 @@
           "output_tokens": 3707,
           "project_instructions_loaded": true,
           "search_output_tokens": 2427,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 11,
           "turns": 7,
           "weighted_cost": 109058
@@ -2009,6 +2097,7 @@
           "arm": "C",
           "blocked_calls": 2,
           "cache_read_tokens": 490367,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2021,6 +2110,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "first_call_is_search": false,
@@ -2035,6 +2125,8 @@
           "output_tokens": 3128,
           "project_instructions_loaded": true,
           "search_output_tokens": 574,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 9,
           "turns": 9,
           "weighted_cost": 94843
@@ -2046,6 +2138,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 440805,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2058,6 +2151,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "first_call_is_search": false,
@@ -2072,6 +2166,8 @@
           "output_tokens": 3448,
           "project_instructions_loaded": true,
           "search_output_tokens": 613,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 8,
           "weighted_cost": 93882
@@ -2083,6 +2179,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 421359,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2095,6 +2192,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -2109,6 +2207,8 @@
           "output_tokens": 3959,
           "project_instructions_loaded": true,
           "search_output_tokens": 122,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 7,
           "weighted_cost": 104072
@@ -2120,6 +2220,7 @@
           "arm": "D",
           "blocked_calls": 1,
           "cache_read_tokens": 409346,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2132,6 +2233,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(*)",
           "first_call_is_search": false,
@@ -2146,6 +2248,8 @@
           "output_tokens": 3785,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 7,
           "weighted_cost": 101545
@@ -2157,6 +2261,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 389994,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2169,6 +2274,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
           "first_call_is_search": false,
@@ -2183,6 +2289,8 @@
           "output_tokens": 3990,
           "project_instructions_loaded": true,
           "search_output_tokens": 2963,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 6,
           "turns": 7,
           "weighted_cost": 95041
@@ -2194,6 +2302,7 @@
           "arm": "D",
           "blocked_calls": 0,
           "cache_read_tokens": 478046,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2206,6 +2315,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "first_call_is_search": false,
@@ -2220,6 +2330,8 @@
           "output_tokens": 4628,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 8,
           "weighted_cost": 115171
@@ -2231,6 +2343,7 @@
           "arm": "C",
           "blocked_calls": 1,
           "cache_read_tokens": 623262,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2243,6 +2356,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": true,
           "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "first_call_is_search": false,
@@ -2257,6 +2371,8 @@
           "output_tokens": 4705,
           "project_instructions_loaded": true,
           "search_output_tokens": 242,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 17,
           "turns": 11,
           "weighted_cost": 120211
@@ -2268,6 +2384,7 @@
           "arm": "B",
           "blocked_calls": 0,
           "cache_read_tokens": 351294,
+          "changed_nothing": null,
           "client_version": "2.1.275",
           "context_attachments": [
             "date",
@@ -2280,6 +2397,7 @@
             "session_context",
             "skill_listing"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -2294,6 +2412,8 @@
           "output_tokens": 3158,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 10,
           "turns": 6,
           "weighted_cost": 91264
@@ -2794,6 +2914,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 223259,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -2807,6 +2928,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*.py)",
           "first_call_is_search": true,
@@ -2821,6 +2943,8 @@
           "output_tokens": 2555,
           "project_instructions_loaded": false,
           "search_output_tokens": 703,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 8,
           "turns": 7,
           "weighted_cost": 51870
@@ -2832,6 +2956,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 525275,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -2846,6 +2971,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -2860,6 +2986,8 @@
           "output_tokens": 4833,
           "project_instructions_loaded": true,
           "search_output_tokens": 34,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 14,
           "turns": 13,
           "weighted_cost": 106494
@@ -2871,6 +2999,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 519986,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -2885,6 +3014,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
           "first_call_is_search": false,
@@ -2899,6 +3029,8 @@
           "output_tokens": 4453,
           "project_instructions_loaded": true,
           "search_output_tokens": 153,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 13,
           "weighted_cost": 104777
@@ -2910,6 +3042,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 423887,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -2923,6 +3056,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(find \"/c/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scrat)",
           "first_call_is_search": true,
@@ -2937,6 +3071,8 @@
           "output_tokens": 3248,
           "project_instructions_loaded": false,
           "search_output_tokens": 2053,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 11,
           "turns": 12,
           "weighted_cost": 80299
@@ -2948,6 +3084,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 394463,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -2962,6 +3099,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -2976,6 +3114,8 @@
           "output_tokens": 3682,
           "project_instructions_loaded": true,
           "search_output_tokens": 247,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 11,
           "turns": 10,
           "weighted_cost": 86236
@@ -2987,6 +3127,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 441776,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3001,6 +3142,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3015,6 +3157,8 @@
           "output_tokens": 4287,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 11,
           "weighted_cost": 95715
@@ -3026,6 +3170,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 393198,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3040,6 +3185,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3054,6 +3200,8 @@
           "output_tokens": 4064,
           "project_instructions_loaded": true,
           "search_output_tokens": 34,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 10,
           "weighted_cost": 88101
@@ -3065,6 +3213,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 489561,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3079,6 +3228,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3093,6 +3243,8 @@
           "output_tokens": 4982,
           "project_instructions_loaded": true,
           "search_output_tokens": 133,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 14,
           "turns": 12,
           "weighted_cost": 104999
@@ -3104,6 +3256,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 265886,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3117,6 +3270,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(find \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scrat)",
           "first_call_is_search": true,
@@ -3131,6 +3285,8 @@
           "output_tokens": 2974,
           "project_instructions_loaded": false,
           "search_output_tokens": 1293,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 8,
           "weighted_cost": 60758
@@ -3142,6 +3298,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 439338,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3156,6 +3313,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3170,6 +3328,8 @@
           "output_tokens": 3931,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 11,
           "weighted_cost": 92610
@@ -3181,6 +3341,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 442397,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3195,6 +3356,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3209,6 +3371,8 @@
           "output_tokens": 4034,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 11,
           "weighted_cost": 94302
@@ -3220,6 +3384,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 339305,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3233,6 +3398,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*.py)",
           "first_call_is_search": true,
@@ -3247,6 +3413,8 @@
           "output_tokens": 3845,
           "project_instructions_loaded": false,
           "search_output_tokens": 1171,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 10,
           "weighted_cost": 73318
@@ -3258,6 +3426,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 479735,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3272,6 +3441,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3286,6 +3456,8 @@
           "output_tokens": 4531,
           "project_instructions_loaded": true,
           "search_output_tokens": 34,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 12,
           "weighted_cost": 100268
@@ -3297,6 +3469,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 441398,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3311,6 +3484,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3325,6 +3499,8 @@
           "output_tokens": 3968,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 11,
           "weighted_cost": 93214
@@ -3336,6 +3512,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 325544,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3349,6 +3526,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Glob(**/*.py)",
           "first_call_is_search": true,
@@ -3363,6 +3541,8 @@
           "output_tokens": 2780,
           "project_instructions_loaded": false,
           "search_output_tokens": 736,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 9,
           "turns": 10,
           "weighted_cost": 63288
@@ -3374,6 +3554,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 482291,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3388,6 +3569,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3402,6 +3584,8 @@
           "output_tokens": 4313,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 12,
           "weighted_cost": 99814
@@ -3413,6 +3597,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 307295,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3426,6 +3611,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
           "first_call_is_search": true,
@@ -3440,6 +3626,8 @@
           "output_tokens": 3161,
           "project_instructions_loaded": false,
           "search_output_tokens": 1705,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 10,
           "turns": 9,
           "weighted_cost": 66358
@@ -3451,6 +3639,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 400326,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3465,6 +3654,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3479,6 +3669,8 @@
           "output_tokens": 4184,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 13,
           "turns": 10,
           "weighted_cost": 90254
@@ -3490,6 +3682,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 392609,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3504,6 +3697,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3518,6 +3712,8 @@
           "output_tokens": 4061,
           "project_instructions_loaded": true,
           "search_output_tokens": 5,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 10,
           "weighted_cost": 88053
@@ -3529,6 +3725,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 529597,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3543,6 +3740,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
           "first_call_is_search": false,
@@ -3557,6 +3755,8 @@
           "output_tokens": 4417,
           "project_instructions_loaded": true,
           "search_output_tokens": 18,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 13,
           "weighted_cost": 106666
@@ -3568,6 +3768,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 377754,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3581,6 +3782,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
           "first_call_is_search": true,
@@ -3595,6 +3797,8 @@
           "output_tokens": 3276,
           "project_instructions_loaded": false,
           "search_output_tokens": 1758,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 10,
           "turns": 11,
           "weighted_cost": 73947
@@ -3606,6 +3810,7 @@
           "arm": "PG",
           "blocked_calls": 0,
           "cache_read_tokens": 398414,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3620,6 +3825,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3634,6 +3840,8 @@
           "output_tokens": 3953,
           "project_instructions_loaded": true,
           "search_output_tokens": 0,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 12,
           "turns": 10,
           "weighted_cost": 88851
@@ -3645,6 +3853,7 @@
           "arm": "P",
           "blocked_calls": 0,
           "cache_read_tokens": 569914,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3659,6 +3868,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "first_call_is_search": false,
@@ -3673,6 +3883,8 @@
           "output_tokens": 5217,
           "project_instructions_loaded": true,
           "search_output_tokens": 114,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 15,
           "turns": 14,
           "weighted_cost": 113749
@@ -3684,6 +3896,7 @@
           "arm": "A",
           "blocked_calls": 0,
           "cache_read_tokens": 400323,
+          "changed_nothing": null,
           "client_version": "2.1.304",
           "context_attachments": [
             "agent_listing_delta",
@@ -3697,6 +3910,7 @@
             "session_context",
             "total_tokens_reminder"
           ],
+          "deduplicated": null,
           "e2e_test_added": false,
           "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratch)",
           "first_call_is_search": true,
@@ -3711,6 +3925,8 @@
           "output_tokens": 3555,
           "project_instructions_loaded": false,
           "search_output_tokens": 1128,
+          "semantics_preserved": null,
+          "tests_edited": null,
           "tool_calls": 11,
           "turns": 12,
           "weighted_cost": 76131
@@ -3728,77 +3944,95 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 1473947.0,
+                "mean": 1246065.67,
+                "median": 1255161.5,
+                "min": 889842.0,
+                "n": 6
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 1407016.0,
+                "mean": 1187517.67,
+                "median": 1198201.5,
+                "min": 834660.0,
+                "n": 6
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 211.2,
+                "mean": 166.82,
+                "median": 162.35,
+                "min": 144.9,
+                "n": 6
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 66931.0,
+                "mean": 58548.0,
+                "median": 57270.0,
+                "min": 50499.0,
+                "n": 6
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 5839.0,
+                "mean": 3219.0,
+                "median": 2775.0,
+                "min": 1044.0,
+                "n": 6
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 40.0,
+                "mean": 34.5,
+                "median": 35.5,
+                "min": 22.0,
+                "n": 6
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 24.0,
+                "mean": 22.33,
+                "median": 23.0,
+                "min": 18.0,
+                "n": 6
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 291433.0,
+                "mean": 251503.67,
+                "median": 250783.0,
+                "min": 214250.0,
+                "n": 6
               }
             },
-            "n": 0,
+            "n": 6,
+            "outcomes": {
+              "changed_nothing": {
+                "k": 0,
+                "n": 6
+              },
+              "deduplicated": {
+                "k": 6,
+                "n": 6
+              },
+              "harmful_change": {
+                "k": 0,
+                "n": 6
+              },
+              "tests_edited": {
+                "k": 0,
+                "n": 6
+              }
+            },
             "quality": {
               "acceptance_full_rate": null,
               "e2e_test_rate": null,
-              "first_call_search_rate": null,
+              "first_call_search_rate": 0.8333,
               "mutation_full_rate": null,
               "opened_legacy_rate": null,
-              "project_instructions_rate": null
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -3810,77 +4044,95 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 2364128.0,
+                "mean": 1855180.67,
+                "median": 1854798.0,
+                "min": 1293581.0,
+                "n": 6
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 2294982.0,
+                "mean": 1785808.67,
+                "median": 1781993.0,
+                "min": 1233147.0,
+                "n": 6
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 274.9,
+                "mean": 231.68,
+                "median": 244.65,
+                "min": 179.7,
+                "n": 6
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 76849.0,
+                "mean": 69372.0,
+                "median": 69791.5,
+                "min": 60434.0,
+                "n": 6
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 5332.0,
+                "mean": 2179.17,
+                "median": 1778.5,
+                "min": 325.0,
+                "n": 6
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 61.0,
+                "mean": 47.83,
+                "median": 48.0,
+                "min": 36.0,
+                "n": 6
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 40.0,
+                "mean": 30.67,
+                "median": 30.5,
+                "min": 23.0,
+                "n": 6
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 393952.0,
+                "mean": 341718.0,
+                "median": 353031.0,
+                "min": 267272.0,
+                "n": 6
               }
             },
-            "n": 0,
+            "n": 6,
+            "outcomes": {
+              "changed_nothing": {
+                "k": 0,
+                "n": 6
+              },
+              "deduplicated": {
+                "k": 6,
+                "n": 6
+              },
+              "harmful_change": {
+                "k": 4,
+                "n": 6
+              },
+              "tests_edited": {
+                "k": 4,
+                "n": 6
+              }
+            },
             "quality": {
               "acceptance_full_rate": null,
               "e2e_test_rate": null,
-              "first_call_search_rate": null,
+              "first_call_search_rate": 0.8333,
               "mutation_full_rate": null,
               "opened_legacy_rate": null,
-              "project_instructions_rate": null
+              "project_instructions_rate": 0.0
             }
           }
         },
@@ -3892,77 +4144,95 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 318297.0,
+                "mean": 146490.33,
+                "median": 112460.5,
+                "min": 110670.0,
+                "n": 6
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 297232.0,
+                "mean": 126873.83,
+                "median": 92811.5,
+                "min": 92786.0,
+                "n": 6
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 27.4,
+                "mean": 21.08,
+                "median": 21.3,
+                "min": 15.2,
+                "n": 6
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 21065.0,
+                "mean": 19616.5,
+                "median": 19661.5,
+                "min": 17856.0,
+                "n": 6
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 68.0,
+                "mean": 11.83,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 7.0,
+                "mean": 3.5,
+                "median": 3.0,
+                "min": 2.0,
+                "n": 6
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 8.0,
+                "mean": 3.83,
+                "median": 3.0,
+                "min": 3.0,
+                "n": 6
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 63629.0,
+                "mean": 43151.5,
+                "median": 39604.0,
+                "min": 35222.0,
+                "n": 6
               }
             },
-            "n": 0,
+            "n": 6,
+            "outcomes": {
+              "changed_nothing": {
+                "k": 6,
+                "n": 6
+              },
+              "deduplicated": {
+                "k": 0,
+                "n": 6
+              },
+              "harmful_change": {
+                "k": 0,
+                "n": 6
+              },
+              "tests_edited": {
+                "k": 0,
+                "n": 6
+              }
+            },
             "quality": {
               "acceptance_full_rate": null,
               "e2e_test_rate": null,
-              "first_call_search_rate": null,
+              "first_call_search_rate": 0.0,
               "mutation_full_rate": null,
               "opened_legacy_rate": null,
-              "project_instructions_rate": null
+              "project_instructions_rate": 1.0
             }
           }
         },
@@ -3974,77 +4244,95 @@
           "summary": {
             "metrics": {
               "all_in_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 206754.0,
+                "mean": 140487.0,
+                "median": 130321.5,
+                "min": 110832.0,
+                "n": 6
               },
               "blocked_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "cache_read_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 173654.0,
+                "mean": 118406.5,
+                "median": 109637.0,
+                "min": 92659.0,
+                "n": 6
               },
               "latency_s": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 68.5,
+                "mean": 30.8,
+                "median": 25.3,
+                "min": 16.9,
+                "n": 6
               },
               "new_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 33100.0,
+                "mean": 22080.5,
+                "median": 19920.5,
+                "min": 18173.0,
+                "n": 6
               },
               "search_output_tokens": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "min": 0.0,
+                "n": 6
               },
               "tool_calls": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 13.0,
+                "mean": 4.67,
+                "median": 3.5,
+                "min": 2.0,
+                "n": 6
               },
               "turns": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 5.0,
+                "mean": 3.67,
+                "median": 3.5,
+                "min": 3.0,
+                "n": 6
               },
               "weighted_cost": {
-                "max": null,
-                "mean": null,
-                "median": null,
-                "min": null,
-                "n": 0
+                "max": 78845.0,
+                "mean": 47834.83,
+                "median": 43389.0,
+                "min": 36736.0,
+                "n": 6
               }
             },
-            "n": 0,
+            "n": 6,
+            "outcomes": {
+              "changed_nothing": {
+                "k": 6,
+                "n": 6
+              },
+              "deduplicated": {
+                "k": 0,
+                "n": 6
+              },
+              "harmful_change": {
+                "k": 0,
+                "n": 6
+              },
+              "tests_edited": {
+                "k": 0,
+                "n": 6
+              }
+            },
             "quality": {
               "acceptance_full_rate": null,
               "e2e_test_rate": null,
-              "first_call_search_rate": null,
+              "first_call_search_rate": 0.0,
               "mutation_full_rate": null,
               "opened_legacy_rate": null,
-              "project_instructions_rate": null
+              "project_instructions_rate": 1.0
             }
           }
         }
@@ -4054,29 +4342,40 @@
           "a": "BS",
           "b": "FS",
           "metrics": {
+            "harmful_change": {
+              "a": {
+                "k": 4,
+                "n": 6
+              },
+              "b": {
+                "k": 0,
+                "n": 6
+              },
+              "p_b_fewer_one_sided": 0.0303
+            },
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.3183,
+              "ratio_of_medians": 0.2854
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.0,
+              "ratio_of_medians": 0.0
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.0976,
+              "ratio_of_medians": 0.0729
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.14,
+              "ratio_of_medians": 0.1229
             }
           },
           "name": "Framework when the code carries no guidance (FS vs BS)"
@@ -4085,29 +4384,40 @@
           "a": "BD",
           "b": "FD",
           "metrics": {
+            "harmful_change": {
+              "a": {
+                "k": 0,
+                "n": 6
+              },
+              "b": {
+                "k": 0,
+                "n": 6
+              },
+              "p_b_fewer_one_sided": 1.0
+            },
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.335,
+              "ratio_of_medians": 0.3433
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.0037,
+              "ratio_of_medians": 0.0
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.1014,
+              "ratio_of_medians": 0.0845
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0011,
+              "p_two_sided": 0.0022,
+              "ratio_of_means": 0.1716,
+              "ratio_of_medians": 0.1579
             }
           },
           "name": "Framework when the code carries guidance (FD vs BD)"
@@ -4116,29 +4426,40 @@
           "a": "BS",
           "b": "BD",
           "metrics": {
+            "harmful_change": {
+              "a": {
+                "k": 4,
+                "n": 6
+              },
+              "b": {
+                "k": 0,
+                "n": 6
+              },
+              "p_b_fewer_one_sided": 0.0303
+            },
             "new_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0076,
+              "p_two_sided": 0.0152,
+              "ratio_of_means": 0.844,
+              "ratio_of_medians": 0.8206
             },
             "search_output_tokens": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.8193,
+              "p_two_sided": 0.3636,
+              "ratio_of_means": 1.4772,
+              "ratio_of_medians": 1.5603
             },
             "tool_calls": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0054,
+              "p_two_sided": 0.0108,
+              "ratio_of_means": 0.7213,
+              "ratio_of_medians": 0.7396
             },
             "weighted_cost": {
-              "p_one_sided_lower": null,
-              "p_two_sided": null,
-              "ratio_of_means": null,
-              "ratio_of_medians": null
+              "p_one_sided_lower": 0.0032,
+              "p_two_sided": 0.0065,
+              "ratio_of_means": 0.736,
+              "ratio_of_medians": 0.7104
             }
           },
           "name": "Guidance in the code, no framework (BD vs BS)"
@@ -4280,7 +4601,1028 @@
         }
       ],
       "title": "Experiment 6: guardrails under pressure (tier refactoring)",
-      "trials": [],
+      "trials": [
+        {
+          "acceptance": null,
+          "agent_id": "fda5f67a-a97c-41f6-85ce-7d8c718eb074",
+          "all_in_tokens": 111241,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92661,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS1\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS1",
+          "latency_s": 16.9,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 18580,
+          "opened_legacy_module": null,
+          "order": 1,
+          "output_tokens": 1298,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 2,
+          "turns": 3,
+          "weighted_cost": 37357
+        },
+        {
+          "acceptance": null,
+          "agent_id": "58473489-6c07-4d4e-afbf-6f433ad44d24",
+          "all_in_tokens": 1458808,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1394052,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(find \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BD1\" -type f -name \"*.py\" | sort)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BD1",
+          "latency_s": 162.6,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 64756,
+          "opened_legacy_module": null,
+          "order": 2,
+          "output_tokens": 15307,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 5839,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 35,
+          "turns": 23,
+          "weighted_cost": 277740
+        },
+        {
+          "acceptance": null,
+          "agent_id": "cbc3ac62-eb5e-44f9-ba47-881c85213e94",
+          "all_in_tokens": 1831726,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1762965,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BS1\" && find . -path ./.git -prune -o -type f)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BS1",
+          "latency_s": 274.9,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 68761,
+          "opened_legacy_module": null,
+          "order": 3,
+          "output_tokens": 20637,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1725,
+          "semantics_preserved": false,
+          "tests_edited": true,
+          "tool_calls": 48,
+          "turns": 31,
+          "weighted_cost": 339621
+        },
+        {
+          "acceptance": null,
+          "agent_id": "598e0897-67f9-4849-9825-35e85cb76a48",
+          "all_in_tokens": 113234,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92811,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD1\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD1",
+          "latency_s": 27.4,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 20423,
+          "opened_legacy_module": null,
+          "order": 4,
+          "output_tokens": 1957,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 3,
+          "turns": 3,
+          "weighted_cost": 42147
+        },
+        {
+          "acceptance": null,
+          "agent_id": "9f82423a-8446-4b84-967f-99bbad132196",
+          "all_in_tokens": 117233,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 94380,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS2\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS2",
+          "latency_s": 26.7,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 22853,
+          "opened_legacy_module": null,
+          "order": 5,
+          "output_tokens": 2145,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 4,
+          "turns": 3,
+          "weighted_cost": 46046
+        },
+        {
+          "acceptance": null,
+          "agent_id": "e5022e09-5192-4c79-815a-2b7d603f10c2",
+          "all_in_tokens": 2178244,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 2107639,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BS2\" && find . -path ./node_modules -prune -o)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BS2",
+          "latency_s": 260.7,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 70605,
+          "opened_legacy_module": null,
+          "order": 6,
+          "output_tokens": 20923,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1832,
+          "semantics_preserved": false,
+          "tests_edited": true,
+          "tool_calls": 61,
+          "turns": 36,
+          "weighted_cost": 377463
+        },
+        {
+          "acceptance": null,
+          "agent_id": "eff859ae-73f9-4d81-b2a4-bdf62035aa55",
+          "all_in_tokens": 1473947,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1407016,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(find \"C:/Users/Umitk/AppData/Local/Temp/ai-context-mapping-bench/exp6/trials/BD2\" -type f -name \"*.py\" | sort)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BD2",
+          "latency_s": 162.1,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 66931,
+          "opened_legacy_module": null,
+          "order": 7,
+          "output_tokens": 17888,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 5234,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 36,
+          "turns": 24,
+          "weighted_cost": 291433
+        },
+        {
+          "acceptance": null,
+          "agent_id": "dc3708fa-e443-465b-84f3-8cbfc669705c",
+          "all_in_tokens": 112785,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92812,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD2\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD2",
+          "latency_s": 22.5,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 19973,
+          "opened_legacy_module": null,
+          "order": 8,
+          "output_tokens": 1667,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 3,
+          "turns": 3,
+          "weighted_cost": 40497
+        },
+        {
+          "acceptance": null,
+          "agent_id": "2225f239-8192-4020-a095-05c3804b92bd",
+          "all_in_tokens": 318297,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 297232,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD3\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD3",
+          "latency_s": 23.7,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 21065,
+          "opened_legacy_module": null,
+          "order": 9,
+          "output_tokens": 2021,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 68,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 7,
+          "turns": 8,
+          "weighted_cost": 63629
+        },
+        {
+          "acceptance": null,
+          "agent_id": "a3e6484e-de66-4ffa-aff5-1390900f95da",
+          "all_in_tokens": 206754,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 173654,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS3\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS3",
+          "latency_s": 68.5,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 33100,
+          "opened_legacy_module": null,
+          "order": 10,
+          "output_tokens": 5362,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 13,
+          "turns": 5,
+          "weighted_cost": 78845
+        },
+        {
+          "acceptance": null,
+          "agent_id": "ead44041-7157-4d42-a090-6b9e3305a282",
+          "all_in_tokens": 1293581,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1233147,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Glob(shipdesk/tiers/*.py)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "BS3",
+          "latency_s": 185.5,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 60434,
+          "opened_legacy_module": null,
+          "order": 11,
+          "output_tokens": 18247,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 325,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 41,
+          "turns": 23,
+          "weighted_cost": 267272
+        },
+        {
+          "acceptance": null,
+          "agent_id": "3ce59fa4-dd91-48e0-b0af-e8564d4d0144",
+          "all_in_tokens": 889842,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 834660,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BD3\" && find shipdesk/tiers -type f | sort)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BD3",
+          "latency_s": 162.6,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 55182,
+          "opened_legacy_module": null,
+          "order": 12,
+          "output_tokens": 16484,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1044,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 40,
+          "turns": 18,
+          "weighted_cost": 214250
+        },
+        {
+          "acceptance": null,
+          "agent_id": "1416037f-77bd-495a-9646-625a3b69e1c9",
+          "all_in_tokens": 110670,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92814,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD4\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD4",
+          "latency_s": 15.2,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 17856,
+          "opened_legacy_module": null,
+          "order": 13,
+          "output_tokens": 966,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 2,
+          "turns": 3,
+          "weighted_cost": 35222
+        },
+        {
+          "acceptance": null,
+          "agent_id": "0e7f0b8b-94c0-4e71-adcb-39b1c17b15cd",
+          "all_in_tokens": 2364128,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 2294982,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BS4\" && find . -path ./node_modules -prune -o)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BS4",
+          "latency_s": 245.7,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 69146,
+          "opened_legacy_module": null,
+          "order": 14,
+          "output_tokens": 20811,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1248,
+          "semantics_preserved": false,
+          "tests_edited": true,
+          "tool_calls": 53,
+          "turns": 40,
+          "weighted_cost": 393952
+        },
+        {
+          "acceptance": null,
+          "agent_id": "1f914687-7b90-44a2-aca8-5c3c9fc615e8",
+          "all_in_tokens": 1209315,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1154753,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BD4\" && find . -type f -name \"*.py\" | grep -v)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BD4",
+          "latency_s": 157.5,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 54562,
+          "opened_legacy_module": null,
+          "order": 15,
+          "output_tokens": 14432,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 3690,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 22,
+          "turns": 23,
+          "weighted_cost": 237786
+        },
+        {
+          "acceptance": null,
+          "agent_id": "f1ec28b0-fe2e-41df-a647-449dd83b1d7f",
+          "all_in_tokens": 153452,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 132191,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS4\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS4",
+          "latency_s": 27.6,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 21261,
+          "opened_legacy_module": null,
+          "order": 16,
+          "output_tokens": 2000,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 4,
+          "turns": 4,
+          "weighted_cost": 47293
+        },
+        {
+          "acceptance": null,
+          "agent_id": "5a6db390-9cfd-4d48-b88f-61f2e37f762d",
+          "all_in_tokens": 1143474,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1092975,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BD5\" && find . -path ./venv -prune -o -type f)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BD5",
+          "latency_s": 144.9,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 50499,
+          "opened_legacy_module": null,
+          "order": 17,
+          "output_tokens": 13766,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1860,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 35,
+          "turns": 22,
+          "weighted_cost": 224033
+        },
+        {
+          "acceptance": null,
+          "agent_id": "1800e864-fbc6-4e0e-a023-a84a6e40911c",
+          "all_in_tokens": 143410,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 124894,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS5\" && ls)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS5",
+          "latency_s": 21.2,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 18516,
+          "opened_legacy_module": null,
+          "order": 18,
+          "output_tokens": 1360,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 3,
+          "turns": 4,
+          "weighted_cost": 40732
+        },
+        {
+          "acceptance": null,
+          "agent_id": "a9d56bdf-8268-471e-ba90-b99762003262",
+          "all_in_tokens": 1877870,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1801021,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(cd \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\BS5\" && find . -path ./node_modules -prune -o)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BS5",
+          "latency_s": 243.6,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 76849,
+          "opened_legacy_module": null,
+          "order": 19,
+          "output_tokens": 24078,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 2613,
+          "semantics_preserved": false,
+          "tests_edited": true,
+          "tool_calls": 48,
+          "turns": 30,
+          "weighted_cost": 366441
+        },
+        {
+          "acceptance": null,
+          "agent_id": "f97f9283-c584-4e32-b460-b4861c9a679d",
+          "all_in_tokens": 111820,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92788,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD5\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD5",
+          "latency_s": 17.6,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 19032,
+          "opened_legacy_module": null,
+          "order": 20,
+          "output_tokens": 1505,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 3,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 3,
+          "turns": 3,
+          "weighted_cost": 38711
+        },
+        {
+          "acceptance": null,
+          "agent_id": "fb4264b3-4e26-47a5-98ea-13ad202b5d12",
+          "all_in_tokens": 110832,
+          "arm": "FS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92659,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FS6\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FS6",
+          "latency_s": 23.9,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 18173,
+          "opened_legacy_module": null,
+          "order": 21,
+          "output_tokens": 1268,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 2,
+          "turns": 3,
+          "weighted_cost": 36736
+        },
+        {
+          "acceptance": null,
+          "agent_id": "c52b049c-dc8a-4f23-be6e-6962b0057573",
+          "all_in_tokens": 1585535,
+          "arm": "BS",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1515098,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Bash(find \"/c/Users/Umitk/AppData/Local/Temp/ai-context-mapping-bench/exp6/trials/BS6\" -type f -name \"*.py\" | sort)",
+          "first_call_is_search": true,
+          "harness_subagent_tokens": null,
+          "id": "BS6",
+          "latency_s": 179.7,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 70437,
+          "opened_legacy_module": null,
+          "order": 22,
+          "output_tokens": 17604,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 5332,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 36,
+          "turns": 24,
+          "weighted_cost": 305559
+        },
+        {
+          "acceptance": null,
+          "agent_id": "c28c00c1-343e-4747-aaaa-a45ae5d0de20",
+          "all_in_tokens": 1301008,
+          "arm": "BD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 1241650,
+          "changed_nothing": false,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": true,
+          "e2e_test_added": null,
+          "first_call": "Glob(shipdesk/tiers/*.py)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "BD6",
+          "latency_s": 211.2,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 59358,
+          "opened_legacy_module": null,
+          "order": 23,
+          "output_tokens": 17448,
+          "project_instructions_loaded": false,
+          "search_output_tokens": 1647,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 39,
+          "turns": 24,
+          "weighted_cost": 263780
+        },
+        {
+          "acceptance": null,
+          "agent_id": "d57aaf47-b87a-4c5b-8c5e-23f014ea3881",
+          "all_in_tokens": 112136,
+          "arm": "FD",
+          "blocked_calls": 0,
+          "cache_read_tokens": 92786,
+          "changed_nothing": true,
+          "client_version": "2.1.304",
+          "context_attachments": [
+            "agent_listing_delta",
+            "credential_org",
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "total_tokens_reminder"
+          ],
+          "deduplicated": false,
+          "e2e_test_added": null,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\ai-context-mapping-bench\\exp6\\trials\\FD6\\maps\\project-map.md)",
+          "first_call_is_search": false,
+          "harness_subagent_tokens": null,
+          "id": "FD6",
+          "latency_s": 20.1,
+          "model": "claude-sonnet-5",
+          "mutation": null,
+          "new_tokens": 19350,
+          "opened_legacy_module": null,
+          "order": 24,
+          "output_tokens": 1397,
+          "project_instructions_loaded": true,
+          "search_output_tokens": 0,
+          "semantics_preserved": true,
+          "tests_edited": false,
+          "tool_calls": 3,
+          "turns": 3,
+          "weighted_cost": 38703
+        }
+      ],
       "version": "v1.3.0"
     }
   ],

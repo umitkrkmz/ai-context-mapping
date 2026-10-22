@@ -395,3 +395,37 @@ def test_p_values_never_render_as_zero() -> None:
     assert tool._p_text(0.001) == "0.001"
     assert tool._p_text(0.9173) == "0.917"
     assert tool._p_text(None) == "n/a"
+
+
+# --------------------------------------------------------------------------------------
+# Refactoring outcomes (experiment 6)
+# --------------------------------------------------------------------------------------
+def test_fisher_one_sided_fewer() -> None:
+    assert tool.fisher_one_sided_fewer(4, 6, 0, 6) == round(15 / 495, 4)  # 0/6 against 4/6
+    assert tool.fisher_one_sided_fewer(0, 6, 0, 6) == 1.0
+    assert tool.fisher_one_sided_fewer(0, 6, 4, 6) == 1.0  # b has more events: no evidence of fewer
+    assert tool.fisher_one_sided_fewer(3, 3, 0, 3) == round(1 / 20, 4)
+    assert tool.fisher_one_sided_fewer(1, 0, 0, 3) is None
+
+
+def outcome_trial(arm: str, preserved: bool, nothing: bool, tests: List[str]) -> Dict[str, Any]:
+    return {"arm": arm, "semantics_preserved": preserved, "changed_nothing": nothing, "tests_edited": bool(tests), "deduplicated": not nothing}
+
+
+def test_outcome_tallies_and_comparison() -> None:
+    a = [outcome_trial("BS", False, False, ["t"]), outcome_trial("BS", True, False, [])]
+    b = [outcome_trial("FS", True, True, []), outcome_trial("FS", True, True, [])]
+    assert tool.outcome_tallies(a)["harmful_change"] == {"k": 1, "n": 2}
+    assert tool.outcome_tallies(b)["changed_nothing"] == {"k": 2, "n": 2}
+    assert tool.outcome_tallies([{"arm": "A"}]) is None  # bug-fix experiments have no outcomes
+    cmp_ = tool.compare_arms(a, b)
+    assert cmp_["harmful_change"]["a"] == {"k": 1, "n": 2} and cmp_["harmful_change"]["b"] == {"k": 0, "n": 2}
+    assert "harmful_change" not in tool.compare_arms([{"weighted_cost": 1}], [{"weighted_cost": 2}])
+
+
+def test_outcomes_table_renders_only_when_present() -> None:
+    exp = {"arms": [{"id": "BS", "label": "bare", "summary": {"outcomes": {"harmful_change": {"k": 4, "n": 6}, "tests_edited": {"k": 4, "n": 6},
+                                                                         "changed_nothing": {"k": 0, "n": 6}, "deduplicated": {"k": 6, "n": 6}}}}],
+           "comparisons": [{"name": "X", "metrics": {"harmful_change": {"a": {"k": 4, "n": 6}, "b": {"k": 0, "n": 6}, "p_b_fewer_one_sided": 0.0303}}}]}
+    text = "\n".join(tool.render_outcomes(exp, {"BS": "bare"}))
+    assert "| BS: bare | 4/6 | 4/6 | 0/6 | 6/6 |" in text and "| X | 4/6 | 0/6 | 0.030 |" in text
