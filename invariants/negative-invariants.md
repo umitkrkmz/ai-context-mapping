@@ -129,16 +129,21 @@ the whole promise of the framework: guardrails must never become a supply-chain 
 Only `scripts/mutation_guard.py` needs to launch a test runner. Every other file must stay
 free of process spawning so that it cannot be turned into a command-injection vector.
 
+One exception, approved by the repository owner on 2026-10-22: `benchmarks/harness/**`. The benchmark
+harness exists to launch headless Claude Code sessions and test runs, so it cannot avoid `subprocess`. It
+is research tooling that adopters never copy, and it passes argument lists, never shell strings. Nothing
+else under `benchmarks/` gets the exception.
+
 ```invariant-rule
 {
   "id": "NI-002",
   "type": "isolated-import",
-  "description": "Only scripts/mutation_guard.py may import subprocess.",
+  "description": "Only scripts/mutation_guard.py (and the benchmark harness) may import subprocess.",
   "modules": ["subprocess"],
   "allowed_in": ["scripts/mutation_guard.py"],
   "use": "scripts/mutation_guard.py",
   "scope": ["**/*.py"],
-  "exclude": ["templates/**"]
+  "exclude": ["templates/**", "benchmarks/harness/**"]
 }
 ```
 

@@ -57,7 +57,10 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: two fixtures and `results/` (manifest.json and results.json; all agent-ignored), framework layers, scoring, analysis. | - |
 | `benchmarks/acceptance_check.py` | test | Hidden scoring check: exactly 50.00 must ship free. Not named test_*.py, so pytest skips it. | - |
 | `benchmarks/analyze_transcripts.py` | test | Derives tool calls, files read, tokens by type, weighted cost, and the model ID from Claude Code agent transcripts; exports benchmarks/results/results.json and renders or checks the tables in docs/benchmark-results.md. | - |
+| `benchmarks/harness/` | test | Benchmark harness (exempt from NI-002): builds trial projects and runs one headless Claude Code session per trial. | NI-002 |
+| `benchmarks/harness/bench.py` | test | Builds arm-specific trial copies, runs `claude -p` per trial, checks each trial's starting context, scores, and records trials in the manifest. | NI-002 |
 | `benchmarks/conftest.py` | test | Tells pytest to skip the benchmark fixtures when run from the repository root. | - |
+| `benchmarks/tier_semantics_check.py` | test | Hidden scoring check for experiment 6: tier tables and audit retention must behave as the original at every boundary. | - |
 | `benchmarks/shipdesk-large-overlay/**` | test | Framework layer for the large benchmark: AGENTS.md, CLAUDE.md, a 147-row map, and four invariants. | - |
 | `benchmarks/shipdesk-overlay/**` | test | Framework layer for benchmark Agent B: AGENTS.md, CLAUDE.md, a hand-written map, and two invariants. | - |
 | `decisions/` | decision | Machine-readable architecture decision records. | ADR-0001 |
@@ -105,6 +108,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest. | - |
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
+| `tests/test_harness.py` | test | Tests the benchmark harness (trial builds, manipulation check, schedule, diff) and the tier semantics check, without launching agents. | - |
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
 | `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |
 | `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
