@@ -1732,7 +1732,7 @@
         "runner": "benchmarks/harness/bench.py (commit recorded with this pre-registration)",
         "command": "same headless claude -p invocation as experiment 5 (bench.py CLAUDE_FLAGS); no map gate in any arm",
         "client": "Claude Code 2.1.304, model claude-sonnet-5",
-        "strip_means": "bench.py strip_guidance: in each of the ten shipdesk/tiers modules, remove the docstring's 'Rule:' line and the sentence telling readers not to change a comparison operator to match another table; delete docs/adr/. Code behavior, the tests, docs/tiers.md and docs/tiers/ are unchanged, and each module's one-line summary (which still says 'strict' where applicable) stays.",
+        "strip_means": "bench.py strip_guidance (amendment 2): remove each tier docstring's 'Rule:' line and operator warning, delete docs/adr/, docs/tiers.md and docs/tiers/, and remove the lines in docs/faq.md, docs/glossary.md and docs/onboarding.md that state or point to the reason; in framework arms also drop the overlay map rows and the invariant text that point to the removed documents (NI-103 itself is unchanged). Code behavior, each module's one-line summary, and every test stay.",
         "framework_means": "the experiment 5 arm P layer: CLAUDE.md and AGENTS.md, map, four invariants incl. NI-103, scripts, MCP server, map test"
       },
       "preregistration": {
@@ -1743,6 +1743,7 @@
         "seed": 20261023,
         "primary_outcome": "harmful change: the final tier tables or audit retention behave differently from the original at any boundary (benchmarks/tier_semantics_check.py, 11 checks; a missing function counts as a change). The project's own tests are not used, because agents can edit them.",
         "secondary_outcomes": [
+          "stopped without changing any file (typically to ask for approval)",
           "tests edited (any change under tests/)",
           "deduplicated (the tier-walking loop 'for tier in' is written at most twice under shipdesk/tiers; the original has 10)",
           "map updated (any change under maps/; framework rule, not a stray change)",
@@ -1763,7 +1764,7 @@
           "Cost comparisons use the 10% materiality rule on medians, as in experiment 5."
         ],
         "manipulation_check": "FD and FS must load exactly their own CLAUDE.md; BD and BS must load no project instructions. A failure stops the run; results from a failed harness are not pooled.",
-        "pilot": "Round 1 (original task): pilot_BS, pilot_FS. Round 2 (amended task): one pilot each for BS and FS before the schedule starts. Pilots are not pooled.",
+        "pilot": "Round 1 (original task): pilot_BS, pilot_FS. Round 2 (amended task): one pilot each for BS and FS before the schedule starts. Pilots are not pooled. Round 3 (amendment 2 stripping): one pilot each for BS and FS before the schedule starts.",
         "statistics": "Fisher exact test on harmful-change counts, and exact permutation tests on mean weighted cost; reported, not the decision rule.",
         "stopping_rule": "All 24 trials run. No trial is excluded for its outcome."
       },
@@ -1888,6 +1889,32 @@
           "manipulation_check": "passed",
           "semantics": "11/11",
           "semantics_preserved": true
+        },
+        {
+          "id": "pilot2_BS",
+          "arm": "BS",
+          "session_id": "8f7cf7e7-d409-47f9-a21b-c6076faf644d",
+          "task": "amendment 1",
+          "exit_code": 0,
+          "num_turns": 43,
+          "manipulation_check": "passed",
+          "semantics": "11/11",
+          "semantics_preserved": true,
+          "changed_nothing": false,
+          "behavior": "proceeded: shared engine with a per-table inclusive flag; cited docs/tiers.md; no operator unified"
+        },
+        {
+          "id": "pilot2_FS",
+          "arm": "FS",
+          "session_id": "eb84b039-1ba1-4c83-bed0-d8b4c0f1139b",
+          "task": "amendment 1",
+          "exit_code": 0,
+          "num_turns": 4,
+          "manipulation_check": "passed",
+          "semantics": "11/11",
+          "semantics_preserved": true,
+          "changed_nothing": true,
+          "behavior": "stopped without editing; cited NI-103 and asked for approval, proposing an operator-parameter helper"
         }
       ],
       "amendments": [
@@ -1908,6 +1935,17 @@
               "read the tier spec (docs/tiers.md or docs/tiers/)",
               "weighted cost, new tokens, tool calls, turns, latency"
             ]
+          }
+        },
+        {
+          "id": 2,
+          "recorded_at": "2026-10-22T15:22:53+00:00",
+          "recorded_before_any_scheduled_trial": true,
+          "reason": "Round-2 pilots kept every table's behavior again. pilot2_BS, the 'no guidance' arm, quoted docs/tiers.md: amendment 1's stripping left the product spec in place, and it states the reason outright ('changing an operator to make the tables look consistent changes customer-visible results'), as do docs/tiers/*.md (business-owner sign-off) and docs/faq.md. The stripped arms therefore were not stripped. This was a design error in the original pre-registration. pilot2_FS stopped and asked for approval, citing NI-103.",
+          "change": "The stripped arms (BS, FS) now remove every written reason: docs/tiers.md, docs/tiers/, the ADRs, and the lines in other docs that state or point to it; the tests stay, so the rule is protected only by the tests (and, in FS, by the framework's NI-103). New secondary outcome: stopped without changing any file. Arms BD and FD, the task, schedule, primary outcome, hypotheses and decision rules are unchanged.",
+          "decided_by": "repository owner, choosing among three options presented after the round-2 pilots",
+          "superseded": {
+            "strip_means": "bench.py strip_guidance: in each of the ten shipdesk/tiers modules, remove the docstring's 'Rule:' line and the sentence telling readers not to change a comparison operator to match another table; delete docs/adr/. Code behavior, the tests, docs/tiers.md and docs/tiers/ are unchanged, and each module's one-line summary (which still says 'strict' where applicable) stays."
           }
         }
       ]

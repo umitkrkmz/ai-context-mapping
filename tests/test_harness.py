@@ -47,13 +47,19 @@ def test_bare_arm_is_the_untouched_fixture(built: Dict[str, Path]) -> None:
 def test_strip_removes_only_the_guidance(built: Dict[str, Path]) -> None:
     diff = bench.diff_trees(built["BS"], bench.FIXTURE)
     assert diff["added"] == []
-    assert diff["removed"] and all(p.startswith("docs/adr/") for p in diff["removed"])
-    assert sorted(diff["modified"]) == sorted(f"shipdesk/tiers/{t}.py" for t in semantics.TABLES)
+    assert diff["removed"] and all(p.startswith(("docs/adr/", "docs/tiers/", "docs/tiers.md")) for p in diff["removed"])
+    assert "docs/tiers.md" in diff["removed"] and any(p.startswith("docs/tiers/") for p in diff["removed"])
+    docs = ["docs/faq.md", "docs/glossary.md", "docs/onboarding.md"]
+    assert sorted(diff["modified"]) == sorted([f"shipdesk/tiers/{t}.py" for t in semantics.TABLES] + docs)
     for table in semantics.TABLES:
         text = (built["BS"] / "shipdesk" / "tiers" / f"{table}.py").read_text(encoding="utf-8")
         assert "do not change a" not in text and "\nRule: " not in text
         assert text.startswith('"""') and '\n"""\n' in text  # the docstring stays well formed
-    assert (built["BS"] / "docs" / "tiers.md").is_file()  # the product spec stays
+    remaining = "".join((built["BS"] / d).read_text(encoding="utf-8") for d in docs)
+    assert "docs/tiers" not in remaining and "docs/adr" not in remaining and "ADR 0" not in remaining
+    assert "business owner" not in remaining  # the FAQ answer with the reason is gone
+    tests_diff = [p for p in diff["modified"] + diff["removed"] if p.startswith("tests/")]
+    assert tests_diff == []  # the boundary tests stay
 
 
 def test_framework_arms_carry_the_rules_and_a_consistent_map(built: Dict[str, Path]) -> None:
@@ -64,7 +70,11 @@ def test_framework_arms_carry_the_rules_and_a_consistent_map(built: Dict[str, Pa
     assert not (built["FD"] / ".claude").exists()
     full = (built["FD"] / "maps" / "project-map.md").read_text(encoding="utf-8").splitlines(keepends=True)
     stripped = (built["FS"] / "maps" / "project-map.md").read_text(encoding="utf-8").splitlines(keepends=True)
-    assert stripped == [line for line in full if not line.startswith("| `docs/adr/")]  # only that row goes
+    assert stripped == [line for line in full if not line.startswith(bench.REMOVED_MAP_ROWS)]  # only those rows go
+    assert len(full) - len(stripped) == 3
+    invariants = (built["FS"] / "invariants" / "negative-invariants.md").read_text(encoding="utf-8")
+    assert "docs/tiers" not in invariants and "docs/adr" not in invariants
+    assert "NI-103" in invariants and "Never:** Change an operator" in invariants
 
 
 def test_gate_arm_runs_the_shipped_gate(built: Dict[str, Path]) -> None:

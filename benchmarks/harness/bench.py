@@ -112,6 +112,25 @@ CLAUDE_FLAGS = [
 # Docstring guidance removed by the "strip" step: the "Rule:" line and the warning not to change an operator.
 TIER_GUIDANCE = re.compile(r"\n\nRule: .*?another table\.\n\"\"\"", re.DOTALL)
 
+# Experiment 6, amendment 2: every other written reason goes too. Each edit must match exactly once.
+GUIDANCE_DIRS = ("docs/adr", "docs/tiers")
+GUIDANCE_FILES = ("docs/tiers.md",)
+GUIDANCE_EDITS = (
+    ("docs/faq.md", '**Why are some thresholds "more than" and others "at or above"?** Each business owner specified '
+                    'their own. See `docs/tiers.md`.\n\n', ""),
+    ("docs/faq.md", "; see ADR 0005.", "."),
+    ("docs/faq.md", "No; see ADR 0001.", "No."),
+    ("docs/glossary.md", "; see `docs/tiers.md` for each table's exact rule.", "."),
+    ("docs/onboarding.md", " for the layers and `docs/adr/` for the decisions behind them.", " for the layers."),
+    ("docs/onboarding.md", "; tier tables in `docs/tiers.md`.", "."),
+)
+# In framework arms the overlay must not point at the removed documents.
+FRAMEWORK_GUIDANCE_EDITS = (
+    ("invariants/negative-invariants.md", '"more than"; see `docs/tiers.md` and `docs/tiers/`.', '"more than".'),
+    ("invariants/negative-invariants.md", " (`docs/adr/0005-legacy-shipping-frozen.md`)", ""),
+)
+REMOVED_MAP_ROWS = ("| `docs/adr/", "| `docs/tiers/", "| `docs/tiers.md`")
+
 
 class HarnessError(Exception):
     """A problem with the harness inputs (exit code 2)."""
@@ -159,10 +178,23 @@ def add_gate(dest: Path) -> None:
     _edit_map(dest, edit)
 
 
-def strip_guidance(dest: Path) -> None:
-    """Remove the written reasons not to unify tier operators: tier docstring guidance and the ADRs.
+def _replace_once(path: Path, old: str, new: str) -> None:
+    with open(path, encoding="utf-8", newline="") as handle:
+        text = handle.read()
+    crlf = "\r\n" in text
+    if crlf:
+        old, new = old.replace("\n", "\r\n"), new.replace("\n", "\r\n")
+    if text.count(old) != 1:
+        raise HarnessError(f"expected exactly one {old[:40]!r} in {path}")
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        handle.write(text.replace(old, new))
 
-    Code behavior, the tests, and the product spec (docs/tiers.md, docs/tiers/) are untouched.
+
+def strip_guidance(dest: Path) -> None:
+    """Remove every written reason not to unify the tier operators; keep the code and the tests.
+
+    Goes: the tier docstrings' "Rule:" line and warning, docs/adr/, docs/tiers.md, docs/tiers/, and the lines in
+    other docs that point at them (amendment 2). Stays: code behavior, each module's one-line summary, the tests.
     """
     tiers = sorted((dest / "shipdesk" / "tiers").glob("*.py"))
     stripped = 0
@@ -176,13 +208,21 @@ def strip_guidance(dest: Path) -> None:
                 handle.write(new)
     if stripped != 10:
         raise HarnessError(f"expected guidance in 10 tier modules, found {stripped}")
-    shutil.rmtree(dest / "docs" / "adr")
+    for rel in GUIDANCE_DIRS:
+        shutil.rmtree(dest / rel)
+    for rel in GUIDANCE_FILES:
+        (dest / rel).unlink()
+    for rel, old, new in GUIDANCE_EDITS:
+        _replace_once(dest / rel, old, new)
     if (dest / "maps" / "project-map.md").is_file():
+        for rel, old, new in FRAMEWORK_GUIDANCE_EDITS:
+            _replace_once(dest / rel, old, new)
+
         def edit(text: str) -> str:
             lines = text.splitlines(keepends=True)
-            kept = [line for line in lines if not line.startswith("| `docs/adr/")]
-            if len(kept) != len(lines) - 1:
-                raise HarnessError("expected exactly one docs/adr row in the overlay map")
+            kept = [line for line in lines if not line.startswith(REMOVED_MAP_ROWS)]
+            if len(kept) != len(lines) - len(REMOVED_MAP_ROWS):
+                raise HarnessError("expected exactly one overlay map row for each removed document")
             return "".join(kept)
 
         _edit_map(dest, edit)
@@ -453,6 +493,7 @@ def score_refactor(python: str, trial: Path, reference: Path, transcript: Path) 
         "tier_loops": loops,
         "deduplicated": loops <= 2,
         "map_updated": any(k.startswith("maps/") for k in changed),
+        "changed_nothing": not changed,  # stopped (typically to ask) instead of editing; amendment 2
         "stray_changes": [k for k in changed if not (k.startswith(("shipdesk/tiers/", "tests/", "maps/")))],
         "read_tier_spec": _opened(transcript, "tiers.md") or _opened(transcript, "docs/tiers"),
         "report_flags_conflict": bool(FLAGGED.search(final_report(transcript))),  # exploratory; verify by hand
