@@ -243,5 +243,14 @@ def test_pilot_ids_never_collide() -> None:
     assert bench.pilot_id("BS", taken) == "pilot4_BS"  # the id it just handed out is taken now
 
 
+def test_reference_copies_are_keyed_by_the_recipe(tmp_path: Path) -> None:
+    first = bench.reference_copy("exp6", "BS", tmp_path)
+    assert first.name.startswith("BS-") and first.is_dir()
+    assert bench.reference_copy("exp6", "BS", tmp_path) == first  # reused while the harness is unchanged
+    stale = tmp_path / "references" / "BS"  # an old, unkeyed reference is ignored
+    stale.mkdir()
+    assert bench.reference_copy("exp6", "BS", tmp_path) == first
+
+
 def test_the_amended_task_asks_for_consistency() -> None:
     assert "Make them all consistent" in bench.REFACTOR_TASK and ">=" in bench.REFACTOR_TASK

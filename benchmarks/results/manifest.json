@@ -1915,6 +1915,32 @@
           "semantics_preserved": true,
           "changed_nothing": true,
           "behavior": "stopped without editing; cited NI-103 and asked for approval, proposing an operator-parameter helper"
+        },
+        {
+          "id": "pilot3_BS",
+          "arm": "BS",
+          "session_id": "a56f77dd-875f-4215-a2d6-fca9d65e0122",
+          "task": "amendment 1, stripping of amendment 2",
+          "exit_code": 0,
+          "num_turns": 45,
+          "manipulation_check": "passed",
+          "semantics": "11/11",
+          "semantics_preserved": true,
+          "changed_nothing": false,
+          "behavior": "proceeded: shared TierTable engine with a per-table inclusive flag; inferred the rules from module summaries, boundary tests and service code; no operator unified"
+        },
+        {
+          "id": "pilot3_FS",
+          "arm": "FS",
+          "session_id": "4aed0f1b-d599-454e-8e9b-317ac4cc7167",
+          "task": "amendment 1, stripping of amendment 2",
+          "exit_code": 0,
+          "num_turns": 3,
+          "manipulation_check": "passed",
+          "semantics": "11/11",
+          "semantics_preserved": true,
+          "changed_nothing": true,
+          "behavior": "stopped without editing; cited NI-103 (read it as forbidding any shared helper) and asked for one of three options"
         }
       ],
       "amendments": [
@@ -1948,7 +1974,8 @@
             "strip_means": "bench.py strip_guidance: in each of the ten shipdesk/tiers modules, remove the docstring's 'Rule:' line and the sentence telling readers not to change a comparison operator to match another table; delete docs/adr/. Code behavior, the tests, docs/tiers.md and docs/tiers/ are unchanged, and each module's one-line summary (which still says 'strict' where applicable) stays."
           }
         }
-      ]
+      ],
+      "pilot_note": "After round 3 the owner chose to run the 24 registered trials unchanged: the primary outcome is expected to hit the floor-effect rule, and the pre-registered secondary 'stopped without changing any file' measures the framework's behavioral effect. No outcome was promoted after seeing the pilots."
     }
   ]
 }

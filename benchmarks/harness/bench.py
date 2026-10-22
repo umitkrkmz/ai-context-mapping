@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import filecmp
+import hashlib
 import json
 import os
 import re
@@ -514,9 +515,11 @@ def pilot_id(arm: str, taken: set) -> str:
 
 
 def reference_copy(exp_id: str, arm: str, root: Path) -> Path:
-    ref = root / "references" / arm
+    """A pristine build of the arm to diff trials against, keyed by this file's hash so a changed recipe rebuilds it."""
+    name = f"{arm}-{hashlib.sha1(Path(__file__).read_bytes()).hexdigest()[:10]}"
+    ref = root / "references" / name
     if not ref.is_dir():
-        build(exp_id, arm, arm, root / "references")
+        build(exp_id, name, arm, root / "references")
     return ref
 
 
