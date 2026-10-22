@@ -89,7 +89,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 1.0
+              "opened_legacy_rate": 1.0,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         },
@@ -169,7 +171,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.0
+              "opened_legacy_rate": 0.0,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         }
@@ -221,7 +225,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 465197,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 63951,
           "id": "A",
           "latency_s": 48.4,
@@ -231,10 +246,12 @@
           "opened_legacy_module": true,
           "order": 1,
           "output_tokens": 4681,
+          "project_instructions_loaded": false,
           "search_output_tokens": 1148,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 148721
+          "weighted_cost": 148721,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -244,7 +261,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 727565,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 85805,
           "id": "B",
           "latency_s": 66.1,
@@ -254,10 +282,12 @@
           "opened_legacy_module": false,
           "order": 2,
           "output_tokens": 5495,
+          "project_instructions_loaded": false,
           "search_output_tokens": 1635,
           "tool_calls": 18,
           "turns": 11,
-          "weighted_cost": 160450
+          "weighted_cost": 160450,
+          "whole_tree_glob_first": true
         }
       ],
       "version": "v1.0.1"
@@ -340,7 +370,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 1.0,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.3333
+              "opened_legacy_rate": 0.3333,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         },
@@ -420,7 +452,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.3333,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.0
+              "opened_legacy_rate": 0.0,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         }
@@ -472,7 +506,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 401625,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 76988,
           "id": "A1",
           "latency_s": 45.5,
@@ -482,10 +527,12 @@
           "opened_legacy_module": false,
           "order": 1,
           "output_tokens": 4740,
+          "project_instructions_loaded": false,
           "search_output_tokens": 6714,
           "tool_calls": 19,
           "turns": 7,
-          "weighted_cost": 158703
+          "weighted_cost": 158703,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -495,7 +542,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 632318,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 88391,
           "id": "B1",
           "latency_s": 47.5,
@@ -505,10 +563,12 @@
           "opened_legacy_module": false,
           "order": 2,
           "output_tokens": 4581,
+          "project_instructions_loaded": false,
           "search_output_tokens": 6758,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 149836
+          "weighted_cost": 149836,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -518,7 +578,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 1229508,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 102629,
           "id": "B2",
           "latency_s": 219.7,
@@ -528,10 +599,12 @@
           "opened_legacy_module": false,
           "order": 3,
           "output_tokens": 8411,
+          "project_instructions_loaded": false,
           "search_output_tokens": 5057,
           "tool_calls": 24,
           "turns": 15,
-          "weighted_cost": 245991
+          "weighted_cost": 245991,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -541,7 +614,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 584027,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 82636,
           "id": "A2",
           "latency_s": 44.0,
@@ -551,10 +635,12 @@
           "opened_legacy_module": true,
           "order": 4,
           "output_tokens": 4365,
+          "project_instructions_loaded": false,
           "search_output_tokens": 9449,
           "tool_calls": 18,
           "turns": 9,
-          "weighted_cost": 136997
+          "weighted_cost": 136997,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -564,7 +650,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 683547,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 81993,
           "id": "A3",
           "latency_s": 57.2,
@@ -574,10 +671,12 @@
           "opened_legacy_module": false,
           "order": 5,
           "output_tokens": 5288,
+          "project_instructions_loaded": false,
           "search_output_tokens": 8407,
           "tool_calls": 20,
           "turns": 10,
-          "weighted_cost": 150887
+          "weighted_cost": 150887,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -587,7 +686,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 625997,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 91745,
           "id": "B3",
           "latency_s": 52.8,
@@ -597,10 +707,12 @@
           "opened_legacy_module": false,
           "order": 6,
           "output_tokens": 4712,
+          "project_instructions_loaded": false,
           "search_output_tokens": 5771,
           "tool_calls": 17,
           "turns": 9,
-          "weighted_cost": 154071
+          "weighted_cost": 154071,
+          "whole_tree_glob_first": true
         }
       ],
       "version": "v1.0.2"
@@ -683,7 +795,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.6667,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.6667
+              "opened_legacy_rate": 0.6667,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         },
@@ -763,7 +877,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.0,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.0
+              "opened_legacy_rate": 0.0,
+              "project_instructions_rate": 0.0,
+              "whole_tree_glob_first_rate": 1.0
             }
           }
         }
@@ -815,7 +931,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 551892,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 81036,
           "id": "Bn1",
           "latency_s": 56.0,
@@ -825,10 +952,12 @@
           "opened_legacy_module": true,
           "order": 1,
           "output_tokens": 4611,
+          "project_instructions_loaded": false,
           "search_output_tokens": 6903,
           "tool_calls": 9,
           "turns": 9,
-          "weighted_cost": 177470
+          "weighted_cost": 177470,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -838,7 +967,18 @@
           "blocked_calls": 1,
           "cache_read_tokens": 535455,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 71550,
           "id": "Bg1",
           "latency_s": 47.5,
@@ -848,10 +988,12 @@
           "opened_legacy_module": false,
           "order": 2,
           "output_tokens": 4235,
+          "project_instructions_loaded": false,
           "search_output_tokens": 655,
           "tool_calls": 15,
           "turns": 9,
-          "weighted_cost": 117632
+          "weighted_cost": 117632,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -861,7 +1003,18 @@
           "blocked_calls": 1,
           "cache_read_tokens": 491180,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 83856,
           "id": "Bg2",
           "latency_s": 53.8,
@@ -871,10 +1024,12 @@
           "opened_legacy_module": false,
           "order": 3,
           "output_tokens": 4464,
+          "project_instructions_loaded": false,
           "search_output_tokens": 39,
           "tool_calls": 15,
           "turns": 8,
-          "weighted_cost": 129379
+          "weighted_cost": 129379,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -884,7 +1039,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 584455,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 78320,
           "id": "Bn2",
           "latency_s": 176.6,
@@ -894,10 +1060,12 @@
           "opened_legacy_module": true,
           "order": 4,
           "output_tokens": 4652,
+          "project_instructions_loaded": false,
           "search_output_tokens": 6844,
           "tool_calls": 10,
           "turns": 9,
-          "weighted_cost": 132854
+          "weighted_cost": 132854,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -907,7 +1075,18 @@
           "blocked_calls": 0,
           "cache_read_tokens": 689514,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 88758,
           "id": "Bn3",
           "latency_s": 59.6,
@@ -917,10 +1096,12 @@
           "opened_legacy_module": false,
           "order": 5,
           "output_tokens": 5421,
+          "project_instructions_loaded": false,
           "search_output_tokens": 6022,
           "tool_calls": 18,
           "turns": 10,
-          "weighted_cost": 160199
+          "weighted_cost": 160199,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -930,7 +1111,18 @@
           "blocked_calls": 1,
           "cache_read_tokens": 461588,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 69851,
           "id": "Bg3",
           "latency_s": 40.2,
@@ -940,10 +1132,12 @@
           "opened_legacy_module": false,
           "order": 6,
           "output_tokens": 3677,
+          "project_instructions_loaded": false,
           "search_output_tokens": 39,
           "tool_calls": 14,
           "turns": 8,
-          "weighted_cost": 105371
+          "weighted_cost": 105371,
+          "whole_tree_glob_first": true
         }
       ],
       "version": "v1.0.4"
@@ -1026,7 +1220,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.25
+              "opened_legacy_rate": 0.25,
+              "project_instructions_rate": 1.0,
+              "whole_tree_glob_first_rate": 0.0
             }
           }
         },
@@ -1106,7 +1302,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.0,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.25
+              "opened_legacy_rate": 0.25,
+              "project_instructions_rate": 1.0,
+              "whole_tree_glob_first_rate": 0.0
             }
           }
         },
@@ -1186,7 +1384,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.75
+              "opened_legacy_rate": 0.75,
+              "project_instructions_rate": 1.0,
+              "whole_tree_glob_first_rate": 0.25
             }
           }
         },
@@ -1266,7 +1466,9 @@
               "acceptance_full_rate": 1.0,
               "e2e_test_rate": 0.5,
               "mutation_full_rate": 1.0,
-              "opened_legacy_rate": 0.0
+              "opened_legacy_rate": 0.0,
+              "project_instructions_rate": 1.0,
+              "whole_tree_glob_first_rate": 0.0
             }
           }
         }
@@ -1511,7 +1713,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 514158,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "harness_subagent_tokens": 74154,
           "id": "D1",
           "latency_s": 61.5,
@@ -1521,10 +1735,12 @@
           "opened_legacy_module": false,
           "order": 1,
           "output_tokens": 5478,
+          "project_instructions_loaded": true,
           "search_output_tokens": 0,
           "tool_calls": 18,
           "turns": 9,
-          "weighted_cost": 169933
+          "weighted_cost": 169933,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1534,7 +1750,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 485887,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "harness_subagent_tokens": 73010,
           "id": "B1",
           "latency_s": 41.7,
@@ -1544,10 +1772,12 @@
           "opened_legacy_module": false,
           "order": 2,
           "output_tokens": 3710,
+          "project_instructions_loaded": true,
           "search_output_tokens": 613,
           "tool_calls": 13,
           "turns": 8,
-          "weighted_cost": 112001
+          "weighted_cost": 112001,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1557,7 +1787,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 456255,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "harness_subagent_tokens": 69275,
           "id": "A1",
           "latency_s": 44.8,
@@ -1567,10 +1809,12 @@
           "opened_legacy_module": true,
           "order": 3,
           "output_tokens": 3821,
+          "project_instructions_loaded": true,
           "search_output_tokens": 3639,
           "tool_calls": 8,
           "turns": 8,
-          "weighted_cost": 104639
+          "weighted_cost": 104639,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1580,7 +1824,19 @@
           "blocked_calls": 2,
           "cache_read_tokens": 489610,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Glob(**/*)",
           "harness_subagent_tokens": 70210,
           "id": "C1",
           "latency_s": 51.4,
@@ -1590,10 +1846,12 @@
           "opened_legacy_module": true,
           "order": 4,
           "output_tokens": 4185,
+          "project_instructions_loaded": true,
           "search_output_tokens": 166,
           "tool_calls": 10,
           "turns": 9,
-          "weighted_cost": 156490
+          "weighted_cost": 156490,
+          "whole_tree_glob_first": true
         },
         {
           "acceptance": "8/8",
@@ -1603,7 +1861,19 @@
           "blocked_calls": 1,
           "cache_read_tokens": 498378,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "PowerShell(Get-ChildItem -Force \"C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-13)",
           "harness_subagent_tokens": 63638,
           "id": "C2",
           "latency_s": 46.0,
@@ -1613,10 +1883,12 @@
           "opened_legacy_module": true,
           "order": 5,
           "output_tokens": 3640,
+          "project_instructions_loaded": true,
           "search_output_tokens": 0,
           "tool_calls": 13,
           "turns": 9,
-          "weighted_cost": 101357
+          "weighted_cost": 101357,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1626,7 +1898,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 390145,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
           "harness_subagent_tokens": 66274,
           "id": "A2",
           "latency_s": 34.4,
@@ -1636,10 +1920,12 @@
           "opened_legacy_module": false,
           "order": 6,
           "output_tokens": 3078,
+          "project_instructions_loaded": true,
           "search_output_tokens": 4332,
           "tool_calls": 6,
           "turns": 7,
-          "weighted_cost": 90685
+          "weighted_cost": 90685,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1649,7 +1935,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 475899,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "harness_subagent_tokens": 70738,
           "id": "B2",
           "latency_s": 40.1,
@@ -1659,10 +1957,12 @@
           "opened_legacy_module": false,
           "order": 7,
           "output_tokens": 3673,
+          "project_instructions_loaded": true,
           "search_output_tokens": 556,
           "tool_calls": 12,
           "turns": 8,
-          "weighted_cost": 107761
+          "weighted_cost": 107761,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1672,7 +1972,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 433919,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "harness_subagent_tokens": 75100,
           "id": "D2",
           "latency_s": 41.9,
@@ -1682,10 +1994,12 @@
           "opened_legacy_module": false,
           "order": 8,
           "output_tokens": 3707,
+          "project_instructions_loaded": true,
           "search_output_tokens": 2427,
           "tool_calls": 11,
           "turns": 7,
-          "weighted_cost": 109058
+          "weighted_cost": 109058,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1695,7 +2009,19 @@
           "blocked_calls": 2,
           "cache_read_tokens": 490367,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "harness_subagent_tokens": 61215,
           "id": "C3",
           "latency_s": 39.2,
@@ -1705,10 +2031,12 @@
           "opened_legacy_module": false,
           "order": 9,
           "output_tokens": 3128,
+          "project_instructions_loaded": true,
           "search_output_tokens": 574,
           "tool_calls": 9,
           "turns": 9,
-          "weighted_cost": 94843
+          "weighted_cost": 94843,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1718,7 +2046,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 440805,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Bash(ls -a \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scra)",
           "harness_subagent_tokens": 63176,
           "id": "A3",
           "latency_s": 37.6,
@@ -1728,10 +2068,12 @@
           "opened_legacy_module": false,
           "order": 10,
           "output_tokens": 3448,
+          "project_instructions_loaded": true,
           "search_output_tokens": 613,
           "tool_calls": 12,
           "turns": 8,
-          "weighted_cost": 93882
+          "weighted_cost": 93882,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1741,7 +2083,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 421359,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "harness_subagent_tokens": 70876,
           "id": "B3",
           "latency_s": 43.1,
@@ -1751,10 +2105,12 @@
           "opened_legacy_module": true,
           "order": 11,
           "output_tokens": 3959,
+          "project_instructions_loaded": true,
           "search_output_tokens": 122,
           "tool_calls": 13,
           "turns": 7,
-          "weighted_cost": 104072
+          "weighted_cost": 104072,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1764,7 +2120,19 @@
           "blocked_calls": 1,
           "cache_read_tokens": 409346,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Glob(*)",
           "harness_subagent_tokens": 70588,
           "id": "D3",
           "latency_s": 43.1,
@@ -1774,10 +2142,12 @@
           "opened_legacy_module": false,
           "order": 12,
           "output_tokens": 3785,
+          "project_instructions_loaded": true,
           "search_output_tokens": 0,
           "tool_calls": 12,
           "turns": 7,
-          "weighted_cost": 101545
+          "weighted_cost": 101545,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1787,7 +2157,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 389994,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Bash(ls -la \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scr)",
           "harness_subagent_tokens": 66386,
           "id": "A4",
           "latency_s": 45.2,
@@ -1797,10 +2179,12 @@
           "opened_legacy_module": false,
           "order": 13,
           "output_tokens": 3990,
+          "project_instructions_loaded": true,
           "search_output_tokens": 2963,
           "tool_calls": 6,
           "turns": 7,
-          "weighted_cost": 95041
+          "weighted_cost": 95041,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1810,7 +2194,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 478046,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "harness_subagent_tokens": 72669,
           "id": "D4",
           "latency_s": 51.3,
@@ -1820,10 +2216,12 @@
           "opened_legacy_module": false,
           "order": 14,
           "output_tokens": 4628,
+          "project_instructions_loaded": true,
           "search_output_tokens": 0,
           "tool_calls": 15,
           "turns": 8,
-          "weighted_cost": 115171
+          "weighted_cost": 115171,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1833,7 +2231,19 @@
           "blocked_calls": 1,
           "cache_read_tokens": 623262,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": true,
+          "first_call": "Bash(cd \"C:/Users/Umitk/AppData/Local/Temp/claude/E--projeler-ai-context-mapping/2e4edb23-3608-4eb3-a81e-139b3859ab15/scratch)",
           "harness_subagent_tokens": 64662,
           "id": "C4",
           "latency_s": 53.1,
@@ -1843,10 +2253,12 @@
           "opened_legacy_module": true,
           "order": 15,
           "output_tokens": 4705,
+          "project_instructions_loaded": true,
           "search_output_tokens": 242,
           "tool_calls": 17,
           "turns": 11,
-          "weighted_cost": 120211
+          "weighted_cost": 120211,
+          "whole_tree_glob_first": false
         },
         {
           "acceptance": "8/8",
@@ -1856,7 +2268,19 @@
           "blocked_calls": 0,
           "cache_read_tokens": 351294,
           "client_version": "2.1.275",
+          "context_attachments": [
+            "date",
+            "deferred_tools_delta",
+            "environment",
+            "instructions",
+            "model",
+            "prompt_snapshot",
+            "remote_session_change",
+            "session_context",
+            "skill_listing"
+          ],
           "e2e_test_added": false,
+          "first_call": "Read(C:\\Users\\Umitk\\AppData\\Local\\Temp\\claude\\E--projeler-ai-context-mapping\\2e4edb23-3608-4eb3-a81e-139b3859ab15\\scratchpad\\)",
           "harness_subagent_tokens": 69351,
           "id": "B4",
           "latency_s": 36.0,
@@ -1866,17 +2290,19 @@
           "opened_legacy_module": false,
           "order": 16,
           "output_tokens": 3158,
+          "project_instructions_loaded": true,
           "search_output_tokens": 0,
           "tool_calls": 10,
           "turns": 6,
-          "weighted_cost": 91264
+          "weighted_cost": 91264,
+          "whole_tree_glob_first": false
         }
       ],
       "version": "v1.1.0"
     }
   ],
   "generated_by": "benchmarks/analyze_transcripts.py",
-  "schema_version": 1,
+  "schema_version": 2,
   "weights": {
     "cache_read": 0.1,
     "cache_write": 1.25,

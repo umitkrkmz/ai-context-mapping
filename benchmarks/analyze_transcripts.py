@@ -43,9 +43,9 @@ import os
 import re
 import statistics
 import sys
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # 2: per-trial context attachments, first call, project_instructions_loaded
 DEFAULT_WEIGHTS = (1.0, 1.25, 0.1, 5.0)  # input, cache write, cache read, output
 DEFAULT_MANIFEST = os.path.join("benchmarks", "results", "manifest.json")
 DEFAULT_RESULTS = os.path.join("benchmarks", "results", "results.json")
@@ -87,6 +87,10 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
     models: Dict[str, int] = {}
     versions: Dict[str, int] = {}
     blocked = 0
+    # Attachments recorded before the first model turn are the context the agent started with. "instructions"
+    # means project instructions (a CLAUDE.md) were loaded, possibly inherited from the parent session.
+    context_attachments: Set[str] = set()
+    started_turns = False
     first_ts: Optional[str] = None
     last_ts: Optional[str] = None
     with open(path, encoding="utf-8") as handle:
@@ -102,6 +106,11 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
             if record.get("version"):
                 versions[str(record["version"])] = versions.get(str(record["version"]), 0) + 1
             message = record.get("message") or {}
+            if record.get("type") == "attachment" and not started_turns:
+                attachment = record.get("attachment") or {}
+                if isinstance(attachment, dict) and attachment.get("type"):
+                    context_attachments.add(str(attachment["type"]))
+                continue
             if record.get("type") == "user" and isinstance(message.get("content"), list):
                 for block in message["content"]:
                     if isinstance(block, dict) and block.get("type") == "tool_result":
@@ -115,6 +124,7 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
                 continue
             if record.get("type") != "assistant":
                 continue
+            started_turns = True
             if message.get("model"):
                 models[str(message["model"])] = models.get(str(message["model"]), 0) + 1
             usage = message.get("usage") or {}
@@ -159,6 +169,9 @@ def load_agent(directory: str, agent_id: str, weights: Sequence[float] = DEFAULT
         "by_tool": by_tool,
         "files_read": [target for name, target in calls if name == "Read"],
         "sequence": calls,
+        "first_call": f"{calls[0][0]}({calls[0][1]})" if calls else None,
+        "context_attachments": sorted(context_attachments),
+        "project_instructions_loaded": "instructions" in context_attachments,
         "blocked_by_gate": blocked,
         "output_tokens_by_kind": {kind: chars // 4 for kind, chars in sorted(output_chars.items())},
         "search_output_tokens": sum(c for k, c in output_chars.items() if k in ("Grep", "Glob", "shell-search")) // 4,
@@ -271,6 +284,10 @@ def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float
         "mutation": scoring.get("mutation"),
         "e2e_test_added": scoring.get("e2e_test_added"),
         "opened_legacy_module": scoring.get("opened_legacy_module"),
+        "project_instructions_loaded": parsed["project_instructions_loaded"],
+        "context_attachments": parsed["context_attachments"],
+        "first_call": parsed["first_call"],
+        "whole_tree_glob_first": bool(parsed["sequence"]) and parsed["sequence"][0] == ("Glob", "**/*"),
     }
 
 
@@ -289,6 +306,8 @@ def summarize_arm(trials: List[Dict[str, Any]]) -> Dict[str, Any]:
             "mutation_full_rate": _fraction_full(t["mutation"] for t in trials if t.get("mutation")),
             "e2e_test_rate": _rate(t.get("e2e_test_added") for t in trials),
             "opened_legacy_rate": _rate(t.get("opened_legacy_module") for t in trials),
+            "project_instructions_rate": _rate(t.get("project_instructions_loaded") for t in trials),
+            "whole_tree_glob_first_rate": _rate(t.get("whole_tree_glob_first") for t in trials),
         },
     }
 
@@ -396,15 +415,16 @@ def render_experiment(exp: Dict[str, Any]) -> str:
         )
     lines += [
         "", "**Per-arm aggregates** (median, with the range in parentheses)", "",
-        "| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module |",
-        "| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: |",
+        "| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call `Glob **/*` |",
+        "| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: | -------------------: | ---------------------: |",
     ]
     for arm in exp["arms"]:
         s, m, q = arm["summary"], arm["summary"]["metrics"], arm["summary"]["quality"]
         lines.append(
             f"| {arm['id']}: {labels[arm['id']]} | {s['n']} | {_range(m['weighted_cost'])} | {_range(m['new_tokens'])} | "
             f"{_range(m['search_output_tokens'])} | {_range(m['tool_calls'])} | {_range(m['turns'])} | {_range(m['latency_s'], 1)} | "
-            f"{_pct(q['acceptance_full_rate'])} | {_pct(q['mutation_full_rate'])} | {_pct(q['e2e_test_rate'])} | {_pct(q['opened_legacy_rate'])} |"
+            f"{_pct(q['acceptance_full_rate'])} | {_pct(q['mutation_full_rate'])} | {_pct(q['e2e_test_rate'])} | {_pct(q['opened_legacy_rate'])} | "
+            f"{_pct(q.get('project_instructions_rate'))} | {_pct(q.get('whole_tree_glob_first_rate'))} |"
         )
     if exp["comparisons"]:
         lines += [

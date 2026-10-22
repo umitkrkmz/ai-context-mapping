@@ -50,9 +50,9 @@ more aggressively rather than trimming descriptions.
 
 > **Measured caveat.** In [our A/B experiments](benchmark-results.md), unguided agents did not scan
 > repositories: they listed files and grepped, and the map saved no tokens. When a hook enforced
-> reading the map first, one experiment saw a 27% lower median cost (three trials per arm), but a
-> randomized re-test (four trials per arm) did not reproduce it, and blocking broad searches without a
-> map did not save cost either. So the token diet is **not demonstrated**; the map's demonstrated value
+> reading the map first, one experiment saw a 27% lower median cost (three trials per arm). A later
+> re-test could not confirm or refute it, because its agents already had the rules in their starting
+> context (a harness confound, corrected in v1.1.1). So the token diet is **not demonstrated**; the map's demonstrated value
 > is orientation and guardrails. Context reduction is not inherently good: the goal is targeted context,
 > not less context. Larger repositories and tasks that cannot be searched for are untested.
 

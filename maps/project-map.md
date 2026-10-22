@@ -66,7 +66,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `docs/` | docs | Long-form documentation. | - |
 | `docs/01-core-principles.md` | docs | Rationale: token diet, file-based stores, and the guardrail layers. | - |
 | `docs/02-token-diet-calculator.md` | docs | Token and cost model: whole-repo scanning vs map-guided reads, with a measuring script. | - |
-| `docs/benchmark-results.md` | docs | Two A/B experiments (4.4k and 55.6k-token projects): no measured token savings; correctness parity; limits. | - |
+| `docs/benchmark-results.md` | docs | Four experiments (4.4k and 55.6k-token projects, incl. the 2x2 gate ablation and its harness-confound correction): no demonstrated token saving; correctness parity; limits. | - |
 | `docs/case-study-mediagrab.md` | docs | Case study of the MediaGrab architecture: zero DB, 100+ tests, map-guided AI work. | - |
 | `invariants/` | invariant | Negative invariants. | - |
 | `invariants/negative-invariants.md` | invariant | Defines negative invariants, templates, and the live machine-checked NI-* rules. | NI-001, NI-002, NI-003, NI-004, NI-005, NI-006, NI-007, NI-009 |
@@ -82,7 +82,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `personas/ux_architect.md` | persona | UX architect persona: flows, error copy, accessibility, contract safety. | - |
 | `scripts/` | script | Standard-library-only guardrail tooling. | NI-001 |
 | `scripts/check_dependency_budget.py` | script | Audits requirements, package.json, and pyproject against an allow-list and ceiling; exits 1. | NI-001, NI-004, NI-005 |
-| `scripts/init_mapping.py` | script | Scans the tree; generates or merges maps/project-map.md; --check freshness and --stats token report. | NI-001, NI-004, NI-005, NI-009 |
+| `scripts/init_mapping.py` | script | Scans the tree (skipping .agentignore and .git/info/exclude paths); generates or merges the map; --check and --stats. | NI-001, NI-004, NI-005, NI-009 |
 | `scripts/install_hooks.sh` | script | Installs the git pre-commit hook that runs the guardrail checks. | - |
 | `scripts/mutation_guard.py` | script | Mutates a target function (incl. boundary shifts) and verifies its test fails; restores the file. | NI-001, NI-002, NI-004, NI-005, NI-006, NI-007 |
 | `scripts/verify_invariants.py` | script | AST checker for forbidden imports, isolated wrappers, forbidden calls, and required guards. | NI-001, NI-004, NI-005 |
@@ -106,6 +106,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
+| `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |
 | `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
 

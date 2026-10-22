@@ -128,6 +128,26 @@ def test_search_output_and_blocked_calls(tmp_path: Path) -> None:
     assert info["output_tokens_by_kind"]["shell-read"] == 1000
 
 
+def test_context_attachments_before_the_first_turn(tmp_path: Path) -> None:
+    def attachment(kind: str) -> Dict[str, Any]:
+        return {"type": "attachment", "attachment": {"type": kind}, "timestamp": "2026-01-01T00:00:00Z"}
+
+    write_transcript(tmp_path, "c1", [
+        {"type": "user", "message": {"content": "task"}},
+        attachment("environment"), attachment("instructions"),
+        assistant("m1", "claude-test-1", "9.9.9", usage(), [tool_use("t1", "Glob", pattern="**/*")]),
+        attachment("late_reminder"),  # arrives mid-run, so it is not starting context
+    ])
+    info = tool.load_agent(str(tmp_path), "c1")
+    assert info["context_attachments"] == ["environment", "instructions"]
+    assert info["project_instructions_loaded"] is True
+    assert info["first_call"] == "Glob(**/*)"
+
+    write_transcript(tmp_path, "c2", [attachment("environment"), assistant("m1", "claude-test-1", "9.9.9", usage())])
+    bare = tool.load_agent(str(tmp_path), "c2")
+    assert bare["project_instructions_loaded"] is False and bare["first_call"] is None
+
+
 def test_transcript_span_and_missing_file(tmp_path: Path) -> None:
     simple_agent(tmp_path, "a6", 1)
     assert tool.load_agent(str(tmp_path), "a6")["transcript_span_s"] == 30.0
@@ -209,7 +229,7 @@ def test_results_are_deterministic(tmp_path: Path) -> None:
     first = tool.dump_json(tool.build_results(manifest, manifest["transcripts_dir"]))
     second = tool.dump_json(tool.build_results(manifest, manifest["transcripts_dir"]))
     assert first == second and first.endswith("\n")
-    assert json.loads(first)["schema_version"] == 1
+    assert json.loads(first)["schema_version"] == tool.SCHEMA_VERSION == 2
     assert "timestamp" not in first.lower().replace("first_timestamp", "").replace("last_timestamp", "")
 
 
@@ -294,7 +314,7 @@ needs_results = pytest.mark.skipif(not RESULTS.is_file(), reason="benchmarks/res
 @needs_results
 def test_committed_results_have_model_and_environment_metadata() -> None:
     results = json.loads(RESULTS.read_text(encoding="utf-8"))
-    assert results["schema_version"] == 1
+    assert results["schema_version"] == tool.SCHEMA_VERSION == 2
     assert results["environment"]["models"] and all(m.startswith("claude-") for m in results["environment"]["models"])
     assert results["environment"]["claude_code_versions"]
     assert {e["id"] for e in results["experiments"]} >= {"exp1", "exp2", "exp3", "exp4"}

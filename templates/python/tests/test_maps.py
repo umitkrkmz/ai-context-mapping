@@ -10,7 +10,8 @@ These tests fail when:
 * ``CLAUDE.md`` drifts away from ``AGENTS.md``.
 
 The file is intentionally self-contained (standard library plus pytest) so it can be copied
-into any project unchanged. Paths ignored by ``.agentignore`` need no map entry.
+into any project unchanged. Paths ignored by ``.agentignore`` need no map entry, and neither do
+personal files that git excludes locally in ``.git/info/exclude`` (never committed).
 """
 from __future__ import annotations
 
@@ -24,6 +25,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 MAP_PATH = ROOT / "maps" / "project-map.md"
 IGNORE_PATH = ROOT / ".agentignore"
+LOCAL_EXCLUDE_PATH = ROOT / ".git" / "info" / "exclude"
 ALWAYS_IGNORED = (".git/", "__pycache__/", ".pytest_cache/")
 FILE_INDEX_TITLE = "file index"
 PLACEHOLDER = re.compile(r"\b(TODO|TBD|FIXME|XXX)\b|describe manually", re.IGNORECASE)
@@ -110,8 +112,9 @@ class IgnoreMatcher:
 
 def load_matcher() -> IgnoreMatcher:
     patterns = list(ALWAYS_IGNORED)
-    if IGNORE_PATH.is_file():
-        patterns.extend(IGNORE_PATH.read_text(encoding="utf-8", errors="replace").splitlines())
+    for ignore_file in (IGNORE_PATH, LOCAL_EXCLUDE_PATH):
+        if ignore_file.is_file():
+            patterns.extend(ignore_file.read_text(encoding="utf-8", errors="replace").splitlines())
     return IgnoreMatcher(patterns)
 
 

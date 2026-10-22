@@ -5,11 +5,13 @@ project (v1.0.2), in the same large project with **Rule 1 enforced by a gate** (
 **2x2 ablation** that separates the map from the search blocking (v1.1.0).
 
 **The short version.** In experiments 1 and 2 the map saved no tokens. Experiment 3 found a 27% lower
-median cost with the gate on, on three trials per arm. **Experiment 4, a randomized and interleaved
-re-test with four trials per arm, did not reproduce that saving**: the gated arm cost 6% more than the
-ungated map arm, and blocking searches without any map cost 17% more than the baseline. Every trial in
-every experiment produced the same correct, well-tested fix. Read section 1 before quoting any number,
-section 11 for the ablation, and section 9 for the limits.
+median cost with the gate on, on three trials per arm. Experiment 4, a randomized 2x2 re-test, found no
+saving, and v1.1.0 reported that as "did not reproduce". **That was wrong (corrected in v1.1.1, section
+12):** in experiment 4 every agent, in every arm, started with this repository's own `CLAUDE.md` (the five
+rules, including "read the map first") in its context, and no agent in experiments 1-3 did. Experiment 4
+therefore tested a different condition and is **not a replication** of experiment 3. The 27% is neither
+confirmed nor refuted. Every trial in every experiment produced the same correct, well-tested fix. Read
+section 1 before quoting any number, section 12 for the confound, and section 9 for the limits.
 
 > *Context reduction is not inherently good. The goal is targeted context, not less context.*
 
@@ -25,9 +27,10 @@ experiment 4 has four.
 | Did the framework arm cost fewer tokens?                        | **No.** Price-weighted cost was **+8%** at 4.4k tokens and a **+2% median** (+23% mean) at 55.6k tokens. |
 | Did the baseline's cost grow with project size?                 | **No.** It was flat: 148.7k at 4.4k tokens, **150.9k median at 55.6k** (12.7x larger). |
 | Did the baseline agent scan the whole repository?               | **No.** All 8 agents listed the tree, then grepped (experiment 2) or opened files by name (experiment 1). None read more than 12 files. |
-| Did the framework agents follow Rule 1 (read the map first)?    | **No, 0 of 3.** All three grepped first; two read the map afterwards; one never opened it. |
-| **Does enforcing Rule 1 change the cost?**                      | **Not reproduced.** Experiment 3 (n=3, sequential) saw **-27%** (117.6k vs 160.2k). Experiment 4 (n=4, randomized, interleaved) saw **+6%** (D 112.1k vs B 105.9k). Treat the 27% as an unconfirmed observation. |
-| Is the saving from the map or from blocking searches? (experiment 4) | **Neither was shown to save cost.** Suppression alone: **+17%** vs baseline (110.8k vs 94.5k, p = 0.17). Map added to suppression: +1% (p = 0.66). Search output fell about 90% or more with a map or a hook. That alone lowered nothing. |
+| Did the framework agents follow Rule 1 (read the map first)?    | **No, 0 of 3** (experiment 2). All three grepped first; two read the map afterwards; one never opened it. Their project's `CLAUDE.md` was never preloaded, as it would be for a real adopter (section 12). |
+| **Does enforcing Rule 1 change the cost?**                      | **Unresolved.** Experiment 3 (n=3, sequential) saw **-27%** (117.6k vs 160.2k), an unreplicated observation. Experiment 4 is not a valid replication: all its agents were already told Rule 1 (section 12). |
+| When agents are already told Rule 1, does a gate or a map add anything? (experiment 4) | **No saving was seen.** Gate vs no gate: +6% (D 112.1k vs B 105.9k). Suppression alone: +17% vs baseline (110.8k vs 94.5k, p = 0.17). Map added to suppression: +1% (p = 0.66). |
+| Does preloading the rules change behavior? (experiments 1-3 vs 4) | **It changed the first move.** 14 of 14 agents without the rules in context opened with `Glob **/*`; 1 of 16 with them did. A cross-experiment comparison, so suggestive only (section 12). |
 | Did the gate hurt fix quality?                                  | **No** on the measured outcome (8/8 acceptance, 4/4 mutants). But gated agents wrote unit tests only (0 of 3 added an end-to-end test vs 2 of 3) and none opened the frozen legacy module. |
 | What did the framework arm buy?                                 | Mutation-verified tests, invariant, dependency, and map checks. It did not buy a better fix. |
 | What did it cost?                                               | About 7,000-12,000 extra tokens of instruction and script reading per task, and one hung command. |
@@ -37,8 +40,8 @@ experiment 4 has four.
 that reads the whole repository. No agent here did that. Agents navigate with `Glob` and `grep`, whose
 cost depends on how many files *match*, not on how large the repository is. The model is a worst case
 for an unguided agent, not a prediction, and this benchmark found no savings from the map at 55,600
-tokens. Experiment 3 suggested that this changes when the rule is enforced (section 5); experiment 4
-did not confirm it (section 11).
+tokens. Experiment 3 suggested that this changes when the rule is enforced (section 5); that has not been
+tested again under the same conditions (section 12).
 
 ## 2. What we measured, and how
 
@@ -288,7 +291,8 @@ suggests the conditions were comparable across runs.
 ### 5.6 What this experiment does not tell us
 
 - **Whether the map or merely the blocking of broad searches produces the saving.** Experiment 4
-  (section 11) ran that ablation. Its answer: no saving reproduced, so there was nothing to attribute.
+  (section 11) ran that ablation, but under a different condition (rules preloaded in every arm, section
+  12), so the question is still open for the experiment 3 condition.
 - **Whether it holds beyond 55,600 tokens, for other bugs, or for symptoms that cannot be grepped.**
 - **How an adopter's setup behaves,** with a session rooted in the project rather than the nested-map mode
   used here.
@@ -329,12 +333,12 @@ inside the noise. **There is no sign that the map's value grows with project siz
   symptom.
 - *"The map's advantage grows with repository size."* Not observed between 4,400 and 55,600 tokens.
 
-**Experiment 3 qualified the conclusions above, and experiment 4 withdrew that qualification.** With
-Rule 1 enforced, experiment 3's agents read the map first and cost a median 27% less. In experiment 4, arms
-were run in random order within blocks, the ungated map agents read the map first on their own (4 of 4), and
-the gated arm cost 6% more than the ungated one. The 27% figure is therefore **not established**. What the
-gate reliably provides is behavior: Rule 1 is enforced deterministically, and search output falls. It has
-not been shown to save money, and it did not measure scale.
+**Experiment 3 qualified the conclusions above; experiment 4 could not test that qualification.** With
+Rule 1 enforced, experiment 3's agents read the map first and cost a median 27% less (n=3, sequential, not
+replicated). Experiment 4 gave every arm this repository's `CLAUDE.md`, so all its agents were already told
+Rule 1; there the gate saved nothing (section 12). The 27% figure is therefore **unresolved, not refuted**.
+What the gate reliably provides is behavior: Rule 1 is enforced deterministically, and search output falls.
+A token saving has not been demonstrated, and scale was not measured.
 
 **What the framework did show value for**
 
@@ -351,9 +355,10 @@ not been shown to save money, and it did not measure scale.
   typical, and it is greppable.
 - **Repositories 10x to 100x larger**, where even matches are numerous and `Glob **/*` itself is
   expensive (here: ~1,700 tokens; at 5,000 files it would be tens of thousands).
-- **Enforcing Rule 1 rather than requesting it.** Implemented in v1.0.3, measured in experiments 3 and 4
-  with conflicting results. What remains: five or more trials per arm, a larger project, a second bug type,
-  and finding out why agent behavior in the ungated arm changed between experiments.
+- **Enforcing Rule 1 rather than requesting it.** Implemented in v1.0.3 and measured in experiment 3;
+  experiment 4 measured a different condition (section 12). What remains: a clean replication in sessions
+  rooted in each trial's directory, with "rules preloaded" as an explicit factor, five or more trials per
+  arm, a larger project, and a second bug type.
 - **Trimming the overhead:** an agent should run a script with `--help`, not read its source;
   `CLAUDE.md` and `AGENTS.md` should not both be read; the map should stay under ~3,000 tokens.
 - **More trials and more bug types.** Three trials per arm and one bug do not support statistics.
@@ -379,11 +384,13 @@ not been shown to save money, and it did not measure scale.
   this experiment), and the hook configuration was swapped between runs of a single session. The
   gate's logic is the shipped one; the surrounding conditions are not.
 - **Experiment 3 has three trials per arm, run in sequence rather than interleaved.** Its cost difference
-  could not reach conventional significance (minimum exact one-sided p = 0.05), and experiment 4 did not
-  reproduce it.
-- **Costs do not compare across experiments.** Arm A cost 151k in experiment 2 and 94k in experiment 4 on
-  identical inputs, the same day, model and client. Only within-experiment comparisons are meaningful, and
-  only interleaved designs (experiment 4) protect against drift.
+  could not reach conventional significance (minimum exact one-sided p = 0.05), and it has not been
+  replicated under the same conditions.
+- **The harness leaked instructions (section 12).** Trials ran as sub-agents of a session rooted in this
+  repository. In experiment 4 every sub-agent inherited this repository's `CLAUDE.md`; in experiments 1-3
+  none did, and none loaded its trial project's own `CLAUDE.md` either, as Claude Code would for a real
+  adopter. Arm A cost 151k in experiment 2 and 94k in experiment 4 on otherwise identical inputs. Compare
+  costs only within an experiment. `results.json` now records each trial's starting context.
 - **Experiment 4 has four trials per arm.** The smallest possible exact one-sided p-value is 1/70. It is a
   null result at this sample size, not evidence of no effect. It also has one bug and one fixture, and the
   hook configuration was swapped between trials of a single session.
@@ -499,12 +506,12 @@ Model: `claude-sonnet-5` (30 trials). Claude Code client: `2.1.275`. Cost weight
 
 **Per-arm aggregates** (median, with the range in parentheses)
 
-| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module |
-| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: |
-| A: No map, no gate (baseline) | 4 | 94,462 (90,685-104,639) | 32,486 (29,500-35,751) | 3,301 (613-4,332) | 7 (6-12) | 8 (7-8) | 41.2 (34.4-45.2) | 100% | 100% | 50% | 25% |
-| B: Map provided, gate off (advisory) | 4 | 105,916 (91,264-112,001) | 37,398 (35,436-39,603) | 339 (0-613) | 12 (10-13) | 8 (6-8) | 40.9 (36.0-43.1) | 100% | 100% | 0% | 25% |
-| C: No map, search suppression only (ablation) | 4 | 110,784 (94,843-156,490) | 31,248 (27,265-73,472) | 204 (0-574) | 12 (9-17) | 9 (9-11) | 48.7 (39.2-53.1) | 100% | 100% | 50% | 75% |
-| D: Map provided, map gate on (enforced) | 4 | 112,114 (101,545-169,933) | 40,714 (37,136-78,383) | 0 (0-2,427) | 14 (11-18) | 8 (7-9) | 47.2 (41.9-61.5) | 100% | 100% | 50% | 0% |
+| Arm | n | Weighted cost | New tokens | Search output | Tool calls | Turns | Latency (s) | 8/8 acceptance | 4/4 mutants | End-to-end test | Opened legacy module | CLAUDE.md in context | First call `Glob **/*` |
+| --- | -: | ------------: | ---------: | ------------: | ---------: | ----: | ----------: | -------------: | ----------: | --------------: | -------------------: | -------------------: | ---------------------: |
+| A: No map, no gate (baseline) | 4 | 94,462 (90,685-104,639) | 32,486 (29,500-35,751) | 3,301 (613-4,332) | 7 (6-12) | 8 (7-8) | 41.2 (34.4-45.2) | 100% | 100% | 50% | 25% | 100% | 0% |
+| B: Map provided, gate off (advisory) | 4 | 105,916 (91,264-112,001) | 37,398 (35,436-39,603) | 339 (0-613) | 12 (10-13) | 8 (6-8) | 40.9 (36.0-43.1) | 100% | 100% | 0% | 25% | 100% | 0% |
+| C: No map, search suppression only (ablation) | 4 | 110,784 (94,843-156,490) | 31,248 (27,265-73,472) | 204 (0-574) | 12 (9-17) | 9 (9-11) | 48.7 (39.2-53.1) | 100% | 100% | 50% | 75% | 100% | 25% |
+| D: Map provided, map gate on (enforced) | 4 | 112,114 (101,545-169,933) | 40,714 (37,136-78,383) | 0 (0-2,427) | 14 (11-18) | 8 (7-9) | 47.2 (41.9-61.5) | 100% | 100% | 50% | 0% | 100% | 0% |
 
 **Comparisons** (ratio of the second arm to the first; p-values are exact permutation tests on mean weighted cost)
 
@@ -521,9 +528,14 @@ rewrites them from `benchmarks/results/results.json`, and a test fails if they d
 
 ### 11.1 Findings
 
-**The 27% saving from experiment 3 did not reproduce.** With arms interleaved in random order, the gated
-arm (D) cost a median 112,114 and the map-as-instruction arm (B) 105,916: D was 6% **more** expensive
-(19% by mean). The hypothesis "D costs less than B" (H1) is not supported.
+> **Correction (v1.1.1).** This section originally said the 27% saving "did not reproduce". Every agent
+> in this experiment started with this repository's `CLAUDE.md` in context, which no agent in experiment 3
+> had (section 12). The findings below hold for that condition, "the agent is already told Rule 1", and
+> are not a test of experiment 3.
+
+**No saving from the gate when the rule was already stated.** With arms interleaved in random order, the
+gated arm (D) cost a median 112,114 and the map-as-instruction arm (B) 105,916: D was 6% **more** expensive
+(19% by mean). The hypothesis "D costs less than B" (H1) is not supported under this condition.
 
 **Applying the pre-registered rules literally gives rule 3: suppression alone harms.** C's median cost was
 110,784 against A's 94,462, which is 1.17x (1.23x by mean). Two things weaken that reading: the exact
@@ -541,14 +553,11 @@ map and invariants and for running the verification scripts (new tokens: B 37.4k
 **What did work as designed:** every arm with a map or a hook cut search output. Median search output was 3,301
 tokens in A against 339 (B), 204 (C) and 0 (D). That reduction, on its own, bought no cost saving here.
 
-**Agent behavior differed from experiments 2 and 3.** All four B agents (no hook) read the map before any
-search, where 0 of 3 did in experiment 2 and 0 of 3 in experiment 3's ungated arm. In D, three of four read
-it first and one (D3) was blocked once on a first `Glob`. So in this experiment the gate had little to
-enforce: D blocked a mean of 0.25 calls per trial. The same model (`claude-sonnet-5`) and client (`2.1.275`)
-ran all 30 trials, so we cannot say what changed. What we can say is that the A arm cost 94k here and 151k in
-experiment 2 on identical inputs, so **costs are not comparable across experiments**, and experiment 3's
-sequential design could have been affected by whatever changed. Only the within-experiment comparisons of
-this randomized design carry weight.
+**Agent behavior differed from experiments 2 and 3, and the cause is now known.** All four B agents (no
+hook) read the map before any search, where 0 of 3 did in experiment 2 and 0 of 3 in experiment 3's ungated
+arm. In D, three of four read it first and one (D3) was blocked once on a first `Glob`, so the gate had
+little to enforce (a mean of 0.25 blocked calls per trial). v1.1.0 said "we cannot say what changed". We
+can: every agent here had the five rules in context from its first turn (section 12).
 
 **Suppression changed how agents worked, not just what they saw.** With no map and broad search blocked,
 C agents made more tool calls (11.5 against 7) and 3 of 4 opened the frozen `legacy_shipping.py`, against
@@ -564,20 +573,21 @@ C agents made more tool calls (11.5 against 7) and 3 of 4 opened the frozen `leg
 | Opened `legacy_shipping.py` | 1/4 | 1/4 | 3/4 | 0/4 |
 | Files changed outside the fix and its tests | 0 | 0 | 0 | 0 |
 
-Experiment 3's finding that gated agents write unit tests only (0 of 3 against 2 of 3) did not reproduce
-either: 2 of 4 D agents added an end-to-end test. "Opened" counts a `Read` or a shell command that names the
+Experiment 3's finding that gated agents write unit tests only (0 of 3 against 2 of 3) was not seen here,
+where 2 of 4 D agents added an end-to-end test. The conditions differ (section 12), so this does not
+contradict experiment 3. "Opened" counts a `Read` or a shell command that names the
 file; a `grep` that only printed lines from it does not count.
 
 ### 11.3 What this experiment does and does not show
 
-- **It shows** that, in this setup, the cost saving of experiment 3 is not a robust property of the gate,
-  and that blocking searches without a map did not reduce cost. It also shows that the gate's benefits are
-  behavioral and deterministic (Rule 1 is enforced) rather than a demonstrated token saving.
+- **It shows** that when agents are already told Rule 1, neither the gate, nor blocking searches, nor the
+  map lowered cost. The gate's benefits there are behavioral and deterministic (Rule 1 is enforced), not a
+  demonstrated token saving.
+- **It does not test** experiment 3's condition, in which no rules were preloaded (section 12).
 - **It does not show** that the map is worthless. The evidence is a null result at n=4 per arm on one bug,
   one fixture and one model, with a permutation test that cannot go below p = 1/70. Small effects are not
   detectable here.
-- **It does not explain** the difference in agent behavior between experiments. That is an open question,
-  and it is the largest threat to any cross-experiment claim.
+- **The difference in agent behavior between experiments** is explained in section 12.
 - **Motto.** *Context reduction is not inherently good. The goal is targeted context, not less context.*
   Experiment 4 is consistent with it in one narrow way: cutting median search output by about 94% (arm C) did
   not lower cost, and agents made up for it with more calls. It does not show that a map is the *targeted*
@@ -604,3 +614,42 @@ python benchmarks/analyze_transcripts.py --check-doc docs/benchmark-results.md
 ```
 
 `results.json` records the exact model ID and client version read from each transcript.
+
+## 12. Correction: a harness confound (v1.1.1)
+
+After v1.1.0 we inspected the `attachment` records in every transcript. They record the context a
+sub-agent starts with, before its first turn. One attachment, `instructions`, splits the experiments
+cleanly:
+
+| | Experiments 1-3 (14 agents) | Experiment 4 (16 agents) |
+| --- | --: | --: |
+| This repository's `CLAUDE.md` (the five rules) in the starting context | **0 of 14** | **16 of 16**, every arm |
+| First tool call was a whole-tree `Glob **/*` | **14 of 14** | **1 of 16** |
+| Arm A agents (no map in their project) mentioned AGENTS.md, a map, or the mutation guard | 0 of 4 | 4 of 4 |
+| Prompt (normalized for the trial directory), model, Claude Code client | same | same |
+
+**Mechanism.** The trials were sub-agents of one Claude Code session rooted in this repository. Sub-agents
+receive their parent session's project instructions. In experiments 1-3 the session's environment snapshot
+recorded `isGitRepo: False` and no instructions were attached. Experiment 4 ran after the session was
+resumed. Its snapshot recorded `isGitRepo: True`, a git status was added, and this repository's
+`CLAUDE.md` was attached to every sub-agent. The likely cause is that the resume re-detected the project.
+We have not confirmed that.
+
+**Consequences.**
+
+1. **Experiment 4 is not a replication of experiment 3.** Every arm, including the "no framework" arms A and
+   C, was told to read `maps/project-map.md` first and that `Glob`/`Grep` are blocked. Its within-experiment
+   comparisons stay valid for that condition. The experiment 3 figure of -27% is unresolved, neither
+   confirmed nor refuted.
+2. **Experiments 1-3 understate a real adopter's setup.** Claude Code loads a project's `CLAUDE.md`
+   automatically. Our framework arms never got that: their agents found `AGENTS.md` only after a first
+   whole-tree `Glob`, which is why "0 of 3 read the map first".
+3. **A new, untested hypothesis.** Having the rules in the starting context changed the first move in 15 of
+   16 agents, and arm A's median cost was 94k with them against 151k without (experiment 2). That compares
+   experiments run at different times, so it is a hypothesis, not a result: *preloaded rules may matter more
+   than either the map or the gate.*
+
+**What changed in v1.1.1.** `analyze_transcripts.py` records each trial's starting attachments,
+`project_instructions_loaded`, and first tool call in `results.json` (schema 2). The per-arm tables show
+"CLAUDE.md in context" and "First call `Glob **/*`". The next experiment will run every trial in a session
+rooted in its own directory and make "rules preloaded" an explicit factor.

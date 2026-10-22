@@ -169,23 +169,27 @@ From now on, adding a file without describing it in the map fails the build.
 
 We ran four experiments: the same agent, model, and bug, with and without the framework, on a
 4,400-token and a 55,600-token project (30 agent runs, measured from transcripts). The last one is a
-randomized 2x2 ablation that tested our own headline claim.
+randomized 2x2 ablation. Re-analysis later found that our harness gave its agents different starting
+context than the earlier runs, so it was not the replication we first reported (v1.1.1 correction).
 
 | Finding | Result |
 | ------- | ------ |
 | Correct fix, strong regression test | **8 of 8** runs, in both arms |
 | Token savings from the project map, **as an instruction** | **None measured.** Median cost +2% (large project), spread larger than the difference |
 | Did unguided agents scan the repository? | **No.** They grepped and read ~11 files, and their cost stayed flat as the project grew 12.7x |
-| Did agents follow "read the map first"? | Varied. **0 of 3** as an instruction in experiments 2 and 3, but **4 of 4** in experiment 4. The gate makes it deterministic |
-| Token cost with Rule 1 **enforced** by the map gate | **Not reproduced.** Experiment 3 saw -27% (n=3); the randomized re-test (experiment 4, n=4) saw **+6%** versus the ungated map |
-| Does blocking broad searches (no map) save tokens? | **No.** Median cost +17% versus baseline (p = 0.17), though search output fell 94% |
+| Did agents follow "read the map first"? | **0 of 3** when they had to discover the rules in the project; **4 of 4** when the rules were in their starting context. The gate makes it deterministic |
+| Token cost with Rule 1 **enforced** by the map gate | **Unresolved.** One experiment saw -27% (n=3, not replicated). The re-test ran under a different condition and is not a valid replication |
+| With the rules already in context, did the gate, search blocking, or the map save tokens? | **No.** Gate +6% vs no gate; search blocking alone +17% vs baseline (p = 0.17); map on top of blocking +1% |
+| Do preloaded rules change agent behavior? | **Apparently yes** (untested hypothesis): 14 of 14 agents without them opened with a whole-tree `Glob`, 1 of 16 with them |
 | What the framework added | Mutation-verified tests and invariant/dependency/map checks, for ~7-12k tokens of reading per task |
 
 So the evidence supports the framework as **verification and guardrails**, not as a token saver. The
-v1.0.4 headline of a 27% saving from the map gate was an observation on three sequential trials per arm,
-and the interleaved re-test in v1.1.0 did not reproduce it. The gate reliably makes Rule 1 deterministic
-and cuts search output, but neither lowered cost in the ablation, and the baseline was the cheapest arm.
-Every one of the 30 runs fixed the bug correctly with a strong test. Larger repositories, other bugs, and
+v1.0.4 headline of a 27% saving from the map gate was an observation on three sequential trials per arm.
+v1.1.0 reported that it "did not reproduce". That was wrong: in the re-test every agent, in every arm,
+already had this repository's `CLAUDE.md` in context, and the earlier agents did not
+([section 12](docs/benchmark-results.md#12-correction-a-harness-confound-v111)). So the 27% is neither
+confirmed nor refuted. The gate reliably makes Rule 1 deterministic and cuts search output. Every one of
+the 30 runs fixed the bug correctly with a strong test. Larger repositories, other bugs, and
 tasks that cannot be grepped remain untested. Full data, method, and limits:
 [docs/benchmark-results.md](docs/benchmark-results.md).
 

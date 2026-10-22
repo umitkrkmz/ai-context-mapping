@@ -2,7 +2,7 @@
 """Generate or refresh ``maps/project-map.md`` for the current repository.
 
 The project map is the first thing an AI agent reads. This tool scans the directory tree
-(honoring ``.agentignore``), assigns every file and directory a category and a purpose,
+(honoring ``.agentignore`` and git's local ``.git/info/exclude``), assigns every file and directory a category and a purpose,
 detects routes and entry points, and writes a Markdown map that other guardrails consume:
 
 * ``tests/test_maps.py`` fails when a file is missing from the map.
@@ -32,6 +32,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
 VERSION = "1.0.1"
 MAP_RELATIVE_PATH = "maps/project-map.md"
 IGNORE_FILE_NAME = ".agentignore"
+LOCAL_EXCLUDE_PATH = Path(".git") / "info" / "exclude"  # git's untracked, per-clone ignore list
 FILE_INDEX_TITLE = "File Index"
 ROUTE_TABLE_TITLE = "Route Table"
 ALWAYS_IGNORED = (".git/", "__pycache__/", ".pytest_cache/")
@@ -251,9 +252,10 @@ class IgnoreMatcher:
     @classmethod
     def from_root(cls, root: Path) -> "IgnoreMatcher":
         patterns = list(ALWAYS_IGNORED)
-        ignore_file = root / IGNORE_FILE_NAME
-        if ignore_file.is_file():
-            patterns.extend(ignore_file.read_text(encoding="utf-8", errors="replace").splitlines())
+        # Files excluded in .git/info/exclude are personal and never committed, so they need no map row.
+        for ignore_file in (root / IGNORE_FILE_NAME, root / LOCAL_EXCLUDE_PATH):
+            if ignore_file.is_file():
+                patterns.extend(ignore_file.read_text(encoding="utf-8", errors="replace").splitlines())
         return cls(patterns)
 
     def _match_one(self, rel_path: str, is_dir: bool) -> Optional[bool]:
