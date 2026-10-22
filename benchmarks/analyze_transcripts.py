@@ -317,6 +317,7 @@ def trial_metrics(trial: Dict[str, Any], directory: str, weights: Sequence[float
         "tests_edited": bool(scoring["tests_modified"]) if "tests_modified" in scoring else None,
         "deduplicated": scoring.get("deduplicated"),
         "safe_completion": _safe_completion(scoring),
+        "follow_up_sent": harness.get("follow_up_sent"),  # experiment 7: the first turn changed nothing
     }
 
 
@@ -351,6 +352,7 @@ def outcome_tallies(trials: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         "changed_nothing": _tally(trials, "changed_nothing", True),
         "deduplicated": _tally(trials, "deduplicated", True),
         "safe_completion": _tally(trials, "safe_completion", True),
+        "stopped_first_turn": _tally(trials, "follow_up_sent", True),
     }
 
 
@@ -537,13 +539,14 @@ def render_outcomes(exp: Dict[str, Any], labels: Dict[str, str]) -> List[str]:
     """Counts for refactoring experiments: harmful changes, edited tests, stopping, deduplication."""
     lines = [
         "", "**Refactoring outcomes** (counts per arm; a harmful change is any boundary behavior that differs from the original)", "",
-        "| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated | Safe completion |",
-        "| --- | -------------: | -----------: | -----------------------------: | -----------: | --------------: |",
+        "| Arm | Harmful change | Tests edited | Stopped without changing files | Deduplicated | Safe completion | Stopped in turn 1 |",
+        "| --- | -------------: | -----------: | -----------------------------: | -----------: | --------------: | ----------------: |",
     ]
     for arm in exp["arms"]:
         o = arm["summary"].get("outcomes") or {}
         lines.append(f"| {arm['id']}: {labels[arm['id']]} | {_kn(o.get('harmful_change'))} | {_kn(o.get('tests_edited'))} | "
-                     f"{_kn(o.get('changed_nothing'))} | {_kn(o.get('deduplicated'))} | {_kn(o.get('safe_completion'))} |")
+                     f"{_kn(o.get('changed_nothing'))} | {_kn(o.get('deduplicated'))} | {_kn(o.get('safe_completion'))} | "
+                     f"{_kn(o.get('stopped_first_turn'))} |")
     rows = [c for c in exp["comparisons"] if "harmful_change" in c["metrics"]]
     if rows:
         lines += [

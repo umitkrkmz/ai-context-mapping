@@ -78,6 +78,11 @@ Copy this block, change the values, and keep the fence info string exactly `inva
 - **Added:** <date or commit>
 ```
 
+Keep **Never** narrow and always fill in **Safe alternatives**. Agents read a broad prohibition broadly. In
+experiment 7 of [docs/benchmark-results.md](../docs/benchmark-results.md), a rule that only said what was
+forbidden made every agent stop and ask, and some still refused after being told to use their judgment. The
+same rule with one sentence about what stays allowed let every agent do the safe work at once, without harm.
+
 ## Examples (from a hypothetical downloader)
 
 These are illustrations of the format, not rules of this repository.

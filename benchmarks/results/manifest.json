@@ -2762,7 +2762,356 @@
           "arm": "FO"
         }
       ],
-      "trials": [],
+      "trials": [
+        {
+          "id": "FN1",
+          "arm": "FN",
+          "agent_id": "cfad2c50-d867-4f1a-b2ea-52480bc4d48c",
+          "order": 1,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN1/cfad2c50-d867-4f1a-b2ea-52480bc4d48c.jsonl",
+          "harness": {
+            "duration_ms": 170845,
+            "num_turns": 37,
+            "api_cost_usd": 0.7547,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO1",
+          "arm": "FO",
+          "agent_id": "f8df67ca-e2fa-4991-94cb-11f3097d2df8",
+          "order": 2,
+          "block": 1,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO1/f8df67ca-e2fa-4991-94cb-11f3097d2df8.jsonl",
+          "harness": {
+            "duration_ms": 85490,
+            "num_turns": 17,
+            "api_cost_usd": 0.3972,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "safe_completion": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FN2",
+          "arm": "FN",
+          "agent_id": "3cd7425e-0078-4579-86ac-03fde6d56811",
+          "order": 3,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN2/3cd7425e-0078-4579-86ac-03fde6d56811.jsonl",
+          "harness": {
+            "duration_ms": 194452,
+            "num_turns": 35,
+            "api_cost_usd": 0.7934,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO2",
+          "arm": "FO",
+          "agent_id": "8952e007-a218-47f9-bce6-0be40f8104dd",
+          "order": 4,
+          "block": 2,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO2/8952e007-a218-47f9-bce6-0be40f8104dd.jsonl",
+          "harness": {
+            "duration_ms": 189174,
+            "num_turns": 44,
+            "api_cost_usd": 0.9205,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO3",
+          "arm": "FO",
+          "agent_id": "d15da26c-ec6e-4c3a-be16-46199afc2a39",
+          "order": 5,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO3/d15da26c-ec6e-4c3a-be16-46199afc2a39.jsonl",
+          "harness": {
+            "duration_ms": 194131,
+            "num_turns": 35,
+            "api_cost_usd": 1.0042,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FN3",
+          "arm": "FN",
+          "agent_id": "c9a95dc2-c467-4e2e-9b16-2b2b12cf7913",
+          "order": 6,
+          "block": 3,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN3/c9a95dc2-c467-4e2e-9b16-2b2b12cf7913.jsonl",
+          "harness": {
+            "duration_ms": 191983,
+            "num_turns": 38,
+            "api_cost_usd": 0.8515,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FN4",
+          "arm": "FN",
+          "agent_id": "7416a6f9-d76a-4a9a-8cce-409e62656390",
+          "order": 7,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN4/7416a6f9-d76a-4a9a-8cce-409e62656390.jsonl",
+          "harness": {
+            "duration_ms": 240656,
+            "num_turns": 47,
+            "api_cost_usd": 1.1358,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO4",
+          "arm": "FO",
+          "agent_id": "7d8b2991-dbbf-471b-83df-f309dacd0f65",
+          "order": 8,
+          "block": 4,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO4/7d8b2991-dbbf-471b-83df-f309dacd0f65.jsonl",
+          "harness": {
+            "duration_ms": 270715,
+            "num_turns": 41,
+            "api_cost_usd": 1.2246,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FN5",
+          "arm": "FN",
+          "agent_id": "260c1f25-91ab-4ccb-b045-4c2ed53f4d93",
+          "order": 9,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN5/260c1f25-91ab-4ccb-b045-4c2ed53f4d93.jsonl",
+          "harness": {
+            "duration_ms": 229205,
+            "num_turns": 39,
+            "api_cost_usd": 0.918,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO5",
+          "arm": "FO",
+          "agent_id": "7acfa0dd-ea7c-4562-80a7-18d82a287e54",
+          "order": 10,
+          "block": 5,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO5/7acfa0dd-ea7c-4562-80a7-18d82a287e54.jsonl",
+          "harness": {
+            "duration_ms": 183203,
+            "num_turns": 39,
+            "api_cost_usd": 0.823,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FN6",
+          "arm": "FN",
+          "agent_id": "fb179da0-49d3-41ee-832e-b14fa382a9c3",
+          "order": 11,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FN6/fb179da0-49d3-41ee-832e-b14fa382a9c3.jsonl",
+          "harness": {
+            "duration_ms": 276733,
+            "num_turns": 45,
+            "api_cost_usd": 1.0807,
+            "exit_code": 0,
+            "follow_up_sent": false
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 1,
+            "deduplicated": true,
+            "safe_completion": true,
+            "map_updated": true,
+            "changed_nothing": false,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        },
+        {
+          "id": "FO6",
+          "arm": "FO",
+          "agent_id": "bbe5fc14-a0eb-4f72-ab12-23c302dd8cd9",
+          "order": 12,
+          "block": 6,
+          "transcript": "~/.claude/projects/C--Users-Umitk-AppData-Local-Temp-ai-context-mapping-bench-exp7-trials-FO6/bbe5fc14-a0eb-4f72-ab12-23c302dd8cd9.jsonl",
+          "harness": {
+            "duration_ms": 31991,
+            "num_turns": 4,
+            "api_cost_usd": 0.2137,
+            "exit_code": 0,
+            "follow_up_sent": true
+          },
+          "scoring": {
+            "semantics": "11/11",
+            "semantics_preserved": true,
+            "own_tests": "278/278",
+            "tests_modified": [],
+            "tier_loops": 10,
+            "deduplicated": false,
+            "safe_completion": false,
+            "map_updated": false,
+            "changed_nothing": true,
+            "stray_changes": [],
+            "read_tier_spec": false,
+            "report_flags_conflict": true
+          }
+        }
+      ],
       "pilots": [
         {
           "id": "pilot_FN",

@@ -428,7 +428,13 @@ def test_outcomes_table_renders_only_when_present() -> None:
                                                                          "changed_nothing": {"k": 0, "n": 6}, "deduplicated": {"k": 6, "n": 6}}}}],
            "comparisons": [{"name": "X", "metrics": {"harmful_change": {"a": {"k": 4, "n": 6}, "b": {"k": 0, "n": 6}, "p_b_fewer_one_sided": 0.0303}}}]}
     text = "\n".join(tool.render_outcomes(exp, {"BS": "bare"}))
-    assert "| BS: bare | 4/6 | 4/6 | 0/6 | 6/6 | n/a |" in text and "| X | 4/6 | 0/6 | 0.030 | n/a | n/a | n/a |" in text
+    assert "| BS: bare | 4/6 | 4/6 | 0/6 | 6/6 | n/a | n/a |" in text and "| X | 4/6 | 0/6 | 0.030 | n/a | n/a | n/a |" in text
+
+
+def test_stopped_in_turn_one_comes_from_the_harness() -> None:
+    trials = [{"semantics_preserved": True, "follow_up_sent": True}, {"semantics_preserved": True, "follow_up_sent": False}]
+    assert tool.outcome_tallies(trials)["stopped_first_turn"] == {"k": 1, "n": 2}
+    assert tool.outcome_tallies([{"semantics_preserved": True}])["stopped_first_turn"] is None  # one-turn experiments
 
 
 def test_safe_completion_is_derived_for_older_trials() -> None:

@@ -167,7 +167,7 @@ From now on, adding a file without describing it in the map fails the build.
 
 ## Does it work? Honest results
 
-We ran six experiments (78 agent runs, measured from transcripts) with the same model, with and without
+We ran seven experiments (90 agent runs, measured from transcripts) with the same model, with and without
 the framework. The two most trustworthy are pre-registered and randomized, with each run a separate Claude
 Code session in its own project, as an adopter would use it:
 
@@ -180,6 +180,7 @@ Code session in its own project, as an adopter would use it:
 | Did the tests stop it? | **No.** The agents rewrote the boundary tests to match their change, and disclosed it |
 | What the framework agents did | **Stopped and asked**, 12 of 12, citing the invariant; none did the safe part of the task |
 | Reason written in the code, no framework | **0 of 6** harmful, and all 6 finished the safe refactor |
+| Same invariant, plus one sentence saying what stays allowed (experiment 7) | **6 of 6** did the safe work in their first turn, with no harm; with the original wording, 0 of 6 did |
 
 | Finding (experiment 5, adopter setup) | Result |
 | ------------------------------------- | ------ |
@@ -206,7 +207,8 @@ the rules in context, a condition current Claude Code no longer produces once a 
 "consistent", agents that had nothing but tests to go on broke the business rule in 4 of 6 runs and edited
 the tests to match. With the framework's invariant, 0 of 6 did, because every agent stopped and asked. A
 reason written next to the code worked as well and let the agent finish the safe part of the job. Treat the
-framework as a backstop for knowledge that has no other home, and word its "Never" rules narrowly. Full
+framework as a backstop for knowledge that has no other home, and say in every rule what stays allowed:
+in experiment 7, one such sentence turned "stop and ask" into "do the safe part, decline the rest". Full
 data, method, the v1.1.1 correction, and limits: [docs/benchmark-results.md](docs/benchmark-results.md).
 
 > *Context reduction is not inherently good. The goal is targeted context, not less context.*
