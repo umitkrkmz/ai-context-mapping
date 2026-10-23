@@ -239,7 +239,8 @@ def adopt(target: Path, stack: str, agents: Sequence[str], with_ci: bool, dry_ru
             return status
 
     verb = "Would add" if dry_run else "Added"
-    print(f"\n{verb} {copied} file(s), skipped {skipped}.")
+    generated = f"; {'would generate' if dry_run else 'generated'} {MAP_RELATIVE_PATH}" if wrote_map else ""
+    print(f"\n{verb} {copied} file(s), skipped {skipped}{generated}.")
     print(style.bold("Next steps:"))
     for number, line in enumerate(next_steps(stack, agents, wrote_map), start=1):
         print(f"  {number}. {line}")

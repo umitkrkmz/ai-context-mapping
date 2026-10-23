@@ -112,7 +112,9 @@ def test_dry_run_writes_nothing(tmp_path: Path, capsys) -> None:
     out = capsys.readouterr().out
     assert "add   .github/workflows/ai-guardrails.yml" in out
     assert out.startswith("Plan for ")
-    assert "Would add " in out
+    planned = len(adopt.COMMON_FILES) + len(adopt.STACK_FILES["python"]) + 2  # CLAUDE.md and the workflow
+    # The map is generated, not copied, so the summary names it apart from the file count.
+    assert f"Would add {planned} file(s), skipped 0; would generate maps/project-map.md." in out
 
 
 def test_agent_entry_files(tmp_path: Path) -> None:
