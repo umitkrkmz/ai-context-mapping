@@ -1,0 +1,15 @@
+{
+  "name": "ai-context-mapping",
+  "description": "Guardrails for AI coding agents: a project map, negative invariants, and deterministic checks.",
+  "owner": {
+    "name": "umitkrkmz",
+    "url": "https://github.com/umitkrkmz"
+  },
+  "plugins": [
+    {
+      "name": "ai-context-mapping",
+      "source": ".",
+      "description": "Invariant check after every Python edit, a commit gate, an MCP server for the project map, an opt-in map gate, and skills to install and verify the framework."
+    }
+  ]
+}

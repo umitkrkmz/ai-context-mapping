@@ -214,7 +214,8 @@ class ContextTools:
             return self.map_path.read_text(encoding="utf-8")
         except FileNotFoundError as exc:
             raise ToolError(
-                f"Project map not found at {self.map_path}. Create it with: python scripts/init_mapping.py"
+                f"Project map not found at {self.map_path}. Create it with: python scripts/init_mapping.py "
+                "(to install the whole framework: scripts/adopt.py, or /ai-context-mapping:adopt in Claude Code)"
             ) from exc
         except OSError as exc:
             raise ToolError(f"Cannot read the project map: {exc}") from exc

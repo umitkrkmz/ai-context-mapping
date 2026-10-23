@@ -38,9 +38,12 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `.claude/commands/verify-invariants.md` | manifesto | /verify-invariants: run the AST invariant checker and fix violations without deleting rules. | - |
 | `.claude/commands/verify-map.md` | manifesto | /verify-map: run init_mapping --check and the map tests, then repair a stale map. | - |
 | `.claude/hooks/` | script | Claude Code hook scripts. | - |
-| `.claude/hooks/guardrail_hook.py` | script | Hook adapter: runs verify_invariants on edited .py files (exit 2 on violation); detects git commits. | NI-001, NI-002, NI-005 |
+| `.claude/hooks/guardrail_hook.py` | script | Hook adapter: runs verify_invariants (project copy, else the bundled one) on edited .py files, exit 2 on violation; detects git commits. | NI-001, NI-002, NI-005 |
 | `.claude/hooks/map_gate.py` | script | PreToolUse gate enforcing Rule 1: blocks Grep, Glob, and exploratory shell search until the map is read. Also holds the opt-in ablation mode `AI_GUARDRAILS_BLOCK_SEARCH_ONLY=1` (blocks broad searches, needs no map). | NI-001, NI-005, NI-010 |
 | `.claude/settings.json` | config | Claude Code hooks: map gate (Rule 1), invariant check after edits, and a commit gate (budget, map test). | - |
+| `.claude-plugin/` | integration | Claude Code plugin manifests: the repository root is both the marketplace and the plugin. | - |
+| `.claude-plugin/marketplace.json` | integration | Marketplace ai-context-mapping with one plugin entry whose source is the repository root ("."). | - |
+| `.claude-plugin/plugin.json` | integration | Plugin manifest: version, MCP server for the user's project, userConfig map_gate (default off) and python_command. | - |
 | `.cursor/` | manifesto | Cursor editor configuration. | - |
 | `.cursor/rules/` | manifesto | Cursor rule files. | - |
 | `.cursor/rules/context-guardrails.mdc` | manifesto | Always-on Cursor rule: use the map, respect invariants, ask before destructive actions. | - |
@@ -71,6 +74,8 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `docs/02-token-diet-calculator.md` | docs | Token and cost model: whole-repo scanning vs map-guided reads, with a measuring script. | - |
 | `docs/benchmark-results.md` | docs | Seven experiments: cost on a bug fix (framework +38%), the v1.1.1 confound correction, a guardrail test (harm 4/6 without the framework, 0/6 with it), and invariant wording; limits. | - |
 | `docs/case-study-mediagrab.md` | docs | Case study of the MediaGrab architecture: zero DB, 100+ tests, map-guided AI work. | - |
+| `hooks/` | integration | Hooks the Claude Code plugin ships. | - |
+| `hooks/hooks.json` | integration | Plugin hooks: invariant check after edits, opt-in map gate, commit gate; each is a no-op without the framework. | - |
 | `invariants/` | invariant | Negative invariants. | - |
 | `invariants/negative-invariants.md` | invariant | Defines negative invariants, templates, and the live machine-checked NI-* rules. | NI-001, NI-002, NI-003, NI-004, NI-005, NI-006, NI-007, NI-009 |
 | `maps/` | map | Repository navigation maps. | - |
@@ -90,6 +95,17 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `scripts/install_hooks.sh` | script | Installs the git pre-commit hook that runs the guardrail checks. | - |
 | `scripts/mutation_guard.py` | script | Mutates a target function (incl. boundary shifts) and verifies its test fails; restores the file. | NI-001, NI-002, NI-004, NI-005, NI-006, NI-007 |
 | `scripts/verify_invariants.py` | script | AST checker for forbidden imports, isolated wrappers, forbidden calls, and required guards. | NI-001, NI-004, NI-005 |
+| `skills/` | manifesto | Skills the Claude Code plugin ships, invoked as /ai-context-mapping:<name>. | - |
+| `skills/adopt/` | manifesto | Skill folder for adopt. | - |
+| `skills/adopt/SKILL.md` | manifesto | /ai-context-mapping:adopt: dry run, confirm, run adopt.py, describe the map, review invariants. User-only. | - |
+| `skills/diet-check/` | manifesto | Skill folder for diet-check. | - |
+| `skills/diet-check/SKILL.md` | manifesto | /ai-context-mapping:diet-check: init_mapping --stats, labeled as a model rather than a measured saving. | - |
+| `skills/mutation-test/` | manifesto | Skill folder for mutation-test. | - |
+| `skills/mutation-test/SKILL.md` | manifesto | /ai-context-mapping:mutation-test: run mutation_guard.py on a regression test and report survivors. | - |
+| `skills/verify-invariants/` | manifesto | Skill folder for verify-invariants. | - |
+| `skills/verify-invariants/SKILL.md` | manifesto | /ai-context-mapping:verify-invariants: run verify_invariants.py and fix code, never rules. | - |
+| `skills/verify-map/` | manifesto | Skill folder for verify-map. | - |
+| `skills/verify-map/SKILL.md` | manifesto | /ai-context-mapping:verify-map: init_mapping --check and the map test, then repair a stale map. | - |
 | `templates/` | template | Boilerplate to copy into other projects. | - |
 | `templates/ci/` | template | CI workflow template for adopted projects. | - |
 | `templates/ci/ai-guardrails.yml` | template | GitHub Actions workflow that adopt.py --ci writes: map, invariants, budget, map test, CLAUDE.md mirror. | - |
@@ -119,6 +135,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
 | `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
+| `tests/test_plugin.py` | test | Static checks of the plugin: marketplace entry, map gate off by default, bundled paths exist, skills, no stray components. | - |
 
 ## Route Table
 

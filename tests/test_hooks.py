@@ -358,6 +358,45 @@ def test_guardrail_hook_detects_git_commits(command: str, expected: bool) -> Non
     assert guard_module.is_git_commit({"tool_name": "Read", "tool_input": {"command": command}}) is False
 
 
+EVAL_BAN = """```invariant-rule
+{"id": "NI-100", "type": "forbidden-call", "description": "No eval in src.", "calls": ["eval"], "scope": ["src/**/*.py"]}
+```
+"""
+
+
+def plugin_project(tmp_path: Path, rules: str = EVAL_BAN) -> Path:
+    """A project as the plugin sees it: invariants and source code, but no scripts/ directory."""
+    root = tmp_path / "adopter"
+    (root / "invariants").mkdir(parents=True)
+    (root / "invariants" / "negative-invariants.md").write_text(rules, encoding="utf-8")
+    (root / "src").mkdir()
+    (root / "src" / "app.py").write_text("x = eval('1')\n", encoding="utf-8")
+    return root
+
+
+def test_post_edit_falls_back_to_the_bundled_checker(tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+    root = plugin_project(tmp_path)
+    assert not (root / "scripts").exists()
+    assert guard_module.verifier_path(root) == guard_module.BUNDLED_VERIFIER
+    assert guard_module.check_file(root, root / "src" / "app.py") == 2
+    assert "NI-100" in capsys.readouterr().err
+
+
+def test_post_edit_without_rules_stays_silent(tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+    root = plugin_project(tmp_path, rules="# no rules yet\n")
+    assert guard_module.check_file(root, root / "src" / "app.py") == 0
+    assert capsys.readouterr().err == ""
+
+
+def test_post_edit_prefers_the_projects_own_checker(tmp_path: Path) -> None:
+    root = plugin_project(tmp_path)
+    (root / "scripts").mkdir()
+    own = root / "scripts" / "verify_invariants.py"
+    own.write_text("def main(argv):\n    return 0\n", encoding="utf-8")  # a project copy that finds nothing
+    assert guard_module.verifier_path(root) == own
+    assert guard_module.check_file(root, root / "src" / "app.py") == 0
+
+
 # --------------------------------------------------------------------------------------
 # Opt-in: a nested project's own map counts (monorepos, benchmark harnesses)
 # --------------------------------------------------------------------------------------

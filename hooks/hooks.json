@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; exec \"$PY\" \"${CLAUDE_PLUGIN_ROOT}/.claude/hooks/guardrail_hook.py\" post-edit",
+            "timeout": 60,
+            "statusMessage": "Checking architectural invariants..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Grep|Glob|Read|Bash|PowerShell|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "case \"${CLAUDE_PLUGIN_OPTION_MAP_GATE:-}\" in true|True|TRUE|1) ;; *) exit 0 ;; esac; if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; exec \"$PY\" \"${CLAUDE_PLUGIN_ROOT}/.claude/hooks/map_gate.py\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit*)",
+            "command": "if python3 -c 0 >/dev/null 2>&1; then PY=python3; else PY=python; fi; \"$PY\" \"${CLAUDE_PLUGIN_ROOT}/.claude/hooks/guardrail_hook.py\" is-git-commit || exit 0; cd \"$CLAUDE_PROJECT_DIR\" || exit 0; [ -f maps/project-map.md ] || exit 0; S=scripts; [ -f \"$S/init_mapping.py\" ] || S=\"${CLAUDE_PLUGIN_ROOT}/scripts\"; \"$PY\" \"$S/check_dependency_budget.py\" --no-color >&2 || exit 2; \"$PY\" \"$S/init_mapping.py\" --check --no-color >&2 || exit 2",
+            "timeout": 120,
+            "statusMessage": "Commit gate: dependency budget and map freshness..."
+          }
+        ]
+      }
+    ]
+  }
+}

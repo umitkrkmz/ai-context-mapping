@@ -5,7 +5,8 @@ Claude Code passes a JSON description of each tool call on stdin. This adapter:
 
 1. reads that JSON and ignores everything except Edit, Write, and MultiEdit calls on ``.py``
    files inside the project,
-2. runs ``scripts/verify_invariants.py`` on the edited file, and
+2. runs ``scripts/verify_invariants.py`` on the edited file (the project's copy, or else the copy
+   that ships with this hook, as in the Claude Code plugin), and
 3. translates the result into the exit codes Claude Code understands.
 
 It also answers one question for the commit gate in .claude/settings.json: "is this Bash call a
@@ -45,6 +46,7 @@ from typing import Any, Dict, Optional, Sequence
 
 EDIT_TOOLS = ("Edit", "Write", "MultiEdit")
 VERIFIER_RELATIVE_PATH = Path("scripts") / "verify_invariants.py"
+BUNDLED_VERIFIER = Path(__file__).resolve().parents[2] / VERIFIER_RELATIVE_PATH
 GIT_COMMIT = re.compile(
     r"\bgit(?:\s+(?:-C|-c|--git-dir|--work-tree)\s+\S+|\s+--?[\w-]+(?:=\S+)?)*\s+commit(?![\w-])"
 )
@@ -56,10 +58,22 @@ def project_root(payload: Dict[str, Any]) -> Path:
     return Path(str(chosen)).resolve()
 
 
+def verifier_path(root: Path) -> Optional[Path]:
+    """Prefer the project's own checker (the version its CI runs); else the copy shipped with this hook.
+
+    The fallback is what the Claude Code plugin uses: the plugin carries the framework, while the
+    project may only have AGENTS.md, a map, and invariants.
+    """
+    for candidate in (root / VERIFIER_RELATIVE_PATH, BUNDLED_VERIFIER):
+        if candidate.is_file():
+            return candidate
+    return None
+
+
 def load_verifier(root: Path) -> Optional[ModuleType]:
-    """Import scripts/verify_invariants.py by path; return None when the project lacks it."""
-    path = root / VERIFIER_RELATIVE_PATH
-    if not path.is_file():
+    """Import verify_invariants.py by path; return None when neither copy exists."""
+    path = verifier_path(root)
+    if path is None:
         return None
     spec = importlib.util.spec_from_file_location("verify_invariants", path)
     if spec is None or spec.loader is None:

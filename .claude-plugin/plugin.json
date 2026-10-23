@@ -1,0 +1,34 @@
+{
+  "name": "ai-context-mapping",
+  "displayName": "AI Context Mapping",
+  "version": "1.5.0",
+  "description": "Project map, negative invariants, and checks an agent cannot talk its way around: an invariant check after every Python edit, a commit gate, an MCP server for the map, an opt-in map gate, and a skill that installs the framework in your project.",
+  "author": {
+    "name": "umitkrkmz",
+    "url": "https://github.com/umitkrkmz"
+  },
+  "homepage": "https://github.com/umitkrkmz/ai-context-mapping",
+  "repository": "https://github.com/umitkrkmz/ai-context-mapping",
+  "license": "MIT",
+  "keywords": ["guardrails", "invariants", "project-map", "mutation-testing", "mcp", "agents"],
+  "mcpServers": {
+    "ai-context-mapping": {
+      "command": "${user_config.python_command}",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/context_server.py", "--root", "${CLAUDE_PROJECT_DIR}"]
+    }
+  },
+  "userConfig": {
+    "map_gate": {
+      "type": "boolean",
+      "title": "Map gate (enforce Rule 1)",
+      "description": "Block Grep, Glob, and search commands until the agent has read maps/project-map.md in this session. Does nothing in projects without a map.",
+      "default": false
+    },
+    "python_command": {
+      "type": "string",
+      "title": "Python command",
+      "description": "Command that starts Python 3.9 or newer, used for the MCP server. On Windows, python3 often opens the Microsoft Store; use python or py there.",
+      "default": "python3"
+    }
+  }
+}
