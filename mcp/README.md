@@ -44,11 +44,17 @@ escaped backslashes in JSON. Restart the client after editing its configuration.
 
 ### Claude Desktop
 
-Edit `claude_desktop_config.json`:
+Edit `claude_desktop_config.json`. The reliable way to find it is **Settings > Developer > Edit Config** in
+Claude Desktop, which shows the file wherever your install keeps it. Typical locations:
 
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`; a Microsoft Store install keeps it under
+  `%LOCALAPPDATA%\Claude-Data\` in a folder named after the app package
 - Linux: `~/.config/Claude/claude_desktop_config.json`
+
+The app also stores its own preferences in this file. Add only the `mcpServers` key and leave the rest as it
+is. Then quit Claude Desktop completely (also from the system tray) and start it again; the servers load at
+startup.
 
 macOS / Linux:
 
