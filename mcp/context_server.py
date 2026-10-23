@@ -315,7 +315,8 @@ def rule_detail(rule: Dict[str, Any], path: str) -> str:
 # --------------------------------------------------------------------------------------
 ALWAYS_IGNORED = (".git/", "__pycache__/", ".pytest_cache/")
 IGNORE_FILES = (".agentignore", ".git/info/exclude")
-PLACEHOLDER = re.compile(r"\b(TODO|TBD|FIXME|XXX)\b|describe manually", re.IGNORECASE)
+# Markers count only in capitals: "NI-xxx" or "xxx-large" in a real description is not a placeholder.
+PLACEHOLDER = re.compile(r"\b(?:TODO|TBD|FIXME|XXX)\b|(?i:describe manually)")
 
 
 def _ignore_glob(pattern: str) -> str:

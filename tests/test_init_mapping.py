@@ -92,6 +92,20 @@ def test_the_typescript_map_test_reads_the_same_ignore_sources() -> None:
     assert 'else if (char === "[")' in source
 
 
+def test_placeholder_markers_count_only_in_capitals() -> None:
+    # "NI-xxx" in a real description failed the map test in every copy before v1.5.2.
+    for path in (ROOT / "tests" / "test_maps.py", ROOT / "templates" / "python" / "tests" / "test_maps.py"):
+        spec = importlib.util.spec_from_file_location(f"maps_copy_{path.parent.parent.name}", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        assert not module.PLACEHOLDER.search("Negative invariants (NI-xxx): rules for a todo list app.")
+        for text in ("TODO: say what it does.", "TBD", "see FIXME", "XXX", "Source file (Describe Manually)."):
+            assert module.PLACEHOLDER.search(text), (path, text)
+    ts = (ROOT / "templates" / "typescript" / "tests" / "test_maps.test.ts").read_text(encoding="utf-8")
+    assert r"const PLACEHOLDER_MARKER = /\b(TODO|TBD|FIXME|XXX)\b/;" in ts  # no /i flag on the markers
+    assert "const PLACEHOLDER_TEXT = /describe manually/i;" in ts
+
+
 def test_writing_the_map_works_with_the_python_39_path_api(tmp_path: Path, monkeypatch) -> None:
     # Python 3.9's Path.write_text() has no newline= parameter. v1.0.0 to v1.5.0 passed one, so creating
     # or merging a map crashed on 3.9. Emulate the 3.9 signature to catch that on any interpreter.

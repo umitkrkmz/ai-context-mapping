@@ -28,7 +28,8 @@ IGNORE_PATH = ROOT / ".agentignore"
 LOCAL_EXCLUDE_PATH = ROOT / ".git" / "info" / "exclude"
 ALWAYS_IGNORED = (".git/", "__pycache__/", ".pytest_cache/")
 FILE_INDEX_TITLE = "file index"
-PLACEHOLDER = re.compile(r"\b(TODO|TBD|FIXME|XXX)\b|describe manually", re.IGNORECASE)
+# Markers count only in capitals: "NI-xxx" or "xxx-large" in a real description is not a placeholder.
+PLACEHOLDER = re.compile(r"\b(?:TODO|TBD|FIXME|XXX)\b|(?i:describe manually)")
 CATEGORY_PATTERN = re.compile(r"^[a-z][a-z0-9-]*$")
 UNESCAPED_PIPE = re.compile(r"(?<!\\)\|")
 

@@ -24,7 +24,9 @@ const IGNORE_PATH = join(ROOT, ".agentignore");
 const LOCAL_EXCLUDE_PATH = join(ROOT, ".git", "info", "exclude");
 const ALWAYS_IGNORED = [".git/", "node_modules/", "__pycache__/", ".pytest_cache/"];
 const FILE_INDEX_TITLE = "file index";
-const PLACEHOLDER = /\b(TODO|TBD|FIXME|XXX)\b|describe manually/i;
+// Markers count only in capitals: "NI-xxx" or "xxx-large" in a real description is not a placeholder.
+const PLACEHOLDER_MARKER = /\b(TODO|TBD|FIXME|XXX)\b/;
+const PLACEHOLDER_TEXT = /describe manually/i;
 const CATEGORY_PATTERN = /^[a-z][a-z0-9-]*$/;
 
 type Row = { path: string; category: string; purpose: string; invariants: string };
@@ -229,7 +231,7 @@ describe("project map", () => {
       }
       if (!CATEGORY_PATTERN.test(category)) problems.push(`${path}: invalid category '${category}'`);
       if (purpose.length < 8) problems.push(`${path}: purpose is too short to be useful`);
-      if (PLACEHOLDER.test(purpose)) problems.push(`${path}: purpose still contains a placeholder`);
+      if (PLACEHOLDER_MARKER.test(purpose) || PLACEHOLDER_TEXT.test(purpose)) problems.push(`${path}: purpose still contains a placeholder`);
       if (invariants === "") problems.push(`${path}: write '-' in the invariants cell when none apply`);
     }
     expect(problems, problems.join("\n")).toEqual([]);

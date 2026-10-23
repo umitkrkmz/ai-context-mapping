@@ -115,6 +115,23 @@ def test_check_map_asks_only_for_descriptions_when_coverage_is_complete(tmp_path
     assert "--merge" not in text
 
 
+def test_lowercase_marker_words_are_not_placeholders(tmp_path: Path) -> None:
+    # Found in the Claude Desktop run: "Negative invariants (NI-xxx): ..." was reported as a placeholder.
+    root = tmp_path / "proj"
+    write(root, "a.py")
+    write(root, "b.py")
+    write(root, "c.py")
+    write(root, "maps/project-map.md", map_rows(
+        ("a.py", "Negative invariants (NI-xxx): rules for a todo list app.", "-"),
+        ("b.py", "TODO: say what this does.", "-"),
+        ("c.py", "Source file c.py (auto-generated entry; Describe Manually).", "-"),
+        ("maps/", "Maps.", "-"), ("maps/project-map.md", "Map.", "-"),
+    ))
+    text = server.ContextTools(root).check_map({})
+    flagged = text.split("Placeholder description (describe it):\n", 1)[1].split("\nDescribe each", 1)[0]
+    assert flagged.splitlines() == ["  - b.py", "  - c.py"]
+
+
 def test_rule_scopes_match_the_verifier_on_this_repository() -> None:
     text = (ROOT / "invariants" / "negative-invariants.md").read_text(encoding="utf-8")
     rules = server._rule_blocks(text)
