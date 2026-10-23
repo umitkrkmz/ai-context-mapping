@@ -1,7 +1,7 @@
 {
   "name": "ai-context-mapping",
   "displayName": "AI Context Mapping",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Project map, negative invariants, and checks an agent cannot talk its way around: an invariant check after every Python edit, a commit gate, an MCP server for the map, an opt-in map gate, and a skill that installs the framework in your project.",
   "author": {
     "name": "umitkrkmz",
