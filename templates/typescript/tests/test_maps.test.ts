@@ -9,6 +9,8 @@
  * expect are globals there), drop the message argument from each `expect(value, message)` call
  * (a vitest-only form), and run through ts-jest or Babel. Uses only Node built-ins.
  *
+ * Paths listed in .agentignore or in git's local .git/info/exclude need no row.
+ *
  * The project root is the current working directory; set PROJECT_ROOT to override it.
  */
 import { describe, expect, it } from "vitest";
@@ -18,6 +20,8 @@ import { join, resolve } from "node:path";
 const ROOT = resolve(process.env.PROJECT_ROOT ?? process.cwd());
 const MAP_PATH = join(ROOT, "maps", "project-map.md");
 const IGNORE_PATH = join(ROOT, ".agentignore");
+// git's untracked, per-clone ignore list: personal files (notes, roadmaps) that are never committed.
+const LOCAL_EXCLUDE_PATH = join(ROOT, ".git", "info", "exclude");
 const ALWAYS_IGNORED = [".git/", "node_modules/", "__pycache__/", ".pytest_cache/"];
 const FILE_INDEX_TITLE = "file index";
 const PLACEHOLDER = /\b(TODO|TBD|FIXME|XXX)\b|describe manually/i;
@@ -52,6 +56,16 @@ function globToRegex(pattern: string): string {
       out += "[^/]*";
     } else if (char === "?") {
       out += "[^/]";
+    } else if (char === "[") {
+      const end = pattern.indexOf("]", i + 1);
+      if (end === -1) {
+        out += escapeRegex(char);
+      } else {
+        let body = pattern.slice(i + 1, end);
+        if (body.startsWith("!")) body = "^" + body.slice(1);
+        out += "[" + body.replace(/\\/g, "\\\\") + "]";
+        i = end;
+      }
     } else {
       out += escapeRegex(char);
     }
@@ -95,8 +109,10 @@ function isIgnored(rules: IgnoreRule[], relPath: string, isDir: boolean): boolea
 
 function loadRules(): IgnoreRule[] {
   const patterns = [...ALWAYS_IGNORED];
-  if (existsSync(IGNORE_PATH)) {
-    patterns.push(...readFileSync(IGNORE_PATH, "utf-8").split(/\r?\n/));
+  for (const ignoreFile of [IGNORE_PATH, LOCAL_EXCLUDE_PATH]) {
+    if (existsSync(ignoreFile) && lstatSync(ignoreFile).isFile()) {
+      patterns.push(...readFileSync(ignoreFile, "utf-8").split(/\r?\n/));
+    }
   }
   return compileIgnoreRules(patterns);
 }

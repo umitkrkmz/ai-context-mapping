@@ -83,6 +83,15 @@ def test_an_undecodable_exclude_file_does_not_crash_the_scan(tmp_path: Path) -> 
     assert "ROADMAP.md" not in scanned(root)
 
 
+def test_the_typescript_map_test_reads_the_same_ignore_sources() -> None:
+    # The TypeScript template cannot run here without Node and vitest, so check that it keeps the two
+    # behaviors it lacked before v1.5.2: git's local exclude list, and [...] character classes in globs.
+    source = (ROOT / "templates" / "typescript" / "tests" / "test_maps.test.ts").read_text(encoding="utf-8")
+    assert 'join(ROOT, ".git", "info", "exclude")' in source
+    assert "for (const ignoreFile of [IGNORE_PATH, LOCAL_EXCLUDE_PATH])" in source
+    assert 'else if (char === "[")' in source
+
+
 def test_writing_the_map_works_with_the_python_39_path_api(tmp_path: Path, monkeypatch) -> None:
     # Python 3.9's Path.write_text() has no newline= parameter. v1.0.0 to v1.5.0 passed one, so creating
     # or merging a map crashed on 3.9. Emulate the 3.9 signature to catch that on any interpreter.

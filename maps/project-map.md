@@ -126,7 +126,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `templates/typescript/maps/` | template | Map directory for the TypeScript starter. | - |
 | `templates/typescript/maps/project-map.md` | template | Minimal project map for the TypeScript starter. | - |
 | `templates/typescript/tests/` | template | Tests directory for the TypeScript starter. | - |
-| `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest. | - |
+| `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest; honors .agentignore and .git/info/exclude like the Python test. | - |
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
 | `tests/test_adopt.py` | test | Tests adopt.py: an adopted project passes its own guardrails, nothing is overwritten, dry run writes nothing; template invariants stay in sync. | - |
