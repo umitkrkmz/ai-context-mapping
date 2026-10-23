@@ -57,12 +57,12 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `benchmarks/` | test | Benchmark material for docs/benchmark-results.md: two fixtures and `results/` (manifest.json and results.json; all agent-ignored), framework layers, scoring, analysis. | - |
 | `benchmarks/acceptance_check.py` | test | Hidden scoring check: exactly 50.00 must ship free. Not named test_*.py, so pytest skips it. | - |
 | `benchmarks/analyze_transcripts.py` | test | Derives tool calls, files read, tokens by type, weighted cost, and the model ID from Claude Code agent transcripts; exports benchmarks/results/results.json and renders or checks the tables in docs/benchmark-results.md. | - |
+| `benchmarks/conftest.py` | test | Tells pytest to skip the benchmark fixtures when run from the repository root. | - |
 | `benchmarks/harness/` | test | Benchmark harness (exempt from NI-002): builds trial projects and runs one headless Claude Code session per trial. | NI-002 |
 | `benchmarks/harness/bench.py` | test | Builds arm-specific trial copies, runs `claude -p` per trial, checks each trial's starting context, scores, and records trials in the manifest. | NI-002 |
-| `benchmarks/conftest.py` | test | Tells pytest to skip the benchmark fixtures when run from the repository root. | - |
-| `benchmarks/tier_semantics_check.py` | test | Hidden scoring check for experiment 6: tier tables and audit retention must behave as the original at every boundary. | - |
 | `benchmarks/shipdesk-large-overlay/**` | test | Framework layer for the large benchmark: AGENTS.md, CLAUDE.md, a 147-row map, and four invariants. | - |
 | `benchmarks/shipdesk-overlay/**` | test | Framework layer for benchmark Agent B: AGENTS.md, CLAUDE.md, a hand-written map, and two invariants. | - |
+| `benchmarks/tier_semantics_check.py` | test | Hidden scoring check for experiment 6: tier tables and audit retention must behave as the original at every boundary. | - |
 | `decisions/` | decision | Machine-readable architecture decision records. | ADR-0001 |
 | `decisions/0001-no-database-file-store.yaml` | decision | ADR-0001: state lives in plain files; forbids databases, ORMs, and services. | ADR-0001 |
 | `decisions/README.md` | decision | Schema, YAML subset, and usage rules for decision records. | - |
@@ -84,16 +84,21 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `personas/tester.md` | persona | Tester persona: regression test first, mutation-verified. | - |
 | `personas/ux_architect.md` | persona | UX architect persona: flows, error copy, accessibility, contract safety. | - |
 | `scripts/` | script | Standard-library-only guardrail tooling. | NI-001 |
+| `scripts/adopt.py` | script | Installs the framework into another project: copies tooling and templates, writes agent entry files, generates the map; never overwrites. | NI-001, NI-002, NI-005 |
 | `scripts/check_dependency_budget.py` | script | Audits requirements, package.json, and pyproject against an allow-list and ceiling; exits 1. | NI-001, NI-004, NI-005 |
 | `scripts/init_mapping.py` | script | Scans the tree (skipping .agentignore and .git/info/exclude paths); generates or merges the map; --check and --stats. | NI-001, NI-004, NI-005, NI-009 |
 | `scripts/install_hooks.sh` | script | Installs the git pre-commit hook that runs the guardrail checks. | - |
 | `scripts/mutation_guard.py` | script | Mutates a target function (incl. boundary shifts) and verifies its test fails; restores the file. | NI-001, NI-002, NI-004, NI-005, NI-006, NI-007 |
 | `scripts/verify_invariants.py` | script | AST checker for forbidden imports, isolated wrappers, forbidden calls, and required guards. | NI-001, NI-004, NI-005 |
 | `templates/` | template | Boilerplate to copy into other projects. | - |
+| `templates/ci/` | template | CI workflow template for adopted projects. | - |
+| `templates/ci/ai-guardrails.yml` | template | GitHub Actions workflow that adopt.py --ci writes: map, invariants, budget, map test, CLAUDE.md mirror. | - |
 | `templates/generic/` | template | Language-agnostic starter. | - |
 | `templates/generic/AGENTS.md` | template | Language-agnostic AGENTS.md: the five rules and the guardrail commands. | - |
 | `templates/generic/maps/` | template | Map directory for the generic starter. | - |
 | `templates/generic/maps/project-map.md` | template | Minimal project map for the generic starter. | - |
+| `templates/invariants/` | template | Invariants starter for adopted projects. | - |
+| `templates/invariants/negative-invariants.md` | template | Adopter copy of the invariants doc: tooling rules NI-001 to NI-009 (NI-002 scoped to the tooling), no NI-010; synced by tests/test_adopt.py. | - |
 | `templates/python/` | template | Python and pytest starter. | - |
 | `templates/python/AGENTS.md` | template | AGENTS.md tuned for Python projects using pytest. | - |
 | `templates/python/maps/` | template | Map directory for the Python starter. | - |
@@ -108,10 +113,11 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `templates/typescript/tests/test_maps.test.ts` | template | TypeScript port of the map coverage test for vitest or jest. | - |
 | `tests/` | test | Self-guarding test suite. | - |
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
+| `tests/test_adopt.py` | test | Tests adopt.py: an adopted project passes its own guardrails, nothing is overwritten, dry run writes nothing; template invariants stay in sync. | - |
+| `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
 | `tests/test_harness.py` | test | Tests the benchmark harness (trial builds, manipulation check, schedule, diff) and the tier semantics check, without launching agents. | - |
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
 | `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |
-| `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
 
 ## Route Table
@@ -121,7 +127,9 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | CLI | `python .claude/hooks/guardrail_hook.py` | `main()` | `.claude/hooks/guardrail_hook.py` |
 | CLI | `python .claude/hooks/map_gate.py` | `main()` | `.claude/hooks/map_gate.py` |
 | CLI | `python benchmarks/analyze_transcripts.py` | `main()` | `benchmarks/analyze_transcripts.py` |
+| CLI | `python benchmarks/harness/bench.py` | `main()` | `benchmarks/harness/bench.py` |
 | CLI | `python mcp/context_server.py` | `main()` | `mcp/context_server.py` |
+| CLI | `python scripts/adopt.py` | `main()` | `scripts/adopt.py` |
 | CLI | `python scripts/check_dependency_budget.py` | `main()` | `scripts/check_dependency_budget.py` |
 | CLI | `python scripts/init_mapping.py` | `main()` | `scripts/init_mapping.py` |
 | CLI | `python scripts/mutation_guard.py` | `main()` | `scripts/mutation_guard.py` |
