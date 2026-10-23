@@ -121,6 +121,11 @@ also checked by a script, so a distracted or non-compliant agent still hits a wa
 the wall exists at the moment of the mistake, not after it. Tools without hooks (Cursor, Copilot)
 still get only the request.
 
+The companion repository explains these layers from first principles in
+[Module 05 of how-ai-actually-works](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/05-agent-guardrails/README.md#3-the-defense-layers):
+why a rule the model reads is probabilistic and a check the code runs is deterministic, with a minimal
+AST gate whose test suite asserts its blind spots.
+
 ### Design properties shared by every layer
 
 - **Deterministic.** Static checks and tests give the same answer every run. No model is asked
@@ -161,7 +166,8 @@ None`) and demands that the test turn red. A test that cannot fail is not eviden
 
 Mutation testing is normally a heavyweight practice. Here it is applied narrowly: one test
 file, one function, at most a few dozen mutants. That keeps it cheap enough to be a routine
-step for every bug fix.
+step for every bug fix. For the mechanism built from scratch, see
+[Module 06 of how-ai-actually-works](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/06-evals-and-benchmarking/README.md#3-mutation-testing-proving-your-tests-can-actually-turn-red).
 
 ## 7. Consent for irreversible actions
 

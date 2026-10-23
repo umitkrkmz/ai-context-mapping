@@ -298,4 +298,10 @@ stale description fails a test instead of misleading the agent.
 - When a rules file grows, move the detail out: file descriptions go in the map, "never
   remove this guard" goes in `invariants/negative-invariants.md`, and rationale goes in
   `decisions/` or `docs/`. Leave a one-line pointer behind.
+
+The arithmetic in this section counts tokens loaded per session. It does not model prompt caching
+policies or the extra model call each targeted read costs. For those, see
+[Module 03 of how-ai-actually-works](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/03-context-engineering/README.md#three-caching-policies),
+the companion repository, which simulates a session under three caching policies and shows when many
+small reads cost more than one large prefix.
 - Keep in the rules file only what must be true in every session.

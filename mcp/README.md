@@ -136,6 +136,12 @@ Set `AI_CONTEXT_DEBUG=1` to log traffic to stderr (stdout carries protocol messa
 - A tool that runs but cannot answer (for example an unknown path) returns a normal result with
   `isError: true`. Malformed arguments return JSON-RPC error `-32602`.
 
+For the protocol itself (the lifecycle, version and capability negotiation, error codes, and why stdout
+must carry protocol messages only), see
+[Module 04 of how-ai-actually-works](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/04-tools-and-mcp/README.md),
+the companion repository. It builds a minimal server and a client tester that drives it through every
+protocol path.
+
 ## Troubleshooting
 
 | Symptom                              | Fix                                                                                   |

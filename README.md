@@ -313,6 +313,19 @@ docs/                         principles, token-diet calculator, MediaGrab case 
 | [MCP server](mcp/README.md)                                       | How to connect Claude Desktop or Cursor             |
 | [Site map](maps/site-map.md)                                      | Every command, tool, and workflow at a glance       |
 
+## Companion repository: how-ai-actually-works
+
+This repository and [**how-ai-actually-works**](https://github.com/umitkrkmz/how-ai-actually-works) are
+two halves of one project. This one is the applied tool plus the measured evidence. That one explains the
+mechanisms underneath, with small standard-library implementations that end in assertions.
+
+| Here (the tool or the evidence)                         | There (the mechanism)                                                                                                     |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Two-tier navigation, [experiment 5](docs/benchmark-results.md#13-experiment-5-the-framework-as-an-adopter-runs-it-v120) | [Module 03: Context Engineering](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/03-context-engineering/README.md): position effects, caching policies, the cost of tool reads |
+| [`mcp/context_server.py`](mcp/context_server.py)        | [Module 04: Tools & MCP](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/04-tools-and-mcp/README.md): the protocol lifecycle with a minimal server and its client tester |
+| [`scripts/verify_invariants.py`](scripts/verify_invariants.py), [negative invariants](invariants/negative-invariants.md), experiments 6 and 7 | [Module 05: Agent Guardrails](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/05-agent-guardrails/README.md): the agent loop, defense layers, an AST gate that asserts its own blind spots |
+| [`scripts/mutation_guard.py`](scripts/mutation_guard.py), [benchmark method](docs/benchmark-results.md) | [Module 06: Evals & Benchmarking](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/06-evals-and-benchmarking/README.md): mutation testing, retrieval metrics, evaluating agents like an experiment |
+
 ## Requirements and limits
 
 - Python 3.9 or newer for the scripts and the MCP server. `pytest` is needed only to run the tests.
