@@ -66,9 +66,11 @@ Transport: JSON-RPC 2.0 over stdio, served by `mcp/context_server.py`.
 | -------------------------------- | -------------------------------- | --------------------------------------------------------------- |
 | `initialize`                     | `handle_message`                 | Negotiates protocol version; declares the `tools` capability    |
 | `ping`                           | `handle_message`                 | Returns `{}`                                                    |
-| `tools/list`                     | `handle_message`                 | Lists the two tools below                                       |
+| `tools/list`                     | `handle_message`                 | Lists the four tools below                                      |
 | `tools/call` -> `read_project_map`  | `ContextTools.read_project_map`  | Full text of `maps/project-map.md`                              |
 | `tools/call` -> `get_file_purpose`  | `ContextTools.get_file_purpose`  | Category, purpose, and resolved invariants for one path         |
+| `tools/call` -> `get_invariants_for_file` | `ContextTools.get_invariants_for_file` | Rules whose scope covers a path, IDs its row lists, narratives, decisions |
+| `tools/call` -> `check_map`         | `ContextTools.check_map`         | Missing, stale, and placeholder rows; read-only                 |
 
 ## Automation routes
 

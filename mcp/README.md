@@ -14,6 +14,12 @@ calls one tool and receives a curated index.
 | --------------------------------- | ------------------------------------------------------------------------------- |
 | `read_project_map()`              | The full content of `maps/project-map.md`.                                      |
 | `get_file_purpose(file_path)`     | The category, purpose, and invariants (with their descriptions) for one path.   |
+| `get_invariants_for_file(file_path)` | Every invariant that covers a path: rules whose scope matches it (even when its map row lists none), the IDs its row lists, each one's "Never" and "Safe alternatives" notes, and the project-wide decisions. |
+| `check_map()`                     | Paths with no map row, rows whose path is gone, and rows whose description is still a placeholder. |
+
+All four tools only read. The server runs no checks and spawns no process: `verify_invariants.py`, the
+dependency budget, and the mutation guard stay with the hooks, the pre-commit hook, and CI, which enforce
+them. Outside Claude Code, an agent calls these tools only if it chooses to.
 
 Example answer for `get_file_purpose("scripts/mutation_guard.py")`:
 

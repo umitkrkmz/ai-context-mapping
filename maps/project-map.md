@@ -83,7 +83,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `maps/site-map.md` | map | Route table for CLI commands, MCP tools, CI jobs, hooks, and the reading order. | - |
 | `mcp/` | integration | Model Context Protocol server and its setup guide. | - |
 | `mcp/README.md` | integration | Setup for Claude Desktop, Cursor, and Claude Code with copy-paste config. | - |
-| `mcp/context_server.py` | integration | Stdio JSON-RPC MCP server exposing read_project_map and get_file_purpose. | NI-001, NI-002, NI-003, NI-005, NI-009 |
+| `mcp/context_server.py` | integration | Stdio JSON-RPC MCP server; read-only tools read_project_map, get_file_purpose, get_invariants_for_file, check_map. | NI-001, NI-002, NI-003, NI-005, NI-009 |
 | `personas/` | persona | Role-specific system prompts for AI workflows. | - |
 | `personas/refactorer.md` | persona | Refactorer persona: change structure, never behavior, respect invariants. | - |
 | `personas/tester.md` | persona | Tester persona: regression test first, mutation-verified. | - |
@@ -131,6 +131,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `tests/__init__.py` | test | Marks tests as a package so pytest module names cannot collide with templates. | - |
 | `tests/test_adopt.py` | test | Tests adopt.py: an adopted project passes its own guardrails, nothing is overwritten, dry run writes nothing; template invariants stay in sync. | - |
 | `tests/test_benchmarks.py` | test | Tests the reporting pipeline with synthetic transcripts and checks that results.json and the tables in docs/benchmark-results.md agree. | - |
+| `tests/test_context_server.py` | test | Tests the read-only MCP tools get_invariants_for_file and check_map, with parity against init_mapping and verify_invariants. | - |
 | `tests/test_harness.py` | test | Tests the benchmark harness (trial builds, manipulation check, schedule, diff) and the tier semantics check, without launching agents. | - |
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
 | `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |

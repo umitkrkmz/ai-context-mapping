@@ -6,10 +6,19 @@ No third-party packages are needed, so the file can be copied into any project o
 
 Tools exposed to Claude Desktop, Cursor, and other MCP clients:
 
-    read_project_map()            Return the full content of maps/project-map.md.
-    get_file_purpose(file_path)   Return the category, purpose, and invariants for one path.
+    read_project_map()                  Return the full content of maps/project-map.md.
+    get_file_purpose(file_path)         Return the category, purpose, and invariants for one path.
+    get_invariants_for_file(file_path)  Return every invariant that covers a path: rules whose scope
+                                        matches it, IDs its map row lists, and project-wide decisions.
+    check_map()                         Report paths missing from the map, stale rows, and rows whose
+                                        description is still a placeholder.
 
-The server reads the map on every call, so edits show up without a restart.
+Every tool only reads. Running the checks (verify_invariants.py, the dependency budget, the mutation
+guard) stays with the hooks, the pre-commit hook, and CI: the server spawns no process (invariant NI-002)
+and imports nothing from scripts/ (NI-003), so it repeats the little matching logic it needs. The tests
+keep that logic in step with the scripts.
+
+The server reads the project's files on every call, so edits show up without a restart.
 
 Usage:
     python mcp/context_server.py                          run as an MCP stdio server
@@ -33,7 +42,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 SERVER_NAME = "ai-context-mapping"
-SERVER_VERSION = "1.0.1"
+SERVER_VERSION = "1.1.0"
 SUPPORTED_PROTOCOLS = ("2025-06-18", "2025-03-26", "2024-11-05")
 MAP_RELATIVE_PATH = "maps/project-map.md"
 INVARIANTS_DOC = "invariants/negative-invariants.md"
@@ -74,6 +83,33 @@ TOOLS: List[Dict[str, Any]] = [
             "required": ["file_path"],
             "additionalProperties": False,
         },
+    },
+    {
+        "name": "get_invariants_for_file",
+        "description": (
+            "List every invariant that protects one path before you edit it: machine-checked rules whose "
+            "scope covers the path (even when its map row lists none), the IDs its map row lists, and the "
+            "project-wide decision records. Includes each invariant's 'Never' and 'Safe alternatives' notes."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Path relative to the project root, for example 'src/billing/tiers.py'.",
+                }
+            },
+            "required": ["file_path"],
+            "additionalProperties": False,
+        },
+    },
+    {
+        "name": "check_map",
+        "description": (
+            "Check whether maps/project-map.md is current: paths with no row, rows whose path no longer "
+            "exists, and rows whose description is still a placeholder. Read-only; it does not fix anything."
+        ),
+        "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
     },
 ]
 
@@ -143,32 +179,249 @@ def parse_file_index(text: str) -> Dict[str, Row]:
 _FENCE_LINE = re.compile(r"^ {0,3}(`{3,}|~{3,})\s*([^\s`]*)\s*$")
 
 
-def _rule_descriptions(text: str) -> Dict[str, str]:
-    """Extract ``id -> description`` from top-level ``invariant-rule`` fenced blocks."""
-    found: Dict[str, str] = {}
+_SECTION_HEADING = re.compile(r"^###\s+([A-Z]{2,5}-\d{1,4})\s*[:\-]\s*(.+?)\s*$")
+
+
+def _split_fences(text: str) -> Tuple[List[Tuple[str, List[str]]], List[Tuple[int, str]]]:
+    """Return ``(fenced blocks as (info, lines), lines outside any fence as (line_no, text))``."""
+    blocks: List[Tuple[str, List[str]]] = []
+    outside: List[Tuple[int, str]] = []
     fence: Optional[Tuple[str, int, str]] = None
     body: List[str] = []
-    for line in text.splitlines():
+    for number, line in enumerate(text.splitlines()):
         match = _FENCE_LINE.match(line)
         if fence is None:
             if match:
                 fence = (match.group(1)[0], len(match.group(1)), match.group(2))
                 body = []
+            else:
+                outside.append((number, line))
             continue
         char, length, info = fence
         if match and match.group(1)[0] == char and len(match.group(1)) >= length and not match.group(2):
-            if info == "invariant-rule":
-                try:
-                    decoded = json.loads("\n".join(body))
-                except ValueError:
-                    decoded = None
-                for item in decoded if isinstance(decoded, list) else [decoded]:
-                    if isinstance(item, dict) and isinstance(item.get("id"), str):
-                        found[item["id"]] = str(item.get("description", "")).strip()
+            blocks.append((info, body))
             fence = None
         else:
             body.append(line)
+    return blocks, outside
+
+
+def _rule_blocks(text: str) -> List[Dict[str, Any]]:
+    """Decode the top-level ``invariant-rule`` fenced blocks; malformed ones are skipped."""
+    rules: List[Dict[str, Any]] = []
+    for info, body in _split_fences(text)[0]:
+        if info != "invariant-rule":
+            continue
+        try:
+            decoded = json.loads("\n".join(body))
+        except ValueError:
+            continue
+        for item in decoded if isinstance(decoded, list) else [decoded]:
+            if isinstance(item, dict) and isinstance(item.get("id"), str):
+                rules.append(item)
+    return rules
+
+
+def _rule_descriptions(text: str) -> Dict[str, str]:
+    """Extract ``id -> description`` from top-level ``invariant-rule`` fenced blocks."""
+    return {rule["id"]: str(rule.get("description", "")).strip() for rule in _rule_blocks(text)}
+
+
+def _narratives(text: str) -> Dict[str, Tuple[str, List[str]]]:
+    """Map each ``### ID: title`` section to its title and prose lines (fenced blocks left out)."""
+    found: Dict[str, Tuple[str, List[str]]] = {}
+    current: Optional[str] = None
+    for _number, line in _split_fences(text)[1]:
+        heading = _SECTION_HEADING.match(line)
+        if heading:
+            current = heading.group(1)
+            found[current] = (heading.group(2), [])
+        elif line.startswith("#"):
+            current = None
+        elif current is not None and line.strip():
+            found[current][1].append(line.rstrip())
     return found
+
+
+_GLOB_CACHE: Dict[str, "re.Pattern[str]"] = {}
+
+
+def _glob_regex(pattern: str) -> "re.Pattern[str]":
+    """Same glob semantics as scripts/verify_invariants.py: ``**`` any depth, ``*`` and ``?`` in one segment."""
+    cached = _GLOB_CACHE.get(pattern)
+    if cached is not None:
+        return cached
+    out: List[str] = []
+    i = 0
+    while i < len(pattern):
+        char = pattern[i]
+        if char == "*":
+            if pattern[i:i + 2] == "**":
+                i += 2
+                if pattern[i:i + 1] == "/":
+                    i += 1
+                    out.append("(?:.*/)?")
+                else:
+                    out.append(".*")
+                continue
+            out.append("[^/]*")
+        elif char == "?":
+            out.append("[^/]")
+        else:
+            out.append(re.escape(char))
+        i += 1
+    compiled = re.compile("^" + "".join(out) + "$")
+    _GLOB_CACHE[pattern] = compiled
+    return compiled
+
+
+def _matches_any(path: str, patterns: Any) -> bool:
+    if isinstance(patterns, str):
+        patterns = [patterns]
+    return isinstance(patterns, list) and any(isinstance(p, str) and _glob_regex(p).match(path) for p in patterns)
+
+
+def rule_covers(rule: Dict[str, Any], path: str) -> bool:
+    """True when ``verify_invariants.py`` would check ``path`` against ``rule``."""
+    if rule.get("type") == "required-text":
+        return rule.get("file") == path
+    return _matches_any(path, rule.get("scope", ["**/*.py"])) and not _matches_any(path, rule.get("exclude", []))
+
+
+def rule_detail(rule: Dict[str, Any], path: str) -> str:
+    """One line on what the rule demands of this particular path."""
+    kind = rule.get("type")
+    if kind == "required-text":
+        return "this file must keep: " + ", ".join(repr(t) for t in rule.get("contains", []))
+    if kind == "isolated-import":
+        modules = ", ".join(rule.get("modules", []))
+        if _matches_any(path, rule.get("allowed_in", [])):
+            return f"this file is the one place allowed to import {modules}"
+        return f"do not import {modules} here; use {rule.get('use') or ', '.join(rule.get('allowed_in', []))}"
+    if kind in ("forbidden-import", "forbidden-call") and _matches_any(path, rule.get("allow_in", [])):
+        return "this file is exempt (allow_in)"
+    if kind == "forbidden-import":
+        return "must not import: " + ", ".join(rule.get("forbidden", []))
+    if kind == "forbidden-call":
+        return "must not call: " + ", ".join(rule.get("calls", []))
+    if kind == "stdlib-only":
+        allowed = rule.get("allow", [])
+        return "standard library only" + (f" (also allowed: {', '.join(allowed)})" if allowed else "")
+    return f"rule type {kind}"
+
+
+# --------------------------------------------------------------------------------------
+# Map freshness (same semantics as scripts/init_mapping.py --check; NI-003 keeps them separate)
+# --------------------------------------------------------------------------------------
+ALWAYS_IGNORED = (".git/", "__pycache__/", ".pytest_cache/")
+IGNORE_FILES = (".agentignore", ".git/info/exclude")
+PLACEHOLDER = re.compile(r"\b(TODO|TBD|FIXME|XXX)\b|describe manually", re.IGNORECASE)
+
+
+def _ignore_glob(pattern: str) -> str:
+    """Translate one gitignore-style glob (with ``[...]`` classes) into a regex fragment."""
+    out: List[str] = []
+    i = 0
+    while i < len(pattern):
+        char = pattern[i]
+        if char == "*":
+            if pattern[i:i + 2] == "**":
+                i += 2
+                if pattern[i:i + 1] == "/":
+                    i += 1
+                    out.append("(?:.*/)?")
+                else:
+                    out.append(".*")
+                continue
+            out.append("[^/]*")
+        elif char == "?":
+            out.append("[^/]")
+        elif char == "[":
+            end = pattern.find("]", i + 1)
+            if end == -1:
+                out.append(re.escape(char))
+            else:
+                body = pattern[i + 1:end]
+                if body.startswith("!"):
+                    body = "^" + body[1:]
+                out.append("[" + body.replace("\\", "\\\\") + "]")
+                i = end
+        else:
+            out.append(re.escape(char))
+        i += 1
+    return "".join(out)
+
+
+class IgnoreRules:
+    """``.agentignore`` and ``.git/info/exclude`` rules, evaluated like scripts/init_mapping.py."""
+
+    def __init__(self, root: Path) -> None:
+        patterns = list(ALWAYS_IGNORED)
+        for name in IGNORE_FILES:
+            candidate = root / name
+            if candidate.is_file():
+                patterns.extend(candidate.read_text(encoding="utf-8", errors="replace").splitlines())
+        self._rules: List[Tuple["re.Pattern[str]", bool, bool]] = []
+        for raw in patterns:
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            negate = line.startswith("!")
+            if negate:
+                line = line[1:]
+            dir_only = line.endswith("/")
+            line = line.rstrip("/")
+            if not line:
+                continue
+            anchored = line.startswith("/") or "/" in line
+            body = _ignore_glob(line.lstrip("/"))
+            self._rules.append((re.compile(f"^{body}$" if anchored else f"^(?:.*/)?{body}$"), negate, dir_only))
+
+    def _verdict(self, rel_path: str, is_dir: bool) -> Optional[bool]:
+        verdict: Optional[bool] = None
+        for regex, negate, dir_only in self._rules:
+            if (is_dir or not dir_only) and regex.match(rel_path):
+                verdict = not negate
+        return verdict
+
+    def ignored(self, rel_path: str, is_dir: bool) -> bool:
+        """True if the path, or any parent directory, is ignored."""
+        parts = rel_path.strip("/").split("/")
+        for depth in range(1, len(parts) + 1):
+            if self._verdict("/".join(parts[:depth]), is_dir if depth == len(parts) else True):
+                return True
+        return False
+
+
+def scan_paths(root: Path) -> List[str]:
+    """Every non-ignored file and directory (directories end with ``/``), as the map must list them."""
+    rules = IgnoreRules(root)
+    found: List[str] = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        rel_dir = Path(dirpath).relative_to(root).as_posix()
+        prefix = "" if rel_dir == "." else rel_dir + "/"
+        kept: List[str] = []
+        for name in sorted(dirnames):
+            rel = prefix + name
+            if rules.ignored(rel, True):
+                continue
+            if os.path.islink(os.path.join(dirpath, name)):
+                found.append(rel)
+                continue
+            kept.append(name)
+            found.append(rel + "/")
+        dirnames[:] = kept
+        found.extend(prefix + name for name in sorted(filenames) if not rules.ignored(prefix + name, False))
+    return found
+
+
+def map_diff(paths: Sequence[str], rows: Dict[str, Row]) -> Tuple[List[str], List[str]]:
+    """Return ``(missing, stale)`` like ``init_mapping.py --check``; ``dir/**`` rows cover their subtree."""
+    groups = [key[:-2] for key in rows if key.endswith("/**")]
+    missing = [p for p in paths if p not in rows and not any(p.startswith(g) for g in groups)]
+    actual = set(paths)
+    stale = sorted(key for key in rows if (key[:-2] if key.endswith("/**") else key) not in actual)
+    return missing, stale
 
 
 def load_invariant_index(root: Path) -> Dict[str, str]:
@@ -291,8 +544,78 @@ class ContextTools:
                 lines.append(f"Directory: {parent}/ ({parent_row.category}) - {parent_row.purpose}")
         return "\n".join(lines)
 
+    def get_invariants_for_file(self, arguments: Dict[str, Any]) -> str:
+        raw = arguments.get("file_path")
+        if not isinstance(raw, str):
+            raise InvalidParams("'file_path' is required and must be a string")
+        path = self.normalize(raw)
+        doc = self.root / INVARIANTS_DOC
+        text = doc.read_text(encoding="utf-8", errors="replace") if doc.is_file() else ""
+        rules = {rule["id"]: rule for rule in _rule_blocks(text)}
+        narratives = _narratives(text)
+        try:
+            listed_row, _how = self._lookup(parse_file_index(self._read_map()), path)
+        except ToolError:
+            listed_row = None  # the rules still apply without a map
+        listed = _ID_PATTERN.findall(listed_row.invariants) if listed_row else []
+        covering = [rule_id for rule_id, rule in rules.items() if rule_covers(rule, path)]
+        index = load_invariant_index(self.root)
+
+        lines = [f"Invariants for {path}"]
+        for ident in dict.fromkeys(listed + covering):
+            sources = []
+            if ident in covering:
+                sources.append("its scope covers this path")
+            if ident in listed:
+                sources.append(f"listed in {MAP_RELATIVE_PATH}")
+            title = narratives[ident][0] if ident in narratives else index.get(ident, "no definition found")
+            lines.append(f"- {ident}: {title} ({'; '.join(sources)})")
+            if ident in rules:
+                rule = rules[ident]
+                lines.append(f"    Rule ({rule.get('type')}): {rule.get('description', '')}".rstrip())
+                lines.append(f"    Here: {rule_detail(rule, path)}")
+            for note in narratives.get(ident, ("", []))[1]:
+                lines.append(f"    {note.strip()}")
+        if len(lines) == 1:
+            lines.append(f"No invariant covers this path: no rule in {INVARIANTS_DOC} matches it, "
+                         "and its map row lists none.")
+        decisions = {k: v for k, v in index.items() if k not in rules and k not in narratives}
+        if decisions:
+            lines.append("Project-wide decisions (they apply to every file):")
+            lines.extend(f"- {ident}: {summary}" for ident, summary in decisions.items())
+        lines.append("Check the code with: python scripts/verify_invariants.py " + path)
+        return "\n".join(lines)
+
+    def check_map(self, _arguments: Dict[str, Any]) -> str:
+        rows = parse_file_index(self._read_map())
+        if not rows:
+            raise ToolError("The project map has no rows under '## File Index'.")
+        paths = scan_paths(self.root)
+        if MAP_RELATIVE_PATH not in paths:  # the map documents itself even before its first commit
+            paths.append(MAP_RELATIVE_PATH)
+        missing, stale = map_diff(paths, rows)
+        placeholders = [key for key, row in rows.items() if PLACEHOLDER.search(row.purpose)]
+        if not (missing or stale or placeholders):
+            return f"The map is current: {len(rows)} rows cover all {len(paths)} paths, and every row is described."
+        lines = [f"The map needs work ({len(rows)} rows, {len(paths)} paths):"]
+        for title, items in (("No row (add it)", missing), ("Stale row (the path is gone)", stale),
+                             ("Placeholder description (describe it)", placeholders)):
+            if items:
+                lines.append(f"{title}:")
+                lines.extend(f"  - {item}" for item in items)
+        if missing or stale:
+            lines.append("Fix: python scripts/init_mapping.py --merge, then write one accurate sentence per new row.")
+        if placeholders:
+            lines.append("Describe each placeholder row in one accurate sentence; read the file first.")
+        return "\n".join(lines)
+
     def call(self, name: str, arguments: Dict[str, Any]) -> str:
-        handlers = {"read_project_map": self.read_project_map, "get_file_purpose": self.get_file_purpose}
+        handlers = {
+            "read_project_map": self.read_project_map,
+            "get_file_purpose": self.get_file_purpose,
+            "get_invariants_for_file": self.get_invariants_for_file,
+            "check_map": self.check_map,
+        }
         handler = handlers.get(name)
         if handler is None:
             raise InvalidParams(f"unknown tool: {name}")
@@ -332,7 +655,10 @@ def handle_message(message: Any, tools: ContextTools) -> Optional[Dict[str, Any]
                 "protocolVersion": version,
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
-                "instructions": "Call read_project_map before exploratory searches; call get_file_purpose before editing a file.",
+                "instructions": (
+                    "Call read_project_map before exploratory searches; call get_file_purpose and "
+                    "get_invariants_for_file before editing a file; call check_map after adding or moving files."
+                ),
             },
         )
     if method.startswith("notifications/"):
@@ -401,7 +727,7 @@ def serve(tools: ContextTools) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="context_server.py",
-        description="MCP stdio server exposing read_project_map and get_file_purpose.",
+        description="MCP stdio server exposing read_project_map, get_file_purpose, get_invariants_for_file, and check_map.",
         epilog=(
             "Register it in your MCP client (see mcp/README.md). Diagnostics go to stderr when\n"
             "AI_CONTEXT_DEBUG=1 is set; stdout carries protocol messages only."
