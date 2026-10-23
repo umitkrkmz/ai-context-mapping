@@ -116,10 +116,12 @@ framework stacks independent layers so that a mistake must slip through several 
 Layer 0 is advisory by nature, and that is deliberate: everything an instruction says that matters is
 also checked by a script, so a distracted or non-compliant agent still hits a wall. The benchmark
 ([results](benchmark-results.md)) showed why this matters: Rule 1 (read the map first) was followed
-0 of 3 times when it was only a request. In Claude Code it is now enforced by a `PreToolUse` gate
+0 of 3 times when it was only a request. In Claude Code it can be enforced by a `PreToolUse` gate
 (`.claude/hooks/map_gate.py`) that blocks searches until the map has been read, so for that one rule
-the wall exists at the moment of the mistake, not after it. Tools without hooks (Cursor, Copilot)
-still get only the request.
+the wall exists at the moment of the mistake, not after it. Once Claude Code preloaded the rules, agents
+read the map first without being forced, and the gate blocked nothing (experiment 5). So the gate is
+opt-in: on in this repository, off by default in the plugin and in projects set up with `adopt.py`.
+Tools without hooks (Cursor, Copilot) still get only the request.
 
 The companion repository explains these layers from first principles in
 [Module 05 of how-ai-actually-works](https://github.com/umitkrkmz/how-ai-actually-works/blob/main/05-agent-guardrails/README.md#3-the-defense-layers):

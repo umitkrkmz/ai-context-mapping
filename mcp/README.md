@@ -96,6 +96,12 @@ Create `.cursor/mcp.json` in the project (or `~/.cursor/mcp.json` for all projec
 
 ### Claude Code
 
+The [plugin](../README.md#quickstart-3-minutes) starts this server for whichever project you open, with
+`--root` set to that project. Set its `python_command` option to `python` or `py` on Windows, where
+`python3` usually opens the Microsoft Store and the server does not start.
+
+Without the plugin, register the project's own copy:
+
 ```bash
 claude mcp add project-context -- python3 /absolute/path/to/your-project/mcp/context_server.py
 ```

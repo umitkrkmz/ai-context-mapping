@@ -83,15 +83,18 @@ Defined in [`AGENTS.md`](AGENTS.md) and mirrored to every agent format:
 
 | #   | Rule                                | What it requires                                                                 | Pillar         | Backed by                                        |
 | --- | ----------------------------------- | -------------------------------------------------------------------------------- | -------------- | ------------------------------------------------ |
-| 1   | **Map before search**               | Read `maps/project-map.md` before any exploratory `grep` or `find`               | Map            | **Enforced in Claude Code** by `.claude/hooks/map_gate.py`; `tests/test_maps.py`, MCP server |
+| 1   | **Map before search**               | Read `maps/project-map.md` before any exploratory `grep` or `find`               | Map            | Enforceable in Claude Code by the opt-in map gate (`.claude/hooks/map_gate.py`); `tests/test_maps.py`, MCP server |
 | 2   | **No fix without a regression test** | The test must survive mutation verification                                     | Verify         | `scripts/mutation_guard.py`                      |
 | 3   | **Consent before destruction**      | Ask before `git push --force`, deleting data, or wiping files                    | Constrain      | Review, pre-commit hook                          |
 | 4   | **Zero unauthorized dependencies**  | Standard library first                                                           | Constrain      | `scripts/check_dependency_budget.py`             |
 | 5   | **Do not invent project knowledge** | If an invariant, decision, or map entry does not define a constraint or contract, stop and ask | Map + Constrain | Map, invariants, and ADRs as the only sources of truth |
 
-Rule 1 used to be advisory. Our benchmark showed agents ignored it (0 of 3 read the map first), so in
-Claude Code it is now a `PreToolUse` gate that blocks searches until the map is read. Cursor and
-GitHub Copilot have no equivalent hook, so there Rule 1 remains a request.
+Rule 1 was first advisory, and agents that had to discover it ignored it (0 of 3 read the map first), so
+Claude Code got a `PreToolUse` gate that blocks searches until the map is read. Later, with the rules
+preloaded as Claude Code now does, agents read the map first on their own and the gate blocked nothing
+(experiment 5). The gate is therefore **opt-in**: this repository keeps it on for its contributors, and
+the plugin and `adopt.py` leave it off unless you enable it. Cursor and GitHub Copilot have no equivalent
+hook, so there Rule 1 remains a request.
 
 Rule 5 is the only rule that no script can fully enforce, so it is worded as a duty to ask:
 an agent that cannot cite a map row, an invariant ID, a decision ID, or code it read for a
@@ -99,50 +102,58 @@ constraint does not know that constraint yet.
 
 ## Quickstart (3 minutes)
 
-Clone or download this repository next to your project, then run these from **your project's root**.
+### Claude Code: install the plugin
 
-**1. Copy the framework in** (30 seconds)
+In Claude Code (v2.1.275 or later), run:
 
-```bash
-FRAMEWORK=../ai-context-mapping                  # path to this repository
-cp -r "$FRAMEWORK/scripts" "$FRAMEWORK/mcp" "$FRAMEWORK/invariants" "$FRAMEWORK/decisions" "$FRAMEWORK/personas" .
-mkdir -p maps tests .github/workflows .cursor/rules
-cp "$FRAMEWORK/.agentignore" .agentignore
-cp "$FRAMEWORK/templates/python/AGENTS.md" AGENTS.md     # or templates/typescript, templates/generic
-cp AGENTS.md CLAUDE.md
-cp "$FRAMEWORK/templates/python/tests/test_maps.py" tests/  # TypeScript: templates/typescript/tests/
-cp "$FRAMEWORK/.github/copilot-instructions.md" .github/
-cp "$FRAMEWORK/.github/workflows/ai-guardrails.yml" .github/workflows/
-cp "$FRAMEWORK/.cursor/rules/context-guardrails.mdc" .cursor/rules/
+```text
+/plugin install ai-context-mapping --marketplace umitkrkmz/ai-context-mapping
 ```
 
-Review `decisions/0001-no-database-file-store.yaml` and `invariants/negative-invariants.md`: keep
-what applies, delete what does not (for example, remove ADR-0001 if your project uses a
-database).
+On older versions, add the marketplace first:
 
-**2. Generate and describe your map** (1 minute)
-
-```bash
-python scripts/init_mapping.py          # scans the tree, honors .agentignore
+```text
+/plugin marketplace add umitkrkmz/ai-context-mapping
+/plugin install ai-context-mapping@ai-context-mapping
 ```
 
-Open `maps/project-map.md` and replace every auto-generated purpose with one accurate line.
-The test refuses placeholders, so nothing stays vague.
+Then, in your project, run `/ai-context-mapping:adopt`. It shows a plan, waits for your yes, copies the
+framework in (never overwriting a file), generates the map, and helps you describe it.
 
-**3. Turn the guardrails on** (1 minute)
+The plugin has two options; change them in `/config`:
+
+| Option | Default | Set it to |
+| ------ | ------- | --------- |
+| `python_command` | `python3` | `python` or `py` on Windows, where `python3` usually opens the Microsoft Store. The MCP server does not start with a wrong value |
+| `map_gate` | off | on, to block searches until the map is read (Rule 1). Map reads made while it was off do not count |
+
+### Any agent: run the installer
+
+Clone or download this repository next to your project, then run from **your project's root**:
 
 ```bash
-python -m pytest -q tests               # the map test must pass
+python ../ai-context-mapping/scripts/adopt.py --dry-run              # show the plan, write nothing
+python ../ai-context-mapping/scripts/adopt.py --agent claude --agent cursor --ci
+```
+
+`adopt.py` copies the scripts, the MCP server, the invariants starter, the personas, `.agentignore`, and
+your stack's `AGENTS.md` and map test (`--stack python`, `typescript`, or `generic`). Each `--agent` adds
+its entry file (`claude`, `cursor`, `copilot`; `codex` reads `AGENTS.md` as is), and `--ci` adds a GitHub
+Actions workflow. It then generates `maps/project-map.md`. It never overwrites a file and runs nothing
+else.
+
+Then:
+
+```bash
+python -m pytest -q tests               # the map test must pass; describe the rows it flags
 python scripts/verify_invariants.py     # exits 0 when all rules hold
 sh scripts/install_hooks.sh             # run the checks on every commit
 ```
 
-**4. Connect your agent (optional, recommended)**
-
-Add the MCP server to Claude Desktop or Cursor. Ready-to-paste config is in
-[`mcp/README.md`](mcp/README.md).
-
-From now on, adding a file without describing it in the map fails the build.
+Open `maps/project-map.md` and replace every auto-generated purpose with one accurate line; the test
+refuses placeholders, so nothing stays vague. Connect Cursor or Claude Desktop to the MCP server with the
+config in [`mcp/README.md`](mcp/README.md). From now on, adding a file without describing it in the map
+fails the build.
 
 ## Feature matrix
 
@@ -159,11 +170,13 @@ From now on, adding a file without describing it in the map fails the build.
 | Dependency budget                   | Supply-chain creep                | `scripts/check_dependency_budget.py`           | Hook, CI        |
 | Mutation guard                      | Green tests that prove nothing    | `scripts/mutation_guard.py`                    | CLI             |
 | Pre-commit hook                     | Broken commits                    | `scripts/install_hooks.sh`                     | git             |
-| Claude Code slash commands          | Skipped checks                    | `.claude/commands/*.md`                        | Claude Code     |
-| Claude Code hooks                   | Violations left in place          | `.claude/settings.json`, `.claude/hooks/`      | Claude Code     |
-| Map gate (Rule 1 enforced)          | Blind searching before the map    | `.claude/hooks/map_gate.py`                    | Claude Code     |
+| Claude Code plugin                  | Manual setup in every project     | `.claude-plugin/`, `hooks/hooks.json`, `skills/` | Claude Code   |
+| Claude Code slash commands          | Skipped checks                    | `skills/` (plugin), `.claude/commands/` (this repo) | Claude Code |
+| Claude Code hooks                   | Violations left in place          | `hooks/hooks.json` (plugin), `.claude/settings.json` (this repo), `.claude/hooks/` | Claude Code |
+| Map gate (Rule 1 enforced, opt-in)  | Blind searching before the map    | `.claude/hooks/map_gate.py`                    | Claude Code     |
+| Installer                           | Slow or incomplete adoption       | `scripts/adopt.py`                             | CLI, plugin     |
 | Persona cards                       | Unfocused agents                  | `personas/*.md`                                | Agent session   |
-| Stack templates                     | Slow adoption                     | `templates/python`, `typescript`, `generic`    | Copy and go     |
+| Stack templates                     | Slow adoption                     | `templates/python`, `typescript`, `generic`, `ci`, `invariants` | `adopt.py` |
 
 ## Does it work? Honest results
 
@@ -222,25 +235,48 @@ data, method, the v1.1.1 correction, and limits: [docs/benchmark-results.md](doc
 | `check_dependency_budget.py`        | Fails on unapproved packages or too many of them                           | `python scripts/check_dependency_budget.py --print-example-config` |
 | `mutation_guard.py`                 | Breaks a function on purpose; the test must go red                         | `python scripts/mutation_guard.py --help`                     |
 | `context_server.py`                 | Serves the map over MCP                                                    | `python mcp/context_server.py --check`                        |
+| `adopt.py`                          | Installs the framework into another project; never overwrites a file       | `python scripts/adopt.py --target ../app --dry-run`           |
 
 Every tool has `--help`, honors `NO_COLOR`, uses documented exit codes (`0` ok, `1` violation,
 `2` usage or configuration error), and never needs a network connection.
 
 ## Claude Code integration
 
-The repository ships a project-level `.claude/` directory, so Claude Code runs the guardrails
-without being asked.
+Claude Code gets the guardrails in two ways: the **plugin**, for any project, and the project-level
+`.claude/` directory of **this repository**, which keeps the map gate on for its own contributors.
+
+### The plugin
+
+| Skill                                  | What it does                                                                 |
+| -------------------------------------- | ---------------------------------------------------------------------------- |
+| `/ai-context-mapping:adopt`            | Runs `adopt.py` after showing the plan; then describes the map and reviews invariants with you. Only you can start it |
+| `/ai-context-mapping:verify-map`       | Runs `init_mapping.py --check` and the map test; repairs a stale map         |
+| `/ai-context-mapping:verify-invariants`| Runs `verify_invariants.py`; fixes violations without deleting rules         |
+| `/ai-context-mapping:mutation-test`    | Runs `mutation_guard.py`; explains the parameters and how to read the result |
+| `/ai-context-mapping:diet-check`       | Runs `init_mapping.py --stats`; labels the guided-reading figure as a model, not a measured saving |
+
+Each skill uses the project's own copy of a script when it has one, and the plugin's copy otherwise. The
+plugin also starts the MCP server for the project you open, and adds the three hooks below. Each hook does
+nothing in a project without the framework: no rules means nothing to check, and no map means no gate and
+no commit check. The commit gate checks map freshness with `init_mapping.py --check`, so it needs no
+pytest.
+
+### This repository
 
 | Slash command        | What it does                                                                 |
 | -------------------- | ---------------------------------------------------------------------------- |
 | `/verify-map`        | Runs `init_mapping.py --check` and `pytest tests/test_maps.py`; repairs a stale map |
 | `/verify-invariants` | Runs `verify_invariants.py`; fixes violations without deleting rules         |
 | `/mutation-test`     | Runs `mutation_guard.py`; explains the parameters and how to read the result |
-| `/diet-check`        | Runs `init_mapping.py --stats`: repository size, map size, estimated token savings |
+| `/diet-check`        | Runs `init_mapping.py --stats`: repository size, map size, and the token model |
 
-Three hooks in `.claude/settings.json` run automatically:
+### The hooks
 
-- **Before any search** (`PreToolUse`), the **map gate** enforces Rule 1. `Grep`, `Glob`, and
+The same three hooks run from the plugin (`hooks/hooks.json`) and from this repository's
+`.claude/settings.json`:
+
+- **Before any search** (`PreToolUse`), the **map gate** enforces Rule 1. In the plugin it runs only when
+  the `map_gate` option is on. `Grep`, `Glob`, and
   exploratory shell commands (`grep -r`, `rg`, `ag`, `find`, `ls -R`, `git grep`, and PowerShell
   equivalents) are blocked with exit code 2 until the agent has read `maps/project-map.md`, run
   `python mcp/context_server.py --call read_project_map`, or called the MCP `read_project_map` or
@@ -250,14 +286,18 @@ Three hooks in `.claude/settings.json` run automatically:
   the call) and can be bypassed for manual or CI runs with `AI_GUARDRAILS_PERMISSIVE=1`.
 - **After every edit to a `.py` file** (`PostToolUse`), the invariant checker runs on that file.
   A violation is fed back to Claude (exit code 2) so it repairs the code immediately.
-- **Before every `git commit`** (`PreToolUse` on `Bash`), the dependency budget and
-  `tests/test_maps.py` must pass, or the commit is blocked. Claude Code has no `PreCommit`
-  event, so the hook inspects Bash commands and acts only on `git commit`.
+- **Before every `git commit`** (`PreToolUse` on `Bash`), the dependency budget and the map check must
+  pass, or the commit is blocked: `tests/test_maps.py` in this repository, `init_mapping.py --check` in
+  the plugin. Claude Code has no `PreCommit` event, so the hook inspects Bash commands and acts only on
+  `git commit`.
 
-Project hooks execute shell commands on your machine, so review `.claude/settings.json` and
-`.claude/hooks/guardrail_hook.py`, and `.claude/hooks/map_gate.py` before trusting a copy of them. Both use only the Python
-standard library. Personal overrides belong in `.claude/settings.local.json`, which
+Hooks execute shell commands on your machine, so review `hooks/hooks.json`, `.claude/settings.json`,
+`.claude/hooks/guardrail_hook.py`, and `.claude/hooks/map_gate.py` before trusting a copy of them. They use
+only the Python standard library. Personal overrides belong in `.claude/settings.local.json`, which
 `.agentignore` excludes.
+
+Outside Claude Code the guardrails are weaker. Cursor, Codex, and Copilot read the rules and can call the
+MCP server, but nothing forces them to: there, the real enforcement is the pre-commit hook and CI.
 
 ### Example: proving a test is real
 
@@ -284,18 +324,20 @@ function does nothing."*
 AGENTS.md  CLAUDE.md          agent manifesto (CLAUDE.md is an identical copy)
 .agentignore                  paths agents must not read
 .gitattributes                line-ending rules (LF for scripts and the manifesto pair)
-.claude/                      Claude Code slash commands, hooks, and settings
+.claude/                      this repository's Claude Code slash commands, hooks, and settings
+.claude-plugin/               plugin and marketplace manifests (the repository root is the plugin)
+hooks/  skills/               the plugin's hooks and skills
 .github/                      Copilot instructions and the CI workflow
 .cursor/rules/                Cursor rules
 maps/                         project-map.md (what is each file?) and site-map.md (how do I reach it?)
 invariants/                   negative invariants and machine-checked rules
 decisions/                    machine-readable architecture decision records
 scripts/                      init_mapping, verify_invariants, check_dependency_budget,
-                              mutation_guard, install_hooks
+                              mutation_guard, install_hooks, adopt
 mcp/                          stdio MCP server and setup guide
 benchmarks/                   fixture project, framework layer, and scoring check for the A/B benchmark
 personas/                     refactorer, tester, ux_architect system prompts
-templates/                    python, typescript, and generic starters
+templates/                    python, typescript, and generic starters; CI and invariants for adopters
 tests/                        self-guarding map tests
 docs/                         principles, token-diet calculator, MediaGrab case study
 ```
@@ -329,7 +371,9 @@ mechanisms underneath, with small standard-library implementations that end in a
 ## Requirements and limits
 
 - Python 3.9 or newer for the scripts and the MCP server. `pytest` is needed only to run the tests.
-- Works on Linux, macOS, and Windows (`install_hooks.sh` needs a POSIX shell such as Git Bash).
+- Works on Linux, macOS, and Windows (`install_hooks.sh` needs a POSIX shell such as Git Bash). On
+  Windows, set the plugin's `python_command` option to `python` or `py`.
+- The plugin needs Claude Code; its hooks enforce only there. Validated with Claude Code 2.1.308.
 - `verify_invariants.py` and `mutation_guard.py` analyze **Python**. For other languages the map,
   invariants, decisions, dependency budget, and map test still apply; see each template.
 - These are guardrails against mistakes, not a sandbox against a hostile agent.

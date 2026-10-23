@@ -8,7 +8,7 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 | Audience           | Read in this order                                                                                          |
 | ------------------ | ----------------------------------------------------------------------------------------------------------- |
 | AI agent           | `AGENTS.md` -> `maps/project-map.md` -> invariants for the files you will touch -> `decisions/`             |
-| New user           | `README.md` -> `docs/01-core-principles.md` -> `templates/<stack>/` -> `mcp/README.md`                      |
+| New user           | `README.md` (Quickstart) -> `/ai-context-mapping:adopt` or `scripts/adopt.py` -> `docs/01-core-principles.md` -> `mcp/README.md` |
 | Contributor        | `README.md` (Contributing) -> `invariants/negative-invariants.md` -> `docs/01-core-principles.md` section 9 |
 | Skeptic            | `docs/02-token-diet-calculator.md` -> `docs/benchmark-results.md` -> `docs/case-study-mediagrab.md`         |
 
@@ -25,6 +25,7 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 | `python scripts/check_dependency_budget.py`                     | `scripts/check_dependency_budget.py` | Enforce approved list and package ceiling        | 0 ok, 1 violation, 2 error          |
 | `python scripts/mutation_guard.py --test T --target F.py:func`  | `scripts/mutation_guard.py`        | Prove a test fails when the function is broken     | 0 pass, 1 fail, 2 error             |
 | `python scripts/mutation_guard.py --target F.py:func --test T --recover` | `scripts/mutation_guard.py` | Restore a file after an interrupted run          | 0                                   |
+| `python scripts/adopt.py --target DIR [--stack S] [--agent A] [--ci] [--dry-run]` | `scripts/adopt.py` | Install the framework into another project; never overwrites | 0 ok, 2 usage error |
 | `sh scripts/install_hooks.sh`                                   | `scripts/install_hooks.sh`         | Install the pre-commit hook                        | 0 ok, 1 error                       |
 | `sh scripts/install_hooks.sh --uninstall`                       | `scripts/install_hooks.sh`         | Remove the managed hook                            | 0                                   |
 | `python -m pytest -q tests`                                     | `tests/test_maps.py`               | Run the self-guarding tests                        | pytest codes                        |
@@ -37,7 +38,10 @@ get to it?": every command, tool, workflow, and reading path that leads into the
 
 ## Claude Code routes
 
-Slash commands are Markdown files in `.claude/commands/`; hooks are configured in `.claude/settings.json`.
+In this repository, slash commands are Markdown files in `.claude/commands/` and hooks are configured in
+`.claude/settings.json`. The plugin ships the same checks as skills in `skills/` (invoked as
+`/ai-context-mapping:<name>`, plus `adopt`) and hooks in `hooks/hooks.json`; its map gate runs only when
+the `map_gate` option is on, and its commit gate runs `init_mapping.py --check` instead of pytest.
 
 | Route                    | Runs                                                           | Purpose                                            |
 | ------------------------ | -------------------------------------------------------------- | -------------------------------------------------- |
@@ -45,6 +49,7 @@ Slash commands are Markdown files in `.claude/commands/`; hooks are configured i
 | `/verify-invariants`     | `verify_invariants.py [paths]`                                 | Enforce invariant rules; fix violations in code    |
 | `/mutation-test`         | `mutation_guard.py --test T --target F.py:func`                | Prove a regression test can fail                   |
 | `/diet-check`            | `init_mapping.py --stats`                                      | Report repository, map, and instruction-file size  |
+| `/ai-context-mapping:adopt` (plugin) | `adopt.py --dry-run`, then `adopt.py` after the user's yes | Install the framework into the open project |
 | `PreToolUse` map gate    | `.claude/hooks/map_gate.py` (on Grep, Glob, Read, Bash, PowerShell, MCP tools) | Rule 1: block searches until the map is read; exit 2 |
 | `PostToolUse` hook       | `.claude/hooks/guardrail_hook.py post-edit`                    | Check an edited `.py` file; exit 2 feeds back to Claude |
 | `PreToolUse` hook (Bash) | `guardrail_hook.py is-git-commit`, then `check_dependency_budget.py` and `pytest tests/test_maps.py` | Commit gate; exit 2 blocks the commit |
@@ -86,4 +91,5 @@ Transport: JSON-RPC 2.0 over stdio, served by `mcp/context_server.py`.
 | `AI_GUARDRAILS_ANY_MAP`    | `.claude/hooks/map_gate.py` | `1` lets a nested project's own map unlock searching (monorepos, benchmarks) |
 | `AI_GUARDRAILS_BLOCK_SEARCH_ONLY` | `.claude/hooks/map_gate.py` | `1` blocks broad searches without requiring a map (ablation studies); `0` or unset is off; any other value fails open with a warning |
 | `AI_GUARDRAILS_STATE_DIR`  | `.claude/hooks/map_gate.py` | Override the marker directory (default: system temp, per project) |
+| `CLAUDE_PLUGIN_OPTION_MAP_GATE` | plugin `hooks/hooks.json` | Set by Claude Code from the plugin's `map_gate` option; the gate runs only when it is `true` or `1` |
 | `MUTATION_GUARD`        | set by `mutation_guard.py` | `1` inside test runs launched by the guard                 |
