@@ -352,7 +352,7 @@ docs/                         principles, token-diet calculator, MediaGrab case 
 | [Case study: MediaGrab](docs/case-study-mediagrab.md)             | What this looks like in a real architecture         |
 | [Negative invariants](invariants/negative-invariants.md)          | How to protect code from well-meaning "cleanup"     |
 | [Decision records](decisions/README.md)                           | How to write machine-readable ADRs                  |
-| [MCP server](mcp/README.md)                                       | How to connect Claude Desktop or Cursor             |
+| [MCP server](mcp/README.md)                                       | How to connect Claude Desktop, Cursor, or Codex     |
 | [Site map](maps/site-map.md)                                      | Every command, tool, and workflow at a glance       |
 
 ## Companion repository: how-ai-actually-works

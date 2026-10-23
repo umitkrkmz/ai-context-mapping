@@ -90,6 +90,7 @@ Create `.cursor/mcp.json` in the project (or `~/.cursor/mcp.json` for all projec
 {
   "mcpServers": {
     "project-context": {
+      "type": "stdio",
       "command": "python3",
       "args": ["${workspaceFolder}/mcp/context_server.py"],
       "env": {
@@ -99,6 +100,30 @@ Create `.cursor/mcp.json` in the project (or `~/.cursor/mcp.json` for all projec
   }
 }
 ```
+
+Cursor replaces `${workspaceFolder}` with the folder that contains `.cursor/mcp.json`. On Windows, use
+`"command": "python"`.
+
+### Codex
+
+Codex (CLI, IDE extension, and desktop app) reads MCP servers from `~/.codex/config.toml`, or from
+`.codex/config.toml` in a project you have marked as trusted. Add the server from the shell:
+
+```bash
+codex mcp add project-context -- python3 /absolute/path/to/your-project/mcp/context_server.py
+```
+
+or write the table yourself:
+
+```toml
+[mcp_servers.project-context]
+command = "python3"
+args = ["/absolute/path/to/your-project/mcp/context_server.py"]
+```
+
+The server serves the parent of its own `mcp/` directory, so no `--root` is needed for the project's own
+copy. On Windows, use `python` instead of `python3`. Codex reads `AGENTS.md` natively, so the rules need
+no extra file.
 
 ### Claude Code
 

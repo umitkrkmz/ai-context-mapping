@@ -82,7 +82,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `maps/project-map.md` | map | This file: the index of every path with category, purpose, and invariants. | NI-009 |
 | `maps/site-map.md` | map | Route table for CLI commands, MCP tools, CI jobs, hooks, and the reading order. | - |
 | `mcp/` | integration | Model Context Protocol server and its setup guide. | - |
-| `mcp/README.md` | integration | Setup for Claude Desktop, Cursor, and Claude Code with copy-paste config. | - |
+| `mcp/README.md` | integration | Tools and setup for Claude Desktop, Cursor, Codex, and Claude Code (plugin or manual) with copy-paste config. | - |
 | `mcp/context_server.py` | integration | Stdio JSON-RPC MCP server; read-only tools read_project_map, get_file_purpose, get_invariants_for_file, check_map. | NI-001, NI-002, NI-003, NI-005, NI-009 |
 | `personas/` | persona | Role-specific system prompts for AI workflows. | - |
 | `personas/refactorer.md` | persona | Refactorer persona: change structure, never behavior, respect invariants. | - |
