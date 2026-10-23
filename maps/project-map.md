@@ -134,7 +134,7 @@ One row per file or directory. Directories end with `/`; a `dir/**` row covers e
 | `tests/test_context_server.py` | test | Tests the read-only MCP tools get_invariants_for_file and check_map, with parity against init_mapping and verify_invariants. | - |
 | `tests/test_harness.py` | test | Tests the benchmark harness (trial builds, manipulation check, schedule, diff) and the tier semantics check, without launching agents. | - |
 | `tests/test_hooks.py` | test | Tests the map gate with mock tool-use payloads (block, unlock, allow, scope, bypass), the search-suppression ablation mode, and the settings wiring. | NI-010 |
-| `tests/test_init_mapping.py` | test | Tests which paths the map must cover: .agentignore and git's local .git/info/exclude both remove a path. | - |
+| `tests/test_init_mapping.py` | test | Tests which paths the map must cover (.agentignore, .git/info/exclude), main exit codes, and map writing on the Python 3.9 Path API. | - |
 | `tests/test_maps.py` | test | Fails when any non-ignored path lacks a map row, or CLAUDE.md drifts from AGENTS.md. | NI-008, NI-009 |
 | `tests/test_plugin.py` | test | Static checks of the plugin: marketplace entry, map gate off by default, bundled paths exist, skills, no stray components. | - |
 

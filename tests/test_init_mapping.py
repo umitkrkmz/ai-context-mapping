@@ -81,3 +81,37 @@ def test_an_undecodable_exclude_file_does_not_crash_the_scan(tmp_path: Path) -> 
     root = make_repo(tmp_path, exclude="ROADMAP.md\n")
     (root / ".git" / "info" / "exclude").write_bytes(b"\xff\xfe junk\nROADMAP.md\n")
     assert "ROADMAP.md" not in scanned(root)
+
+
+def test_writing_the_map_works_with_the_python_39_path_api(tmp_path: Path, monkeypatch) -> None:
+    # Python 3.9's Path.write_text() has no newline= parameter. v1.0.0 to v1.5.0 passed one, so creating
+    # or merging a map crashed on 3.9. Emulate the 3.9 signature to catch that on any interpreter.
+    def write_text_39(self, data, encoding=None, errors=None):
+        with open(self, "w", encoding=encoding, errors=errors) as handle:
+            return handle.write(data)
+
+    monkeypatch.setattr(Path, "write_text", write_text_39)
+    root = make_repo(tmp_path)
+    assert init_mapping.main(["--root", str(root), "--no-color"]) == 0
+    written = (root / "maps" / "project-map.md").read_bytes()
+    assert b"`src/app.py`" in written and b"\r\n" not in written  # LF on every OS
+    assert init_mapping.main(["--root", str(root), "--merge", "--no-color"]) == 0
+
+
+def test_main_exit_codes(tmp_path: Path, capsys) -> None:
+    root = make_repo(tmp_path)
+    run = lambda *extra: init_mapping.main(["--root", str(root), "--no-color", *extra])  # noqa: E731
+    assert run("--check") == 1 and run("--stats") == 1      # no map yet
+    assert "map not found" in capsys.readouterr().err
+    assert init_mapping.main(["--root", str(root / "missing"), "--no-color"]) == 2
+    assert run() == 0
+    assert "Wrote maps" in capsys.readouterr().out.replace("\\", "/")
+    assert run() == 1                                       # refuses to overwrite without --merge/--force
+    assert run("--check") == 0 and run("--stats") == 0
+    (root / "src" / "new.py").write_text("y = 2\n", encoding="utf-8")
+    capsys.readouterr()
+    assert run("--check") == 1
+    assert "[FAIL] not in map: src/new.py" in capsys.readouterr().out
+    assert run("--merge") == 0
+    assert "Updated maps" in capsys.readouterr().out.replace("\\", "/")
+    assert run("--check") == 0

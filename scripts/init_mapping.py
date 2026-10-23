@@ -1019,7 +1019,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 0
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(document, encoding="utf-8", newline="\n")
+    # Path.write_text() accepts newline= only from Python 3.10; open() keeps LF output on 3.9 too.
+    with open(output, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(document)
     verb = "Updated" if args.merge and existing_text else "Wrote"
     print(style.green(f"[ok] {verb} {output.relative_to(root) if output.is_relative_to(root) else output}"))
     for path in missing:
